@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Bitwise Operations in C/C++ | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Bitwise Operations in C/C++" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming." />
+<meta property="og:description" content="A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming." />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/Bitwise1.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/Bitwise1.webp" />
+<meta property="twitter:title" content="Bitwise Operations in C/C++" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-02-13T14:55:28+00:00","datePublished":"2025-10-20T00:00:00+00:00","description":"A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming.","headline":"Bitwise Operations in C/C++","image":"/cover_images/posts/Bitwise1.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2025-10-20-Bitwise/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2025-10-20-Bitwise/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/coding/2025-10-20-Bitwise/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/coding/">coding</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2025-10-20-Bitwise</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-coding-Bitwise" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Bitwise Operations in C/C++
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time> in <span>Blog</span> / <a href="/programming/" class="flip-title">Algorithms and Programming Languages</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/Bitwise1.webp"
+    
+    
+  
+  alt="Bitwise Operations in C/C++"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming.
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#1-why-bits-matter">1. Why Bits Matter</a></li>
+  <li><a href="#2-the-six-bitwise-operators">2. The Six Bitwise Operators</a></li>
+  <li><a href="#3-practical-applications">3. Practical Applications</a></li>
+  <li><a href="#4-embedded-systems-applications">4. Embedded Systems Applications</a></li>
+  <li><a href="#5-common-patterns">5. Common Patterns</a></li>
+  <li><a href="#6-practice-problems">6. Practice Problems</a></li>
+  <li><a href="#7-best-practices">7. Best Practices</a></li>
+</ul>
+
+<hr />
+
+<h2 id="1-why-bits-matter">1. Why Bits Matter</h2>
+
+<p>Computers store and process data as binary digits (bits). Bitwise operations allow direct manipulation of individual bits, providing efficiency gains that high-level operations cannot match.</p>
+
+<pre><code class="language-mermaid">graph LR
+    A[High-Level Code] --&gt; B[Compiler]
+    B --&gt; C[Assembly/Machine Code]
+    C --&gt; D[Binary Operations]
+    D --&gt; E[Hardware Execution]
+    
+    style D fill:#ffeb3b
+    style E fill:#4caf50
+</code></pre>
+
+<p><strong>Why Learn Bitwise Operations?</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Benefit</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Speed</strong></td>
+      <td>10-100x faster than arithmetic operations</td>
+    </tr>
+    <tr>
+      <td><strong>Memory</strong></td>
+      <td>Store 8 boolean flags in 1 byte instead of 8</td>
+    </tr>
+    <tr>
+      <td><strong>Hardware Control</strong></td>
+      <td>Direct manipulation of registers in embedded systems</td>
+    </tr>
+    <tr>
+      <td><strong>Efficiency</strong></td>
+      <td>Essential for graphics, cryptography, compression</td>
+    </tr>
+    <tr>
+      <td><strong>Problem Solving</strong></td>
+      <td>Efficient solutions to complex problems</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Real-World Impact:</strong></p>
+<ul>
+  <li><strong>Embedded Systems:</strong> Control LEDs, read sensors, configure hardware</li>
+  <li><strong>Graphics:</strong> Fast pixel manipulation, color blending</li>
+  <li><strong>Networking:</strong> IP address manipulation, packet parsing</li>
+  <li><strong>Algorithms:</strong> Fast mathematical operations, optimization tricks</li>
+</ul>
+
+<hr />
+
+<h2 id="2-the-six-bitwise-operators">2. The Six Bitwise Operators</h2>
+
+<h3 id="21-and-operator-">2.1 AND Operator (&amp;)</h3>
+
+<p><strong>Rule:</strong> Output is 1 only if BOTH bits are 1</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    1 0 1 0    (10 in decimal)
+  &amp; 1 1 0 0    (12 in decimal)
+  ---------
+    1 0 0 0    (8 in decimal)
+</code></pre></div></div>
+
+<p><strong>Truth Table:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>A &amp; B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td><strong>1</strong> ← Only this case!</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Code Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// 1010 in binary</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>  <span class="c1">// 1100 in binary</span>
+<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// 1000 = 8</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: 8</span>
+</code></pre></div></div>
+
+<p><strong>Common Uses:</strong></p>
+<ul>
+  <li>Check if a bit is set: <code class="language-plaintext highlighter-rouge">if (x &amp; (1 &lt;&lt; n))</code></li>
+  <li>Clear bits: <code class="language-plaintext highlighter-rouge">x = x &amp; 0xF0</code> (keep upper 4 bits)</li>
+  <li>Extract specific bits (masking)</li>
+</ul>
+
+<hr />
+
+<h3 id="22-or-operator-">2.2 OR Operator (|)</h3>
+
+<p><strong>Rule:</strong> Output is 1 if EITHER bit is 1</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    1 0 1 0    (10 in decimal)
+  | 1 1 0 0    (12 in decimal)
+  ---------
+    1 1 1 0    (14 in decimal)
+</code></pre></div></div>
+
+<p><strong>Truth Table:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>A | B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td><strong>1</strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td><strong>1</strong></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td><strong>1</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Code Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// 1010</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>  <span class="c1">// 1100</span>
+<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// 1110 = 14</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: 14</span>
+</code></pre></div></div>
+
+<p><strong>Common Uses:</strong></p>
+<ul>
+  <li>Set specific bits: <code class="language-plaintext highlighter-rouge">x = x | (1 &lt;&lt; n)</code></li>
+  <li>Combine flags: <code class="language-plaintext highlighter-rouge">options = FLAG_A | FLAG_B</code></li>
+  <li>Turn bits ON</li>
+</ul>
+
+<hr />
+
+<h3 id="23-xor-operator-">2.3 XOR Operator (^)</h3>
+
+<p><strong>Rule:</strong> Output is 1 if bits are DIFFERENT</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    1 0 1 0    (10 in decimal)
+  ^ 1 1 0 0    (12 in decimal)
+  ---------
+    0 1 1 0    (6 in decimal)
+</code></pre></div></div>
+
+<p><strong>Truth Table:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>A ^ B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td><strong>0</strong></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td><strong>1</strong> ← Different!</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td><strong>1</strong> ← Different!</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td><strong>0</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Code Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// 1010</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>  <span class="c1">// 1100</span>
+<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// 0110 = 6</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: 6</span>
+</code></pre></div></div>
+
+<p><strong>Key Property:</strong> <code class="language-plaintext highlighter-rouge">x ^ x = 0</code> and <code class="language-plaintext highlighter-rouge">x ^ 0 = x</code></p>
+
+<p><strong>Common Uses:</strong></p>
+<ul>
+  <li>Toggle bits: <code class="language-plaintext highlighter-rouge">x = x ^ (1 &lt;&lt; n)</code></li>
+  <li>Swap without temp variable: <code class="language-plaintext highlighter-rouge">a^=b; b^=a; a^=b;</code></li>
+  <li>Find unique element in array</li>
+  <li>Encryption (basic XOR cipher)</li>
+</ul>
+
+<hr />
+
+<h3 id="24-not-operator-">2.4 NOT Operator (~)</h3>
+
+<p><strong>Rule:</strong> Flips all bits (0→1, 1→0)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ~ 1 0 1 0    (10 in decimal)
+  ---------
+    0 1 0 1    (-11 in two's complement)
+</code></pre></div></div>
+
+<p><strong>Code Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// 00001010</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">result</span> <span class="o">=</span> <span class="o">~</span><span class="n">a</span><span class="p">;</span>  <span class="c1">// 11110101 = 245</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: 245</span>
+</code></pre></div></div>
+
+<p><strong>Important:</strong> Result depends on data type size!</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">unsigned char</code>: 8 bits</li>
+  <li><code class="language-plaintext highlighter-rouge">int</code>: typically 32 bits</li>
+  <li>Watch out for sign extension!</li>
+</ul>
+
+<p><strong>Common Uses:</strong></p>
+<ul>
+  <li>Clear specific bits: <code class="language-plaintext highlighter-rouge">x = x &amp; ~(1 &lt;&lt; n)</code></li>
+  <li>Create bit masks: <code class="language-plaintext highlighter-rouge">~0xFF</code> = all 1s except lower 8 bits</li>
+</ul>
+
+<hr />
+
+<h3 id="25-left-shift-">2.5 Left Shift («)</h3>
+
+<p><strong>Rule:</strong> Shift bits left, fill right with zeros</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    0 0 1 0 1 0    (10 in decimal)
+ &lt;&lt; 2
+  ---------------
+    1 0 1 0 0 0    (40 in decimal)
+</code></pre></div></div>
+
+<p><strong>Visual:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original:  [0][0][1][0][1][0]
+             ↓  ↓  ↓  ↓  
+Shift left 2: [1][0][1][0][0][0]
+                          ↑  ↑
+                       Fill with 0
+</code></pre></div></div>
+
+<p><strong>Code Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>      <span class="c1">// 1010</span>
+<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">// 101000 = 40</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: 40</span>
+</code></pre></div></div>
+
+<p><strong>Mathematical Formula:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x &lt;&lt; k = x × 2^k
+
+Examples:
+10 &lt;&lt; 1 = 10 × 2¹ = 10 × 2   = 20
+10 &lt;&lt; 2 = 10 × 2² = 10 × 4   = 40
+5  &lt;&lt; 3 = 5  × 2³ = 5  × 8   = 40
+7  &lt;&lt; 4 = 7  × 2⁴ = 7  × 16  = 112
+</code></pre></div></div>
+
+<p><strong>Common Uses:</strong></p>
+<ul>
+  <li>Fast multiplication by powers of 2</li>
+  <li>Create bit masks: <code class="language-plaintext highlighter-rouge">1 &lt;&lt; n</code></li>
+  <li>Set specific bit positions</li>
+</ul>
+
+<hr />
+
+<h3 id="26-right-shift-">2.6 Right Shift (»)</h3>
+
+<p><strong>Rule:</strong> Shift bits right, discard rightmost bits</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    1 0 1 0 0 0    (40 in decimal)
+ &gt;&gt; 2
+  ---------------
+    0 0 1 0 1 0    (10 in decimal)
+</code></pre></div></div>
+
+<p><strong>Visual:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original:    [1][0][1][0][0][0]
+                      ↓  ↓  ↓
+Shift right 2: [0][0][1][0][1][0]
+               ↑  ↑
+            Fill with 0
+           (for unsigned)
+</code></pre></div></div>
+
+<p><strong>Code Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>      <span class="c1">// 101000</span>
+<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">// 1010 = 10</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: 10</span>
+</code></pre></div></div>
+
+<p><strong>Mathematical Formula:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x &gt;&gt; k = x ÷ 2^k  (integer division, rounds down)
+
+Examples:
+40  &gt;&gt; 1 = 40  ÷ 2¹ = 40  ÷ 2  = 20
+40  &gt;&gt; 2 = 40  ÷ 2² = 40  ÷ 4  = 10
+100 &gt;&gt; 3 = 100 ÷ 2³ = 100 ÷ 8  = 12
+17  &gt;&gt; 2 = 17  ÷ 2² = 17  ÷ 4  = 4  (remainder discarded)
+</code></pre></div></div>
+
+<p><strong>Signed vs Unsigned:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200</span><span class="p">;</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">);</span>  <span class="c1">// 50 (fills with 0)</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">);</span>  <span class="c1">// -50 (arithmetic shift, fills with sign bit)</span>
+</code></pre></div></div>
+
+<p><strong>Common Uses:</strong></p>
+<ul>
+  <li>Fast division by powers of 2</li>
+  <li>Extract bit fields</li>
+  <li>Parse bit patterns</li>
+</ul>
+
+<hr />
+
+<h2 id="3-common-techniques">3. Common Techniques</h2>
+
+<h3 id="technique-1-check-if-number-is-even-or-odd">Technique 1: Check if Number is Even or Odd</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isOdd</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// Check least significant bit</span>
+<span class="p">}</span>
+
+<span class="c1">// Why it works:</span>
+<span class="c1">// Even: ...0010 (LSB = 0)</span>
+<span class="c1">// Odd:  ...0011 (LSB = 1)</span>
+</code></pre></div></div>
+
+<p><strong>Performance:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traditional:  n % 2    → 10-20 CPU cycles
+Bitwise:      n &amp; 1    → 1 CPU cycle ⚡
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="technique-2-multiplydivide-by-powers-of-2">Technique 2: Multiply/Divide by Powers of 2</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">multiplyBy4</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">// Same as n * 4</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">divideBy8</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">;</span>  <span class="c1">// Same as n / 8</span>
+<span class="p">}</span>
+
+<span class="c1">// Benchmark:</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">*</span> <span class="mi">32</span><span class="p">;</span>   <span class="c1">// ~10 cycles</span>
+<span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">;</span>   <span class="c1">// ~1 cycle  (32x faster)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="technique-3-swap-without-temp-variable">Technique 3: Swap Without Temp Variable</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// a = a^b, b = b</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// a = a^b, b = (a^b)^b = a</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// a = (a^b)^a = b, b = a</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">y</span><span class="p">;</span>  <span class="c1">// 10 5</span>
+</code></pre></div></div>
+
+<p><strong>Step-by-Step:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initial:  a=5 (0101), b=10 (1010)
+
+Step 1: a = a^b = 0101 ^ 1010 = 1111
+        a=15, b=10
+
+Step 2: b = a^b = 1111 ^ 1010 = 0101 = 5
+        a=15, b=5
+
+Step 3: a = a^b = 1111 ^ 0101 = 1010 = 10
+        a=10, b=5
+
+Result: a=10, b=5
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="technique-4-check-if-power-of-2">Technique 4: Check if Power of 2</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isPowerOf2</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Why it works:</span>
+<span class="c1">// Power of 2:     1000 (8)</span>
+<span class="c1">// n - 1:          0111 (7)</span>
+<span class="c1">// n &amp; (n-1):      0000</span>
+
+<span class="c1">// Not power of 2: 1010 (10)</span>
+<span class="c1">// n - 1:          1001 (9)</span>
+<span class="c1">// n &amp; (n-1):      1000 (not 0)</span>
+</code></pre></div></div>
+
+<p><strong>Visual:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = 8 (power of 2):
+    1 0 0 0
+  &amp; 0 1 1 1  (n-1)
+  ---------
+    0 0 0 0  (result is 0)
+
+n = 10 (not power of 2):
+    1 0 1 0
+  &amp; 1 0 0 1  (n-1)
+  ---------
+    1 0 0 0  (result is not 0)
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="technique-5-count-set-bits-brian-kernighans-algorithm">Technique 5: Count Set Bits (Brian Kernighan’s Algorithm)</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">countSetBits</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// Remove rightmost set bit</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: n = 13 (1101)</span>
+<span class="c1">// Step 1: 1101 &amp; 1100 = 1100, count=1</span>
+<span class="c1">// Step 2: 1100 &amp; 1011 = 1000, count=2</span>
+<span class="c1">// Step 3: 1000 &amp; 0111 = 0000, count=3</span>
+<span class="c1">// Result: 3 set bits</span>
+</code></pre></div></div>
+
+<p><strong>Visualization:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = 13:  1 1 0 1
+           ↓
+Step 1:  1 1 0 0  (removed rightmost 1)
+           ↓
+Step 2:  1 0 0 0  (removed another 1)
+         ↓
+Step 3:  0 0 0 0  (removed last 1)
+
+Total: 3 iterations = 3 set bits
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="4-embedded-systems-applications">4. Embedded Systems Applications</h2>
+
+<h3 id="example-1-led-control">Example 1: LED Control</h3>
+
+<p>Controlling 8 LEDs connected to a single port:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LED positions</span>
+<span class="cp">#define LED0 (1 &lt;&lt; 0)  // 00000001
+#define LED1 (1 &lt;&lt; 1)  // 00000010
+#define LED2 (1 &lt;&lt; 2)  // 00000100
+#define LED3 (1 &lt;&lt; 3)  // 00001000
+</span><span class="c1">// ... and so on</span>
+
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">PORTB</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>  <span class="c1">// All LEDs OFF</span>
+
+<span class="c1">// Turn ON LED2</span>
+<span class="n">PORTB</span> <span class="o">|=</span> <span class="n">LED2</span><span class="p">;</span>  <span class="c1">// Set bit 2</span>
+<span class="c1">// Result: 00000100</span>
+
+<span class="c1">// Turn OFF LED2</span>
+<span class="n">PORTB</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">LED2</span><span class="p">;</span>  <span class="c1">// Clear bit 2</span>
+<span class="c1">// Result: 00000000</span>
+
+<span class="c1">// Toggle LED2</span>
+<span class="n">PORTB</span> <span class="o">^=</span> <span class="n">LED2</span><span class="p">;</span>  <span class="c1">// Flip bit 2</span>
+<span class="c1">// Result: 00000100 → 00000000 → 00000100</span>
+
+<span class="c1">// Check if LED2 is ON</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">PORTB</span> <span class="o">&amp;</span> <span class="n">LED2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"LED2 is ON!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Turn ON multiple LEDs</span>
+<span class="n">PORTB</span> <span class="o">|=</span> <span class="p">(</span><span class="n">LED0</span> <span class="o">|</span> <span class="n">LED2</span> <span class="o">|</span> <span class="n">LED5</span><span class="p">);</span>
+<span class="c1">// Result: 00100101</span>
+</code></pre></div></div>
+
+<p><strong>Visual Port State:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PORTB: [LED7][LED6][LED5][LED4][LED3][LED2][LED1][LED0]
+          0     0     1     0     0     1     0     1
+          ↑     ↑     ↑     ↑     ↑     ↑     ↑     ↑
+         OFF   OFF   ON    OFF   OFF   ON    OFF   ON
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="example-2-reading-sensor-status">Example 2: Reading Sensor Status</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Sensor register bits</span>
+<span class="cp">#define SENSOR_READY    (1 &lt;&lt; 0)
+#define SENSOR_ERROR    (1 &lt;&lt; 1)
+#define SENSOR_OVERFLOW (1 &lt;&lt; 2)
+#define SENSOR_BUSY     (1 &lt;&lt; 3)
+</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">sensorStatus</span> <span class="o">=</span> <span class="mb">0b00001001</span><span class="p">;</span>  <span class="c1">// Binary literal</span>
+
+<span class="c1">// Check if sensor is ready</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">sensorStatus</span> <span class="o">&amp;</span> <span class="n">SENSOR_READY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Sensor ready!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Check if there's an error</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">sensorStatus</span> <span class="o">&amp;</span> <span class="n">SENSOR_ERROR</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Error detected!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Check multiple conditions</span>
+<span class="k">if</span> <span class="p">((</span><span class="n">sensorStatus</span> <span class="o">&amp;</span> <span class="n">SENSOR_READY</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+    <span class="o">!</span><span class="p">(</span><span class="n">sensorStatus</span> <span class="o">&amp;</span> <span class="n">SENSOR_BUSY</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Safe to read data!"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Wait until sensor is not busy</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">sensorStatus</span> <span class="o">&amp;</span> <span class="n">SENSOR_BUSY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Read status register</span>
+    <span class="n">sensorStatus</span> <span class="o">=</span> <span class="n">readSensorRegister</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="example-3-configuration-flags">Example 3: Configuration Flags</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Configuration options</span>
+<span class="cp">#define ENABLE_WIFI     (1 &lt;&lt; 0)
+#define ENABLE_BT       (1 &lt;&lt; 1)
+#define ENABLE_GPS      (1 &lt;&lt; 2)
+#define LOW_POWER_MODE  (1 &lt;&lt; 3)
+#define DEBUG_MODE      (1 &lt;&lt; 4)
+</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">config</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// Enable WiFi and GPS</span>
+<span class="n">config</span> <span class="o">|=</span> <span class="p">(</span><span class="n">ENABLE_WIFI</span> <span class="o">|</span> <span class="n">ENABLE_GPS</span><span class="p">);</span>
+<span class="c1">// config: 00000101</span>
+
+<span class="c1">// Disable GPS</span>
+<span class="n">config</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">ENABLE_GPS</span><span class="p">;</span>
+<span class="c1">// config: 00000001</span>
+
+<span class="c1">// Toggle debug mode</span>
+<span class="n">config</span> <span class="o">^=</span> <span class="n">DEBUG_MODE</span><span class="p">;</span>
+
+<span class="c1">// Check configuration</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">config</span> <span class="o">&amp;</span> <span class="n">ENABLE_WIFI</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">initWiFi</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">config</span> <span class="o">&amp;</span> <span class="n">LOW_POWER_MODE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">enterLowPowerMode</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Memory Comparison:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traditional approach (8 flags):
+bool wifi, bt, gps, lowpower, debug...
+Total: 8 bytes (or more)
+
+Bitwise approach (8 flags):
+unsigned char config;
+Total: 1 byte
+
+Space saved: 87.5%
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="5-common-patterns">5. Common Patterns</h2>
+
+<h3 id="pattern-1-set-clear-toggle-bit">Pattern 1: Set, Clear, Toggle Bit</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// SET bit n</span>
+<span class="n">x</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span>
+
+<span class="c1">// CLEAR bit n</span>
+<span class="n">x</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span>
+
+<span class="c1">// TOGGLE bit n</span>
+<span class="n">x</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span>
+
+<span class="c1">// CHECK if bit n is set</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* bit is set */</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">x</span> <span class="o">=</span> <span class="mb">0b00101000</span><span class="p">;</span>  <span class="c1">// 40</span>
+
+<span class="c1">// Set bit 1</span>
+<span class="n">x</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span>
+<span class="c1">// Result: 00101010 (42)</span>
+
+<span class="c1">// Clear bit 3</span>
+<span class="n">x</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">);</span>
+<span class="c1">// Result: 00100010 (34)</span>
+
+<span class="c1">// Toggle bit 5</span>
+<span class="n">x</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">);</span>
+<span class="c1">// Result: 00000010 (2)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="pattern-2-extract-bit-field">Pattern 2: Extract Bit Field</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Extract n bits starting from position p</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">extract</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">p</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="o">~</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: Extract 3 bits from position 2</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mb">0b11010110</span><span class="p">;</span>  <span class="c1">// 214</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="c1">// Result: 101 (5)</span>
+</code></pre></div></div>
+
+<p><strong>Visual:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original: 1 1 0 1 0 1 1 0
+Position:   6 5 4 3 2 1 0
+
+Extract 3 bits from position 2:
+Step 1: Shift right by 2
+        0 0 1 1 0 1 0 1
+
+Step 2: Mask lower 3 bits
+        0 0 0 0 0 1 0 1
+        &amp;       1 1 1  (mask)
+        ---------------
+        0 0 0 0 0 1 0 1 = 5
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="pattern-3-set-multiple-bits-at-once">Pattern 3: Set Multiple Bits at Once</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Set bits 2, 4, and 6</span>
+<span class="n">x</span> <span class="o">|=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">));</span>
+
+<span class="c1">// Clear bits 1, 3, and 5</span>
+<span class="n">x</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="6-practice-problems">6. Practice Problems</h2>
+
+<h3 id="problem-1-find-the-only-non-duplicate">Problem 1: Find the Only Non-Duplicate</h3>
+
+<p><strong>Problem:</strong> Array has all numbers appearing twice except one. Find it.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">findUnique</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">^=</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">findUnique</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>  <span class="c1">// Output: 5</span>
+</code></pre></div></div>
+
+<p><strong>Why It Works:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Property: x ^ x = 0, x ^ 0 = x
+
+Step-by-step:
+result = 0
+result ^= 4  → 4
+result ^= 2  → 4^2 = 6
+result ^= 4  → 6^4 = 2  (4 cancelled!)
+result ^= 5  → 2^5 = 7
+result ^= 2  → 7^2 = 5  (2 cancelled!)
+
+Result: 5
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-2-reverse-bits">Problem 2: Reverse Bits</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">reverseBits</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span>           <span class="c1">// Make room</span>
+        <span class="n">result</span> <span class="o">|=</span> <span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">);</span>      <span class="c1">// Copy last bit</span>
+        <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>                <span class="c1">// Move to next bit</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: 00000101 → 10100000</span>
+</code></pre></div></div>
+
+<p><strong>Visualization:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input:  0 0 0 0 0 1 0 1
+
+Iteration 1:
+  result = 0, take rightmost bit (1)
+  result = 1
+
+Iteration 2:
+  result = 1 &lt;&lt; 1 = 10, take next bit (0)
+  result = 10
+
+Iteration 3:
+  result = 10 &lt;&lt; 1 = 100, take next bit (1)
+  result = 101
+
+... continues ...
+
+Output: 1 0 1 0 0 0 0 0
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-3-count-bits-to-flip">Problem 3: Count Bits to Flip</h3>
+
+<p><strong>Problem:</strong> How many bits need to flip to convert A to B?</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">bitsToFlip</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">xorResult</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// Different bits are 1</span>
+    <span class="k">return</span> <span class="n">countSetBits</span><span class="p">(</span><span class="n">xorResult</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// 1010</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>  <span class="c1">// 10100</span>
+<span class="c1">// XOR:       // 11110 (4 different bits)</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">bitsToFlip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>  <span class="c1">// Output: 4</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-4-power-set-using-bits">Problem 4: Power Set Using Bits</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">printPowerSet</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">totalSubsets</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">;</span>  <span class="c1">// 2^n subsets</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">totalSubsets</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"{ "</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">))</span> <span class="p">{</span>  <span class="c1">// Check if jth bit is set</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"}"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: {1, 2, 3}</span>
+<span class="c1">// Output: {}, {1}, {2}, {1,2}, {3}, {1,3}, {2,3}, {1,2,3}</span>
+</code></pre></div></div>
+
+<p><strong>How It Works:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Array: [1, 2, 3]
+Bits:   2  1  0
+
+i=0 (000): {}
+i=1 (001): {1}       (bit 0 set)
+i=2 (010): {2}       (bit 1 set)
+i=3 (011): {1, 2}    (bits 0,1 set)
+i=4 (100): {3}       (bit 2 set)
+i=5 (101): {1, 3}    (bits 0,2 set)
+i=6 (110): {2, 3}    (bits 1,2 set)
+i=7 (111): {1, 2, 3} (all bits set)
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-5-find-two-non-repeating-elements">Problem 5: Find Two Non-Repeating Elements</h3>
+
+<p><strong>Problem:</strong> All elements appear twice except two. Find both.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findTwoUnique</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Step 1: XOR all elements</span>
+    <span class="kt">int</span> <span class="n">xorAll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">xorAll</span> <span class="o">^=</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// xorAll = a ^ b (the two unique numbers)</span>
+    
+    <span class="c1">// Step 2: Find rightmost set bit</span>
+    <span class="kt">int</span> <span class="n">rightmostBit</span> <span class="o">=</span> <span class="n">xorAll</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">xorAll</span><span class="p">;</span>
+    
+    <span class="c1">// Step 3: Divide array into two groups and XOR each</span>
+    <span class="kt">int</span> <span class="n">group1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">group2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&amp;</span> <span class="n">rightmostBit</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">group1</span> <span class="o">^=</span> <span class="n">num</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">group2</span> <span class="o">^=</span> <span class="n">num</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="p">{</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: {2, 3, 7, 9, 11, 2, 3, 11}</span>
+<span class="c1">// Output: {7, 9}</span>
+</code></pre></div></div>
+
+<p><strong>How It Works:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Array: [2, 3, 7, 9, 11, 2, 3, 11]
+
+Step 1: XOR all = 7 ^ 9 = 1110
+
+Step 2: Rightmost set bit of 1110 is bit 1 (0010)
+
+Step 3: Partition by bit 1:
+  Group with bit 1 set: 2, 3, 2, 3 → XOR = 0 ^ 0 = 0... (wait, 7 has bit 1)
+  Group with bit 1 clear: 9, 11, 11 → XOR = 9
+
+Result: 7 and 9
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-6-missing-number-from-1-to-n">Problem 6: Missing Number from 1 to N</h3>
+
+<p><strong>Problem:</strong> Array contains n-1 numbers from 1 to n. Find missing number.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">findMissing</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">xorAll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="c1">// XOR all numbers from 1 to n</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">xorAll</span> <span class="o">^=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// XOR all array elements</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">xorAll</span> <span class="o">^=</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">xorAll</span><span class="p">;</span>  <span class="c1">// Missing number</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: arr = {1, 2, 4, 5}, n = 5</span>
+<span class="c1">// Output: 3</span>
+</code></pre></div></div>
+
+<p><strong>Why It Works:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Numbers 1-5: 1 ^ 2 ^ 3 ^ 4 ^ 5
+Array:       1 ^ 2 ^ 4 ^ 5
+
+XOR result:  3 (since others cancel out)
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-7-check-opposite-signs">Problem 7: Check Opposite Signs</h3>
+
+<p><strong>Problem:</strong> Determine if two integers have opposite signs.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">oppositeSigns</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Alternative using AND:</span>
+<span class="kt">bool</span> <span class="nf">oppositeSigns2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// Traditional way</span>
+    <span class="c1">// Bitwise: ((a ^ b) &amp; (1 &lt;&lt; 31)) != 0  (for 32-bit int)</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="n">oppositeSigns</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">);</span>   <span class="c1">// true</span>
+<span class="n">oppositeSigns</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">);</span>  <span class="c1">// false</span>
+<span class="n">oppositeSigns</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>    <span class="c1">// false</span>
+</code></pre></div></div>
+
+<p><strong>How It Works:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Positive: 0xxx...
+Negative: 1xxx... (two's complement)
+
+XOR of sign bits:
+  Same sign:     0 (positive result)
+  Different sign: 1 (negative result)
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-8-swap-odd-and-even-bits">Problem 8: Swap Odd and Even Bits</h3>
+
+<p><strong>Problem:</strong> Swap all odd and even bits in an integer.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">swapOddEven</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 0xAAAAAAAA = 10101010... (odd bits)</span>
+    <span class="c1">// 0x55555555 = 01010101... (even bits)</span>
+    
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">evenBits</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mh">0x55555555</span><span class="p">;</span>  <span class="c1">// Extract even bits</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">oddBits</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mh">0xAAAAAAAA</span><span class="p">;</span>   <span class="c1">// Extract odd bits</span>
+    
+    <span class="n">evenBits</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// Shift even bits left</span>
+    <span class="n">oddBits</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">// Shift odd bits right</span>
+    
+    <span class="k">return</span> <span class="n">evenBits</span> <span class="o">|</span> <span class="n">oddBits</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: 00010111 (23)</span>
+<span class="c1">// Even bits (0, 2, 4, 6): 0001_1_ (extract: 00010101, shift left: 00101010)</span>
+<span class="c1">// Odd bits (1, 3, 5, 7): _0_0_1 (extract: 00000010, shift right: 00000001)</span>
+<span class="c1">// Result: 00101011 (43)</span>
+</code></pre></div></div>
+
+<p><strong>Visual:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input:  [7][6][5][4][3][2][1][0]
+         0  0  0  1  0  1  1  1
+
+Even:    0  _  0  _  0  _  1  _  → extract → 0  0  0  0  0  1  0  1
+Odd:     _  0  _  1  _  1  _  1  → extract → 0  0  0  1  0  1  1  0
+
+Shift even left:  0  0  0  1  0  1  0  0
+Shift odd right:  0  0  0  0  1  0  1  1
+
+Combine: 0  0  1  0  1  0  1  1 = 43
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-9-check-duplicate-characters-bitmask">Problem 9: Check Duplicate Characters (Bitmask)</h3>
+
+<p><strong>Problem:</strong> Check if a string has duplicate characters using only O(1) space.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">hasDuplicates</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">checker</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">bitPos</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">;</span>  <span class="c1">// Assuming lowercase a-z</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">checker</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bitPos</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">// Already seen this character</span>
+        <span class="p">}</span>
+        
+        <span class="n">checker</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bitPos</span><span class="p">);</span>  <span class="c1">// Mark as seen</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="n">hasDuplicates</span><span class="p">(</span><span class="s">"abcdef"</span><span class="p">);</span>  <span class="c1">// false</span>
+<span class="n">hasDuplicates</span><span class="p">(</span><span class="s">"abcdea"</span><span class="p">);</span>  <span class="c1">// true (a repeats)</span>
+</code></pre></div></div>
+
+<p><strong>How It Works:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String: "abac"
+
+c='a' (bit 0): checker = 00000001
+c='b' (bit 1): checker = 00000011
+c='a' (bit 0): Already set! → return true
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-10-case-conversion-using-bits">Problem 10: Case Conversion Using Bits</h3>
+
+<p><strong>Problem:</strong> Toggle case of alphabetic characters using bitwise operations.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="nf">toggleCase</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ASCII: 'A' = 65 (0100 0001), 'a' = 97 (0110 0001)</span>
+    <span class="c1">// Difference is bit 5 (0x20 = 32)</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">^</span> <span class="mi">32</span><span class="p">;</span>  <span class="c1">// or c ^ 0x20</span>
+<span class="p">}</span>
+
+<span class="kt">char</span> <span class="nf">toLowerCase</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">|</span> <span class="mi">32</span><span class="p">;</span>  <span class="c1">// Set bit 5</span>
+<span class="p">}</span>
+
+<span class="kt">char</span> <span class="nf">toUpperCase</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mi">32</span><span class="p">;</span>  <span class="c1">// Clear bit 5</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="n">toggleCase</span><span class="p">(</span><span class="sc">'A'</span><span class="p">);</span>  <span class="c1">// 'a'</span>
+<span class="n">toggleCase</span><span class="p">(</span><span class="sc">'a'</span><span class="p">);</span>  <span class="c1">// 'A'</span>
+<span class="n">toLowerCase</span><span class="p">(</span><span class="sc">'B'</span><span class="p">);</span> <span class="c1">// 'b'</span>
+<span class="n">toUpperCase</span><span class="p">(</span><span class="sc">'x'</span><span class="p">);</span> <span class="c1">// 'X'</span>
+</code></pre></div></div>
+
+<p><strong>ASCII Bit Pattern:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'A' = 01000001
+'a' = 01100001
+      ^^^^ bit 5 is the difference
+
+XOR with 32 (00100000) flips bit 5
+OR with 32 sets bit 5 (lowercase)
+AND with ~32 clears bit 5 (uppercase)
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-11-rotate-bits">Problem 11: Rotate Bits</h3>
+
+<p><strong>Problem:</strong> Rotate bits of a number left or right by k positions.</p>
+
+<p><strong>Formulas:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rotate Left by k:  (n &lt;&lt; k) | (n &gt;&gt; (bits - k))
+Rotate Right by k: (n &gt;&gt; k) | (n &lt;&lt; (bits - k))
+
+where 'bits' = total number of bits (e.g., 32 for int)
+</code></pre></div></div>
+
+<p><strong>Implementation:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">rotateLeft</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="n">bits</span><span class="p">;</span>  <span class="c1">// Handle k &gt; bits</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="n">k</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">rotateRight</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="n">bits</span><span class="p">;</span>  <span class="c1">// Handle k &gt; bits</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="n">k</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// Example (8-bit for clarity):</span>
+<span class="c1">// n = 11010110, k = 2</span>
+<span class="c1">// rotateLeft(n, 2):  01011011</span>
+<span class="c1">// rotateRight(n, 2): 10110101</span>
+</code></pre></div></div>
+
+<p><strong>Visualization (8-bit):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original: n = 11010110 (214 in decimal)
+
+ROTATE LEFT by k=2:
+  Formula: (n &lt;&lt; 2) | (n &gt;&gt; (8-2))
+           = (n &lt;&lt; 2) | (n &gt;&gt; 6)
+  
+  Step 1: n &lt;&lt; 2 = 01011000  (shift left, lose leftmost 2 bits)
+  Step 2: n &gt;&gt; 6 = 00000011  (shift right, get leftmost 2 bits)
+  Step 3: OR them = 01011011  (combine both parts)
+  
+  Result: 01011011 (91 in decimal)
+
+ROTATE RIGHT by k=2:
+  Formula: (n &gt;&gt; 2) | (n &lt;&lt; (8-2))
+           = (n &gt;&gt; 2) | (n &lt;&lt; 6)
+  
+  Step 1: n &gt;&gt; 2 = 00110101  (shift right, lose rightmost 2 bits)
+  Step 2: n &lt;&lt; 6 = 10000000  (shift left, get rightmost 2 bits)
+  Step 3: OR them = 10110101  (combine both parts)
+  
+  Result: 10110101 (181 in decimal)
+</code></pre></div></div>
+
+<p><strong>Key Insight:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rotation = Circular shift (no bits are lost)
+- Left rotation: bits that fall off the left reappear on the right
+- Right rotation: bits that fall off the right reappear on the left
+
+Shift vs Rotate:
+  Shift:  bits fall off and are replaced with 0s
+  Rotate: bits wrap around to the other end
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="problem-12-maximum-and-value-of-pair">Problem 12: Maximum AND Value of Pair</h3>
+
+<p><strong>Problem:</strong> Find the maximum bitwise AND of any two elements in an array.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">maxAND</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    
+    <span class="c1">// Check bits from MSB to LSB</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">bit</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span> <span class="n">bit</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bit</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">candidate</span> <span class="o">=</span> <span class="n">result</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span><span class="p">);</span>
+        
+        <span class="c1">// Count how many numbers have this bit pattern</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">((</span><span class="n">num</span> <span class="o">&amp;</span> <span class="n">candidate</span><span class="p">)</span> <span class="o">==</span> <span class="n">candidate</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// If at least 2 numbers have this pattern, include this bit</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example: {3, 6, 5, 10, 12, 15}</span>
+<span class="c1">// Output: 12 (from 12 &amp; 15)</span>
+</code></pre></div></div>
+
+<p><strong>Approach:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Build result bit by bit from MSB:
+- Try to set each bit starting from MSB
+- Check if at least 2 numbers have this bit pattern
+- If yes, keep the bit set
+
+Example: [12, 15]
+12 = 1100
+15 = 1111
+AND= 1100 = 12
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="7-pro-tips">7. Pro Tips</h2>
+
+<h3 id="-dos">✅ DO’s</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tip</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Use for powers of 2</td>
+      <td><code class="language-plaintext highlighter-rouge">x &lt;&lt; 3</code> instead of <code class="language-plaintext highlighter-rouge">x * 8</code></td>
+    </tr>
+    <tr>
+      <td>Combine with #define</td>
+      <td><code class="language-plaintext highlighter-rouge">#define BIT3 (1 &lt;&lt; 3)</code></td>
+    </tr>
+    <tr>
+      <td>Use unsigned for shifts</td>
+      <td>Avoid sign extension issues</td>
+    </tr>
+    <tr>
+      <td>Comment bit manipulations</td>
+      <td>Code can be cryptic!</td>
+    </tr>
+    <tr>
+      <td>Test edge cases</td>
+      <td>0, -1, max values</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-donts">❌ DON’Ts</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mistake</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shift by negative</td>
+      <td>Undefined behavior!</td>
+    </tr>
+    <tr>
+      <td>Shift &gt;= type width</td>
+      <td><code class="language-plaintext highlighter-rouge">int x; x &lt;&lt; 32</code> ⚠️</td>
+    </tr>
+    <tr>
+      <td>Mix with arithmetic</td>
+      <td><code class="language-plaintext highlighter-rouge">-1 &gt;&gt; 1</code> depends on implementation</td>
+    </tr>
+    <tr>
+      <td>Forget parentheses</td>
+      <td><code class="language-plaintext highlighter-rouge">x &amp; 1 &lt;&lt; 2</code> vs <code class="language-plaintext highlighter-rouge">x &amp; (1 &lt;&lt; 2)</code></td>
+    </tr>
+    <tr>
+      <td>Overuse for clarity</td>
+      <td>Sometimes <code class="language-plaintext highlighter-rouge">x * 2</code> is clearer than <code class="language-plaintext highlighter-rouge">x &lt;&lt; 1</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="quick-reference-card">Quick Reference Card</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Basic Operations</span>
+<span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span>      <span class="c1">// AND</span>
+<span class="n">x</span> <span class="o">|</span> <span class="n">y</span>      <span class="c1">// OR</span>
+<span class="n">x</span> <span class="o">^</span> <span class="n">y</span>      <span class="c1">// XOR</span>
+<span class="o">~</span><span class="n">x</span>         <span class="c1">// NOT</span>
+<span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">n</span>     <span class="c1">// Left shift</span>
+<span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">n</span>     <span class="c1">// Right shift</span>
+
+<span class="c1">// Common Patterns</span>
+<span class="n">x</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span>      <span class="c1">// Set bit n</span>
+<span class="n">x</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span>     <span class="c1">// Clear bit n</span>
+<span class="n">x</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span>      <span class="c1">// Toggle bit n</span>
+<span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span>       <span class="c1">// Check bit n</span>
+<span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>        <span class="c1">// Clear rightmost set bit</span>
+<span class="n">x</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">x</span>             <span class="c1">// Isolate rightmost set bit</span>
+<span class="n">x</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>        <span class="c1">// Set all bits right of rightmost set bit</span>
+<span class="o">~</span><span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1">// Isolate rightmost 0 bit</span>
+
+<span class="c1">// Quick Checks</span>
+<span class="n">x</span> <span class="o">&amp;</span> <span class="mi">1</span>              <span class="c1">// Is odd?</span>
+<span class="o">!</span><span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>     <span class="c1">// Is power of 2?</span>
+<span class="n">x</span> <span class="o">^</span> <span class="n">x</span>              <span class="c1">// Always 0</span>
+<span class="n">x</span> <span class="o">^</span> <span class="mi">0</span>              <span class="c1">// Always x</span>
+<span class="n">x</span> <span class="o">^</span> <span class="o">~</span><span class="n">x</span>             <span class="c1">// Always -1</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<p><strong>Key Takeaways:</strong></p>
+
+<ol>
+  <li><strong>Performance</strong>: Bitwise operations are 10-100x faster than arithmetic</li>
+  <li><strong>Memory efficiency</strong>: Pack multiple flags into single bytes</li>
+  <li><strong>Hardware control</strong>: Essential for embedded systems and low-level programming</li>
+  <li><strong>Clean solutions</strong>: Efficient approaches to complex problems</li>
+</ol>
+
+<p><strong>When to Use Bitwise:</strong></p>
+<ul>
+  <li>Embedded systems (registers, ports, hardware control)</li>
+  <li>Performance-critical code (graphics, cryptography)</li>
+  <li>Flag management (multiple boolean states)</li>
+  <li>Algorithmic techniques (unique element, power of 2)</li>
+  <li>Bit field manipulation</li>
+</ul>
+
+<p><strong>When NOT to Use:</strong></p>
+<ul>
+  <li>When it hurts readability for minimal gain</li>
+  <li>When compiler optimizations do it automatically</li>
+  <li>When team members don’t understand it</li>
+</ul>
+
+<p>Bitwise operations are powerful tools. Use them where they provide clear benefits in performance or memory efficiency, but prioritize code readability when the gains are marginal.</p>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/industry/2026-02-16-portable-C/" class="flip-title"><span>Portable and Secure C- A Practical Guide to MISRA C & CERT C</span></a>  <time class="faded fine" datetime="2026-02-16T00:00:00+00:00">16 Feb 2026</time></li>          <li class="h4">  <a href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>Local First, Building Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

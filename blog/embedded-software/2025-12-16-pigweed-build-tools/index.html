@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Build Systems in Embedded Development: From Make to Pigweed | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Build Systems in Embedded Development: From Make to Pigweed" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Why does your code compile on your machine but fail on your teammate’s? Explore Make, CMake, and Pigweed—the tools that turn scattered C++ files into working firmware. Learn which one you actually need and why that answer might surprise you." />
+<meta property="og:description" content="Why does your code compile on your machine but fail on your teammate’s? Explore Make, CMake, and Pigweed—the tools that turn scattered C++ files into working firmware. Learn which one you actually need and why that answer might surprise you." />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/build-system.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/build-system.webp" />
+<meta property="twitter:title" content="Build Systems in Embedded Development: From Make to Pigweed" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-18T07:07:51+00:00","datePublished":"2025-12-16T00:00:00+00:00","description":"Why does your code compile on your machine but fail on your teammate’s? Explore Make, CMake, and Pigweed—the tools that turn scattered C++ files into working firmware. Learn which one you actually need and why that answer might surprise you.","headline":"Build Systems in Embedded Development: From Make to Pigweed","image":"/cover_images/posts/build-system.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/embedded-software/2025-12-16-pigweed-build-tools/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/embedded-software/2025-12-16-pigweed-build-tools/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/embedded-software/2025-12-16-pigweed-build-tools/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/embedded-software/">embedded-software</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2025-12-16-pigweed-build-tools</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-embedded-software-pigweed-build-tools" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Build Systems in Embedded Development: From Make to Pigweed
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time> in <span>Blog</span> / <a href="/embedded-software/" class="flip-title">Embedded Software</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/build-system.webp"
+    
+    
+  
+  alt="Build Systems in Embedded Development: From Make to Pigweed"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      Why does your code compile on your machine but fail on your teammate’s? Explore Make, CMake, and Pigweed—the tools that turn scattered C++ files into working firmware. Learn which one you actually need and why that answer might surprise you.
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <p>Ever spent hours debugging why your firmware which works on your machine but won’t compile on your teammate’s machine? Or wrestled with cryptic Makefiles that look like they were written in the 1990s (because they were)? You’re not alone.</p>
+
+<p>Build failures on different machines and cryptic Makefiles are common causes of wasted development time; they usually stem from differences in build systems and toolchains.</p>
+
+<p>Let’s talk about the tools that either make or break your embedded development workflow: <strong>Make, CMake, and Pigweed</strong>. By the end, you’ll know which one you actually need—and why that answer might surprise you.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#the-build-system-evolution">The Build System Evolution</a></li>
+  <li><a href="#make-the-grandfather">Make: The Grandfather</a></li>
+  <li><a href="#cmake-the-modernizer">CMake: The Modernizer</a></li>
+  <li><a href="#pigweed-the-game-changer">Pigweed: The Game Changer</a></li>
+  <li><a href="#which-one-should-you-use">Which One Should You Use?</a></li>
+</ul>
+
+<hr />
+
+<h2 id="the-build-system-evolution">The Build System Evolution</h2>
+
+<p>Think about your last embedded project. How did you get from scattered <code class="language-plaintext highlighter-rouge">.c</code> files to a working <code class="language-plaintext highlighter-rouge">.bin</code> file flashed onto hardware?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main.c + hal_uart.c + startup.s + ... → Magic happens → firmware.bin
+</code></pre></div></div>
+
+<p>That “magic” is your build system. And here’s the thing: <strong>choosing the wrong one costs you days, sometimes weeks, of frustration.</strong></p>
+
+<h3 id="the-journey">The Journey</h3>
+
+<pre><code class="language-mermaid">graph LR
+    A[1980s-1990s&lt;br/&gt;Make Era] --&gt;|Manual Everything| B[2000s&lt;br/&gt;CMake Era]
+    B --&gt;|Generated Builds| C[2020s&lt;br/&gt;Pigweed Era]
+    
+    A -.-&gt;|Problem| A1["Verbose syntax&lt;br/&gt;Platform-specific"]
+    B -.-&gt;|Solution| B1["Meta-build system&lt;br/&gt;Cross-platform"]
+    B -.-&gt;|Problem| B2["No HAL&lt;br/&gt;No protocols"]
+    C -.-&gt;|Solution| C1["Complete framework&lt;br/&gt;Everything included"]
+    
+    style A fill:#f9f9f9
+    style B fill:#e3f2fd
+    style C fill:#e8f5e9
+</code></pre>
+
+<p><strong>1980s-1990s</strong>: Make ruled everything. No alternatives.<br />
+<strong>2000s</strong>: CMake emerged—”Just write a simpler config file and we’ll generate the Makefile for you!”<br />
+<strong>2020s</strong>: Google releases Pigweed — a framework that bundles build tooling, toolchains, HALs, and protocols to reduce repetitive setup.</p>
+
+<p>Each generation solved problems the previous one couldn’t. Let’s see why.</p>
+
+<hr />
+
+<h2 id="make-the-grandfather">Make: The Grandfather</h2>
+
+<h3 id="what-is-make">What Is Make?</h3>
+
+<p>Make is the OG build tool. If you’ve touched Linux or embedded development, you’ve probably seen a Makefile that looks like this:</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CC</span> <span class="o">=</span> arm-none-eabi-gcc
+<span class="nv">CFLAGS</span> <span class="o">=</span> <span class="nt">-mcpu</span><span class="o">=</span>cortex-m4 <span class="nt">-mthumb</span> <span class="nt">-O2</span>
+
+<span class="nl">all</span><span class="o">:</span> <span class="nf">firmware.elf</span>
+
+<span class="nl">firmware.elf</span><span class="o">:</span> <span class="nf">main.o hal.o</span>
+	<span class="p">$(</span>CC<span class="p">)</span> <span class="p">$(</span>CFLAGS<span class="p">)</span> main.o hal.o <span class="nt">-o</span> firmware.elf
+
+<span class="nl">main.o</span><span class="o">:</span> <span class="nf">main.c</span>
+	<span class="p">$(</span>CC<span class="p">)</span> <span class="p">$(</span>CFLAGS<span class="p">)</span> <span class="nt">-c</span> main.c
+
+<span class="nl">hal.o</span><span class="o">:</span> <span class="nf">hal.c</span>
+	<span class="p">$(</span>CC<span class="p">)</span> <span class="p">$(</span>CFLAGS<span class="p">)</span> <span class="nt">-c</span> hal.c
+
+<span class="nl">clean</span><span class="o">:</span>
+	<span class="nb">rm</span> <span class="nt">-f</span> <span class="k">*</span>.o <span class="k">*</span>.elf
+</code></pre></div></div>
+
+<p><strong>Build Flow:</strong></p>
+<pre><code class="language-mermaid">graph LR
+    A[main.c] --&gt;|compile| B[main.o]
+    C[hal.c] --&gt;|compile| D[hal.o]
+    
+    B --&gt;|link| E[firmware.elf]
+    D --&gt;|link| E
+    
+    F[make all] -.-&gt;|triggers| E
+    
+    G[Change main.c] ==&gt;|rebuilds| B
+    G ==&gt;|rebuilds| E
+    
+    style A fill:#e3f2fd
+    style C fill:#e3f2fd
+    style B fill:#fff3e0
+    style D fill:#fff3e0
+    style E fill:#c8e6c9
+    style F fill:#4caf50
+    style G fill:#ffcdd2
+</code></pre>
+
+<p>Make tracks dependencies: change <code class="language-plaintext highlighter-rouge">main.c</code> → only <code class="language-plaintext highlighter-rouge">main.o</code> and <code class="language-plaintext highlighter-rouge">firmware.elf</code> rebuild (not <code class="language-plaintext highlighter-rouge">hal.o</code>).</p>
+
+<h3 id="the-good">The Good</h3>
+
+<ul>
+  <li><strong>Universal</strong>: Installed on virtually every Unix-like system</li>
+  <li><strong>Explicit</strong>: You see exactly what commands run</li>
+  <li><strong>Simple concepts</strong>: Targets, dependencies, commands</li>
+  <li><strong>No abstraction overhead</strong>: What you write is what runs</li>
+</ul>
+
+<h3 id="the-problem">The Problem</h3>
+
+<p>Have you ever tried to make a Makefile work on both Linux and Windows? Or switch from GCC to Clang? <strong>Every change cascades into editing dozens of lines.</strong></p>
+
+<p>Here’s what happened when I tried to add one new source file to a large project:</p>
+<ol>
+  <li>Add the <code class="language-plaintext highlighter-rouge">.c</code> file to the source list</li>
+  <li>Add the corresponding <code class="language-plaintext highlighter-rouge">.o</code> file to the object list</li>
+  <li>Update the dependency chain</li>
+  <li>Add include paths if it uses new headers</li>
+  <li>Test and discover I typoed one of the paths</li>
+  <li><strong>30 minutes gone</strong></li>
+</ol>
+
+<p>Make forces you to manually manage every detail. Great for learning. Terrible for productivity.</p>
+
+<p><strong>Question for you</strong>: How many times have you copy-pasted a Makefile from one project to another and spent an hour fixing paths?</p>
+
+<hr />
+
+<h2 id="cmake-the-modernizer">CMake: The Modernizer</h2>
+
+<h3 id="why-cmake-exists">Why CMake Exists</h3>
+
+<p>CMake’s pitch is simple: <strong>“Stop writing build scripts. Write build configuration.”</strong></p>
+
+<p>Instead of spelling out every compilation command, you describe <em>what</em> you want:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.13<span class="p">)</span>
+
+<span class="c1"># Set compilers for ARM Cortex-M</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_C_COMPILER <span class="s2">"arm-none-eabi-gcc"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_COMPILER <span class="s2">"arm-none-eabi-g++"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_ASM_COMPILER <span class="s2">"arm-none-eabi-gcc"</span><span class="p">)</span>
+
+<span class="c1"># Set architecture</span>
+<span class="nb">set</span><span class="p">(</span>MCU <span class="s2">"-mcpu=cortex-m0 -mthumb"</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>COMMON_FLAGS <span class="s2">"</span><span class="si">${</span><span class="nv">MCU</span><span class="si">}</span><span class="s2"> -fdata-sections -ffunction-sections -Wall"</span><span class="p">)</span>
+
+<span class="c1"># Add your sources</span>
+<span class="nb">add_executable</span><span class="p">(</span>firmware
+    src/main.cpp
+    hal/uart/uart_stm32.cpp
+    platform/startup_stm32f072xb.s
+    platform/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c
+<span class="p">)</span>
+
+<span class="c1"># Link everything</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>firmware hal_library<span class="p">)</span>
+</code></pre></div></div>
+
+<p>CMake reads this and <em>generates</em> a Makefile (or Ninja file, or Visual Studio project, or Xcode project…).</p>
+
+<h3 id="what-cmake-actually-does">What CMake Actually Does</h3>
+
+<p>Let’s break down the embedded compilation pipeline:</p>
+
+<pre><code class="language-mermaid">flowchart TD
+    A[Source Files&lt;br/&gt;.c .cpp .s] --&gt; B[Preprocessor]
+    B --&gt;|Expands macros&lt;br/&gt;Resolves includes| C[Compiler]
+    C --&gt;|Generates| D[Object Files&lt;br/&gt;.o]
+    E[Assembly .s] --&gt; F[Assembler]
+    F --&gt; D
+    D --&gt; G[Linker]
+    H[Linker Script&lt;br/&gt;.ld] --&gt; G
+    I[Libraries&lt;br/&gt;.a] --&gt; G
+    G --&gt;|Combines| J[ELF File&lt;br/&gt;with debug symbols]
+    J --&gt; K[objcopy]
+    K --&gt; L[Binary .bin&lt;br/&gt;or HEX .hex]
+    L --&gt; M[Flash to MCU]
+    
+    N[CMake] -.-&gt;|Orchestrates| B
+    N -.-&gt;|Orchestrates| C
+    N -.-&gt;|Orchestrates| F
+    N -.-&gt;|Orchestrates| G
+    N -.-&gt;|Orchestrates| K
+    
+    style N fill:#ff9800,stroke:#e65100,stroke-width:3px
+    style L fill:#4caf50
+    style M fill:#2196f3
+</code></pre>
+
+<p><strong>CMake orchestrates every step.</strong> You configure once; it handles the rest.</p>
+
+<h3 id="real-world-example-multi-target-embedded-project">Real-World Example: Multi-Target Embedded Project</h3>
+
+<p>Imagine you’re building firmware that needs to run on:</p>
+<ul>
+  <li>STM32F4 (Cortex-M4)</li>
+  <li>STM32F0 (Cortex-M0)</li>
+  <li>A host simulator for testing</li>
+</ul>
+
+<p>With Make, you’d maintain three separate Makefiles. With CMake:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Platform-specific settings</span>
+<span class="nb">if</span><span class="p">(</span>TARGET_PLATFORM STREQUAL <span class="s2">"STM32F4"</span><span class="p">)</span>
+    <span class="nb">set</span><span class="p">(</span>MCU <span class="s2">"-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard"</span><span class="p">)</span>
+    <span class="nb">set</span><span class="p">(</span>LINKER_SCRIPT <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="si">}</span><span class="s2">/platform/STM32F4.ld"</span><span class="p">)</span>
+<span class="nb">elseif</span><span class="p">(</span>TARGET_PLATFORM STREQUAL <span class="s2">"STM32F0"</span><span class="p">)</span>
+    <span class="nb">set</span><span class="p">(</span>MCU <span class="s2">"-mcpu=cortex-m0 -mthumb"</span><span class="p">)</span>
+    <span class="nb">set</span><span class="p">(</span>LINKER_SCRIPT <span class="s2">"</span><span class="si">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="si">}</span><span class="s2">/platform/STM32F0.ld"</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+    <span class="c1"># Host simulator - use native compiler</span>
+    <span class="nb">set</span><span class="p">(</span>MCU <span class="s2">""</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c1"># Same source code, different targets</span>
+<span class="nb">add_executable</span><span class="p">(</span>firmware <span class="si">${</span><span class="nv">SOURCES</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">target_compile_options</span><span class="p">(</span>firmware PRIVATE <span class="si">${</span><span class="nv">MCU</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">cmake -DTARGET_PLATFORM=STM32F4 ..</code> and you’re building for F4. Change to <code class="language-plaintext highlighter-rouge">STM32F0</code> and rebuild. <strong>Same CMakeLists.txt. Zero manual editing.</strong></p>
+
+<p><strong>Architecture:</strong></p>
+<pre><code class="language-mermaid">graph TB
+    A[CMakeLists.txt&lt;br/&gt;Single Source] --&gt; B{Platform?}
+    B --&gt;|STM32F4| C[Cortex-M4 Config]
+    B --&gt;|STM32F0| D[Cortex-M0 Config]
+    B --&gt;|Simulator| E[Host Config]
+    
+    C --&gt; F[arm-none-eabi-gcc&lt;br/&gt;-mcpu=cortex-m4]
+    D --&gt; G[arm-none-eabi-gcc&lt;br/&gt;-mcpu=cortex-m0]
+    E --&gt; H[gcc/clang&lt;br/&gt;native]
+    
+    I[Same Source Code] --&gt; F
+    I --&gt; G
+    I --&gt; H
+    
+    F --&gt; J[firmware_f4.elf]
+    G --&gt; K[firmware_f0.elf]
+    H --&gt; L[simulator]
+    
+    style A fill:#2196f3
+    style I fill:#4caf50
+</code></pre>
+
+<h3 id="the-cmake-advantage">The CMake Advantage</h3>
+
+<p><strong>Cross-platform</strong>: Write once, build on Windows, Linux, macOS<br />
+<strong>IDE integration</strong>: VS Code, CLion, Eclipse all understand CMake<br />
+<strong>Toolchain management</strong>: Easily switch between GCC, Clang, IAR, Keil<br />
+<strong>Dependency tracking</strong>: Change one header? CMake knows what to rebuild<br />
+<strong>Modern syntax</strong>: Actually readable (compared to Make’s tab-sensitive chaos)</p>
+
+<h3 id="when-cmake-falls-short">When CMake Falls Short</h3>
+
+<p>Here’s what CMake <em>doesn’t</em> solve:</p>
+<ul>
+  <li><strong>Hardware abstraction</strong>: Still writing your own HAL or using vendor libraries</li>
+  <li><strong>Portability</strong>: Your <em>code</em> isn’t portable just because your build system is</li>
+  <li><strong>Communication protocols</strong>: Need RPC? Serial? Bluetooth? Roll your own or find libraries</li>
+  <li><strong>Testing infrastructure</strong>: You’ll bolt on frameworks separately</li>
+  <li><strong>Toolchain downloads</strong>: You still manually install <code class="language-plaintext highlighter-rouge">arm-none-eabi-gcc</code></li>
+</ul>
+
+<p>Which brings us to Pigweed.</p>
+
+<hr />
+
+<h2 id="pigweed-the-game-changer">Pigweed: The Game Changer</h2>
+
+<h3 id="what-pigweed-provides">What Pigweed Provides</h3>
+
+<p>Google asked: “Why do embedded developers waste time on the same problems everyone else already solved?”</p>
+
+<p><strong>Pigweed’s answer</strong>: Package the build system, toolchain, HAL, protocols, logging, testing, and RPC into one framework.</p>
+
+<p>It’s not just a build tool. It’s an <strong>entire embedded development ecosystem</strong>.</p>
+
+<h3 id="the-core-problem-pigweed-solves">The Core Problem Pigweed Solves</h3>
+
+<p>Picture this scenario:</p>
+
+<p>You write firmware for a temperature sensor. Works great on STM32. Now your customer wants it on ESP32. Then Nordic nRF52. Then a Linux gateway.</p>
+
+<p><strong>Traditional approach:</strong></p>
+<ol>
+  <li>Rewrite your UART driver for the new platform</li>
+  <li>Rewrite your SPI driver</li>
+  <li>Rewrite your logging system</li>
+  <li>Rewrite your communication protocol</li>
+  <li>Spend weeks debugging because byte ordering is different</li>
+  <li>Repeat for the next platform</li>
+</ol>
+
+<p><strong>Pigweed approach:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Same code on STM32, ESP32, nRF52, Linux:</span>
+<span class="n">pw</span><span class="o">::</span><span class="n">stream</span><span class="o">::</span><span class="n">Write</span><span class="p">(</span><span class="n">log_stream</span><span class="p">,</span> <span class="s">"Temperature: "</span><span class="p">,</span> <span class="n">temp</span><span class="p">);</span>
+<span class="n">pw</span><span class="o">::</span><span class="n">spi</span><span class="o">::</span><span class="n">Device</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">sensor_data</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Cross-Platform Architecture:</strong></p>
+<pre><code class="language-mermaid">graph TB
+    A[Your Application Code] --&gt; B[Pigweed Interfaces]
+    
+    B --&gt; C[pw::stream]
+    B --&gt; D[pw::spi]
+    B --&gt; E[pw::uart]
+    B --&gt; F[pw::log]
+    
+    C --&gt; G[STM32 HAL]
+    C --&gt; H[ESP32 SDK]
+    C --&gt; I[nRF52 SDK]
+    C --&gt; J[Linux]
+    
+    D --&gt; G
+    D --&gt; H
+    D --&gt; I
+    D --&gt; J
+    
+    E --&gt; G
+    E --&gt; H
+    E --&gt; I
+    E --&gt; J
+    
+    F --&gt; G
+    F --&gt; H
+    F --&gt; I
+    F --&gt; J
+    
+    style A fill:#4caf50
+    style B fill:#2196f3
+    style G fill:#ff9800
+    style H fill:#ff9800
+    style I fill:#ff9800
+    style J fill:#ff9800
+</code></pre>
+
+<p>Pigweed provides the <strong>hardware abstraction</strong>. You write to interfaces. Pigweed implements them on 20+ platforms.</p>
+
+<h3 id="architecture-not-just-libraries">Architecture: Not Just Libraries</h3>
+
+<h4 id="1-build-system-bazel">1. <strong>Build System: Bazel</strong></h4>
+
+<p>Pigweed uses <strong>Bazel</strong>, not CMake. Why?</p>
+
+<p>Bazel was designed by Google for massive, multi-language, multi-platform projects:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># BUILD.bazel file
+</span><span class="nf">cc_binary</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">blinky</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">srcs</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">main.cpp</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">deps</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sh">"</span><span class="s">//pw_system</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">//modules/gpio</span><span class="sh">"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Bazel targets</strong> represent exactly what you want to build:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//apps/blinky:simulator_blinky      # Run on host simulator
+//apps/blinky:stm32_blinky           # Flash to STM32
+//apps/blinky:rpc_client              # Python control interface
+</code></pre></div></div>
+
+<p><strong>Bazel Dependency Graph:</strong></p>
+<pre><code class="language-mermaid">graph TD
+    A["//apps/blinky"] --&gt; B[simulator_blinky]
+    A --&gt; C[stm32_blinky]
+    A --&gt; D[rpc_client]
+    
+    B --&gt; E["//pw_system"]
+    B --&gt; F["//modules/gpio"]
+    
+    C --&gt; E
+    C --&gt; F
+    C --&gt; G["//hal/stm32"]
+    
+    D --&gt; H["//pw_rpc"]
+    D --&gt; I[Python libs]
+    
+    E --&gt; J["//pw_log"]
+    E --&gt; K["//pw_thread"]
+    
+    style A fill:#4caf50
+    style B fill:#2196f3
+    style C fill:#ff9800
+    style D fill:#9c27b0
+</code></pre>
+
+<p>One command builds the right target:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bazel build //apps/blinky:stm32_blinky
+</code></pre></div></div>
+
+<h4 id="2-rpc-talk-to-your-hardware-like-its-a-web-service">2. <strong>RPC: Talk to Your Hardware Like It’s a Web Service</strong></h4>
+
+<p><strong>What’s RPC?</strong> Remote Procedure Call lets you call functions on another device as if they were local. Instead of:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Traditional approach:
+</span><span class="n">serial</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">BLINK,200,3</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># Send text command
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">serial</span><span class="p">.</span><span class="nf">readline</span><span class="p">()</span>    <span class="c1"># Parse text response
+</span><span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="sh">"</span><span class="s">OK</span><span class="sh">"</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Success</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You write:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># RPC approach:
+</span><span class="n">device</span><span class="p">.</span><span class="n">rpcs</span><span class="p">.</span><span class="n">blinky</span><span class="p">.</span><span class="nc">Blink</span><span class="p">(</span><span class="n">interval_ms</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">blink_count</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># That's it. Function call. Done.
+</span></code></pre></div></div>
+
+<p>The RPC system handles serialization, transport, deserialization, and error handling automatically. It’s like calling a web API, but for embedded devices.</p>
+
+<p>Here’s where Pigweed gets really interesting.</p>
+
+<p>Define your device interface in a <code class="language-plaintext highlighter-rouge">.proto</code> file:</p>
+
+<div class="language-protobuf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">syntax</span> <span class="o">=</span> <span class="s">"proto3"</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nn">blinky</span><span class="p">;</span>
+
+<span class="kd">service</span> <span class="n">Blinky</span> <span class="p">{</span>
+  <span class="k">rpc</span> <span class="n">ToggleLed</span><span class="p">(</span><span class="n">pw.protobuf.Empty</span><span class="p">)</span> <span class="k">returns</span><span class="p">(</span><span class="n">pw.protobuf.Empty</span><span class="p">);</span>
+  <span class="k">rpc</span> <span class="n">Blink</span><span class="p">(</span><span class="n">BlinkRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">pw.protobuf.Empty</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">BlinkRequest</span> <span class="p">{</span>
+  <span class="kt">uint32</span> <span class="na">interval_ms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">optional</span> <span class="kt">uint32</span> <span class="na">blink_count</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Pigweed auto-generates:</p>
+<ul>
+  <li><strong>C++ server code</strong> (runs on your embedded device)</li>
+  <li><strong>Python client code</strong> (runs on your PC)</li>
+  <li><strong>Efficient binary protocol</strong> (minimal overhead)</li>
+</ul>
+
+<p>Now control your device from a Python shell:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Connect to device over serial
+</span><span class="n">device</span> <span class="o">=</span> <span class="n">pw_device</span><span class="p">.</span><span class="nc">Device</span><span class="p">(</span><span class="sh">'</span><span class="s">/dev/ttyUSB0</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Call RPC methods like they're local functions
+</span><span class="n">device</span><span class="p">.</span><span class="n">rpcs</span><span class="p">.</span><span class="n">blinky</span><span class="p">.</span><span class="n">Blinky</span><span class="p">.</span><span class="nc">Blink</span><span class="p">(</span><span class="n">interval_ms</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">blink_count</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># LED blinks 3 times!
+</span>
+<span class="c1"># Read sensor data
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">rpcs</span><span class="p">.</span><span class="n">board</span><span class="p">.</span><span class="n">Board</span><span class="p">.</span><span class="nc">OnboardTemp</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Temperature: </span><span class="si">{</span><span class="n">response</span><span class="p">.</span><span class="n">temp</span><span class="si">}</span><span class="s">°C</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>RPC Communication Flow:</strong></p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant PC as Python Client&lt;br/&gt;(Your PC)
+    participant Serial as Serial/USB
+    participant MCU as C++ Device&lt;br/&gt;(MCU)
+    
+    PC-&gt;&gt;PC: device.rpcs.blinky.Blink(interval_ms=200)
+    PC-&gt;&gt;Serial: Binary protobuf message
+    Serial-&gt;&gt;MCU: 0x0A 0x02 0xC8 0x00...
+    MCU-&gt;&gt;MCU: Deserialize protobuf
+    MCU-&gt;&gt;MCU: Call Blink() method
+    MCU-&gt;&gt;MCU: GPIO toggle
+    MCU-&gt;&gt;Serial: Response (Status.OK)
+    Serial-&gt;&gt;PC: Binary response
+    PC-&gt;&gt;PC: Deserialize to Python object
+    
+    Note over PC,MCU: Type-safe, compact, no manual parsing!
+</code></pre>
+
+<p><strong>Outcome:</strong></p>
+<ul>
+  <li>No parsing text commands</li>
+  <li>No ASCII protocol debugging</li>
+  <li>No manual serialization</li>
+  <li><strong>Type-safe communication</strong> between Python and embedded C++</li>
+</ul>
+
+<p>Change the protocol? Edit the <code class="language-plaintext highlighter-rouge">.proto</code> file. Regenerate. Done.</p>
+
+<h4 id="3-hardware-modules">3. <strong>Hardware Modules</strong></h4>
+
+<p>Pigweed includes battle-tested modules:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>What It Does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_log</code></td>
+      <td>Multi-backend logging (UART, RTT, file)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_uart</code></td>
+      <td>Serial communication abstraction</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_spi</code></td>
+      <td>SPI interface</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_i2c</code></td>
+      <td>I2C interface</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_bluetooth</code></td>
+      <td>Bluetooth HCI</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_rpc</code></td>
+      <td>Remote procedure call system</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_thread</code></td>
+      <td>Threading abstraction</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_sync</code></td>
+      <td>Synchronization primitives</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_string</code></td>
+      <td>Fixed-size strings (no dynamic allocation)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_containers</code></td>
+      <td>Fixed-size data structures</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pw_console</code></td>
+      <td>Interactive debugging console</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All with <strong>platform-neutral interfaces</strong> and <strong>implementations for major MCUs</strong>.</p>
+
+<h4 id="4-embedded-friendly-standard-library">4. <strong>Embedded-Friendly Standard Library</strong></h4>
+
+<p>Standard C++ on embedded is risky:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">std::string</code> uses dynamic allocation → heap fragmentation</li>
+  <li><code class="language-plaintext highlighter-rouge">std::vector</code> can run out of memory</li>
+  <li>Exceptions aren’t always supported</li>
+</ul>
+
+<p>Pigweed provides alternatives:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Instead of std::string:</span>
+<span class="n">pw</span><span class="o">::</span><span class="n">InlineString</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="n">fixed_string</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">;</span>
+
+<span class="c1">// Instead of std::vector:</span>
+<span class="n">pw</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;</span> <span class="n">fixed_vector</span><span class="p">;</span>  <span class="c1">// Max 10 elements, no heap</span>
+</code></pre></div></div>
+
+<h4 id="5-complete-development-environment">5. <strong>Complete Development Environment</strong></h4>
+
+<p>Run one command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source </span>bootstrap.sh
+</code></pre></div></div>
+
+<p>Pigweed downloads and sets up:</p>
+<ul>
+  <li>Correct compiler versions</li>
+  <li>Bazel</li>
+  <li>Python environment</li>
+  <li>All dependencies</li>
+</ul>
+
+<p><strong>No more “works on my machine”</strong> because everyone has the <em>exact same toolchain</em>.</p>
+
+<h3 id="real-world-workflow-air-quality-sensor">Real-World Workflow: Air Quality Sensor</h3>
+
+<p>Pigweed’s “Sense” tutorial demonstrates a complete project:</p>
+
+<p><strong>1. Device Firmware (C++):</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Implement the RPC service</span>
+<span class="k">class</span> <span class="nc">BoardService</span> <span class="o">:</span> <span class="k">public</span> <span class="n">pw_rpc</span><span class="o">::</span><span class="n">Board</span><span class="o">::</span><span class="n">Service</span> <span class="p">{</span>
+  <span class="n">pw</span><span class="o">::</span><span class="n">Status</span> <span class="n">OnboardTemp</span><span class="p">(</span><span class="n">pw</span><span class="o">::</span><span class="n">protobuf</span><span class="o">::</span><span class="n">Empty</span><span class="o">::</span><span class="n">Message</span><span class="o">&amp;</span> <span class="n">request</span><span class="p">,</span>
+                         <span class="n">board</span><span class="o">::</span><span class="n">OnboardTempResponse</span><span class="o">::</span><span class="n">Message</span><span class="o">&amp;</span> <span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">response</span><span class="p">.</span><span class="n">temp</span> <span class="o">=</span> <span class="n">ReadTemperatureSensor</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">pw</span><span class="o">::</span><span class="n">OkStatus</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong>2. Python Client:</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Interactive REPL
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">device</span><span class="p">.</span><span class="n">rpcs</span><span class="p">.</span><span class="n">board</span><span class="p">.</span><span class="n">Board</span><span class="p">.</span><span class="nc">OnboardTemp</span><span class="p">()</span>
+<span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">board</span><span class="p">.</span><span class="nc">OnboardTempResponse</span><span class="p">(</span><span class="n">temp</span><span class="o">=</span><span class="mf">22.5</span><span class="p">))</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">device</span><span class="p">.</span><span class="n">rpcs</span><span class="p">.</span><span class="n">blinky</span><span class="p">.</span><span class="n">Blinky</span><span class="p">.</span><span class="nc">ToggleLed</span><span class="p">()</span>
+<span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">pw</span><span class="p">.</span><span class="n">protobuf</span><span class="p">.</span><span class="nc">Empty</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p><strong>What’s a REPL?</strong> Read-Eval-Print Loop is an interactive shell where you type commands and immediately see results. Think Python’s <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code> prompt or your browser’s JavaScript console.</p>
+
+<p><strong>RPC + REPL = Powerful Debugging:</strong></p>
+<ul>
+  <li>Type a command → RPC serializes it → Device executes → Result appears instantly</li>
+  <li>No recompiling firmware to test a single function</li>
+  <li>No printf debugging to see sensor values</li>
+  <li>Just interactive exploration of your hardware</li>
+</ul>
+
+<p>It’s the difference between:</p>
+<ul>
+  <li><strong>Without REPL</strong>: Change code → Rebuild → Flash → Test → Repeat (5 minutes per cycle)</li>
+  <li><strong>With REPL</strong>: Type command → See result (5 seconds)</li>
+</ul>
+
+<p><strong>3. Build and Flash:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build for hardware</span>
+bazel build //apps/sense:stm32_sense
+
+<span class="c"># Or run on simulator for testing</span>
+bazel run //apps/sense:simulator_sense
+</code></pre></div></div>
+
+<p>All from the same codebase.</p>
+
+<h3 id="the-tradeoffs">The Tradeoffs</h3>
+
+<p><strong>When Pigweed Makes Sense:</strong></p>
+<ul>
+  <li>Large projects (multiple engineers, multiple platforms)</li>
+  <li>Need professional debugging tools</li>
+  <li>Want standardized communication (RPC)</li>
+  <li>Building a product family with shared code</li>
+  <li>Have time to climb the learning curve</li>
+</ul>
+
+<p><strong>When It Might Be Overkill:</strong></p>
+<ul>
+  <li>Simple blinky projects</li>
+  <li>One-off prototypes</li>
+  <li>Highly resource-constrained (&lt; 32KB flash)</li>
+  <li>Team unfamiliar with Bazel and Protocol Buffers</li>
+  <li>Quick turnaround needed (learning curve is steep)</li>
+</ul>
+
+<p>Note: Pigweed front-loads complexity; it requires an initial investment of time and learning for long-term benefits.</p>
+
+<hr />
+
+<h2 id="which-one-should-you-use">Which One Should You Use?</h2>
+
+<p>Let’s be practical. Here’s my decision tree:</p>
+
+<pre><code class="language-mermaid">flowchart TD
+    A[Starting New Project?] --&gt; B{Project Size?}
+    B --&gt;|&lt; 10 files&lt;br/&gt;Learning| C[Make]
+    B --&gt;|10-1000s files&lt;br/&gt;Production| D{Requirements?}
+    B --&gt;|Large scale&lt;br/&gt;Multi-platform| E{Team &amp; Budget?}
+    
+    D --&gt;|Just build&lt;br/&gt;Single platform| F[Make/CMake]
+    D --&gt;|Multi-platform&lt;br/&gt;IDE integration| G[CMake]
+    D --&gt;|Need HAL/RPC&lt;br/&gt;Protocols| E
+    
+    E --&gt;|Small team&lt;br/&gt;Quick deadline| G
+    E --&gt;|Large team&lt;br/&gt;Long-term| H[Pigweed]
+    
+    I[Existing Project?] --&gt; J{Current tool?}
+    J --&gt;|Make struggling| G
+    J --&gt;|CMake scaling| K{Worth migration?}
+    K --&gt;|Yes| H
+    K --&gt;|No| G
+    
+    style C fill:#f9f9f9
+    style G fill:#2196f3
+    style H fill:#4caf50
+</code></pre>
+
+<h3 id="use-make-if">Use Make If:</h3>
+<ul>
+  <li>✅ Tiny project (&lt; 10 source files)</li>
+  <li>✅ where simplicity and direct control suffice without complex configuration</li>
+</ul>
+
+<h3 id="use-cmake-if">Use CMake If:</h3>
+<ul>
+  <li>✅ Most embedded projects (10-1000s of files)</li>
+  <li>✅ Cross-platform builds</li>
+  <li>✅ Multiple targets (dev board + production hardware)</li>
+  <li>✅ IDE integration matters</li>
+  <li>✅ Team with varying skill levels</li>
+  <li>❌ <strong>Don’t</strong> expect hardware abstraction or protocols</li>
+</ul>
+
+<h3 id="use-pigweed-if">Use Pigweed If:</h3>
+<ul>
+  <li>✅ Large-scale product development</li>
+  <li>✅ Multiple hardware platforms</li>
+  <li>✅ Need RPC and serialization</li>
+  <li>✅ Team of experienced engineers</li>
+  <li>✅ Long-term maintenance</li>
+  <li>❌ <strong>Don’t</strong> use for quick prototypes or tiny teams</li>
+</ul>
+
+<h3 id="the-hybrid-approach">The Hybrid Approach</h3>
+
+<p>Here’s what professionals actually do:</p>
+
+<p><strong>Phase 1 (Prototype)</strong>: Start with CMake<br />
+<strong>Phase 2 (Production)</strong>: Migrate critical modules to Pigweed<br />
+<strong>Phase 3 (Product Family)</strong>: Full Pigweed infrastructure</p>
+
+<p>You don’t have to choose just one.</p>
+
+<hr />
+
+<h2 id="comparison-table">Comparison Table</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Make</th>
+      <th>CMake</th>
+      <th>Pigweed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Learning Curve</strong></td>
+      <td>Days</td>
+      <td>Weeks</td>
+      <td>Months</td>
+    </tr>
+    <tr>
+      <td><strong>Setup Time</strong></td>
+      <td>Minutes</td>
+      <td>Hours</td>
+      <td>Days</td>
+    </tr>
+    <tr>
+      <td><strong>Long-term ROI</strong></td>
+      <td>Low</td>
+      <td>High</td>
+      <td>Very High</td>
+    </tr>
+    <tr>
+      <td><strong>Team Size</strong></td>
+      <td>1-2</td>
+      <td>1-20</td>
+      <td>5+</td>
+    </tr>
+    <tr>
+      <td><strong>Cross-platform</strong></td>
+      <td>Manual</td>
+      <td>Automatic</td>
+      <td>Automatic</td>
+    </tr>
+    <tr>
+      <td><strong>Toolchain Management</strong></td>
+      <td>Manual</td>
+      <td>Manual</td>
+      <td>Automatic</td>
+    </tr>
+    <tr>
+      <td><strong>Hardware Abstraction</strong></td>
+      <td>None</td>
+      <td>None</td>
+      <td>Comprehensive</td>
+    </tr>
+    <tr>
+      <td><strong>RPC/Protocols</strong></td>
+      <td>DIY</td>
+      <td>DIY</td>
+      <td>Built-in</td>
+    </tr>
+    <tr>
+      <td><strong>Testing Framework</strong></td>
+      <td>DIY</td>
+      <td>Bolt-on</td>
+      <td>Integrated</td>
+    </tr>
+    <tr>
+      <td><strong>IDE Support</strong></td>
+      <td>Basic</td>
+      <td>Excellent</td>
+      <td>VS Code</td>
+    </tr>
+    <tr>
+      <td><strong>Industry Adoption</strong></td>
+      <td>Universal</td>
+      <td>Very High</td>
+      <td>Growing</td>
+    </tr>
+    <tr>
+      <td><strong>Best For</strong></td>
+      <td>Learning</td>
+      <td>Production</td>
+      <td>Enterprise</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p><strong>Make</strong> taught us build automation exists.<br />
+<strong>CMake</strong> modernized how we configure builds.<br />
+<strong>Pigweed</strong> is reimagining what embedded development could be.</p>
+
+<p>Choosing a tool depends on project size, team resources, and long-term maintenance goals.</p>
+
+<p>Starting a weekend blinky project? CMake is probably perfect.</p>
+
+<p>Trying to build the next generation of IoT devices for a Fortune 500 company? Pigweed might save you months.</p>
+
+<p>Maintaining a 15-year-old product with crusty Makefiles? Maybe cleaning those up is better than rewriting everything.</p>
+
+<div class="tip">
+  <p>Tool choice affects workflow and maintenance; select the one that fits your constraints and goals.</p>
+</div>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li>A. Mahmutbegović, C++ in Embedded Systems: A practical transition from C to modern C++, Packt Publishing, 2024.</li>
+</ul>
+
+<p><strong>CMake:</strong></p>
+<ul>
+  <li>Official Tutorial: https://cmake.org/cmake/help/latest/guide/tutorial/</li>
+  <li>Modern CMake: https://cliutils.gitlab.io/modern-cmake/</li>
+</ul>
+
+<p><strong>Pigweed:</strong></p>
+<ul>
+  <li>Official Site: https://pigweed.dev/</li>
+  <li>Getting Started: https://pigweed.dev/docs/get_started/</li>
+  <li>Sense Tutorial: https://pigweed.dev/showcases/sense/</li>
+</ul>
+
+<p><strong>Further Reading:</strong></p>
+<ul>
+  <li>“The Architecture of Open Source Applications” - Make and CMake chapters</li>
+  <li>Google’s Bazel documentation for understanding Pigweed’s build system</li>
+</ul>
+
+<hr />
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/rust-dev/2025-12-17-raii-cpp-rust/" class="flip-title"><span>RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector</span></a>  <time class="faded fine" datetime="2025-12-17T00:00:00+00:00">17 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

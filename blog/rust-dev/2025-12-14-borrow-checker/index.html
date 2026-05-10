@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful) | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="The borrow checker was the most confusing thing I encountered as a Rust beginner coming from C++. It looked like a compiler plus linter at first, but I was wrong. Here I explore how to understand and use it to grasp Rust’s design philosophy" />
+<meta property="og:description" content="The borrow checker was the most confusing thing I encountered as a Rust beginner coming from C++. It looked like a compiler plus linter at first, but I was wrong. Here I explore how to understand and use it to grasp Rust’s design philosophy" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/Borrow-checker.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/Borrow-checker.webp" />
+<meta property="twitter:title" content="Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-02-13T14:55:28+00:00","datePublished":"2025-12-14T00:00:00+00:00","description":"The borrow checker was the most confusing thing I encountered as a Rust beginner coming from C++. It looked like a compiler plus linter at first, but I was wrong. Here I explore how to understand and use it to grasp Rust’s design philosophy","headline":"Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)","image":"/cover_images/posts/Borrow-checker.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/rust-dev/2025-12-14-borrow-checker/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/rust-dev/2025-12-14-borrow-checker/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/rust-dev/2025-12-14-borrow-checker/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/rust-dev/">rust-dev</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2025-12-14-borrow-checker</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-rust-dev-borrow-checker" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-12-14T00:00:00+00:00">14 Dec 2025</time> in <span>Blog</span> / <a href="/rust-dev/" class="flip-title">Rust Dev</a> , Tags: <span>Rustdev</span>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/Borrow-checker.webp"
+    
+    
+  
+  alt="Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      The borrow checker was the most confusing thing I encountered as a Rust beginner coming from C++. It looked like a compiler plus linter at first, but I was wrong. Here I explore how to understand and use it to grasp Rust’s design philosophy
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul id="markdown-toc">
+  <li><a href="#getting-past-the-initial-frustration" id="markdown-toc-getting-past-the-initial-frustration">Getting Past the Initial Frustration</a></li>
+  <li><a href="#what-the-borrow-checker-actually-prevents" id="markdown-toc-what-the-borrow-checker-actually-prevents">What the Borrow Checker Actually Prevents</a>    <ul>
+      <li><a href="#the-stuff-that-gets-stopped" id="markdown-toc-the-stuff-that-gets-stopped">The Stuff That Gets Stopped</a></li>
+      <li><a href="#what-still-slips-through" id="markdown-toc-what-still-slips-through">What Still Slips Through</a></li>
+      <li><a href="#why-this-actually-matters" id="markdown-toc-why-this-actually-matters">Why This Actually Matters</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-aliasing-problem-what-c-quietly-ignores" id="markdown-toc-the-aliasing-problem-what-c-quietly-ignores">The Aliasing Problem (What C++ Quietly Ignores)</a></li>
+  <li><a href="#understanding-borrow-checker-errors" id="markdown-toc-understanding-borrow-checker-errors">Understanding Borrow Checker Errors</a>    <ul>
+      <li><a href="#cannot-borrow-as-mutable-more-than-once" id="markdown-toc-cannot-borrow-as-mutable-more-than-once">“Cannot borrow as mutable more than once”</a></li>
+      <li><a href="#borrowed-value-does-not-live-long-enough" id="markdown-toc-borrowed-value-does-not-live-long-enough">“Borrowed value does not live long enough”</a></li>
+      <li><a href="#pattern-3-interior-mutability" id="markdown-toc-pattern-3-interior-mutability">Pattern 3: Interior Mutability</a></li>
+    </ul>
+  </li>
+  <li><a href="#decision-tree" id="markdown-toc-decision-tree">Decision Tree</a></li>
+  <li><a href="#common-patterns" id="markdown-toc-common-patterns">Common Patterns</a>    <ul>
+      <li><a href="#1-copy-small-data" id="markdown-toc-1-copy-small-data">1. Copy Small Data</a></li>
+      <li><a href="#2-use-indices-not-references" id="markdown-toc-2-use-indices-not-references">2. Use Indices, Not References</a></li>
+      <li><a href="#3-event-queue-pattern" id="markdown-toc-3-event-queue-pattern">3. Event Queue Pattern</a></li>
+    </ul>
+  </li>
+  <li><a href="#when-to-use-rc-and-refcell-carefully" id="markdown-toc-when-to-use-rc-and-refcell-carefully">When to Use <code class="language-plaintext highlighter-rouge">Rc</code> and <code class="language-plaintext highlighter-rouge">RefCell</code> (Carefully)</a>    <ul>
+      <li><a href="#refcell-for-interior-mutability-you-control" id="markdown-toc-refcell-for-interior-mutability-you-control"><code class="language-plaintext highlighter-rouge">RefCell</code> for interior mutability you control</a></li>
+      <li><a href="#rc-for-truly-shared-read-only-data" id="markdown-toc-rc-for-truly-shared-read-only-data"><code class="language-plaintext highlighter-rouge">Rc</code> for truly shared read-only data</a></li>
+      <li><a href="#breaking-reference-cycles" id="markdown-toc-breaking-reference-cycles">Breaking Reference Cycles</a></li>
+    </ul>
+  </li>
+  <li><a href="#lessons-for-any-language-even-c" id="markdown-toc-lessons-for-any-language-even-c">Lessons for Any Language (Even C++)</a></li>
+  <li><a href="#the-real-takeaway" id="markdown-toc-the-real-takeaway">The Real Takeaway</a></li>
+  <li><a href="#quick-reference" id="markdown-toc-quick-reference">Quick Reference</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<h2 id="getting-past-the-initial-frustration">Getting Past the Initial Frustration</h2>
+
+<p>I spent a good chunk of my first week with Rust fighting the borrow checker. It felt like the compiler was deliberately being difficult—like it had opinions about my code that it shouldn’t have. I’d spend hours refactoring, only to hit another wall. But somewhere around that third or fourth rewrite, it clicked: <strong>the compiler wasn’t being difficult. It was pointing at genuine design problems I’d missed.</strong></p>
+
+<p>Here’s what actually shifted my perspective:</p>
+
+<p><strong>The errors aren’t blockers—they’re feedback.</strong> When the compiler yells at you, it’s not saying your idea is wrong. It’s saying “two parts of your code are trying to mutate the same data simultaneously, and that’s a real problem.” It’s not a language limitation; it’s a design issue waiting to be fixed.</p>
+
+<p><strong>There are always solutions.</strong> And they’re usually better than what you had:</p>
+<ul>
+  <li>Pick a single place in your code that actually owns and mutates the data</li>
+  <li>Split your data structures so functions only need what they use (not the whole thing)</li>
+  <li>Defer mutations—collect changes in a queue and apply them in a controlled phase</li>
+</ul>
+
+<p><strong><code class="language-plaintext highlighter-rouge">RefCell</code> and <code class="language-plaintext highlighter-rouge">Rc</code> aren’t escape hatches.</strong> I used them early as a way to sidestep the checker, and it never ended well. They’re tools for specific problems, not band-aids for poor design.</p>
+
+<h2 id="what-the-borrow-checker-actually-prevents">What the Borrow Checker Actually Prevents</h2>
+
+<h3 id="the-stuff-that-gets-stopped">The Stuff That Gets Stopped</h3>
+
+<p>Rust’s borrow checker catches the <em>hard</em> memory bugs—the ones that silently corrupt your program:</p>
+
+<ul>
+  <li><strong>Use-after-free</strong>: You try to access memory that’s already been freed</li>
+  <li><strong>Double-free</strong>: You free the same block twice</li>
+  <li><strong>Dangling pointers</strong>: You hold a reference to memory that no longer exists</li>
+  <li><strong>Data races</strong>: Two threads access the same data at the same time without synchronization</li>
+  <li><strong>Iterator invalidation</strong>: You modify a collection while iterating over it</li>
+  <li><strong>Aliased mutation</strong>: Multiple parts of your code try to mutate the same thing simultaneously</li>
+</ul>
+
+<p><strong>Here’s a real example—the kind that haunts C++ developers:</strong></p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++: Compiles, crashes later</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>  <span class="c1">// Reallocates!</span>
+<span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>         <span class="c1">// ❌ Dangling pointer - UB</span>
+</code></pre></div></div>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Rust: Rejected at compile time</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">vec</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="k">let</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">vec</span><span class="nf">.push</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>       <span class="c1">// ❌ ERROR: cannot borrow as mutable</span>
+<span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>         <span class="c1">// while borrowed immutably</span>
+</code></pre></div></div>
+
+<h3 id="what-still-slips-through">What Still Slips Through</h3>
+
+<p>Rust won’t save you from these:</p>
+
+<ul>
+  <li><strong>Logic bugs</strong>: Off-by-one errors, wrong algorithm, bad business logic</li>
+  <li><strong>Deadlocks</strong>: You can still create circular lock dependencies</li>
+  <li><strong>Memory leaks</strong>: If you create cycles with <code class="language-plaintext highlighter-rouge">Rc</code>, they’ll leak</li>
+  <li><strong>Integer overflow</strong>: Won’t catch it in release mode</li>
+  <li><strong>Panics</strong>: You can still call <code class="language-plaintext highlighter-rouge">unwrap()</code> on <code class="language-plaintext highlighter-rouge">None</code> or divide by zero</li>
+  <li><strong>Resource exhaustion</strong>: You can still run out of handles or memory</li>
+</ul>
+
+<p><strong>These still compile fine, but they’re broken:</strong></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Compiles fine, but logic bug</span>
+<span class="k">fn</span> <span class="nf">calculate_average</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">i32</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="nb">i32</span> <span class="p">{</span>
+    <span class="n">numbers</span><span class="nf">.iter</span><span class="p">()</span><span class="py">.sum</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">i32</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">/</span> <span class="n">numbers</span><span class="nf">.len</span><span class="p">()</span> <span class="k">as</span> <span class="nb">i32</span>
+    <span class="c1">// Panics if numbers is empty!</span>
+<span class="p">}</span>
+
+<span class="c1">// ✅ Compiles fine, but deadlock possible</span>
+<span class="k">let</span> <span class="n">mutex1</span> <span class="o">=</span> <span class="nn">Arc</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">Mutex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="k">let</span> <span class="n">mutex2</span> <span class="o">=</span> <span class="nn">Arc</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">Mutex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+
+<span class="c1">// Thread A: locks mutex1, then mutex2</span>
+<span class="c1">// Thread B: locks mutex2, then mutex1</span>
+<span class="c1">// = Classic deadlock (still possible in Rust!)</span>
+</code></pre></div></div>
+
+<h3 id="why-this-actually-matters">Why This Actually Matters</h3>
+
+<p>Here’s the thing: those memory bugs? They’re the <em>hard</em> ones. Microsoft and Google have published numbers showing that roughly 70% of their security vulnerabilities come from memory safety issues. Rust eliminates that entire category at compile time.</p>
+
+<p>You still need tests. You’ll still have bugs. But they’ll be logic bugs you can reason about, not mysterious crashes from memory corruption happening three function calls deep.</p>
+
+<h2 id="the-aliasing-problem-what-c-quietly-ignores">The Aliasing Problem (What C++ Quietly Ignores)</h2>
+
+<p>In C++, you can write code like this and it’ll compile fine. But it has a ticking time bomb inside:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++: Compiles. Might crash later (or not). Who knows?</span>
+<span class="k">class</span> <span class="nc">GameWorld</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Entity</span><span class="o">&gt;</span> <span class="n">entities</span><span class="p">;</span>
+    <span class="n">PhysicsEngine</span> <span class="n">physics</span><span class="p">;</span>
+    
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">update</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">physics</span><span class="p">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">entities</span><span class="p">);</span>      <span class="c1">// Mutates entities</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="o">:</span> <span class="n">entities</span><span class="p">)</span> <span class="p">{</span>       <span class="c1">// Iterating entities</span>
+            <span class="n">e</span><span class="p">.</span><span class="n">updateBehavior</span><span class="p">(</span><span class="n">entities</span><span class="p">);</span>  <span class="c1">// Also mutates entities!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>The problem isn’t obvious at first glance:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">physics.simulate()</code> mutates the <code class="language-plaintext highlighter-rouge">entities</code> vector</li>
+  <li>The loop is iterating over that same vector</li>
+  <li><code class="language-plaintext highlighter-rouge">updateBehavior()</code> might add or remove entities, causing a reallocation</li>
+  <li>When the vector reallocates, all those references become garbage</li>
+</ul>
+
+<p>This is a <strong>classic iterator invalidation bug</strong>. In C++, you only find it when:</p>
+<ol>
+  <li>The vector gets big enough to reallocate</li>
+  <li>Someone actually calls <code class="language-plaintext highlighter-rouge">updateBehavior()</code> in a way that modifies the collection</li>
+  <li>You have a customer report about a crash</li>
+</ol>
+
+<p>Rust won’t let you write this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Rust: Rejected at compile time</span>
+<span class="k">impl</span> <span class="n">GameWorld</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">update</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="py">.physics</span><span class="nf">.simulate</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="py">.entities</span><span class="p">);</span>
+        
+        <span class="k">for</span> <span class="n">e</span> <span class="k">in</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="py">.entities</span> <span class="p">{</span>
+            <span class="n">e</span><span class="nf">.update_behavior</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="py">.entities</span><span class="p">);</span>  
+            <span class="c1">// ❌ ERROR: cannot borrow as mutable more than once</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>But here’s the key: <strong>the real question isn’t syntax. It’s design.</strong></p>
+
+<p>Who actually owns the right to mutate <code class="language-plaintext highlighter-rouge">entities</code> right now? Physics? Each entity during its update? The main loop? They can’t all own it. You have to pick one.</p>
+
+<p>Rust forces this decision upfront. And that’s not a language limitation—that’s forcing clarity.</p>
+
+<h2 id="understanding-borrow-checker-errors">Understanding Borrow Checker Errors</h2>
+
+<p>When you hit a borrow checker error, it usually falls into one of a few patterns. Learning to recognize them makes them much less frustrating.</p>
+
+<h3 id="cannot-borrow-as-mutable-more-than-once">“Cannot borrow as mutable more than once”</h3>
+
+<p>This is the most common one. It means you’re trying to pass the same thing mutably to two different places at once.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">InputHandler</span> <span class="p">{</span>
+    <span class="n">mouse</span><span class="p">:</span> <span class="n">MouseState</span><span class="p">,</span>
+    <span class="n">keyboard</span><span class="p">:</span> <span class="n">KeyboardState</span><span class="p">,</span>
+    <span class="n">camera</span><span class="p">:</span> <span class="n">Camera</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">InputHandler</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">process</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// This fails—you're passing &amp;mut self to both</span>
+        <span class="c1">// handle_mouse(&amp;mut self.mouse, &amp;mut self.camera);</span>
+        <span class="c1">// handle_keyboard(&amp;mut self.keyboard, &amp;mut self.camera);</span>
+        
+        <span class="c1">// Solution: Destructure to make independence explicit</span>
+        <span class="k">let</span> <span class="k">Self</span> <span class="p">{</span> <span class="n">mouse</span><span class="p">,</span> <span class="n">keyboard</span><span class="p">,</span> <span class="n">camera</span> <span class="p">}</span> <span class="o">=</span> <span class="k">self</span><span class="p">;</span>
+        
+        <span class="nf">handle_mouse</span><span class="p">(</span><span class="n">mouse</span><span class="p">,</span> <span class="n">camera</span><span class="p">);</span>      <span class="c1">// OK!</span>
+        <span class="nf">handle_keyboard</span><span class="p">(</span><span class="n">keyboard</span><span class="p">,</span> <span class="n">camera</span><span class="p">);</span> <span class="c1">// OK!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>What’s happening:</strong> Once you destructure, Rust sees that <code class="language-plaintext highlighter-rouge">mouse</code> and <code class="language-plaintext highlighter-rouge">keyboard</code> are independent. They’re not both borrowing from the same container. This is the error telling you: “These two operations don’t actually need to share ownership of the whole handler—split it up.”</p>
+
+<h3 id="borrowed-value-does-not-live-long-enough">“Borrowed value does not live long enough”</h3>
+
+<p>This one shows up when you have a reference that outlives the data it points to.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">Tag</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">label</span><span class="p">:</span> <span class="o">&amp;</span><span class="nv">'a</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">make_tag</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="n">Tag</span><span class="o">&lt;</span><span class="nv">'_</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"session-42"</span><span class="p">);</span>
+    <span class="n">Tag</span> <span class="p">{</span> <span class="n">label</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">s</span> <span class="p">}</span>
+    <span class="c1">// ERROR: s is dropped here, but we're returning a reference to it</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>The problem:</strong> <code class="language-plaintext highlighter-rouge">s</code> is allocated on the stack inside <code class="language-plaintext highlighter-rouge">make_tag()</code>. When the function returns, the stack unwinds and <code class="language-plaintext highlighter-rouge">s</code> is gone. But you’re trying to hand back a reference to it. That reference now points to deallocated memory.</p>
+
+<p><strong>Solutions:</strong></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Option 1: Own the data instead of borrowing</span>
+<span class="k">struct</span> <span class="n">Tag</span> <span class="p">{</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">make_tag</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="n">Tag</span> <span class="p">{</span>
+    <span class="n">Tag</span> <span class="p">{</span> <span class="n">label</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"session-42"</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Option 2: Borrow from the caller</span>
+<span class="k">fn</span> <span class="n">make_tag</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="o">&amp;</span><span class="nv">'a</span> <span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Tag</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">Tag</span> <span class="p">{</span> <span class="n">label</span> <span class="p">}</span>  <span class="c1">// Caller controls the lifetime</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>What this teaches:</strong> Lifetimes are saying “who lives longer?” If you can’t answer that clearly, your design needs rethinking.</p>
+
+<h3 id="pattern-3-interior-mutability">Pattern 3: Interior Mutability</h3>
+
+<p><strong>When it works:</strong></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Caching: mutation is internal</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">cell</span><span class="p">::</span><span class="n">OnceCell</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Image</span> <span class="p">{</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="n">bytes</span><span class="p">:</span> <span class="n">OnceCell</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;&gt;</span><span class="p">,</span>  <span class="c1">// Lazy load</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">Image</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">data</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">u8</span><span class="p">]</span> <span class="p">{</span>  <span class="c1">// Note: &amp;self, not &amp;mut</span>
+        <span class="k">self</span><span class="py">.bytes</span><span class="nf">.get_or_init</span><span class="p">(||</span> <span class="nf">load_from_disk</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="py">.path</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>When it doesn’t:</strong></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ Observable mutation behind &amp;self</span>
+<span class="k">impl</span> <span class="n">Settings</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">set_mode</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="n">Mode</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// Looks const but isn't!</span>
+        <span class="k">self</span><span class="py">.mode</span><span class="nf">.borrow_mut</span><span class="p">()</span><span class="nf">.replace</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>If callers can see the change, require <code class="language-plaintext highlighter-rouge">&amp;mut self</code>. Interior mutability is for internal details only.</p>
+</blockquote>
+
+<h2 id="decision-tree">Decision Tree</h2>
+
+<pre><code class="language-mermaid">flowchart TD
+    A[Borrow checker error] --&gt; B{Real aliasing risk?&lt;br/&gt;Two mutations at once}
+    B --&gt;|Yes| C[Redesign:&lt;br/&gt;• Split state&lt;br/&gt;• Copy small data&lt;br/&gt;• Use indices/IDs&lt;br/&gt;• Event queue]
+    B --&gt;|No| D{Mutation visible&lt;br/&gt;externally?}
+    D --&gt;|Yes| E[Wrong abstraction:&lt;br/&gt;Require &amp;mut self&lt;br/&gt;or refactor phases]
+    D --&gt;|No| F[Interior mutability OK:&lt;br/&gt;RefCell, Cell, OnceCell]
+    F --&gt; G{Truly shared&lt;br/&gt;ownership?}
+    G --&gt;|Yes| H[Use Rc/Arc:&lt;br/&gt;Read-mostly data&lt;br/&gt;Avoid Rc RefCell unless necessary]
+    G --&gt;|No| I[Choose single owner:&lt;br/&gt;Pass refs or indices]
+    
+    style C fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style E fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style F fill:#51cf66,stroke:#2f9e44
+    style H fill:#ffe066,stroke:#f08c00
+    style I fill:#51cf66,stroke:#2f9e44
+</code></pre>
+
+<h2 id="common-patterns">Common Patterns</h2>
+
+<h3 id="1-copy-small-data">1. Copy Small Data</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fighting borrows</span>
+<span class="k">fn</span> <span class="nf">spawn_projectile</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">:</span> <span class="n">EntityId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">entity</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.entities</span><span class="p">[</span><span class="n">entity_id</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">proj</span> <span class="o">=</span> <span class="nn">Projectile</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">entity</span><span class="py">.position</span><span class="p">);</span>
+    <span class="k">self</span><span class="py">.projectiles</span><span class="nf">.push</span><span class="p">(</span><span class="n">proj</span><span class="p">);</span>  <span class="c1">// ERROR: already borrowed</span>
+<span class="p">}</span>
+
+<span class="c1">// Copy what you need</span>
+<span class="k">fn</span> <span class="nf">spawn_projectile</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">entity_id</span><span class="p">:</span> <span class="n">EntityId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">position</span> <span class="o">=</span> <span class="k">self</span><span class="py">.entities</span><span class="p">[</span><span class="n">entity_id</span><span class="p">]</span><span class="py">.position</span><span class="p">;</span>  <span class="c1">// Copy</span>
+    <span class="k">let</span> <span class="n">proj</span> <span class="o">=</span> <span class="nn">Projectile</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">position</span><span class="p">);</span>
+    <span class="k">self</span><span class="py">.projectiles</span><span class="nf">.push</span><span class="p">(</span><span class="n">proj</span><span class="p">);</span>  <span class="c1">// OK!</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Copying small data (12 bytes for Vec3) breaks the borrow dependency.</p>
+
+<h3 id="2-use-indices-not-references">2. Use Indices, Not References</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Cross-references everywhere</span>
+<span class="k">struct</span> <span class="n">Player</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">weapon</span><span class="p">:</span> <span class="o">&amp;</span><span class="nv">'a</span> <span class="n">Weapon</span><span class="p">,</span>  <span class="c1">// Lifetime hell</span>
+<span class="p">}</span>
+
+<span class="c1">// Use handles</span>
+<span class="k">type</span> <span class="n">WeaponId</span> <span class="o">=</span> <span class="nb">usize</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Player</span> <span class="p">{</span>
+    <span class="n">weapon_id</span><span class="p">:</span> <span class="n">WeaponId</span><span class="p">,</span>  <span class="c1">// Just an index</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">GameWorld</span> <span class="p">{</span>
+    <span class="n">players</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">weapons</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Weapon</span><span class="o">&gt;</span><span class="p">,</span>  <span class="c1">// Central storage</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">GameWorld</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">get_player_weapon</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">player_id</span><span class="p">:</span> <span class="nb">usize</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="o">&amp;</span><span class="n">Weapon</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">weapon_id</span> <span class="o">=</span> <span class="k">self</span><span class="py">.players</span><span class="p">[</span><span class="n">player_id</span><span class="p">]</span><span class="py">.weapon_id</span><span class="p">;</span>
+        <span class="o">&amp;</span><span class="k">self</span><span class="py">.weapons</span><span class="p">[</span><span class="n">weapon_id</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Why this works:</strong></p>
+<ul>
+  <li>No lifetime constraints</li>
+  <li>Easy to swap/modify</li>
+  <li>Serialization is simple</li>
+  <li>Clear ownership (store owns data)</li>
+</ul>
+
+<h3 id="3-event-queue-pattern">3. Event Queue Pattern</h3>
+
+<p>This is my favorite solution for games and complex systems. The idea is simple: <strong>don’t mutate while you’re reading.</strong></p>
+
+<p>Instead:</p>
+<ol>
+  <li><strong>Phase 1 (Read-only)</strong>: Iterate through all entities, check their state, decide what needs to happen. Collect all changes into a list.</li>
+  <li><strong>Phase 2 (Mutate)</strong>: Process the list of changes and apply them.</li>
+</ol>
+
+<p>Separating these phases eliminates the aliasing problem entirely:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">update</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">events</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+    
+    <span class="c1">// Phase 1: Only read. No mutations.</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="o">&amp;</span><span class="k">self</span><span class="py">.entities</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">entity</span><span class="nf">.should_spawn</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">events</span><span class="nf">.push</span><span class="p">(</span><span class="n">SpawnEvent</span> <span class="p">{</span> 
+                <span class="n">position</span><span class="p">:</span> <span class="n">entity</span><span class="py">.position</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Phase 2: Now mutate. No reads of entities happening.</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="k">in</span> <span class="n">events</span> <span class="p">{</span>
+        <span class="k">self</span><span class="nf">.handle_spawn</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>  <span class="c1">// Safe to mutate now</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Why this works:</strong></p>
+<ul>
+  <li>While you’re iterating <code class="language-plaintext highlighter-rouge">&amp;self.entities</code>, you’re not mutating them</li>
+  <li>When you mutate, you’re not iterating</li>
+  <li>No concurrent access to the same data</li>
+  <li>Predictable, testable order of operations</li>
+</ul>
+
+<p>Game engines use this pattern extensively because it scales beautifully. One master event queue per frame, and you never have aliasing issues.</p>
+
+<h2 id="when-to-use-rc-and-refcell-carefully">When to Use <code class="language-plaintext highlighter-rouge">Rc</code> and <code class="language-plaintext highlighter-rouge">RefCell</code> (Carefully)</h2>
+
+<p>Both of these tools let you work around the borrow checker. But they’re not free passes. Use them only when you have a genuine need, not as a band-aid for poor design.</p>
+
+<h3 id="refcell-for-interior-mutability-you-control"><code class="language-plaintext highlighter-rouge">RefCell</code> for interior mutability you control</h3>
+
+<p><code class="language-plaintext highlighter-rouge">RefCell</code> lets you mutate through an immutable reference. It panics if you try to borrow mutably while an immutable borrow exists.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Internal caching</span>
+<span class="k">struct</span> <span class="n">Metrics</span> <span class="p">{</span>
+    <span class="n">hits</span><span class="p">:</span> <span class="n">RefCell</span><span class="o">&lt;</span><span class="nb">u64</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">Metrics</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">hit</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// &amp;self, not &amp;mut self</span>
+        <span class="o">*</span><span class="k">self</span><span class="py">.hits</span><span class="nf">.borrow_mut</span><span class="p">()</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ❌ Bad: Shared mutation with unclear ownership</span>
+<span class="k">let</span> <span class="n">config</span> <span class="o">=</span> <span class="nn">Rc</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">RefCell</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">Config</span><span class="p">::</span><span class="nf">default</span><span class="p">()));</span>
+<span class="nf">module_a</span><span class="p">(</span><span class="n">config</span><span class="nf">.clone</span><span class="p">());</span>  <span class="c1">// Who controls it now?</span>
+<span class="nf">module_b</span><span class="p">(</span><span class="n">config</span><span class="nf">.clone</span><span class="p">());</span>  <span class="c1">// Both can change it</span>
+<span class="c1">// This compiles, but it's chaos. Who's responsible for what?</span>
+</code></pre></div></div>
+
+<p>The first example is good because the <code class="language-plaintext highlighter-rouge">RefCell</code> is internal—callers don’t know or care about it. The second is a code smell: two modules now share mutable ownership of the same data, and there’s no clear protocol.</p>
+
+<h3 id="rc-for-truly-shared-read-only-data"><code class="language-plaintext highlighter-rouge">Rc</code> for truly shared read-only data</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ✅ Good: Shared immutable data</span>
+<span class="k">let</span> <span class="n">theme</span> <span class="o">=</span> <span class="nn">Rc</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">Theme</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="s">"blue"</span> <span class="p">});</span>
+<span class="k">let</span> <span class="n">button</span> <span class="o">=</span> <span class="n">Button</span> <span class="p">{</span> <span class="n">theme</span><span class="p">:</span> <span class="n">theme</span><span class="nf">.clone</span><span class="p">()</span> <span class="p">};</span>
+<span class="k">let</span> <span class="n">label</span> <span class="o">=</span> <span class="n">Label</span> <span class="p">{</span> <span class="n">theme</span><span class="p">:</span> <span class="n">theme</span><span class="nf">.clone</span><span class="p">()</span> <span class="p">};</span>
+<span class="c1">// Both share the same theme. It's immutable, so no issues.</span>
+
+<span class="c1">// ❌ Bad: Shared mutable ownership</span>
+<span class="k">let</span> <span class="n">state</span> <span class="o">=</span> <span class="nn">Rc</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">RefCell</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nn">State</span><span class="p">::</span><span class="nf">default</span><span class="p">()));</span>
+<span class="c1">// Now you've recreated garbage collection and shared mutable state.</span>
+<span class="c1">// The borrow checker is gone. You're back to manual coordination.</span>
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">Rc&lt;T&gt;</code> when you genuinely need multiple owners of the same immutable data. Combine it with <code class="language-plaintext highlighter-rouge">RefCell</code> only when necessary, and understand the performance cost (runtime borrow checks are slower than compile-time checks).</p>
+
+<h3 id="breaking-reference-cycles">Breaking Reference Cycles</h3>
+
+<p><strong>Pattern for tree structures:</strong></p>
+
+<pre><code class="language-mermaid">graph TD
+    Parent[Parent Node&lt;br/&gt;Rc RefCell Node] --&gt;|Rc owning| Child1[Child 1&lt;br/&gt;Rc RefCell Node]
+    Parent --&gt;|Rc owning| Child2[Child 2&lt;br/&gt;Rc RefCell Node]
+    Child1 -.-&gt;|Weak non-owning| Parent
+    Child2 -.-&gt;|Weak non-owning| Parent
+    
+    style Parent fill:#51cf66,stroke:#2f9e44
+    style Child1 fill:#74c0fc,stroke:#1971c2
+    style Child2 fill:#74c0fc,stroke:#1971c2
+</code></pre>
+
+<ul>
+  <li><strong>Rc (Strong)</strong>: Keeps data alive</li>
+  <li><strong>Weak</strong>: Doesn’t keep data alive, breaks cycles</li>
+  <li>Parent owns children → when parent drops, children can be freed</li>
+  <li>Children don’t own parent → no circular reference</li>
+</ul>
+
+<h2 id="lessons-for-any-language-even-c">Lessons for Any Language (Even C++)</h2>
+
+<p>The borrow checker isn’t unique to Rust. These principles work in C++, Python, Go, or anything else:</p>
+
+<p><strong>1. Make ownership explicit</strong> – Don’t hide it behind raw pointers or ambiguous parameters:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ❌ What does this function do with the callback? Takes ownership? Borrows it?</span>
+<span class="kt">void</span> <span class="nf">setCallback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;*</span> <span class="n">cb</span><span class="p">);</span>
+
+<span class="c1">// ✅ Clear intent</span>
+<span class="kt">void</span> <span class="nf">setCallback</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;&gt;</span> <span class="n">cb</span><span class="p">);</span>  <span class="c1">// Takes ownership</span>
+<span class="kt">void</span> <span class="nf">setCallbackRef</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;&amp;</span> <span class="n">cb</span><span class="p">);</span>  <span class="c1">// Borrows from caller</span>
+</code></pre></div></div>
+
+<p><strong>2. Minimize shared mutable state</strong> – Ask yourself:</p>
+<ul>
+  <li>Does everything in this class really need to mutate together?</li>
+  <li>Can some parts be read-only?</li>
+  <li>Can mutations be deferred into a separate phase?</li>
+</ul>
+
+<p><strong>3. Question every <code class="language-plaintext highlighter-rouge">shared_ptr</code></strong> – It’s the C++ equivalent of “I don’t know who owns this”:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span> <span class="n">config</span><span class="p">;</span>  <span class="c1">// Who owns it? Everyone? No one? </span>
+                            <span class="c1">// Hard to say. Easy to make mistakes.</span>
+
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span> <span class="n">config</span><span class="p">;</span>  <span class="c1">// Only one owner. Clear responsibility.</span>
+</code></pre></div></div>
+
+<p>The borrow checker just forces you to answer these questions at compile time instead of debugging them at runtime.</p>
+
+<h2 id="the-real-takeaway">The Real Takeaway</h2>
+
+<p>Here’s what changed for me: I stopped seeing borrow checker errors as the compiler being difficult. They’re the compiler asking questions you should be asking yourself:</p>
+
+<ul>
+  <li><strong>Who owns this data?</strong> Not vague assumptions—an actual answer.</li>
+  <li><strong>When does it get mutated?</strong> In one place, or scattered everywhere?</li>
+  <li><strong>What depends on what?</strong> Is this coupling intentional or accidental?</li>
+  <li><strong>Can I simplify this?</strong> Copy small values? Use indices? Defer mutations?</li>
+</ul>
+
+<p>These questions improve code in <em>any</em> language. Rust just forces you to answer them before your code runs.</p>
+
+<p><strong>The practical impact:</strong></p>
+<ul>
+  <li>70% fewer memory bugs (the hard category that nobody plans for)</li>
+  <li>Clearer architecture (you can’t hide design decisions)</li>
+  <li>Better tests (because you’ve thought through ownership upfront)</li>
+  <li>Transferable skills (these principles apply everywhere)</li>
+</ul>
+
+<p>When you hit a borrow checker error, take it as feedback, not a blocker. Nine times out of ten, your code will be better after you fix it.</p>
+
+<h2 id="quick-reference">Quick Reference</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Situation</th>
+      <th>Solution</th>
+      <th>Tool</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Multiple mutable borrows</td>
+      <td>Split into independent fields</td>
+      <td>Destructuring</td>
+    </tr>
+    <tr>
+      <td>Need data from borrowed struct</td>
+      <td>Copy small values (IDs, positions)</td>
+      <td><code class="language-plaintext highlighter-rouge">Copy</code> trait</td>
+    </tr>
+    <tr>
+      <td>Cross-struct references</td>
+      <td>Use indices/IDs instead</td>
+      <td><code class="language-plaintext highlighter-rouge">HashMap&lt;ID, T&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Deferred mutations</td>
+      <td>Collect events, apply later</td>
+      <td><code class="language-plaintext highlighter-rouge">Vec&lt;Event&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Internal caching</td>
+      <td>Interior mutability</td>
+      <td><code class="language-plaintext highlighter-rouge">Cell</code>, <code class="language-plaintext highlighter-rouge">OnceCell</code></td>
+    </tr>
+    <tr>
+      <td>Shared read-only data</td>
+      <td>Reference counting</td>
+      <td><code class="language-plaintext highlighter-rouge">Rc&lt;T&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Tree with parent links</td>
+      <td>Break cycles</td>
+      <td><code class="language-plaintext highlighter-rouge">Rc</code> + <code class="language-plaintext highlighter-rouge">Weak</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">Rust Book: Understanding Ownership</a></li>
+  <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-resource">C++ Core Guidelines: Resource Management</a></li>
+  <li><a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">Interior Mutability in Rust</a></li>
+</ul>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-20-automobile-cybersecurity/" class="flip-title"><span>From Regulation to Implementation- Understanding Vehicle Cybersecurity legal Compliance & How Vehicle Cybersecurity Actually Gets Done</span></a>  <time class="faded fine" datetime="2025-12-20T00:00:00+00:00">20 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2026-02-16-portable-C/" class="flip-title"><span>Portable and Secure C- A Practical Guide to MISRA C & CERT C</span></a>  <time class="faded fine" datetime="2026-02-16T00:00:00+00:00">16 Feb 2026</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

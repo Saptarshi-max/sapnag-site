@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Automating Hardware Testing with Python | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Automating Hardware Testing with Python" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Good measurement is extremely essential in testing, because acquired data drives key engineering decisions. While engineers prefer automated testing to minimise human error and accelerate the process of data acquisition. But automated testing is not all about running scripts on a loop. If not checked, automated testing can introduce incorrect conclusions and poor engineering decisions" />
+<meta property="og:description" content="Good measurement is extremely essential in testing, because acquired data drives key engineering decisions. While engineers prefer automated testing to minimise human error and accelerate the process of data acquisition. But automated testing is not all about running scripts on a loop. If not checked, automated testing can introduce incorrect conclusions and poor engineering decisions" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/measure.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/measure.webp" />
+<meta property="twitter:title" content="Automating Hardware Testing with Python" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-26T13:04:55+00:00","datePublished":"2025-12-26T00:00:00+00:00","description":"Good measurement is extremely essential in testing, because acquired data drives key engineering decisions. While engineers prefer automated testing to minimise human error and accelerate the process of data acquisition. But automated testing is not all about running scripts on a loop. If not checked, automated testing can introduce incorrect conclusions and poor engineering decisions","headline":"Automating Hardware Testing with Python","image":"/cover_images/posts/measure.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/eh/2025-12-26-pyvisa/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/eh/2025-12-26-pyvisa/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/eh/2025-12-26-pyvisa/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/eh/">eh</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2025-12-26-pyvisa</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-eh-pyvisa" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Automating Hardware Testing with Python
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time> in <span>Blog</span> / <a href="/embedded-hardware/" class="flip-title">Embedded Hardware</a> , Tags: <a href="/tag-debugging/" class="flip-title">Debugging</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/measure.webp"
+    
+    
+  
+  alt="Automating Hardware Testing with Python"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      Good measurement is extremely essential in testing, because acquired  data drives key engineering decisions. While engineers prefer automated testing to minimise human error and accelerate the process of data acquisition. But automated testing is not all about running scripts on a loop. If not checked, automated testing can introduce incorrect conclusions and poor engineering decisions
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul id="markdown-toc">
+  <li><a href="#introduction--manual-testing-is-painful-but-bad-measurements-are-worse" id="markdown-toc-introduction--manual-testing-is-painful-but-bad-measurements-are-worse">Introduction – Manual Testing Is Painful, but Bad Measurements Are Worse</a></li>
+  <li><a href="#measurement-fundamentals-for-embedded-systems" id="markdown-toc-measurement-fundamentals-for-embedded-systems">Measurement Fundamentals for Embedded Systems</a></li>
+  <li><a href="#why-python-for-embedded-testing" id="markdown-toc-why-python-for-embedded-testing">Why Python for Embedded Testing?</a></li>
+  <li><a href="#the-scpi-commands-and-ieee-standardisations-for-measurement-equipments" id="markdown-toc-the-scpi-commands-and-ieee-standardisations-for-measurement-equipments">The SCPI Commands and IEEE Standardisations for Measurement Equipments</a>    <ul>
+      <li><a href="#scpi-command-structure" id="markdown-toc-scpi-command-structure">SCPI Command Structure</a></li>
+      <li><a href="#measurement-system-architecture" id="markdown-toc-measurement-system-architecture">Measurement System Architecture</a></li>
+    </ul>
+  </li>
+  <li><a href="#reading-the-datasheet--reference-manual-before-you-touch-python" id="markdown-toc-reading-the-datasheet--reference-manual-before-you-touch-python">Reading the Datasheet &amp; Reference Manual (Before You Touch Python)</a>    <ul>
+      <li><a href="#what-to-look-for" id="markdown-toc-what-to-look-for">What to Look For</a></li>
+    </ul>
+  </li>
+  <li><a href="#building-your-first-automated-measurement" id="markdown-toc-building-your-first-automated-measurement">Building Your First Automated Measurement</a>    <ul>
+      <li><a href="#step-1-install-the-tools" id="markdown-toc-step-1-install-the-tools">Step 1: Install the Tools</a></li>
+      <li><a href="#step-2-find-your-instrument" id="markdown-toc-step-2-find-your-instrument">Step 2: Find Your Instrument</a></li>
+      <li><a href="#step-3-make-your-first-measurement" id="markdown-toc-step-3-make-your-first-measurement">Step 3: Make Your First Measurement</a></li>
+      <li><a href="#step-4-take-multiple-readings-and-save-data" id="markdown-toc-step-4-take-multiple-readings-and-save-data">Step 4: Take Multiple Readings and Save Data</a></li>
+      <li><a href="#step-5-visualize-the-data" id="markdown-toc-step-5-visualize-the-data">Step 5: Visualize the Data</a></li>
+    </ul>
+  </li>
+  <li><a href="#level-up-power-consumption-testing" id="markdown-toc-level-up-power-consumption-testing">Level Up: Power Consumption Testing</a>    <ul>
+      <li><a href="#the-setup" id="markdown-toc-the-setup">The Setup</a></li>
+      <li><a href="#step-1-single-test-point" id="markdown-toc-step-1-single-test-point">Step 1: Single Test Point</a></li>
+      <li><a href="#step-2-test-multiple-voltages" id="markdown-toc-step-2-test-multiple-voltages">Step 2: Test Multiple Voltages</a></li>
+      <li><a href="#step-3-add-error-handling" id="markdown-toc-step-3-add-error-handling">Step 3: Add Error Handling</a></li>
+      <li><a href="#step-4-make-it-reusable-optional" id="markdown-toc-step-4-make-it-reusable-optional">Step 4: Make It Reusable (Optional)</a></li>
+      <li><a href="#quick-checklist-before-running" id="markdown-toc-quick-checklist-before-running">Quick Checklist Before Running</a></li>
+    </ul>
+  </li>
+  <li><a href="#real-world-applications" id="markdown-toc-real-world-applications">Real-World Applications</a>    <ul>
+      <li><a href="#cicd-integration-advanced" id="markdown-toc-cicd-integration-advanced">CI/CD Integration (Advanced)</a>        <ul>
+          <li><a href="#physical-setup-required" id="markdown-toc-physical-setup-required">Physical Setup Required</a></li>
+          <li><a href="#example-github-actions-with-self-hosted-runner" id="markdown-toc-example-github-actions-with-self-hosted-runner">Example: GitHub Actions with Self-Hosted Runner</a></li>
+          <li><a href="#example-gitlab-ci-with-self-hosted-runner" id="markdown-toc-example-gitlab-ci-with-self-hosted-runner">Example: GitLab CI with Self-Hosted Runner</a></li>
+          <li><a href="#common-gotchas" id="markdown-toc-common-gotchas">Common Gotchas</a></li>
+          <li><a href="#is-this-worth-it" id="markdown-toc-is-this-worth-it">Is This Worth It?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#when-things-go-wrong" id="markdown-toc-when-things-go-wrong">When Things Go Wrong</a>    <ul>
+      <li><a href="#timeout-error" id="markdown-toc-timeout-error">“Timeout error”</a></li>
+      <li><a href="#wrong-measurements" id="markdown-toc-wrong-measurements">“Wrong measurements”</a></li>
+      <li><a href="#script-crashes" id="markdown-toc-script-crashes">“Script crashes”</a></li>
+    </ul>
+  </li>
+  <li><a href="#testing-the-tests--pyvisa-mocks--simulation" id="markdown-toc-testing-the-tests--pyvisa-mocks--simulation">Testing the Tests – PyVISA Mocks &amp; Simulation</a>    <ul>
+      <li><a href="#pyvisasim--deterministic-simulator-backend" id="markdown-toc-pyvisasim--deterministic-simulator-backend">PyVISA‑sim — Deterministic Simulator Backend</a></li>
+      <li><a href="#pyvisamock--dynamic-codedriven-mocks" id="markdown-toc-pyvisamock--dynamic-codedriven-mocks">pyvisa‑mock — Dynamic, Code‑Driven Mocks</a></li>
+      <li><a href="#testing-strategy---decision-flow" id="markdown-toc-testing-strategy---decision-flow">Testing Strategy - Decision Flow</a></li>
+    </ul>
+  </li>
+  <li><a href="#debugging-automated-measurements" id="markdown-toc-debugging-automated-measurements">Debugging Automated Measurements</a></li>
+  <li><a href="#designing-automationfriendly-embedded-tests-not-just-scripts" id="markdown-toc-designing-automationfriendly-embedded-tests-not-just-scripts">Designing Automation‑Friendly Embedded Tests (Not Just Scripts)</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<h2 id="introduction--manual-testing-is-painful-but-bad-measurements-are-worse">Introduction – Manual Testing Is Painful, but Bad Measurements Are Worse</h2>
+
+<p>Manual testing runing for several hours or days can be really tricky, as it introduces human error if not careful. So while the operator probe voltages for hours, copy numbers into Excel carefully, error can still be introduced through human intervention or just loose probe issue, Its inportant the testing framework is secured and easy to debug.</p>
+
+<p>PyVISA fixes this. Write Python code once, run it overnight. Same SCPI commands you’d type on the instrument, but repeatable. The script doesn’t forget to log data or accidentally change the range mid-test.</p>
+
+<p>But, automation makes mistakes bigger. Bad config = bad data everywhere.</p>
+
+<p>In this blog post, I want to share practical tips and techniques for automating measurement equipment using PyVISA, covering everything from connecting instruments to handling errors and testing without hardware.</p>
+
+<p>connect instruments → send SCPI commands → save data → handle errors → test without hardware.</p>
+
+<hr />
+
+<h2 id="measurement-fundamentals-for-embedded-systems">Measurement Fundamentals for Embedded Systems</h2>
+
+<p>Automating a bad test setup just gives you bad data faster. What matters:</p>
+
+<p><strong>Accuracy vs Precision:</strong> Accurate = close to truth. Precise = repeatable. You need both. A DMM reading 4.80V repeatedly on a 5V rail is precise but wrong.</p>
+
+<p><strong>Settings that actually matter:</strong></p>
+<ul>
+  <li><strong>Range:</strong> Auto-range is convenient but slow and adds jitter. Fix it.</li>
+  <li><strong>Resolution:</strong> 6.5 digits sounds impressive until you realize your DUT has ±5% tolerance.</li>
+  <li><strong>Triggering:</strong> Know when your instrument actually takes the measurement.</li>
+</ul>
+
+<p><strong>Common traps:</strong></p>
+<ul>
+  <li>Automating before validating manually (garbage in, garbage out at scale)</li>
+  <li>Forgetting warm-up (cold instruments drift)</li>
+  <li>Trusting out-of-calibration equipment</li>
+</ul>
+
+<hr />
+
+<h2 id="why-python-for-embedded-testing">Why Python for Embedded Testing?</h2>
+
+<p>LabVIEW costs $5,000+ per seat and proprietary tools lock you into specific hardware vendors. MATLAB is fine but Python is free, runs everywhere, and has a mature ecosystem that hardware engineers already use for data analysis.</p>
+
+<p>Python gives you:</p>
+<ul>
+  <li><strong>Readable code</strong> that doesn’t require a manual to understand 6 months later</li>
+  <li><strong>Pandas/Matplotlib</strong> for analysis (beat Excel’s 1M row limit easily) - In automated data acquisition experiments might run for hours/days the 1M row limit is a barrier.</li>
+  <li><strong>Free ecosystem</strong> (no license servers, no dongles)</li>
+  <li><strong>Real programming</strong> with proper version control, CI/CD, and debugging tools</li>
+</ul>
+
+<p>Here’s the entire “hello world” for instrument control:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span>
+<span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+<span class="n">inst</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">USB0::0x1234::INSTR</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">*IDN?</span><span class="sh">'</span><span class="p">))</span>  <span class="c1"># "Who are you?"
+</span></code></pre></div></div>
+
+<p>That’s it. No init blocks, no state machines, no wires.</p>
+
+<hr />
+
+<h2 id="the-scpi-commands-and-ieee-standardisations-for-measurement-equipments">The SCPI Commands and IEEE Standardisations for Measurement Equipments</h2>
+
+<p>SCPI (Standard Commands for Programmable Instruments) is the ASCII-based command language that all modern test equipment speaks. Think of it as the universal protocol that lets your Python scripts talk to oscilloscopes, multimeters, power supplies, and signal generators.</p>
+
+<p><strong>IEEE 488.2 connection:</strong> SCPI builds on the IEEE 488.2 standard, which defines how instruments communicate over interfaces like GPIB, USB, and Ethernet. IEEE 488.2 handles the physical connection and message structure, while SCPI defines the actual commands (<code class="language-plaintext highlighter-rouge">*IDN?</code>, <code class="language-plaintext highlighter-rouge">VOLT 3.3</code>, etc.). Together, they ensure the same commands work across different manufacturers.</p>
+
+<p>Same SCPI command works on Keysight, Tektronix, Rohde &amp; Schwarz—no vendor-specific nonsense.</p>
+
+<h3 id="scpi-command-structure">SCPI Command Structure</h3>
+
+<ul>
+  <li><strong>Commands</strong> end with nothing: <code class="language-plaintext highlighter-rouge">CONF:VOLT:DC 10,0.001</code></li>
+  <li><strong>Queries</strong> end with <code class="language-plaintext highlighter-rouge">?</code>: <code class="language-plaintext highlighter-rouge">*IDN?</code>, <code class="language-plaintext highlighter-rouge">READ?</code></li>
+  <li><strong>Parameters</strong> separated by commas: <code class="language-plaintext highlighter-rouge">10,0.001</code> (range, resolution)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Same SCPI command works on Keysight, Rohde &amp; Schwarz, Tektronix, etc.
+</span><span class="n">instrument</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">*IDN?</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Returns: "Keysight Technologies,DMM,123456,1.0"
+</span><span class="n">instrument</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:VOLT:DC 10,0.001</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Configure for 10V DC, 1mV resolution
+</span><span class="n">reading</span> <span class="o">=</span> <span class="n">instrument</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Get measurement
+</span></code></pre></div></div>
+
+<p>Most buttons on the front panel of your measurement device have SCPI equivalents. Check the programming manual to learn about the exact SCPI commands to control them.</p>
+
+<h3 id="measurement-system-architecture">Measurement System Architecture</h3>
+
+<pre><code class="language-mermaid">graph TB
+    subgraph Control["Control Layer"]
+        PC[Control PC/Python Script]
+    end
+    
+    subgraph Interface["Interface Layer"]
+        VISA[VISA Resource Manager]
+        USB[USB Interface]
+        LAN[LAN/Ethernet]
+        GPIB[GPIB Interface]
+    end
+    
+    subgraph Instruments
+        OSC[Oscilloscope]
+        DMM[Digital Multimeter]
+        PSU[Power Supply]
+        SIG[Signal Generator]
+    end
+    
+    subgraph DUT_Layer["DUT Layer"]
+        DUT[Device Under Test]
+        PROBE[Probes &amp; Cables]
+    end
+    
+    PC --&gt; VISA
+    VISA --&gt; USB
+    VISA --&gt; LAN
+    VISA --&gt; GPIB
+    
+    USB --&gt; OSC
+    USB --&gt; DMM
+    USB --&gt; PSU
+    USB --&gt; SIG 
+
+    LAN --&gt; OSC
+    LAN --&gt; DMM
+    LAN --&gt; PSU
+    LAN --&gt; SIG 
+
+    GPIB --&gt; OSC
+    GPIB --&gt; DMM
+    GPIB --&gt; PSU
+    GPIB --&gt; SIG 
+    
+    
+    OSC --&gt; PROBE
+    DMM --&gt; PROBE
+    PSU --&gt; PROBE
+    SIG --&gt; PROBE
+    PROBE --&gt; DUT
+    
+    style PC fill:#90EE90
+    style VISA fill:#87CEEB
+    style DUT fill:#FFB6C1
+</code></pre>
+
+<p><strong>Physical connection:</strong><br />
+Your PC runs Python + PyVISA → VISA handles USB/LAN/GPIB → Instruments respond to SCPI → Instruments measure your DUT</p>
+
+<hr />
+
+<h2 id="reading-the-datasheet--reference-manual-before-you-touch-python">Reading the Datasheet &amp; Reference Manual (Before You Touch Python)</h2>
+
+<div class="important">
+
+  <p>Read your instrument’s programming manual first, Its important that you know how your instruments works internally only then can you use Python to control the operation. Jumping directly to Python to control the instrument works for simple operations like on/off or capture/compare but for complex orchestation of several operations, software development requires understanding the basics of the instrument and debugging tools provided by the vendor</p>
+
+</div>
+
+<h3 id="what-to-look-for">What to Look For</h3>
+
+<ul>
+  <li><strong>Command Reference:</strong> List of all SCPI commands with examples</li>
+  <li><strong>Connection Methods:</strong> USB, LAN, GPIB addresses</li>
+  <li><strong>Error Codes:</strong> What the numbers mean when things go wrong</li>
+  <li><strong>Timing Requirements:</strong> How long commands take to execute</li>
+  <li><strong>Programming Manual</strong> Based on your instrument’s vendor (Keusight or Tektronix) set the Programming manual which has information on special functions or registers(internal buffer) which stores the essential data or metadata</li>
+</ul>
+
+<div class="warning">
+
+  <p>Commands vary by firmware version. Check yours against the manual.</p>
+</div>
+
+<h2 id="building-your-first-automated-measurement">Building Your First Automated Measurement</h2>
+
+<p>Let’s build a complete voltage measurement script from scratch.</p>
+
+<p>A script that:</p>
+<ol>
+  <li>Connects to a multimeter (DMM)</li>
+  <li>Takes 5 voltage readings</li>
+  <li>Saves data to CSV</li>
+  <li>Creates a simple chart</li>
+</ol>
+
+<p><strong>Real output you’ll get:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Connected to: Keysight Technologies,34461A,MY12345678,A.02.14-02.40-02.14-00.49-03-01
+Reading 1: 3.287 V
+Reading 2: 3.289 V
+Reading 3: 3.288 V
+Reading 4: 3.290 V
+Reading 5: 3.287 V
+Data saved to voltage_measurements.csv
+</code></pre></div></div>
+
+<h3 id="step-1-install-the-tools">Step 1: Install the Tools</h3>
+
+<p>Open your terminal and run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pyvisa pyvisa-py pandas matplotlib
+</code></pre></div></div>
+
+<p><strong>What each does:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">pyvisa</code> - talks to instruments</li>
+  <li><code class="language-plaintext highlighter-rouge">pyvisa-py</code> - pure Python backend (no VISA libraries needed)</li>
+  <li><code class="language-plaintext highlighter-rouge">pandas</code> - organizes data into tables</li>
+  <li><code class="language-plaintext highlighter-rouge">matplotlib</code> - creates charts</li>
+</ul>
+
+<h3 id="step-2-find-your-instrument">Step 2: Find Your Instrument</h3>
+
+<p>Plug in your multimeter via USB. Run this to see if Python can find it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span>
+
+<span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+<span class="n">instruments</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">list_resources</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Found instruments:</span><span class="sh">"</span><span class="p">,</span> <span class="n">instruments</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>When you run that, you should see a string like <code class="language-plaintext highlighter-rouge">('USB0::0x2A8D::0x0101::MY12345678::INSTR',)</code>. That weird string is your instrument’s address. Copy it—you’ll need it for the next step. If it prints an empty tuple, double-check your USB connection or look up whether your DMM needs a specific driver.</p>
+
+<h3 id="step-3-make-your-first-measurement">Step 3: Make Your First Measurement</h3>
+
+<p>Now let’s actually talk to the instrument. Replace the address with yours from Step 2:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span>
+
+<span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+
+<span class="c1"># Replace this address with yours!
+</span><span class="n">instrument_address</span> <span class="o">=</span> <span class="sh">'</span><span class="s">USB0::0x2A8D::0x0101::MY12345678::INSTR</span><span class="sh">'</span>
+
+<span class="k">with</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="n">instrument_address</span><span class="p">)</span> <span class="k">as</span> <span class="n">inst</span><span class="p">:</span>
+    <span class="c1"># Ask who it is
+</span>    <span class="n">idn</span> <span class="o">=</span> <span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">*IDN?</span><span class="sh">'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Connected to: </span><span class="si">{</span><span class="n">idn</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># Configure for DC voltage measurement
+</span>    <span class="c1"># 10V range, 1mV resolution
+</span>    <span class="n">inst</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:VOLT:DC 10,0.001</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="c1"># Take one measurement
+</span>    <span class="n">voltage</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Measured voltage: </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> V</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>What’s happening here:</strong></p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">open_resource()</code> - opens connection to the DMM</li>
+  <li><code class="language-plaintext highlighter-rouge">query('*IDN?')</code> - asks “who are you?” (standard SCPI command)</li>
+  <li><code class="language-plaintext highlighter-rouge">write('CONF:VOLT:DC 10,0.001')</code> - sets up voltage measurement</li>
+  <li><code class="language-plaintext highlighter-rouge">query('READ?')</code> - takes a reading and returns it</li>
+</ol>
+
+<p>Run it. You should see the voltage on whatever you’re probing.</p>
+
+<h3 id="step-4-take-multiple-readings-and-save-data">Step 4: Take Multiple Readings and Save Data</h3>
+
+<p>Now let’s collect 5 readings and save them. This is where automation starts helping:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+<span class="n">instrument_address</span> <span class="o">=</span> <span class="sh">'</span><span class="s">USB0::0x2A8D::0x0101::MY12345678::INSTR</span><span class="sh">'</span>
+
+<span class="k">with</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="n">instrument_address</span><span class="p">)</span> <span class="k">as</span> <span class="n">inst</span><span class="p">:</span>
+    <span class="c1"># Setup measurement
+</span>    <span class="n">inst</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:VOLT:DC 10,0.001</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="c1"># Collect 5 measurements
+</span>    <span class="n">measurements</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">voltage</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">))</span>
+        <span class="n">measurements</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+            <span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">(),</span>
+            <span class="sh">'</span><span class="s">reading_number</span><span class="sh">'</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">voltage_v</span><span class="sh">'</span><span class="p">:</span> <span class="n">voltage</span>
+        <span class="p">})</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Reading </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> V</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># Save to CSV
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">measurements</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">voltage_measurements.csv</span><span class="sh">'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Data saved to voltage_measurements.csv</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Open <code class="language-plaintext highlighter-rouge">voltage_measurements.csv</code></strong> - you’ll see something like this (using dummy data for this example):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>timestamp,reading_number,voltage_v
+2026-01-09 14:23:01.123456,1,3.287
+2026-01-09 14:23:01.234567,2,3.289
+...
+</code></pre></div></div>
+
+<h3 id="step-5-visualize-the-data">Step 5: Visualize the Data</h3>
+
+<p>Add these lines after saving the CSV:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">reading_number</span><span class="sh">'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">voltage_v</span><span class="sh">'</span><span class="p">],</span> <span class="sh">'</span><span class="s">o-</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Reading Number</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Voltage (V)</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">Voltage Measurements</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">'</span><span class="s">voltage_plot.png</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Chart saved to voltage_plot.png</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="/cover_images/posts/dummy-plot.webp" alt="" /></p>
+
+<div class="note">
+  <p>You’ll get a nice graph like this (generated with <a href="https://matplotlib.org/">Matplotlib</a>) showing your measurements; with the example dummy data it looks straightforward. In real tests, the recorded data can be much more complex and is useful for spotting drift or noise.</p>
+</div>
+
+<hr />
+
+<h2 id="level-up-power-consumption-testing">Level Up: Power Consumption Testing</h2>
+
+<p>Now let’s do something more practical—measure how much power your circuit draws at different voltages. This needs <strong>two instruments</strong>:</p>
+<ul>
+  <li>Power supply (sets voltage)</li>
+  <li>Multimeter (measures current)</li>
+</ul>
+
+<p>We’ll build this in small steps so you can test as you go.</p>
+
+<h3 id="the-setup">The Setup</h3>
+
+<p><strong>Physical connections:</strong></p>
+<ol>
+  <li>Power supply (+) → Your circuit VCC</li>
+  <li>Power supply (-) → Multimeter COM</li>
+  <li>Multimeter INPUT → Your circuit GND</li>
+</ol>
+
+<p>The multimeter sits “in series” to measure current flow.</p>
+
+<h3 id="step-1-single-test-point">Step 1: Single Test Point</h3>
+
+<p>Let’s start by testing one voltage (3.3V) and measuring the current:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span>
+<span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+
+<span class="c1"># Update these addresses to yours
+</span><span class="n">psu</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">TCPIP::192.168.1.100::INSTR</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Power supply
+</span><span class="n">dmm</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">USB0::0x2A8D::0x0101::MY12345678::INSTR</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Multimeter
+</span>
+<span class="c1"># Set power supply to 3.3V
+</span><span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">VOLT 3.3</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP ON</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Turn output ON
+</span><span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Let it stabilize
+</span>
+<span class="c1"># Configure DMM to measure current (1A range, 1mA resolution)
+</span><span class="n">dmm</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:CURR:DC 1,0.001</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">current</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">dmm</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">))</span>
+
+<span class="c1"># Calculate power
+</span><span class="n">power</span> <span class="o">=</span> <span class="mf">3.3</span> <span class="o">*</span> <span class="n">current</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Voltage: 3.3V, Current: </span><span class="si">{</span><span class="n">current</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">mA, Power: </span><span class="si">{</span><span class="n">power</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">mW</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Turn off supply
+</span><span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP OFF</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Expected output:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Voltage: 3.3V, Current: 45.2mA, Power: 149.2mW
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Pro tip:</strong> Always add <code class="language-plaintext highlighter-rouge">time.sleep()</code> after changing voltage. Power supplies need time to settle.</p>
+</blockquote>
+
+<h3 id="step-2-test-multiple-voltages">Step 2: Test Multiple Voltages</h3>
+
+<p>Now let’s sweep 3.0V, 3.3V, 3.6V, and 5.0V to see how current changes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+<span class="n">psu</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">TCPIP::192.168.1.100::INSTR</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">dmm</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">USB0::0x2A8D::0x0101::MY12345678::INSTR</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Configure DMM once
+</span><span class="n">dmm</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:CURR:DC 1,0.001</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Test these voltages
+</span><span class="n">voltages</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Starting power sweep...</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voltages</span><span class="p">:</span>
+    <span class="c1"># Set voltage
+</span>    <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">VOLT </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP ON</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Stabilize
+</span>    
+    <span class="c1"># Measure current
+</span>    <span class="n">current</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">dmm</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">))</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">current</span>
+    
+    <span class="c1"># Save data
+</span>    <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+        <span class="sh">'</span><span class="s">voltage</span><span class="sh">'</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">current_a</span><span class="sh">'</span><span class="p">:</span> <span class="n">current</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">power_w</span><span class="sh">'</span><span class="p">:</span> <span class="n">power</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+    <span class="p">})</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s">V: </span><span class="si">{</span><span class="n">current</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">mA, </span><span class="si">{</span><span class="n">power</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">mW</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Turn off supply
+</span><span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP OFF</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Save to CSV
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="nf">to_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">power_test.csv</span><span class="sh">'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">Data saved to power_test.csv</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>What you’ll see:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting power sweep...
+3.0V: 42.1mA, 126.3mW
+3.3V: 45.2mA, 149.2mW
+3.6V: 48.7mA, 175.3mW
+5.0V: 65.3mA, 326.5mW
+
+Data saved to power_test.csv
+</code></pre></div></div>
+
+<h3 id="step-3-add-error-handling">Step 3: Add Error Handling</h3>
+
+<p>Equipment fails. Cables disconnect. Add safety:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">measure_power_at_voltage</span><span class="p">(</span><span class="n">psu</span><span class="p">,</span> <span class="n">dmm</span><span class="p">,</span> <span class="n">voltage</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Measure current and power at a specific voltage. Returns (current, power) or (None, None) on error.</span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">VOLT </span><span class="si">{</span><span class="n">voltage</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP ON</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        
+        <span class="n">current</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">dmm</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">))</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span>
+        <span class="k">return</span> <span class="n">current</span><span class="p">,</span> <span class="n">power</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">⚠️ Error at </span><span class="si">{</span><span class="n">voltage</span><span class="si">}</span><span class="s">V: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+<span class="c1"># Use context managers for automatic cleanup
+</span><span class="k">with</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">TCPIP::192.168.1.100::INSTR</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">psu</span><span class="p">,</span> \
+     <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">USB0::0x2A8D::0x0101::MY12345678::INSTR</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">dmm</span><span class="p">:</span>
+    
+    <span class="n">dmm</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:CURR:DC 1,0.001</span><span class="sh">'</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]:</span>
+        <span class="n">current</span><span class="p">,</span> <span class="n">power</span> <span class="o">=</span> <span class="nf">measure_power_at_voltage</span><span class="p">(</span><span class="n">psu</span><span class="p">,</span> <span class="n">dmm</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">✓ </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s">V: </span><span class="si">{</span><span class="n">current</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">mA</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">✗ </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s">V: Failed</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP OFF</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="c1"># Instruments auto-close here, even if something crashed
+</span></code></pre></div></div>
+
+<p><strong>Why this matters:</strong> If your script crashes halfway through, the power supply turns off automatically. No burnt circuits.</p>
+
+<p><img src="/cover_images/posts/fire.webp" alt="" /></p>
+
+<div class="warning">
+  <p><strong>Safety Note:</strong> Always maintain a <strong>fire extinguisher</strong> in your laboratory. Automated testing often requires extended periods of unattended operation. Even with reliable electronics, implementing comprehensive fire safety precautions is essential laboratory practice. (Photo by <a href="https://unsplash.com/@kevphotomcr?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Tak Kei Wong</a> on <a href="https://unsplash.com/photos/red-fire-extinguisher-on-gray-wall-PWOV__8cRpw?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>
+      )</p>
+</div>
+
+<h3 id="step-4-make-it-reusable-optional">Step 4: Make It Reusable (Optional)</h3>
+
+<p>If you’re doing this often, wrap it in a class:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SimplePowerTest</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">psu_addr</span><span class="p">,</span> <span class="n">dmm_addr</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">psu_addr</span> <span class="o">=</span> <span class="n">psu_addr</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dmm_addr</span> <span class="o">=</span> <span class="n">dmm_addr</span>
+    
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">voltages</span><span class="o">=</span><span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]):</span>
+        <span class="sh">"""</span><span class="s">Run power test at specified voltages. Returns list of results.</span><span class="sh">"""</span>
+        <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">psu_addr</span><span class="p">)</span> <span class="k">as</span> <span class="n">psu</span><span class="p">,</span> \
+             <span class="n">self</span><span class="p">.</span><span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">dmm_addr</span><span class="p">)</span> <span class="k">as</span> <span class="n">dmm</span><span class="p">:</span>
+            
+            <span class="n">dmm</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CONF:CURR:DC 1,0.001</span><span class="sh">'</span><span class="p">)</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+            
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voltages</span><span class="p">:</span>
+                <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">VOLT </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+                <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP ON</span><span class="sh">'</span><span class="p">)</span>
+                <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+                
+                <span class="n">current</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">dmm</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">))</span>
+                <span class="n">power</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">current</span>
+                
+                <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                    <span class="sh">'</span><span class="s">voltage</span><span class="sh">'</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> 
+                    <span class="sh">'</span><span class="s">current</span><span class="sh">'</span><span class="p">:</span> <span class="n">current</span><span class="p">,</span> 
+                    <span class="sh">'</span><span class="s">power</span><span class="sh">'</span><span class="p">:</span> <span class="n">power</span>
+                <span class="p">})</span>
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s">V: </span><span class="si">{</span><span class="n">current</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">mA</span><span class="sh">"</span><span class="p">)</span>
+            
+            <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP OFF</span><span class="sh">'</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># Usage
+</span><span class="n">test</span> <span class="o">=</span> <span class="nc">SimplePowerTest</span><span class="p">(</span>
+    <span class="n">psu_addr</span><span class="o">=</span><span class="sh">'</span><span class="s">TCPIP::192.168.1.100::INSTR</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">dmm_addr</span><span class="o">=</span><span class="sh">'</span><span class="s">USB0::0x2A8D::0x0101::MY12345678::INSTR</span><span class="sh">'</span>
+<span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">test</span><span class="p">.</span><span class="nf">run</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Now you can reuse this in other scripts easily.</p>
+
+<h3 id="quick-checklist-before-running">Quick Checklist Before Running</h3>
+
+<p>✓ Power supply connected to your circuit<br />
+✓ Multimeter in series (measures current between supply and circuit)<br />
+✓ Instrument addresses updated in the code<br />
+✓ Run <code class="language-plaintext highlighter-rouge">python power_test.py</code></p>
+
+<p><strong>You’ll get:</strong></p>
+<ul>
+  <li>Console output showing progress</li>
+  <li><code class="language-plaintext highlighter-rouge">power_test.csv</code> with timestamped data</li>
+  <li>Easy-to-plot data for reports</li>
+</ul>
+
+<hr />
+
+<h2 id="real-world-applications">Real-World Applications</h2>
+
+<p><strong>Basics:</strong> Single-shot measurements, data logging, simple sweeps</p>
+
+<p><strong>Production patterns:</strong> Error handling, CI/CD integration</p>
+
+<p>Power profiling: sweep supply voltage, log current draw. Interface checks: probe I2C/SPI/UART with a scope. RF work: automate sweeps with signal generators. Production: quick go/no-go tests.</p>
+
+<h3 id="cicd-integration-advanced">CI/CD Integration (Advanced)</h3>
+
+<p><strong>What is this?</strong> Running hardware tests automatically every time you push code to Git. If a code change breaks something, you find out immediately—not weeks later in production.</p>
+
+<p><strong>The challenge:</strong> Most CI/CD runners (GitHub Actions, GitLab CI) run in the cloud. But your instruments are sitting on your desk. How do you connect them?</p>
+
+<p><strong>The solution:</strong> Use a <strong>self-hosted runner</strong>—a computer in your lab that has access to the test instruments and runs your tests when code changes.</p>
+
+<h4 id="physical-setup-required">Physical Setup Required</h4>
+
+<p>You need:</p>
+<ol>
+  <li><strong>A dedicated computer</strong> (can be a Raspberry Pi, old laptop, or lab PC)</li>
+  <li><strong>Instruments connected</strong> to that computer (USB/LAN)</li>
+  <li><strong>Self-hosted runner software</strong> installed (free from GitHub/GitLab)</li>
+  <li><strong>Stable internet</strong> so it can talk to your Git repository</li>
+</ol>
+
+<p><strong>Think of it like this:</strong></p>
+<ul>
+  <li>Your code lives in GitHub/GitLab (the cloud)</li>
+  <li>When you push changes, the cloud tells your lab computer “hey, run the tests”</li>
+  <li>Your lab computer runs PyVISA scripts using real instruments</li>
+  <li>Results get sent back to the cloud and show up in your pull request</li>
+</ul>
+
+<h4 id="example-github-actions-with-self-hosted-runner">Example: GitHub Actions with Self-Hosted Runner</h4>
+
+<p><strong>Step 1: Set up the self-hosted runner</strong></p>
+
+<p>On your lab computer (the one connected to instruments):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download runner (Linux/Mac/Windows versions available)</span>
+<span class="c"># Go to: Your Repo → Settings → Actions → Runners → New self-hosted runner</span>
+<span class="c"># Follow the instructions shown there</span>
+
+<span class="c"># It will give you commands like:</span>
+./config.sh <span class="nt">--url</span> https://github.com/yourname/yourrepo <span class="nt">--token</span> YOUR_TOKEN
+./run.sh
+</code></pre></div></div>
+
+<p><strong>Step 2: Label your runner</strong></p>
+
+<p>When configuring, add a label like <code class="language-plaintext highlighter-rouge">hardware-lab</code>. This tells GitHub “only run hardware tests on this specific machine.”</p>
+
+<p><strong>Step 3: Create your workflow file</strong></p>
+
+<p>In your repo, create <code class="language-plaintext highlighter-rouge">.github/workflows/hardware-tests.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Hardware Tests</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span><span class="pi">,</span> <span class="nv">dev</span> <span class="pi">]</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">hardware_validation</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">self-hosted</span>  <span class="c1"># This tells GitHub to use your lab computer</span>
+    
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout code</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Python</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v4</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">python-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.10'</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install dependencies</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">pip install pyvisa pyvisa-py pytest</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run hardware tests</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">pytest tests/hardware/ --junitxml=test-results.xml -v</span>
+        <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">10</span>  <span class="c1"># Safety: kill if tests hang</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload test results</span>
+        <span class="na">if</span><span class="pi">:</span> <span class="s">always()</span>  <span class="c1"># Upload even if tests fail</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/upload-artifact@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">hardware-test-results</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">test-results.xml</span>
+</code></pre></div></div>
+
+<p><strong>What happens when you push code:</strong></p>
+
+<ol>
+  <li>GitHub sees the new commit</li>
+  <li>Sends signal to your lab computer: “Run hardware tests”</li>
+  <li>Your lab computer:
+    <ul>
+      <li>Downloads the latest code</li>
+      <li>Installs dependencies</li>
+      <li>Runs pytest with real instruments</li>
+      <li>Uploads results back to GitHub</li>
+    </ul>
+  </li>
+  <li>You see ✅ or ❌ in your pull request</li>
+</ol>
+
+<p><strong>Example test file</strong> (<code class="language-plaintext highlighter-rouge">tests/hardware/test_power_supply.py</code>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pytest</span>
+<span class="kn">import</span> <span class="n">pyvisa</span>
+
+<span class="nd">@pytest.fixture</span>
+<span class="k">def</span> <span class="nf">power_supply</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">Connect to the power supply once per test session</span><span class="sh">"""</span>
+    <span class="n">rm</span> <span class="o">=</span> <span class="n">pyvisa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">()</span>
+    <span class="n">psu</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">TCPIP::192.168.1.100::INSTR</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">psu</span>
+    <span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP OFF</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Safety: turn off after tests
+</span>    <span class="n">psu</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">test_voltage_accuracy</span><span class="p">(</span><span class="n">power_supply</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Test that power supply outputs correct voltage</span><span class="sh">"""</span>
+    <span class="n">power_supply</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">VOLT 3.3</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">power_supply</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP ON</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="c1"># Read back actual voltage
+</span>    <span class="n">actual</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">power_supply</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">MEAS:VOLT?</span><span class="sh">'</span><span class="p">))</span>
+    
+    <span class="c1"># Should be within 1% of 3.3V
+</span>    <span class="k">assert</span> <span class="mf">3.267</span> <span class="o">&lt;=</span> <span class="n">actual</span> <span class="o">&lt;=</span> <span class="mf">3.333</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Voltage out of spec: </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="s">V</span><span class="sh">"</span>
+
+<span class="k">def</span> <span class="nf">test_current_limit</span><span class="p">(</span><span class="n">power_supply</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Test that current limiting works</span><span class="sh">"""</span>
+    <span class="n">power_supply</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">VOLT 5.0</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">power_supply</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">CURR 0.5</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># 500mA limit
+</span>    <span class="n">power_supply</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">OUTP ON</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="c1"># Try to draw more current (via external load)
+</span>    <span class="n">actual_current</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="n">power_supply</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">MEAS:CURR?</span><span class="sh">'</span><span class="p">))</span>
+    
+    <span class="c1"># Should limit to 500mA ± 10mA
+</span>    <span class="k">assert</span> <span class="n">actual_current</span> <span class="o">&lt;=</span> <span class="mf">0.51</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Current limit failed: </span><span class="si">{</span><span class="n">actual_current</span><span class="si">}</span><span class="s">A</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p><strong>What you see in GitHub:</strong></p>
+
+<p>When tests run, you get:</p>
+<ul>
+  <li>✅ Green checkmark if all tests pass</li>
+  <li>❌ Red X if any test fails</li>
+  <li>Detailed logs showing which specific test failed</li>
+  <li>Downloadable test report (XML file)</li>
+</ul>
+
+<h4 id="example-gitlab-ci-with-self-hosted-runner">Example: GitLab CI with Self-Hosted Runner</h4>
+
+<p>Similar concept, different syntax. Create <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stages</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">test</span>
+
+<span class="na">hardware_tests</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">test</span>
+  <span class="na">tags</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">hardware-lab</span>  <span class="c1"># Your runner's label</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">pip install pyvisa pyvisa-py pytest</span>
+    <span class="pi">-</span> <span class="s">pytest tests/hardware/ --junitxml=report.xml -v</span>
+  <span class="na">artifacts</span><span class="pi">:</span>
+    <span class="na">when</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">reports</span><span class="pi">:</span>
+      <span class="na">junit</span><span class="pi">:</span> <span class="s">report.xml</span>
+  <span class="na">only</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">main</span>
+    <span class="pi">-</span> <span class="s">merge_requests</span>
+</code></pre></div></div>
+
+<h4 id="common-gotchas">Common Gotchas</h4>
+
+<p><strong>Issue: “Runner can’t find instruments”</strong></p>
+<ul>
+  <li>Make sure instruments are powered on 24/7</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">rm.list_resources()</code> to your test startup to verify connections</li>
+  <li>Check firewall settings on the runner machine</li>
+</ul>
+
+<p><strong>Issue: “Tests pass locally but fail in CI”</strong></p>
+<ul>
+  <li>Instrument might be in a different state (settings from previous test)</li>
+  <li>Add reset commands: <code class="language-plaintext highlighter-rouge">inst.write('*RST')</code> at test start</li>
+  <li>Use pytest fixtures to ensure clean state</li>
+</ul>
+
+<p><strong>Issue: “Tests timeout”</strong></p>
+<ul>
+  <li>Hardware tests are slower than unit tests</li>
+  <li>Set reasonable timeouts (10-30 minutes)</li>
+  <li>Parallel testing usually doesn’t work well with physical instruments</li>
+</ul>
+
+<h4 id="is-this-worth-it">Is This Worth It?</h4>
+
+<p><strong>Yes, if:</strong></p>
+<ul>
+  <li>You have firmware that controls hardware</li>
+  <li>Bugs in production are expensive (automotive, medical, aerospace)</li>
+  <li>You make frequent changes and want fast feedback</li>
+</ul>
+
+<p><strong>No, if:</strong></p>
+<ul>
+  <li>You’re prototyping and hardware changes daily</li>
+  <li>Only one person works on the code</li>
+  <li>Manual testing is good enough for your use case</li>
+</ul>
+
+<p><strong>Pro tip:</strong> Start with a single smoke test that just checks “can we connect to instruments?” Then gradually add more tests as you find bugs.</p>
+
+<hr />
+
+<h2 id="when-things-go-wrong">When Things Go Wrong</h2>
+
+<p>Common problems you’ll hit:</p>
+
+<p><strong>“list_resources() returns []”</strong></p>
+<ul>
+  <li>Check USB/LAN connections</li>
+  <li>Install instrument drivers</li>
+  <li>Try different connection types</li>
+</ul>
+
+<h3 id="timeout-error">“Timeout error”</h3>
+<p><strong>Problem:</strong> Script hangs waiting for response
+<strong>Solutions:</strong></p>
+<ul>
+  <li>Increase timeout: <code class="language-plaintext highlighter-rouge">inst.timeout = 10000</code> (10 seconds)</li>
+  <li>Check instrument is not busy</li>
+  <li>Verify command syntax</li>
+</ul>
+
+<h3 id="wrong-measurements">“Wrong measurements”</h3>
+<p><strong>Problem:</strong> Readings don’t make sense
+<strong>Solutions:</strong></p>
+<ul>
+  <li>Check range settings match your signals</li>
+  <li>Verify probe connections (red/black wires)</li>
+  <li>Compare with manual measurement</li>
+</ul>
+
+<h3 id="script-crashes">“Script crashes”</h3>
+<p><strong>Problem:</strong> Unhandled errors stop execution
+<strong>Solution:</strong> Add try/except blocks</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Your measurement code
+</span>    <span class="n">voltage</span> <span class="o">=</span> <span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">READ?</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="c1"># Cleanup code here
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="testing-the-tests--pyvisa-mocks--simulation">Testing the Tests – PyVISA Mocks &amp; Simulation</h2>
+
+<p>No hardware? Two tools: <strong>PyVISA‑sim</strong> and <strong>pyvisa‑mock</strong>.</p>
+
+<h3 id="pyvisasim--deterministic-simulator-backend">PyVISA‑sim — Deterministic Simulator Backend</h3>
+<ul>
+  <li><strong>Link</strong> <a href="https://pyvisa.readthedocs.io/projects/pyvisa-sim/en/latest/">https://pyvisa.readthedocs.io/projects/pyvisa-sim/en/latest/</a></li>
+  <li><strong>Backend:</strong> <code class="language-plaintext highlighter-rouge">@sim</code> (drop‑in for PyVISA)</li>
+  <li><strong>Modeling style:</strong> YAML/config‑driven simulated instruments</li>
+  <li><strong>Use case:</strong> CI/CD pipelines, regression tests, sharing test configs</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyvisa</span> <span class="k">as</span> <span class="n">visa</span>
+<span class="n">rm</span> <span class="o">=</span> <span class="n">visa</span><span class="p">.</span><span class="nc">ResourceManager</span><span class="p">(</span><span class="sh">'</span><span class="s">@sim</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">inst</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">SIM::DMM</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">*IDN?</span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">MEAS:VOLT:DC?</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="pyvisamock--dynamic-codedriven-mocks">pyvisa‑mock — Dynamic, Code‑Driven Mocks</h3>
+<ul>
+  <li><strong>Link:</strong> <a href="https://github.com/microsoft/pyvisa-mock">https://github.com/microsoft/pyvisa-mock</a></li>
+  <li><strong>Backend:</strong> <code class="language-plaintext highlighter-rouge">@mock</code></li>
+  <li><strong>Modeling style:</strong> Python classes handle SCPI with decorators; great for stateful behavior, delays, binary payloads</li>
+  <li><strong>Strengths:</strong> Fast unit tests with per‑test customization; no need to edit YAML for special cases</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="n">pyvisa</span> <span class="kn">import</span> <span class="n">ResourceManager</span>
+<span class="kn">from</span> <span class="n">pyvisa_mock.base.base_mocker</span> <span class="kn">import</span> <span class="n">BaseMocker</span><span class="p">,</span> <span class="n">scpi</span>
+<span class="kn">from</span> <span class="n">pyvisa_mock.base.register</span> <span class="kn">import</span> <span class="n">register_resource</span>
+
+<span class="k">class</span> <span class="nc">Channel</span><span class="p">(</span><span class="n">BaseMocker</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_v</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="nd">@scpi</span><span class="p">(</span><span class="sh">'</span><span class="s">:VOLTage &lt;v&gt;</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">set_v</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_v</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="nd">@scpi</span><span class="p">(</span><span class="sh">'</span><span class="s">:VOLTage?</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_v</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_v</span>
+
+<span class="k">class</span> <span class="nc">MockPSU</span><span class="p">(</span><span class="n">BaseMocker</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">_ch</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="n">Channel</span><span class="p">)</span>
+    <span class="nd">@scpi</span><span class="p">(</span><span class="sh">'</span><span class="s">*IDN?</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">idn</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">'</span><span class="s">MockCo,PSU,00000,0.01</span><span class="sh">'</span>
+    <span class="nd">@scpi</span><span class="p">(</span><span class="sh">'</span><span class="s">:INSTR:CHANnel&lt;idx&gt;</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">ch</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Channel</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_ch</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+<span class="nf">register_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">MOCK0::psu::INSTR</span><span class="sh">'</span><span class="p">,</span> <span class="nc">MockPSU</span><span class="p">())</span>
+<span class="n">rm</span> <span class="o">=</span> <span class="nc">ResourceManager</span><span class="p">(</span><span class="n">visa_library</span><span class="o">=</span><span class="sh">'</span><span class="s">@mock</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">psu</span> <span class="o">=</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="sh">'</span><span class="s">MOCK0::psu::INSTR</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">psu</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">:INSTR:CHANNEL1:VOLT 2.5</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">psu</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">:INSTR:CHANNEL1:VOLT?</span><span class="sh">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="testing-strategy---decision-flow">Testing Strategy - Decision Flow</h3>
+
+<pre><code class="language-mermaid">flowchart TD
+    Start([Need to Test]) --&gt; HW{Hardware&lt;br/&gt;Available?}
+    
+    HW --&gt;|Yes| RealHW[Test on Real Hardware]
+    RealHW --&gt; Doc[Document Results]
+    
+    HW --&gt;|No| Type{Test Type?}
+    
+    Type --&gt;|Unit Test| Mock[Use pyvisa-mock]
+    Mock --&gt; MockFeatures[Custom Behavior&lt;br/&gt;Error Injection&lt;br/&gt;State Management]
+    
+    Type --&gt;|Integration Test| Sim[Use PyVISA-sim]
+    Sim --&gt; SimFeatures[YAML Configuration&lt;br/&gt;Shared Scenarios&lt;br/&gt;CI/CD Integration]
+    
+    Type --&gt;|Both| Hybrid[Hybrid Approach]
+    Hybrid --&gt; HybridFeatures[Mock for Units&lt;br/&gt;Sim for Integration]
+    
+    MockFeatures --&gt; Validate
+    SimFeatures --&gt; Validate
+    HybridFeatures --&gt; Validate
+    
+    Validate{Validate Against&lt;br/&gt;Real HW?}
+    Validate --&gt;|Weekly| Contract[Contract Tests]
+    Validate --&gt;|Release| Full[Full Regression]
+    Contract --&gt; Doc
+    Full --&gt; Doc
+    
+    Doc --&gt; End([End])
+    
+    style Start fill:#90EE90
+    style End fill:#90EE90
+    style RealHW fill:#87CEEB
+    style Mock fill:#FFD700
+    style Sim fill:#FFA500
+    style Hybrid fill:#FF6B6B
+</code></pre>
+
+<p>PyVISA-sim for CI. pyvisa-mock for unit tests with custom behavior.</p>
+
+<p>Keep SCPI strings in a single adapter layer and validate against hardware periodically.</p>
+
+<p>Version control your configs and mocks. Snapshot I/O (SCPI sent/received) with timestamps. Seed randomness and fix ranges/triggers. Fail fast on errors—assert empty error queues in teardown. Run weekly tests on real hardware to catch drift.</p>
+
+<hr />
+
+<h2 id="debugging-automated-measurements">Debugging Automated Measurements</h2>
+
+<p>Send SCPI commands manually first. Capture the exact strings your script uses. Log all I/O with timestamps. Store instrument ID and settings next to the data.</p>
+
+<p>Reduce the setup: one instrument, simple DUT. Add pieces back gradually. Compare against a handheld meter to catch gross errors.</p>
+
+<hr />
+
+<h2 id="designing-automationfriendly-embedded-tests-not-just-scripts">Designing Automation‑Friendly Embedded Tests (Not Just Scripts)</h2>
+
+<p><strong>Production rules for tests that last:</strong></p>
+
+<p>Split your code: configuration, acquisition, processing, reporting. Keep them separate.</p>
+
+<p>Use fixed ranges and explicit triggers. No auto-ranging in production tests.</p>
+
+<p>Save raw data with metadata. Generate quick plots so you can eyeball results.</p>
+
+<p>Wrap instruments in adapters so you can swap hardware without rewriting tests.</p>
+
+<pre><code class="language-mermaid">graph TB
+    subgraph Test_Bench["Test Bench Architecture"]
+        subgraph Core["Core Components"]
+            Orch[Test Orchestrator]
+        end
+        
+        subgraph Adapters["Adapter Layer"]
+            InstAdapter[Instrument Adapter]
+            DutAdapter[DUT Controller]
+        end
+        
+        subgraph Services["Services"]
+            Logger[Logger/Report]
+            Config[Configuration]
+            DataProc[Data Processing]
+        end
+        
+        subgraph Hardware["Hardware Interface"]
+            VISA[VISA Backend]
+            Serial[Serial/UART]
+            Debug[Debug Probe/SWD]
+        end
+    end
+    
+    subgraph Physical["Physical Layer"]
+        OSC[Oscilloscope]
+        DMM[Multimeter]
+        PSU[Power Supply]
+        DUT[Device Under Test]
+    end
+    
+    Orch --&gt;|Configure| InstAdapter
+    Orch --&gt;|Control| DutAdapter
+    Orch --&gt;|Log Results| Logger
+    Orch --&gt;|Load Settings| Config
+    Orch --&gt;|Process| DataProc
+    
+    InstAdapter --&gt;|SCPI/VISA| VISA
+    DutAdapter --&gt;|Commands| Serial
+    DutAdapter --&gt;|Flash/Debug| Debug
+    
+    VISA --&gt;|Control| OSC
+    VISA --&gt;|Measure| DMM
+    VISA --&gt;|Power| PSU
+    
+    Serial --&gt;|UART| DUT
+    Debug --&gt;|SWD/JTAG| DUT
+    PSU --&gt;|Supply| DUT
+    OSC --&gt;|Probe| DUT
+    DMM --&gt;|Measure| DUT
+    
+    Logger --&gt;|Generate| Report[Test Report]
+    DataProc --&gt;|Analyze| Metrics[Metrics &amp; Plots]
+    
+    style Orch fill:#90EE90
+    style DUT fill:#FFB6C1
+    style Logger fill:#87CEEB
+    style Report fill:#FFD700
+</code></pre>
+
+<p>Small, focused tests. Clear failure messages.</p>
+
+<p>The difference between a throwaway script and a real test: the script works once on your bench. The test works next month when someone else runs it on different hardware.</p>
+
+<p><strong>Architecture matters.</strong> Don’t dump everything into one 500-line function. Separate config (YAML/JSON), acquisition (SCPI loops), processing (pandas), and reporting (CSV/plots). When the DMM dies and you swap in a different model, you edit one adapter class instead of hunting through spaghetti code.</p>
+
+<p><strong>Kill auto-ranging in production.</strong> Fixed ranges only. <code class="language-plaintext highlighter-rouge">CONF:VOLT:DC 10,0.001</code> means 10V range, 1mV resolution—every time. Auto-ranging adds jitter and makes timing unpredictable.</p>
+
+<p><strong>Triggers sync instruments.</strong> Instead of guessing with <code class="language-plaintext highlighter-rouge">time.sleep()</code>, use <code class="language-plaintext highlighter-rouge">TRIG:SOUR BUS</code> (instrument waits for your trigger command) and <code class="language-plaintext highlighter-rouge">*OPC?</code> (blocks until operation completes, returns ‘1’). Set PSU voltage → wait for <code class="language-plaintext highlighter-rouge">*OPC?</code> → trigger DMM. No race conditions.</p>
+
+<p><strong>Retry logic.</strong> Instruments flake out. Network glitches. Busy errors. Wrap measurements in retries:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">measure_with_retry</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">inst</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">INIT</span><span class="sh">'</span><span class="p">)</span>
+            <span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">*OPC?</span><span class="sh">'</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nf">float</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">FETC?</span><span class="sh">'</span><span class="p">))</span>
+        <span class="nf">except </span><span class="p">(</span><span class="n">pyvisa</span><span class="p">.</span><span class="n">VisaIOError</span><span class="p">,</span> <span class="nb">ValueError</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">inst</span><span class="p">.</span><span class="nf">clear</span><span class="p">()</span>  <span class="c1"># Clear error queue
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
+</code></pre></div></div>
+
+<p><strong>Use context managers.</strong> Instruments lock up when scripts crash. Python’s <code class="language-plaintext highlighter-rouge">with</code> statement auto-closes connections:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">rm</span><span class="p">.</span><span class="nf">open_resource</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="k">as</span> <span class="n">inst</span><span class="p">:</span>
+    <span class="n">reading</span> <span class="o">=</span> <span class="n">inst</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="sh">'</span><span class="s">MEAS:VOLT:DC?</span><span class="sh">'</span><span class="p">)</span>
+<span class="c1"># Cleanup happens automatically
+</span></code></pre></div></div>
+
+<p><strong>Save raw data.</strong> Always. Processed CSV is nice but raw SCPI responses plus timestamps let you debug weird issues later. Instrument said what? Check the log.</p>
+
+<p><strong>Quick plots.</strong> Generate a PNG so you can eyeball if the test even makes sense. Voltage should ramp up smoothly, not spike randomly.</p>
+
+<p><strong>Critical SCPI commands:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">*RST</code> - Reset instrument to known state</li>
+  <li><code class="language-plaintext highlighter-rouge">*CLS</code> - Clear error queue</li>
+  <li><code class="language-plaintext highlighter-rouge">*OPC?</code> - Wait for operation complete (returns ‘1’)</li>
+  <li><code class="language-plaintext highlighter-rouge">SYST:ERR?</code> - Query error queue (check in teardown)</li>
+  <li><code class="language-plaintext highlighter-rouge">*IDN?</code> - Verify you’re talking to the right instrument</li>
+</ul>
+
+<p>Small tests with clear failures beat giant test suites that fail mysteriously. If a test fails, the message should say “PSU current limit tripped at 3.3V” not “AssertionError line 487”.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>PyVISA: https://pyvisa.readthedocs.io/</li>
+  <li>SCPI Overview: https://en.wikipedia.org/wiki/Standard_Commands_for_Programmable_Instruments</li>
+  <li>pyvisa‑sim: https://pyvisa-sim.readthedocs.io/</li>
+  <li>pyvisa‑mock: https://github.com/microsoft/pyvisa-mock</li>
+  <li>
+    <p>Keysight, Rohde &amp; Schwarz, Tektronix programming manuals for your instruments</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Cover image: Photo by khezez</td>
+          <td>خزاز: https://www.pexels.com/photo/electronics-lab-with-oscilloscopes-and-engineers-34007241/</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/productivity/2026-02-18-ui/" class="flip-title"><span>The Embedded Engineer's Second Brain: PARA and CODE Systems</span></a>  <time class="faded fine" datetime="2026-02-18T00:00:00+00:00">18 Feb 2026</time></li>          <li class="h4">  <a href="/blog/random-bits/2025-12-11-indian-fermented-drinks/" class="flip-title"><span>Lesser Known Fermented Drinks From Rural India</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-14-borrow-checker/" class="flip-title"><span>Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)</span></a>  <time class="faded fine" datetime="2025-12-14T00:00:00+00:00">14 Dec 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

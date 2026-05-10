@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Local First, Building Portable Embedded C++ pipeline with self-hosted CI | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Local First, Building Portable Embedded C++ pipeline with self-hosted CI" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="How Woodpecker CI, Cosmopolitan, and Google Pigweed give small firmware teams automated build-test-flash pipelines" />
+<meta property="og:description" content="How Woodpecker CI, Cosmopolitan, and Google Pigweed give small firmware teams automated build-test-flash pipelines" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/cpp-portable-pipeline.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/cpp-portable-pipeline.png" />
+<meta property="twitter:title" content="Local First, Building Portable Embedded C++ pipeline with self-hosted CI" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-07T07:07:55+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"How Woodpecker CI, Cosmopolitan, and Google Pigweed give small firmware teams automated build-test-flash pipelines","headline":"Local First, Building Portable Embedded C++ pipeline with self-hosted CI","image":"/cover_images/posts/cpp-portable-pipeline.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/embedded-software/">embedded-software</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2026-02-28-pigweed-cosmopolitan-woodpeaker</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-embedded-software-pigweed-cosmopolitan-woodpeaker" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Local First, Building Portable Embedded C++ pipeline with self-hosted CI
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time> in <span>Blog</span> / <a href="/embedded-software/" class="flip-title">Embedded Software</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/cpp-portable-pipeline.png"
+    
+    
+  
+  alt="Local First, Building Portable Embedded C++ pipeline with self-hosted CI"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      How Woodpecker CI, Cosmopolitan, and Google Pigweed give small firmware teams automated build-test-flash pipelines
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <p>In good DevOps practice, automation across building, testing, and releasing software plays a prominent role. CI (continuous integration) acts as a safety net: it takes raw materials (code), assembles them (builds), and quality-checks them (tests). If CI fails, the second half of the acronym (CD: continuous delivery/deployment) becomes too risky and can lead to serious production issues. There are several DevOps tools providing complete CI/CD services, but things get tricky while developing and testing embedded software.</p>
+
+<h2 id="the-problem-nobody-is-talking-about">The Problem Nobody Is Talking About</h2>
+
+<p>CI/CD is very stable in web and backend development. For embedded firmware, the picture is more uneven.</p>
+
+<p>Some teams have real pipelines, which include tools like GitLab CI/CD runners that cross-compile, run QEMU simulations, flash a board over a self-hosted runner with USB access, collect serial logs, and push artifacts to a dashboard.</p>
+
+<p>These setups work and they exist in production today. But they’re almost always custom-built, tricky to maintain, and tightly coupled to one specific board, one specific CI platform, and one team’s institutional knowledge. When the engineer or team who set it up leaves, the pipeline starts to rot.</p>
+
+<p>At the other end, many small firmware teams have no CI at all, or a GitHub Actions workflow that cross-compiles and calls it a day. But logical bugs that a 10-second host simulation would have caught survive to hardware integration, where they take days to diagnose. Full regression testing is sometimes missing, so QA engineers have to do it manually.</p>
+
+<div class="think">
+
+  <p>The gap isn’t between “no CI” and “perfect CI.” It’s between ad-hoc, fragile setups and something that’s <strong>portable across development boards and OSes, self-hosted without cloud dependency (due to compliance requirements, aerospace, defense, and medical teams often resist pushing proprietary source code or massive firmware binaries to Microsoft or GitLab’s public cloud platforms), and structured enough that it doesn’t collapse when the individuals who set up the entire CI pipeline leave the team</strong>.</p>
+</div>
+
+<p>The structural problems are the same across teams of this size: the build system and test hardware are physically separate, hosted cloud CI runners have no USB or JTAG access, host simulation and device results live in separate codebases maintained by different people. When simulation passes and the board fails, diagnosis starts from zero. That is the gap this stack closes - not full analog HIL, but the step before it that most small teams are missing entirely.</p>
+
+<h2 id="what-hil-testing-is-and-why-its-a-bit-broken-">What HIL Testing Is, and Why It’s a bit Broken ?</h2>
+
+<p>Hardware-in-the-loop (HIL) testing is the gold standard for embedded validation: production firmware runs on a real controller while surrounding sensors, actuators, and bus traffic are simulated in a controlled, repeatable way.<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">1</a></sup><sup id="fnref:8" role="doc-noteref"><a href="#fn:8" class="footnote" rel="footnote">2</a></sup> In high-reliability domains such as automotive, aerospace, and medical systems, this class of testing is often mandatory in practice because it catches timing and integration failures that pure host-side tests can miss.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">3</a></sup><sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">4</a></sup></p>
+
+<div class="important">
+
+  <p><strong>Why HIL is relevant to this post</strong>
+This post is not claiming to replace full HIL. It is showing the practical path that makes HIL adoption possible for small firmware teams.</p>
+
+  <p>This stack (Woodpeacker CI + Cosmopolitian + Pigweed) covers the missing middle layer between no-hardware CI and full industrial HIL, while keeping the boundaries explicit.</p>
+
+</div>
+
+<ol>
+  <li><strong>Problem evidence:</strong> Embedded defects often survive compile-only CI and appear only during hardware interaction.</li>
+  <li><strong>HIL relevance:</strong> HIL exists to expose exactly those hardware-interaction failures under repeatable conditions.<sup id="fnref:4:1" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">1</a></sup><sup id="fnref:8:1" role="doc-noteref"><a href="#fn:8" class="footnote" rel="footnote">2</a></sup></li>
+  <li><strong>Current gap in small teams:</strong> Full HIL benches are costly and operationally heavy, so many teams stop at host tests or manual bench checks.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">5</a></sup><sup id="fnref:9" role="doc-noteref"><a href="#fn:9" class="footnote" rel="footnote">6</a></sup></li>
+  <li><strong>What this stack contributes:</strong> Pigweed provides host/device test architecture, Cosmopolitan reduces host-tool portability friction, and Woodpecker provides self-hosted automation near real boards.</li>
+  <li><strong>Systematic outcome:</strong> Teams move from manual build-flash-check loops to repeatable on-target regression, which is the operational precondition before scaling toward higher-fidelity HIL.</li>
+</ol>
+
+<div class="think">
+
+  <p><strong>The problem is structural</strong> and it shows up the same way regardless of team size:</p>
+
+</div>
+
+<ol>
+  <li><strong>The build system and the test hardware are physically separate</strong> Running on-device tests means manually flashing a binary and reading results, nothing in the build pipeline knows the board exists.</li>
+  <li><strong>Hosted cloud CI has no direct concept of your lab hardware.</strong> GitHub-hosted runners don’t have your USB probes, serial adapters, or JTAG devices attached.</li>
+  <li><strong>The validation gap.</strong>  Host tests and device tests are separate activities with separate codebases, often maintained by different people. When simulation passes and the board fails, there is no shared ground, diagnosis starts from zero.</li>
+  <li><strong>Toolchain portability.</strong> The cross-compiler that produces the firmware binary behaves differently across developer machines, creating “works on my machine” problems before you even reach the hardware.</li>
+</ol>
+
+<p>This stack helps address all four in practical day-to-day engineering work - without mandatory cloud dependency and without requiring an expensive full HIL rig on day one <sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote" rel="footnote">7</a></sup>. It can also be adopted incrementally instead of forcing an all-at-once CI platform migration. However, it does not simulate analog signals, environmental conditions, or replace compliance tooling for ISO 26262 or IEC 62304. Those gaps are real and worth knowing before you read further.<sup id="fnref:9:1" role="doc-noteref"><a href="#fn:9" class="footnote" rel="footnote">6</a></sup></p>
+
+<hr />
+
+<h2 id="three-tools-one-insight">Three Tools, One Insight</h2>
+
+<p>The stack is <strong>Woodpecker CI + Cosmopolitan Libc + Google Pigweed</strong>. None of these tools were designed together, but they address complementary pain points:</p>
+
+<div class="note">
+
+  <p>Embedded teams don’t lack motivation for using CI/CD workflow, they lack infrastructure that isn’t hardware-locked, OS-specific, or overly cloud-dependent. This stack is all three: hardware-agnostic, portable, and cloud-independent. While full analog HIL (simulating every complex electrical characteristic) may remain out of scope for small teams, the combination of these tools targets the automation gap. They move the needle from “manual laboratory testing” to automated on-target testing, allowing teams to catch bugs early in the CI/CD pipeline rather than at the very end of the V-Diagram</p>
+
+</div>
+
+<p>Here’s what each tool contributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Role in the solution</th>
+      <th>Why it matters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Google Pigweed</strong></td>
+      <td>The Embedded Framework</td>
+      <td>Pigweed is a collection of libraries designed for embedded development. It provides the hardware-agnostic C++ architecture layer by offering robust modules for unit testing, RPCs, and device abstraction that work the same on your host machine as they do on the microcontroller, collapsing the gap between simulation and real hardware testing.</td>
+    </tr>
+    <tr>
+      <td><strong>Cosmopolitan Libc</strong></td>
+      <td>The Portability Engine</td>
+      <td>This is the “secret sauce.” Cosmopolitan Libc allows you to compile C++ once into an Actually Portable Executable (APE) that runs natively on Linux, Mac, Windows, FreeBSD, and OpenBSD. This eliminates OS-specific barriers and makes build tools and test runners platform-independent.</td>
+    </tr>
+    <tr>
+      <td><strong>Woodpecker CI</strong></td>
+      <td>The Orchestrator</td>
+      <td>A self-hosted, lightweight container-based CI runner. Because it is easy to self-host, it eliminates cloud dependence. You can run it on a local server or even a Raspberry Pi. It keeps your IP and binaries on-premises, on your lab bench, with USB access to real hardware and no cloud dependency.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/cover_images/posts/mermaid+cosmo+wood.png" alt="mermaid" /></p>
+
+<p>This stack is particularly potent because of how these three interact:</p>
+
+<p>Eliminating “It works on my machine”: With Cosmopolitan, your build toolchain or test runner is a single binary that runs on any dev’s laptop and the CI runner without needing to manage complex dependencies or specific OS versions.</p>
+
+<p>Local-First Development: Pigweed emphasizes that code should be testable on the host (your PC). You can run thousands of unit tests in seconds using Woodpecker before the code ever touches a physical chip.</p>
+
+<p>Low Overhead: Unlike heavy enterprise CI suites, Woodpecker is tiny and fast. When paired with the efficiency of C++/Pigweed, your feedback loop (the time from “code save” to “test pass”) shrinks from minutes to seconds.</p>
+
+<hr />
+
+<h2 id="what-this-stack-actually-gets-you-and-what-it-doesnt">What This Stack Actually Gets You (and What It Doesn’t)</h2>
+
+<div class="important">
+
+  <p><strong>Before overselling this:</strong> running <code class="language-plaintext highlighter-rouge">pw_unit_test</code> on a board via a USB probe is <em>not</em> the same as what the industry calls HIL testing. A real HIL rig simulates analog sensor signals, controls power rails, injects noise, and emulates bus traffic with precise timing.</p>
+
+</div>
+
+<p>This stack also doesn’t address:</p>
+<ul>
+  <li><strong>Analog signal simulation.</strong> If your firmware reads a 4–20 mA current loop, you still need a DAC or signal generator to produce that signal in a test.</li>
+  <li><strong>Environmental testing.</strong> Temperature chambers, EMC testing, and vibration are outside the scope of any CI pipeline.</li>
+  <li><strong>Compliance certification.</strong> ISO 26262 (automotive), IEC 62304 (medical), and DO-178C (aerospace) all require specific evidence and traceability that a YAML pipeline alone doesn’t provide.</li>
+  <li><strong>Mock fidelity.</strong> The mock backends you write for host testing are only as good as your understanding of the hardware. If you mock away the very behavior that causes the bug, the test is green and useless.</li>
+</ul>
+
+<p>What this stack <em>does</em> get you: a free, self-hosted pipeline that automates the dull parts like <em>compiling, running logic tests on the host, flashing firmware, and collecting results</em> so your limited engineering hours go toward the hard problems instead of manual “build-flash-check” cycles.</p>
+
+<p>For a firmware team of 3–8 engineers at an industrial IoT company or a hardware startup that doesn’t have a $100K test rig budget. Also were the team are working with different Operating systems(OS), containerization is a necessity.</p>
+
+<hr />
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>The recommended path to building this pipeline:</p>
+
+<ol>
+  <li><strong>Start with Pigweed’s Sense Showcase:</strong> Fork it and study how the facade/backend pattern is applied to a real project.</li>
+  <li><strong>Add pw_unit_test to one module:</strong> Pick a logic-heavy module in your current firmware, abstract the hardware, and write five host-side tests.</li>
+  <li><strong>Stand up Woodpecker CI:</strong> Run the Docker Compose file on a lab machine. Get host-side tests running in CI automatically.</li>
+  <li><strong>Build your Cosmopolitan runner:</strong> Compile your host-side test harness with <code class="language-plaintext highlighter-rouge">cosmocc</code> and commit the binary to fix portability.</li>
+  <li><strong>Attach a board to your Woodpecker agent:</strong> Configure <code class="language-plaintext highlighter-rouge">pw_target_runner</code>, write a hardware-gated step, and run your first automated on-device test in CI.</li>
+</ol>
+
+<h2 id="the-testing-pyramid-this-stack-enables">The Testing Pyramid This Stack Enables</h2>
+
+<p>The embedded testing pyramid has four levels. This stack covers the first three well and partially addresses the fourth:</p>
+
+<p><img src="/cover_images/posts/hil-pyramid.png" alt="pic" /></p>
+
+<p>Each level catches a different class of bug:</p>
+
+<h2 id="level-1-unit-tests">Level 1 (Unit Tests):</h2>
+
+<p>Pure logic, zero hardware dependency. Runs in &lt; 5 seconds on any machine.</p>
+<ul>
+  <li><strong>What it does?</strong> Pigweed provides a framework for host-side unit tests that can run rapidly without needing physical hardware.</li>
+  <li><strong>Why it matters?</strong> This aligns with the “Model-in-the-Loop” (MIL) and “Software-in-the-Loop” (SIL) stages described in the V-Diagram, where the controller and environment are simulated to catch logic errors early.<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote" rel="footnote">8</a></sup></li>
+</ul>
+
+<h2 id="level-2-host-simulation">Level 2 (Host Simulation):</h2>
+
+<p>Pigweed facade pattern — HAL mocked for host. Cosmopolitan test runner guarantees an identical environment on all OSes.</p>
+
+<ul>
+  <li>
+    <p><strong>What it does?</strong> Pigweed is designed for “hermetic building,” meaning software is built in a completely isolated environment. This makes it less sensitive to the libraries, tools, or configurations installed on the host machine, ensuring the development environment is reproducible. Cosmopolitan Libc reinforces this by allowing C/C++ code to be “build-once run-anywhere,” providing an identical execution environment across Linux, Mac, Windows, and even BIOS.</p>
+  </li>
+  <li>
+    <p><strong>Why it matters?</strong> Using Pigweed’s architecture (often utilizing a facade pattern for hardware abstraction layers) alongside Cosmopolitan ensures that host-side simulations are highly reliable and consistent across different developer operating systems.</p>
+  </li>
+</ul>
+
+<h2 id="level-3-on-device-tests">Level 3 (On-Device Tests):</h2>
+
+<p>Flashed firmware with automated test runner reporting over <code class="language-plaintext highlighter-rouge">pw_rpc</code>. Run on every PR via Woodpecker hardware-attached agent.</p>
+
+<ul>
+  <li><strong>What it does?</strong> Pigweed explicitly supports on-device unit tests and communication with hardware via <code class="language-plaintext highlighter-rouge">pw_rpc</code>.</li>
+  <li><strong>Why it matters?</strong> Woodpecker CI provides the automation engine to trigger these tests. By using a “hardware-attached agent” (a common extensible use case for Woodpecker’s container-based pipelines), teams can automate the flashing and testing of firmware on every pull request.</li>
+</ul>
+
+<h2 id="level-4-scheduled-on-target-regression">Level 4 (Scheduled On-Target Regression):</h2>
+
+<p>Triggered on main branch merges or nightly. Note: this level is where the gap between “on-target unit tests” and true regression tests (with analog signal simulation) becomes important. This stack automates on-target testing well; 
+<strong>Full HIL with simulated physical signals still requires additional test equipment</strong>.</p>
+
+<ul>
+  <li><strong>What it does?</strong> On-target execution on the hardware confirms that your firmware runs correctly on real silicon. True HIL goes further , it electrically emulates the sensors and actuators your firmware controls, to simulating the entire plant setup.</li>
+  <li><strong>Why it matters?</strong> While this stack automates the software side (on-target tests), the sources acknowledge that full HIL remains a “pivotal” and more complex stage involving mathematical representations of dynamic systems and specialized I/O interfaces. The stack effectively bridges the gap from “no testing” to “automated hardware testing.”</li>
+</ul>
+
+<div class="think">
+  <p>The key advance is that levels 1 and 2 now share the same C++ source code as levels 3 and 4. When a test passes on the host and fails on the device, you’ve isolated a genuine hardware-specific bug.</p>
+</div>
+
+<hr />
+
+<h2 id="pillar-one-pigweed--write-once-test-everywhere">Pillar One: Pigweed — Write Once, Test Everywhere</h2>
+<p><img src="/cover_images/posts/Pigweed.png" alt="pigweed" /></p>
+
+<p>Pigweed is Google’s open-source embedded C++ framework, battle-tested in Pixel phones, Nest thermostats, DeepMind robots, and satellites. Its central architectural contribution is the <strong>facade/backend pattern</strong>.</p>
+
+<h3 id="the-facade-pattern-in-practice">The Facade Pattern in Practice</h3>
+
+<p>Every hardware interaction — SPI, GPIO, UART, I2C, a timer — is expressed as a C++ abstract class. In firmware, you instantiate the real backend that talks to hardware registers. In host simulation, you instantiate a mock backend that logs calls, returns scripted values, or asserts on call sequences. The business logic never changes.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Your sensor driver — hardware-agnostic</span>
+<span class="k">class</span> <span class="nc">PressureSensor</span> <span class="p">{</span>
+ <span class="nl">public:</span>
+  <span class="k">explicit</span> <span class="n">PressureSensor</span><span class="p">(</span><span class="n">pw</span><span class="o">::</span><span class="n">spi</span><span class="o">::</span><span class="n">Device</span><span class="o">&amp;</span> <span class="n">spi</span><span class="p">)</span> <span class="o">:</span> <span class="n">spi_</span><span class="p">(</span><span class="n">spi</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">pw</span><span class="o">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">ReadPressurePa</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Reads over SPI — works on host (mock SPI) and on STM32 (real SPI)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">byte</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">response</span><span class="p">;</span>
+    <span class="n">PW_TRY</span><span class="p">(</span><span class="n">spi_</span><span class="p">.</span><span class="n">Read</span><span class="p">(</span><span class="n">response</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">ParsePressureBytes</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+  <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">pw</span><span class="o">::</span><span class="n">spi</span><span class="o">::</span><span class="n">Device</span><span class="o">&amp;</span> <span class="n">spi_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>On the host, <code class="language-plaintext highlighter-rouge">spi_</code> is a <code class="language-plaintext highlighter-rouge">FakeSpiDevice</code> that returns pre-programmed byte sequences. On an STM32 board, it’s a real SPI peripheral backed by DMA. The test for <code class="language-plaintext highlighter-rouge">ReadPressurePa()</code> runs identically in both environments.</p>
+
+<h3 id="pw_unit_test-one-test-binary-two-targets">pw_unit_test: One Test Binary, Two Targets</h3>
+
+<p>Pigweed’s unit test framework is GoogleTest-compatible but uses no dynamic memory allocation — it runs on bare-metal MCUs. The same test source compiles to an x86 binary for your CI container and an ARM binary for your board:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TEST</span><span class="p">(</span><span class="n">PressureSensorTest</span><span class="p">,</span> <span class="n">ReturnsCorrectPressureForKnownBytes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">FakeSpiDevice</span> <span class="n">fake_spi</span><span class="p">({</span><span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x67</span><span class="p">,</span> <span class="mh">0x1A</span><span class="p">});</span>
+  <span class="n">PressureSensor</span> <span class="nf">sensor</span><span class="p">(</span><span class="n">fake_spi</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">.</span><span class="n">ReadPressurePa</span><span class="p">();</span>
+
+  <span class="n">ASSERT_TRUE</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ok</span><span class="p">());</span>
+  <span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="mf">101325.0f</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This test catches logic bugs at Level 1. When it also passes on the device at Level 3, you’ve confirmed hardware integration.</p>
+
+<h3 id="pw_watch-and-pw_target_runner-automated-on-device-ci">pw_watch and pw_target_runner: Automated On-Device CI</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pw_watch</code> monitors your source tree and, on file save, compiles only the affected tests and flashes them to an attached device. <code class="language-plaintext highlighter-rouge">pw_target_runner</code> can distribute this across multiple boards running in parallel — the embedded equivalent of parallelized CI workers.</p>
+
+<p>In a Woodpecker pipeline, this becomes:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># In a hardware-gated Woodpecker workflow file:</span>
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">device-tests</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:22.04</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">pw_target_runner_client -host localhost -port 8080 -binary build/test_binary.elf</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/dev/ttyACM0:/dev/ttyACM0</span>   <span class="c1"># The attached board</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="pillar-two-cosmopolitan--the-toolchain-portability-problem">Pillar Two: Cosmopolitan — The Toolchain Portability Problem</h2>
+
+<p><img src="/cover_images/posts/cosmo.png" alt="cosmos" /></p>
+
+<p>There’s a subtler problem that Pigweed alone doesn’t solve: your build tools themselves aren’t portable. A Python script that parses firmware map files on your Ubuntu CI machine fails on a Windows developer’s laptop because of path separator differences. These mismatches create builds that are “reproducible” in theory and brittle in practice.</p>
+
+<p>Cosmopolitan Libc addresses this for host-side tooling. It reconfigures GCC and Clang to produce <strong>Actually Portable Executables (APEs)</strong>, polyglot binaries that run natively on Linux, macOS, Windows, FreeBSD, and NetBSD on both x86-64 and ARM64 without recompilation.</p>
+
+<div class="warning">
+  <p>The embedded toolchain itself (arm-none-eabi-gcc, OpenOCD, pw CLI, Python environment) still needs to be installed and version-matched. Cosmopolitan solves one narrow piece: the test runner binary itself being portable. But a Windows developer without the ARM toolchain, without OpenOCD, and without Pigweed’s bootstrap still can’t build firmware or run device tests.</p>
+</div>
+
+<h3 id="what-this-means-for-an-embedded-pipeline">What This Means for an Embedded Pipeline</h3>
+
+<p>Your host-side test infrastructure, the binary that runs <code class="language-plaintext highlighter-rouge">pw_unit_test</code> results on the host, the serial port listener that collects device test output, the log parser and the code coverage reporter, all of these can all be built with <code class="language-plaintext highlighter-rouge">cosmocc</code> instead of <code class="language-plaintext highlighter-rouge">cc</code>.</p>
+
+<p>The resulting binaries are checked into the repository and work identically everywhere.</p>
+
+<p>A new team member on Windows clones the repo, runs <code class="language-plaintext highlighter-rouge">./tools/run_host_tests</code>, and gets the same results as the Linux CI agent. No Docker required for local development.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the host test runner once with cosmocc</span>
+cosmocc <span class="nt">-o</span> tools/run_host_tests src/test_runner.c
+
+<span class="c"># Now this binary works on:</span>
+<span class="c"># - Ubuntu </span>
+<span class="c"># - macOS </span>
+<span class="c"># - Windows 11 (native, not WSL)</span>
+<span class="c"># - Raspberry Pi 5 lab bench server (ARM64)</span>
+</code></pre></div></div>
+
+<div class="warning">
+
+  <p><strong>Check Your Scope</strong>
+ The firmware binary itself is still compiled with <code class="language-plaintext highlighter-rouge">arm-none-eabi-gcc</code>. Cosmopolitan is for your <em>development tooling</em>, not for the bare-metal MCU. Also note that Cosmopolitan ships its own C++ standard library (<code class="language-plaintext highlighter-rouge">ctl/</code>) rather than libstdc++, so complex C++ code with heavy template metaprogramming or bleeding-edge C++20/23 features may hit compatibility gaps. For simple CLI tools and test runners, this is rarely an issue.</p>
+
+</div>
+
+<hr />
+
+<h2 id="pillar-three-woodpecker-ci--self-hosted-hardware-attached-free">Pillar Three: Woodpecker CI — Self-Hosted, Hardware-Attached, Free</h2>
+
+<p><img src="/cover_images/posts/woodpeacker.png" alt="woodpecker" /></p>
+
+<p>GitHub Actions and GitLab CI aren’t built for embedded firmware: their runners are ephemeral cloud VMs with no physical I/O. You can’t attach a JTAG probe, a USB-serial adapter, or a power relay to a cloud runner.</p>
+
+<p>Woodpecker CI runs on your hardware. The server is a lightweight Go binary that talks to your Git forge. Agents, the workers that execute pipeline steps (Not to be confused with Agentic AI agents) A Woodpecker agent is a separate process (often a container) which run wherever you need them. One agent on a spare laptop in the lab bench has access to every USB device connected to that machine.</p>
+
+<h3 id="the-agent-model-for-hardware">The Agent Model for Hardware</h3>
+
+<p>Woodpecker’s edge for embedded CI is its agent label system. You label an agent, say for example: <code class="language-plaintext highlighter-rouge">hw-stm32h750</code> and restrict workflows to that agent(machine) where the board is physically connected.</p>
+
+<p>Woodpecker routes entire workflow files to agents via labels. So you split your pipeline across multiple workflow files:</p>
+
+<p>for example, this yaml file builds the basic build for the stm32H750 MCU</p>
+
+<p>Steps of operation:</p>
+
+<ul>
+  <li>
+    <p>(1) CMake build with ARM GCC in Release mode</p>
+  </li>
+  <li>
+    <p>(2) host-based tests via Cosmopolitan binary</p>
+  </li>
+  <li>
+    <p>(3) Pigweed presubmit checks for linting, clang-format, and C++ analysis. Runs on generic agents</p>
+  </li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .woodpecker/build-and-host.yaml</span>
+<span class="c1"># Runs on any agent (no hardware needed)</span>
+
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">build</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">gcc-arm:13</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">cmake -B build -DTARGET=stm32h750 -DCMAKE_BUILD_TYPE=Release</span>
+      <span class="pi">-</span> <span class="s">cmake --build build -j$(nproc)</span>
+
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">host-tests</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:22.04</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./tools/run_host_tests</span>   <span class="c1"># Cosmopolitan binary, works anywhere</span>
+
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">lint-and-presubmit</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:22.04</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">pw presubmit --step pragma_once --step clang_format --step cpp_checks</span>
+</code></pre></div></div>
+<p>Next, This ‘.woodpecker/device-tests.yaml’ is a Woodpecker CI pipeline for hardware-in-the-loop tests on an STM32H750 board.</p>
+
+<p><em>Pipeline Triggers</em>
+Routes to agents labeled hardware: stm32h750 (board attached). Triggers only on push events to the main branch.</p>
+
+<p><em>Flash and Test Step</em>
+Uses ubuntu:22.04 image. First, OpenOCD flashes build/firmware.elf to the board via stm32h750b-disco.cfg config (program, verify, reset, exit). Then, pw_target_runner_client executes build/test_binary.elf tests via Pigweed’s target runner server on localhost:8080.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .woodpecker/device-tests.yaml</span>
+<span class="c1"># Routed to the agent with the board attached</span>
+
+<span class="na">labels</span><span class="pi">:</span>
+  <span class="na">hardware</span><span class="pi">:</span> <span class="s">stm32h750</span>
+
+<span class="na">when</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">branch</span><span class="pi">:</span> <span class="s">main</span>
+    <span class="na">event</span><span class="pi">:</span> <span class="s">push</span>
+
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">flash-and-device-tests</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:22.04</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">openocd -f board/stm32h750b-disco.cfg -c "program build/firmware.elf verify reset exit"</span>
+      <span class="pi">-</span> <span class="s">pw_target_runner_client -host localhost -port 8080 -binary build/test_binary.elf</span>
+</code></pre></div></div>
+<p>And lastly, This ‘.woodpecker/hil-nightly.yaml’ is for nightly Hardware-in-the-Loop (HIL) regression testing by Woodpecker CI pipeline on an STM32H750 board.</p>
+
+<p><em>Pipeline Triggers</em>
+Routes to agents labeled hardware: stm32h750 (board attached). Triggers on cron event scheduled as nightly (e.g., daily at midnight).</p>
+
+<p><em>HIL Regression Step</em>
+Uses ubuntu:22.04 image. Runs</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python3</span> <span class="n">tools</span><span class="o">/</span><span class="n">hil</span><span class="o">/</span><span class="n">run_regression_suite</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyACM0</span> 
+</code></pre></div></div>
+
+<p>to execute a comprehensive Python-based test suite over the board’s serial port (ACM0, in Linux), verifying firmware stability overnight.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .woodpecker/hil-nightly.yaml</span>
+<span class="c1"># Nightly regression on the hardware agent</span>
+
+<span class="na">labels</span><span class="pi">:</span>
+  <span class="na">hardware</span><span class="pi">:</span> <span class="s">stm32h750</span>
+
+<span class="na">when</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">event</span><span class="pi">:</span> <span class="s">cron</span>
+    <span class="na">cron</span><span class="pi">:</span> <span class="s">nightly</span>
+
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">hil-regression</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:22.04</span>
+    <span class="na">commands</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">python3 tools/hil/run_regression_suite.py --port /dev/ttyACM0</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li>
+    <p>The build and host-test workflow runs on every commit — no hardware needed.</p>
+  </li>
+  <li>
+    <p>The device-test workflow triggers on merges to main, routed to the lab agent with the board attached.</p>
+  </li>
+  <li>
+    <p>The HIL regression runs nightly.<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote" rel="footnote">9</a></sup></p>
+  </li>
+</ul>
+
+<h3 id="why-not-github-actions-with-self-hosted-runners">Why Not GitHub Actions with Self-Hosted Runners?</h3>
+
+<p>Woodpecker has three major advantages for the specific embedded use case:</p>
+<ol>
+  <li><strong>Air-gap friendly</strong>: It has no dependency on the cloud. In defense or medical devices, traffic to github.com is often prohibited. Woodpecker works fully offline.</li>
+  <li><strong>Minimal overhead</strong>: The server uses a SQLite database and can run comfortably on a Raspberry Pi 5 with ~100MB of RAM.</li>
+  <li><strong>Hardware declarations</strong>: The agent label mechanism is straightforward for routing hardware-gated workflows, though note that labels apply at the <em>workflow</em> level, not per-step. You’ll need separate workflow files for cloud-only and hardware-attached steps.</li>
+</ol>
+
+<hr />
+
+<h2 id="where-host-tests-meet-hardware">Where Host Tests Meet Hardware</h2>
+
+<p>The core payoff of this stack is narrowing the gap between what passes in simulation and what works on real silicon. It doesn’t eliminate that gap, hardware surprises are inherent to the domain but it makes the gap <em>visible and diagnosable</em> instead of something you discover at system integration.</p>
+
+<p>Without this kind of setup, hardware surprises tend to surface during system integration which can take weeks,  escalating the cost of diagnosis.</p>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://pigweed.dev">Pigweed documentation</a> — start with the Tour of Pigweed and the Sense showcase</li>
+  <li><a href="https://opensource.googleblog.com/2024/08/introducing-pigweed-sdk.html">Pigweed SDK announcement (Google, Aug 2024)</a></li>
+  <li><a href="https://github.com/jart/cosmopolitan">Cosmopolitan Libc</a> — cosmocc toolchain and APE format</li>
+  <li><a href="https://woodpecker-ci.org">Woodpecker CI</a> — documentation and Docker Compose quick start</li>
+  <li><a href="https://blog.golioth.io/automated-hardware-testing-using-pytest/">Golioth Firmware SDK HIL testing</a> — a detailed real-world HIL CI implementation worth studying</li>
+</ul>
+
+<h2 id="sources">Sources</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:4" role="doc-endnote">
+      <p><a href="https://www.ansys.com/simulation-topics/what-is-hardware-in-the-loop-testing">What is Hardware-in-the-Loop Testing?</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:4:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:8" role="doc-endnote">
+      <p><a href="https://www.opal-rt.com/blog/a-guide-to-hardware-in-the-loop-testing/">A Guide to hardware-in-the-loop (HIL) testing in 2026 - OPAL-RT</a> <a href="#fnref:8" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:8:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://www.genuen.com/blog/why-hil-is-becoming-critical-for-medical-device-testing">Why HIL is Becoming Critical for Medical Device Testing</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://www.can-cia.org/fileadmin/cia/documents/publications/cnlm/december_2019/19-4_p30_hil_test_systems_in_the_automotive_industry_frank_heidemann_set.pdf">HIL test systems in the automotive industry</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://www.vector.com/int/en/products/products-a-z/hardware/hil-test-systems/">HIL Test Systems</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:9" role="doc-endnote">
+      <p><a href="https://www.automotivetestingtechnologyinternational.com/industry-opinion/hardware-in-the-loop-key-challenges-and-considerations.html">Hardware-in-the-loop: key challenges and considerations</a> <a href="#fnref:9" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:9:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p><a href="https://mdipenta.github.io/files/msr2022-cps.pdf">Problems and Solutions in Applying Continuous Integration to Cyber-Physical Systems</a> <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p><a href="https://testrigor.com/blog/what-is-hardware-in-loop-and-software-in-loop-testing/">What Is Hardware-In-Loop (HIL) and Software-In-Loop (SIL) Testing?</a> <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p><a href="https://www.opal-rt.com/blog/building-a-regression-testing-pipeline-for-hil-in-electrification-teams/">Building a regression testing pipeline for HIL in electrification teams</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-21-rust-composition/" class="flip-title"><span>7 C++ Inheritance pain-points Rust Fixes Forever</span></a>  <time class="faded fine" datetime="2025-12-21T00:00:00+00:00">21 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Binary Search Tree in C | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Binary Search Tree in C" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="A complete guide to Solve the Binary Search Trees(BST) Problems in C &amp; popular LeetCode BST problems" />
+<meta property="og:description" content="A complete guide to Solve the Binary Search Trees(BST) Problems in C &amp; popular LeetCode BST problems" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/c-algo.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/c-algo.webp" />
+<meta property="twitter:title" content="Binary Search Tree in C" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-02-26T08:48:48+00:00","datePublished":"2026-02-01T00:00:00+00:00","description":"A complete guide to Solve the Binary Search Trees(BST) Problems in C &amp; popular LeetCode BST problems","headline":"Binary Search Tree in C","image":"/cover_images/posts/c-algo.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2026-02-01-c-bst/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2026-02-01-c-bst/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/coding/2026-02-01-c-bst/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/coding/">coding</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2026-02-01-c-bst</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-coding-c-bst" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Binary Search Tree in C
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time> in <span>Blog</span> / <a href="/programming/" class="flip-title">Algorithms and Programming Languages</a> , Tags: <a href="/tag-c/" class="flip-title">C</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/c-algo.webp"
+    
+    
+  
+  alt="Binary Search Tree in C"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      A complete guide to Solve the Binary Search Trees(BST) Problems in C &amp;  popular LeetCode BST problems
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <p>A guide to BST operations in C with LeetCode problem mappings</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#1-what-is-a-binary-search-tree">1. What is a Binary Search Tree?</a></li>
+  <li><a href="#2-node-structure">2. Node Structure</a></li>
+  <li><a href="#3-core-bst-operations">3. Core BST Operations</a></li>
+  <li><a href="#4-tree-traversals">4. Tree Traversals</a></li>
+  <li><a href="#5-bst-properties--utilities">5. BST Properties &amp; Utilities</a></li>
+  <li><a href="#6-leetcode-practice-problems">6. LeetCode Practice Problems</a></li>
+  <li><a href="#7-full-working-code">7. Full Working Code</a></li>
+  <li><a href="#8-reference">8. Reference</a></li>
+</ul>
+
+<hr />
+
+<h2 id="1-what-is-a-binary-search-tree">1. What is a Binary Search Tree?</h2>
+
+<h3 id="bst-property">BST Property</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A((50)) --&gt; B((30))
+    A --&gt; C((70))
+    B --&gt; D((20))
+    B --&gt; E((40))
+    C --&gt; F((60))
+    C --&gt; G((80))
+
+    style A fill:#6c5ce7,color:#fff
+    style B fill:#00b894,color:#fff
+    style C fill:#e17055,color:#fff
+    style D fill:#00b894,color:#fff
+    style E fill:#00b894,color:#fff
+    style F fill:#e17055,color:#fff
+    style G fill:#e17055,color:#fff
+</code></pre>
+
+<p><em>Every node follows one rule: <span style="color:#00b894">left children are smaller</span> and <span style="color:#e17055">right children are larger</span>. For example, 30 and 20 sit left of 50 (both smaller), while 70, 60, 80 sit right (all larger).</em></p>
+
+<p>A <strong>Binary Search Tree (BST)</strong> is a binary tree where for every node:</p>
+<ul>
+  <li>All values in the <strong>left subtree</strong> are <strong>less</strong> than the node’s value</li>
+  <li>All values in the <strong>right subtree</strong> are <strong>greater</strong> than the node’s value</li>
+  <li>Both left and right subtrees are also BSTs</li>
+</ul>
+
+<p><strong>Example BST:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        50
+       /  \
+      30    70
+     / \   / \
+    20  40 60  80
+</code></pre></div></div>
+
+<h3 id="time-complexity">Time Complexity</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Average</th>
+      <th>Worst (skewed)</th>
+      <th>Space</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Search</td>
+      <td>O(log n)</td>
+      <td>O(n)</td>
+      <td>O(1) iterative</td>
+    </tr>
+    <tr>
+      <td>Insert</td>
+      <td>O(log n)</td>
+      <td>O(n)</td>
+      <td>O(1) iterative</td>
+    </tr>
+    <tr>
+      <td>Delete</td>
+      <td>O(log n)</td>
+      <td>O(n)</td>
+      <td>O(1) iterative</td>
+    </tr>
+    <tr>
+      <td>Traversal</td>
+      <td>O(n)</td>
+      <td>O(n)</td>
+      <td>O(n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table shows BST operation complexities: average case is O(log n) for search, insert, and delete, but degrades to O(n) when the tree becomes skewed (like a linked list).</em></p>
+
+<hr />
+
+<h2 id="2-node-structure">2. Node Structure</h2>
+
+<h3 id="memory-layout">Memory Layout</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ┌──────────────────────────┐
+ │       TreeNode           │
+ ├──────────┬───────────────┤
+ │ int val  │      50       │  ← data
+ ├──────────┼───────────────┤
+ │ left  ●──┼──→ [Node 30]  │  ← pointer to left child
+ ├──────────┼───────────────┤
+ │ right ●──┼──→ [Node 70]  │  ← pointer to right child
+ └──────────┴───────────────┘
+               │
+        ┌──────┴──────┐
+        ▼             ▼
+   ┌─────────┐   ┌─────────┐
+   │ val: 30 │   │ val: 70 │
+   │ left: ∅ │   │ left: ∅ │
+   │ right: ∅│   │ right: ∅│
+   └─────────┘   └─────────┘
+</code></pre></div></div>
+
+<p><em>Each node is a C struct with three fields: <code class="language-plaintext highlighter-rouge">int val</code> stores the data, <code class="language-plaintext highlighter-rouge">left</code> and <code class="language-plaintext highlighter-rouge">right</code> are pointers to child nodes (or NULL if no child exists). Node 50 points left to 30 (smaller) and right to 70 (larger).</em></p>
+
+<p><strong>Required headers:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp">
+</span></code></pre></div></div>
+
+<p><strong>Node definition and constructor:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">createNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">));</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-core-bst-operations">3. Core BST Operations</h2>
+
+<h3 id="insertion">Insertion</h3>
+
+<h4 id="insertion-flow">Insertion Flow</h4>
+
+<p><strong>Inserting 35 into this BST:</strong></p>
+
+<pre><code class="language-mermaid">graph TD
+    A((50)) -.-&gt;|"35 &lt; 50 → go left"| B((30))
+    B -.-&gt;|"35 &gt; 30 → go right"| C((40))
+    C -.-&gt;|"35 &lt; 40 → go left"| D["✅ NULL → insert 35 here"]
+
+    style A fill:#636e72,color:#fff
+    style B fill:#636e72,color:#fff
+    style C fill:#636e72,color:#fff
+    style D fill:#00b894,color:#fff
+</code></pre>
+
+<p><em>Starting at the root, each comparison tells us exactly which direction to go. We keep moving down until we hit a NULL spot — that’s where the new node goes.</em></p>
+
+<p><strong>Iterative insertion:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">createNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">));</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">insert</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">newNode</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">newNode</span><span class="p">;</span>
+
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">parent</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">curr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">// duplicate — no insertion</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">parent</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">parent</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">newNode</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">parent</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">newNode</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+    <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Tree built with 4 nodes</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Iterative insertion avoids recursion overhead and is preferred in performance-critical embedded systems and low-level C code.</p>
+
+<p><strong>Recursive insertion:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">insertRecursive</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">createNode</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">insertRecursive</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">insertRecursive</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">// duplicate — unchanged</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="leetcode-problems-using-insertion">LeetCode Problems Using Insertion</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/insert-into-a-binary-search-tree/">701. Insert into a BST</a></td>
+      <td>Insert a value into a BST and return the root</td>
+      <td>Use the recursive insertion above directly.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="search">Search</h3>
+
+<h4 id="search-flow">Search Flow</h4>
+
+<pre><code class="language-mermaid">graph LR
+    A["search(root, val)"] --&gt; B{root == NULL?}
+    B --&gt;|Yes| C[Return NULL]
+    B --&gt;|No| D{"val == root-&gt;val?"}
+    D --&gt;|Yes| E[Found — return node]
+    D --&gt;|No| F{"val &lt; root-&gt;val?"}
+    F --&gt;|Yes| G[Search left]
+    F --&gt;|No| H[Search right]
+</code></pre>
+
+<p><em>The search flow exploits BST ordering: at each node, the value tells us exactly which subtree to explore, eliminating half the tree at each step.</em></p>
+
+<p><strong>Iterative search:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">search</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">!=</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">// NULL if not found</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Recursive search:</strong></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">searchRecursive</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">searchRecursive</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">searchRecursive</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="leetcode-problems-using-search">LeetCode Problems Using Search</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/search-in-a-binary-search-tree/">700. Search in a BST</a></td>
+      <td>Return the subtree rooted at the node with the target value</td>
+      <td>Use either iterative or recursive search above.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="find-min--max">Find Min / Max</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Logic</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Find Min</td>
+      <td>Go left until <code class="language-plaintext highlighter-rouge">left == NULL</code></td>
+      <td><code class="language-plaintext highlighter-rouge">while (root &amp;&amp; root-&gt;left) root = root-&gt;left;</code></td>
+    </tr>
+    <tr>
+      <td>Find Max</td>
+      <td>Go right until <code class="language-plaintext highlighter-rouge">right == NULL</code></td>
+      <td><code class="language-plaintext highlighter-rouge">while (root &amp;&amp; root-&gt;right) root = root-&gt;right;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>The minimum value in a BST is always the leftmost node, and the maximum is always the rightmost. Both traverse a single path from root to leaf.</em></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">findMin</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">findMax</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="deletion">Deletion</h3>
+
+<h4 id="deletion-decision-flow">Deletion Decision Flow</h4>
+
+<pre><code class="language-mermaid">graph TD
+    A["deleteNode(root, key)"] --&gt; B{Found node?}
+    B --&gt;|No| C[Return NULL]
+    B --&gt;|Yes| D{How many children?}
+    D --&gt;|0 - Leaf| E[Free node, return NULL]
+    D --&gt;|1 child| F[Replace with child]
+    D --&gt;|2 children| G[Find inorder successor]
+    G --&gt; H["Copy successor's value"]
+    H --&gt; I["Delete successor from right subtree"]
+</code></pre>
+
+<p><em>Deletion has three cases: leaf nodes are simply removed, single-child nodes are replaced by their child, and two-child nodes use the inorder successor (smallest value in right subtree) as a replacement.</em></p>
+
+<p><strong>Three cases explained:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Case</th>
+      <th>Condition</th>
+      <th>Action</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Leaf</td>
+      <td>No children</td>
+      <td>Free node, return NULL</td>
+      <td>Delete 20 from tree</td>
+    </tr>
+    <tr>
+      <td>One child</td>
+      <td>Left or right is NULL</td>
+      <td>Bypass node with its child</td>
+      <td>Delete node with only right child</td>
+    </tr>
+    <tr>
+      <td>Two children</td>
+      <td>Both children exist</td>
+      <td>Replace with inorder successor, delete successor</td>
+      <td>Delete 30 (replace with 35)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table summarizes the three deletion cases: each requires different handling based on the node’s child count.</em></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">deleteNode</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Case 1 &amp; 2: No child or one child</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Case 3: Two children</span>
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">successor</span> <span class="o">=</span> <span class="n">findMin</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">successor</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">successor</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Deletion visualized (deleting 30):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Case 3: Two children          After replacing with
+        50                      inorder successor (35)
+       /  \                          50
+      30    70         →            /  \
+     / \   / \                    35    70
+    20  40 60  80                /  \  / \
+       /                        20  40 60 80
+      35
+</code></pre></div></div>
+
+<h3 id="leetcode-problems-using-deletion">LeetCode Problems Using Deletion</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/delete-node-in-a-bst/">450. Delete Node in a BST</a></td>
+      <td>Delete a value and return the updated root</td>
+      <td>Use the three-case deletion above directly.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/trim-a-bst/">669. Trim a BST</a></td>
+      <td>Remove all nodes outside range [low, high]</td>
+      <td>If <code class="language-plaintext highlighter-rouge">val &lt; low</code>, return trimmed right subtree. If <code class="language-plaintext highlighter-rouge">val &gt; high</code>, return trimmed left subtree.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="4-tree-traversals">4. Tree Traversals</h2>
+
+<h3 id="traversal-overview">Traversal Overview</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Tree Traversals] --&gt; B[DFS - Depth First]
+    A --&gt; C[BFS - Breadth First]
+    B --&gt; D["Inorder: L → Root → R"]
+    B --&gt; E["Preorder: Root → L → R"]
+    B --&gt; F["Postorder: L → R → Root"]
+    C --&gt; G["Level Order: Level by level"]
+    D --&gt; H["Sorted output for BST"]
+    E --&gt; I["Tree serialization"]
+    F --&gt; J["Safe deletion"]
+    G --&gt; K["Uses a Queue"]
+</code></pre>
+
+<p><em>Tree traversals are either depth-first (going deep before wide) or breadth-first (going wide before deep). Each DFS variant has specific use cases: inorder for sorting, preorder for copying, postorder for deletion.</em></p>
+
+<h3 id="traversal-order-comparison">Traversal Order Comparison</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Traversal</th>
+      <th>Order</th>
+      <th>BST Use Case</th>
+      <th>Output for example tree</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Inorder</td>
+      <td>Left → Root → Right</td>
+      <td><strong>Sorted</strong> sequence</td>
+      <td>20 30 35 40 50 60 70 80</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Preorder</td>
+      <td>Root → Left → Right</td>
+      <td>Serialize / copy tree</td>
+      <td>50 30 20 40 35 70 60 80</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Postorder</td>
+      <td>Left → Right → Root</td>
+      <td>Safe free / delete</td>
+      <td>20 35 40 30 60 80 70 50</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Level Order</td>
+      <td>Level by level</td>
+      <td>BFS analysis</td>
+      <td>50</td>
+      <td>30 70</td>
+      <td>20 40 60 80</td>
+      <td>35</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table compares the four traversal orders, their visit sequence, practical use cases, and the output produced when applied to the example BST.</em></p>
+
+<hr />
+
+<h3 id="inorder-left--root--right">Inorder (Left → Root → Right)</h3>
+
+<p>Produces a <strong>sorted sequence</strong> of values from a BST.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">createNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">));</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Store inorder result in array (useful for many LeetCode problems)</span>
+<span class="kt">void</span> <span class="nf">inorderToArray</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">inorderToArray</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+    <span class="n">arr</span><span class="p">[(</span><span class="o">*</span><span class="n">idx</span><span class="p">)</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+    <span class="n">inorderToArray</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="mi">70</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Inorder: "</span><span class="p">);</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>  <span class="c1">// 20 30 40 50 70</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Inorder traversal is the most important BST traversal — it produces a sorted sequence, which is the basis for problems like Kth Smallest, Validate BST, and finding minimum differences.</p>
+
+<hr />
+
+<h3 id="preorder-root--left--right">Preorder (Root → Left → Right)</h3>
+
+<p>Used to <strong>serialize or copy</strong> a tree. The root is visited first, making it ideal for reconstruction.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">preorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="postorder-left--right--root">Postorder (Left → Right → Root)</h3>
+
+<p>Used to <strong>safely delete/free</strong> a tree — children are freed before the parent.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">postorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Free entire tree using postorder</span>
+<span class="kt">void</span> <span class="nf">freeTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">freeTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">freeTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Always use postorder to free a tree in C. Freeing a parent before its children creates dangling pointers and memory leaks — a common mistake in manual memory management.</p>
+
+<hr />
+
+<h3 id="level-order-bfs">Level Order (BFS)</h3>
+
+<h4 id="bfs-process">BFS Process</h4>
+
+<pre><code class="language-mermaid">graph LR
+    A[Enqueue root] --&gt; B[Dequeue node]
+    B --&gt; C[Process node]
+    C --&gt; D{Has left child?}
+    D --&gt;|Yes| E[Enqueue left]
+    D --&gt;|No| F{Has right child?}
+    E --&gt; F
+    F --&gt;|Yes| G[Enqueue right]
+    F --&gt;|No| H{Queue empty?}
+    G --&gt; H
+    H --&gt;|No| B
+    H --&gt;|Yes| I[Done]
+</code></pre>
+
+<p><em>Level order traversal uses a queue: enqueue the root, then repeatedly dequeue a node, process it, and enqueue its children. This visits all nodes level by level from top to bottom.</em></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="c1">// Simple queue for BFS</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">front</span><span class="p">,</span> <span class="n">rear</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">Queue</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">initQueue</span><span class="p">(</span><span class="n">Queue</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="kt">void</span> <span class="nf">enqueue</span><span class="p">(</span><span class="n">Queue</span><span class="o">*</span> <span class="n">q</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">dequeue</span><span class="p">(</span><span class="n">Queue</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span><span class="o">++</span><span class="p">];</span> <span class="p">}</span>
+<span class="n">bool</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="n">Queue</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">front</span> <span class="o">==</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">rear</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">Queue</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">initQueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>
+    <span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">isEmpty</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">rear</span> <span class="o">-</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">;</span>  <span class="c1">// nodes at current level</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">dequeue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span>  <span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">enqueue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>  <span class="c1">// new line per level</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Level order traversal is essential for problems that require processing nodes level-by-level, such as finding the width of a tree, right-side view, or zigzag traversal.</p>
+
+<h3 id="leetcode-problems-using-traversals">LeetCode Problems Using Traversals</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/">94. Binary Tree Inorder Traversal</a></td>
+      <td>Return inorder sequence as array</td>
+      <td>Use <code class="language-plaintext highlighter-rouge">inorderToArray</code> helper, return the array.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/">144. Binary Tree Preorder Traversal</a></td>
+      <td>Return preorder sequence as array</td>
+      <td>Visit root first, then left, then right into array.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/binary-tree-postorder-traversal/">145. Binary Tree Postorder Traversal</a></td>
+      <td>Return postorder sequence as array</td>
+      <td>Visit left, right, then root into array.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/">102. Binary Tree Level Order Traversal</a></td>
+      <td>Return values grouped by level</td>
+      <td>Use BFS with queue, track level size.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/">107. Level Order Traversal II</a></td>
+      <td>Level order bottom to top</td>
+      <td>Same as 102, then reverse the result array.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="5-bst-properties--utilities">5. BST Properties &amp; Utilities</h2>
+
+<h3 id="height-of-tree">Height of Tree</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A["height(root)"] --&gt; B{root == NULL?}
+    B --&gt;|Yes| C["Return -1"]
+    B --&gt;|No| D["leftH = height(left)"]
+    D --&gt; E["rightH = height(right)"]
+    E --&gt; F["Return 1 + max(leftH, rightH)"]
+</code></pre>
+
+<p><em>Height is computed recursively: the height of an empty tree is -1, and each node adds 1 to the maximum height of its subtrees.</em></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">height</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>  <span class="c1">// -1 for edges, 0 for nodes</span>
+
+    <span class="kt">int</span> <span class="n">leftH</span>  <span class="o">=</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">rightH</span> <span class="o">=</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">leftH</span> <span class="o">&gt;</span> <span class="n">rightH</span> <span class="o">?</span> <span class="n">leftH</span> <span class="o">:</span> <span class="n">rightH</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Example:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        50          height = 3
+       /  \
+      30    70      height = 2
+     / \   / \
+    20  40 60  80   height = 1
+       /
+      35            height = 0
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="count-nodes">Count Nodes</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">countNodes</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="validate-bst">Validate BST</h3>
+
+<h4 id="validation-strategy">Validation Strategy</h4>
+
+<pre><code class="language-mermaid">graph TD
+    A["isValidBST(root, min, max)"] --&gt; B{root == NULL?}
+    B --&gt;|Yes| C["Return true"]
+    B --&gt;|No| D{"val &lt;= min OR val &gt;= max?"}
+    D --&gt;|Yes| E["Return false — violates BST"]
+    D --&gt;|No| F["Check left with (min, root-&gt;val)"]
+    F --&gt; G["Check right with (root-&gt;val, max)"]
+    G --&gt; H["Return left AND right"]
+</code></pre>
+
+<p><em>Validation uses a min/max range that narrows at each level: left children must be less than the parent, right children must be greater. This catches the common mistake of only checking immediate parent.</em></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp">
+</span>
+<span class="n">bool</span> <span class="nf">isValidBSTHelper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">long</span> <span class="n">min</span><span class="p">,</span> <span class="kt">long</span> <span class="n">max</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">min</span> <span class="o">||</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;=</span> <span class="n">max</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">isValidBSTHelper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">min</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+           <span class="n">isValidBSTHelper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">bool</span> <span class="nf">isValidBST</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">isValidBSTHelper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">LONG_MIN</span><span class="p">,</span> <span class="n">LONG_MAX</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Why just checking parent is wrong:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        5
+       / \
+      1    6      ← Looks valid at each parent
+          / \
+         3   7    ← 3 &lt; 5 — violates BST property!
+</code></pre></div></div>
+
+<p>The range-based approach catches this: node 3 would need to be in range (5, 6), but 3 &lt; 5, so it fails.</p>
+
+<hr />
+
+<h3 id="lowest-common-ancestor">Lowest Common Ancestor</h3>
+
+<h4 id="lca-decision-flow">LCA Decision Flow</h4>
+
+<pre><code class="language-mermaid">graph TD
+    A["LCA(root, p, q)"] --&gt; B{"p &lt; root AND q &lt; root?"}
+    B --&gt;|Yes| C["Both in left → go left"]
+    B --&gt;|No| D{"p &gt; root AND q &gt; root?"}
+    D --&gt;|Yes| E["Both in right → go right"]
+    D --&gt;|No| F["Split point = LCA!"]
+</code></pre>
+
+<p><em>In a BST, the LCA is the first node where the two target values diverge into different subtrees. This makes it O(log n) instead of the O(n) general tree approach.</em></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>       <span class="c1">// both in left subtree</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>      <span class="c1">// both in right subtree</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>             <span class="c1">// split point = LCA</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="kth-smallest-element">Kth Smallest Element</h3>
+
+<p>Use <strong>inorder traversal</strong> (sorted order) and count down to k.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">kthSmallestHelper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">count</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="o">*</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">kthSmallestHelper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+
+    <span class="p">(</span><span class="o">*</span><span class="n">count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">count</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">kthSmallestHelper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">kthSmallest</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">kthSmallestHelper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Example (k=3):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inorder: 20, 30, [35], 40, 50, 60, 70, 80
+                   ↑
+              3rd smallest = 35
+</code></pre></div></div>
+
+<h3 id="leetcode-problems-using-bst-properties">LeetCode Problems Using BST Properties</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/validate-binary-search-tree/">98. Validate BST</a></td>
+      <td>Check if tree is a valid BST</td>
+      <td>Use min/max range validation. Do NOT just check parent — check global range.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">104. Maximum Depth</a></td>
+      <td>Return height of the tree</td>
+      <td>Recursively compute <code class="language-plaintext highlighter-rouge">1 + max(left, right)</code>. Base case: NULL returns 0 (or -1 for edge count).</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/balanced-binary-tree/">110. Balanced Binary Tree</a></td>
+      <td>Check if height difference ≤ 1 at every node</td>
+      <td>Modify height function to return -1 if unbalanced, propagate up.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/count-complete-tree-nodes/">222. Count Complete Tree Nodes</a></td>
+      <td>Count nodes in complete tree</td>
+      <td>Simple recursion <code class="language-plaintext highlighter-rouge">1 + count(left) + count(right)</code>. Optimized: compare left/right heights.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">230. Kth Smallest</a></td>
+      <td>Find kth smallest value in BST</td>
+      <td>Inorder traversal with counter. Stop early when count reaches k.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. LCA of BST</a></td>
+      <td>Find lowest common ancestor</td>
+      <td>Exploit BST ordering: follow split point where p and q diverge.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/minimum-absolute-difference-in-bst/">530. Min Absolute Difference</a></td>
+      <td>Find minimum difference between any two nodes</td>
+      <td>Inorder traversal, track previous value, compute min diff at each step.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="6-leetcode-practice-problems">6. LeetCode Practice Problems</h2>
+
+<h3 id="problem-1-convert-sorted-array-to-bst">Problem 1: Convert Sorted Array to BST</h3>
+
+<p>Build a height-balanced BST from a sorted array by always picking the middle element as root.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">createNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">));</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">sortedArrayToBST</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span>  <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">nums</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Inorder: "</span><span class="p">);</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>  <span class="c1">// -10 -3 0 5 9</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Process:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Array: [-10, -3, 0, 5, 9]
+                ↓
+Mid = 0 (index 2)         →  Root = 0
+Left half:  [-10, -3]     →  Left subtree
+Right half: [5, 9]        →  Right subtree
+
+Result:
+        0
+       / \
+     -3    9
+     /    /
+   -10   5
+</code></pre></div></div>
+
+<p>This technique guarantees a balanced tree (height difference ≤ 1). It’s a divide-and-conquer approach used in database index construction and balanced tree initialization.</p>
+
+<hr />
+
+<h3 id="problem-2-invert-binary-tree">Problem 2: Invert Binary Tree</h3>
+
+<p>Swap left and right children at every node recursively.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">invertTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span>  <span class="o">=</span> <span class="n">invertTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">invertTree</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Process:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before:         After:
+    4              4
+   / \            / \
+  2    7   →    7    2
+ / \  / \      / \  / \
+1   3 6   9   9   6 3   1
+</code></pre></div></div>
+
+<p>Tree inversion is a classic recursion problem famously associated with Homebrew creator Max Howell’s Google interview. It tests understanding of tree structure manipulation and recursive thinking.</p>
+
+<hr />
+
+<h3 id="problem-3-two-sum-iv-bst">Problem 3: Two Sum IV (BST)</h3>
+
+<p>Flatten BST to sorted array via inorder, then use two pointers.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">inorderToArray</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">inorderToArray</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+    <span class="n">arr</span><span class="p">[(</span><span class="o">*</span><span class="n">idx</span><span class="p">)</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+    <span class="n">inorderToArray</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">bool</span> <span class="nf">findTarget</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10001</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">inorderToArray</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">idx</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">lo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">lo</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">hi</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="n">lo</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">hi</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Example (k=9):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inorder: [2, 3, 4, 6, 7]
+          ↑            ↑     2+7=9 ✓ Found!
+         lo           hi
+</code></pre></div></div>
+
+<p>This combines BST inorder traversal with the classic two-pointer technique. The sorted property of inorder output makes two-pointer search optimal at O(n) time and O(n) space.</p>
+
+<hr />
+
+<h3 id="problem-4-trim-a-bst">Problem 4: Trim a BST</h3>
+
+<p>Remove all nodes outside the range [low, high].</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">trimBST</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">low</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">trimBST</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">high</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">trimBST</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span>  <span class="o">=</span> <span class="n">trimBST</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">trimBST</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Process (trim [1, 3]):</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before:         After:
+    3              3
+   / \            /
+  0    4   →    2
+   \           /
+    2         1
+   /
+  1
+</code></pre></div></div>
+
+<p>Trimming uses BST ordering: if a node is below the range, all its left children are too, so we only keep the right subtree (and vice versa). This makes it efficient — no need to check every node twice.</p>
+
+<hr />
+
+<h3 id="problem-5-minimum-absolute-difference">Problem 5: Minimum Absolute Difference</h3>
+
+<p>Find the minimum difference between any two node values in a BST.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">minDiffHelper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">prev</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">minDiff</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">minDiffHelper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">minDiff</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">prev</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">-</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">minDiff</span><span class="p">)</span> <span class="o">*</span><span class="n">minDiff</span> <span class="o">=</span> <span class="n">diff</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">*</span><span class="n">prev</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+
+    <span class="n">minDiffHelper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">minDiff</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">getMinimumDifference</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">prev</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">minDiff</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+    <span class="n">minDiffHelper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prev</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">minDiff</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">minDiff</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Example:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inorder: 1, 2, 3, 4, 6
+Diffs:     1  1  1  2
+Min diff = 1
+</code></pre></div></div>
+
+<p>Since inorder traversal of a BST is sorted, the minimum difference must be between consecutive elements. This avoids the O(n²) brute-force approach.</p>
+
+<h3 id="complete-leetcode-reference-table">Complete LeetCode Reference Table</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Problem</th>
+      <th>Core Operation</th>
+      <th>Difficulty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>94</td>
+      <td><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/">Inorder Traversal</a></td>
+      <td>Inorder traversal</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>98</td>
+      <td><a href="https://leetcode.com/problems/validate-binary-search-tree/">Validate BST</a></td>
+      <td>Range validation</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td><a href="https://leetcode.com/problems/same-tree/">Same Tree</a></td>
+      <td>Recursive comparison</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td><a href="https://leetcode.com/problems/symmetric-tree/">Symmetric Tree</a></td>
+      <td>Mirror check</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/">Level Order Traversal</a></td>
+      <td>BFS / Queue</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">Maximum Depth</a></td>
+      <td>Height recursion</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td><a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/">Sorted Array to BST</a></td>
+      <td>Build balanced BST</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td><a href="https://leetcode.com/problems/balanced-binary-tree/">Balanced Binary Tree</a></td>
+      <td>Height + balance check</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/">Preorder Traversal</a></td>
+      <td>Preorder traversal</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>145</td>
+      <td><a href="https://leetcode.com/problems/binary-tree-postorder-traversal/">Postorder Traversal</a></td>
+      <td>Postorder traversal</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>222</td>
+      <td><a href="https://leetcode.com/problems/count-complete-tree-nodes/">Count Complete Tree Nodes</a></td>
+      <td>Count nodes</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>226</td>
+      <td><a href="https://leetcode.com/problems/invert-binary-tree/">Invert Binary Tree</a></td>
+      <td>Swap children</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>230</td>
+      <td><a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">Kth Smallest in BST</a></td>
+      <td>Inorder + counter</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>235</td>
+      <td><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">LCA of BST</a></td>
+      <td>BST split point</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>236</td>
+      <td><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">LCA of Binary Tree</a></td>
+      <td>General DFS</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>450</td>
+      <td><a href="https://leetcode.com/problems/delete-node-in-a-bst/">Delete Node in BST</a></td>
+      <td>Deletion with successor</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>530</td>
+      <td><a href="https://leetcode.com/problems/minimum-absolute-difference-in-bst/">Min Absolute Difference</a></td>
+      <td>Inorder + diff</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>653</td>
+      <td><a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/">Two Sum IV - BST</a></td>
+      <td>Inorder + two pointers</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>669</td>
+      <td><a href="https://leetcode.com/problems/trim-a-bst/">Trim a BST</a></td>
+      <td>Recursive trim</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>700</td>
+      <td><a href="https://leetcode.com/problems/search-in-a-binary-search-tree/">Search in BST</a></td>
+      <td>BST search</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>701</td>
+      <td><a href="https://leetcode.com/problems/insert-into-a-binary-search-tree/">Insert into BST</a></td>
+      <td>BST insertion</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>783</td>
+      <td><a href="https://leetcode.com/problems/minimum-distance-between-bst-nodes/">Min Distance Between BST Nodes</a></td>
+      <td>Inorder + diff</td>
+      <td>Easy</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="7-full-working-code">7. Full Working Code</h2>
+
+<p>A complete program demonstrating all operations:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TreeNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">TreeNode</span><span class="p">;</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">createNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TreeNode</span><span class="p">));</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span>   <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span>  <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">insert</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">createNode</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">findMin</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">deleteNode</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span>  <span class="p">{</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span> <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span> <span class="k">return</span> <span class="n">t</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>  <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span> <span class="k">return</span> <span class="n">t</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">s</span> <span class="o">=</span> <span class="n">findMin</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">TreeNode</span><span class="o">*</span> <span class="nf">search</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">!=</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">preorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">postorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">height</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="n">r</span> <span class="o">?</span> <span class="n">l</span> <span class="o">:</span> <span class="n">r</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">countNodes</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">freeTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">freeTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">freeTree</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">values</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">35</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+    <span class="c1">// Build BST</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+    <span class="c1">// Traversals</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Inorder:   "</span><span class="p">);</span> <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>   <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Preorder:  "</span><span class="p">);</span> <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>   <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Postorder: "</span><span class="p">);</span> <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// Properties</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Height:    %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Count:     %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">root</span><span class="p">));</span>
+
+    <span class="c1">// Search</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">found</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Search 40: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">found</span> <span class="o">?</span> <span class="s">"Found"</span> <span class="o">:</span> <span class="s">"Not found"</span><span class="p">);</span>
+
+    <span class="c1">// Delete</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Deleting 30...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Inorder:   "</span><span class="p">);</span> <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// Min / Max</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Min value: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">findMin</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+
+    <span class="n">freeTree</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Output:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inorder:   20 30 35 40 50 60 70 80
+Preorder:  50 30 20 40 35 70 60 80
+Postorder: 20 35 40 30 60 80 70 50
+Height:    3
+Count:     8
+Search 40: Found
+
+Deleting 30...
+Inorder:   20 35 40 50 60 70 80
+Min value: 20
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="8-reference">8. Reference</h2>
+
+<h3 id="operations-quick-reference">Operations Quick Reference</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create</span>
+<span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">createNode</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+
+<span class="c1">// Insert</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+<span class="c1">// Search</span>
+<span class="n">TreeNode</span><span class="o">*</span> <span class="n">found</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+<span class="c1">// Delete</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">deleteNode</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+
+<span class="c1">// Min / Max</span>
+<span class="n">TreeNode</span><span class="o">*</span> <span class="n">min</span> <span class="o">=</span> <span class="n">findMin</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="n">TreeNode</span><span class="o">*</span> <span class="n">max</span> <span class="o">=</span> <span class="n">findMax</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+
+<span class="c1">// Traversals</span>
+<span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>    <span class="c1">// Sorted output</span>
+<span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>   <span class="c1">// Serialize tree</span>
+<span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>  <span class="c1">// Safe deletion</span>
+
+<span class="c1">// Properties</span>
+<span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="n">bool</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">isValidBST</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+
+<span class="c1">// Cleanup</span>
+<span class="n">freeTree</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="final-tips">Final Tips</h2>
+
+<p><strong>Do:</strong></p>
+<ul>
+  <li>Use inorder traversal for sorted-order problems</li>
+  <li>Use min/max range for BST validation (not just parent check)</li>
+  <li>Free trees with postorder traversal</li>
+  <li>Consider iterative versions for production C code</li>
+  <li>Handle NULL pointers at every function entry</li>
+</ul>
+
+<p><strong>Don’t:</strong></p>
+<ul>
+  <li>Forget to <code class="language-plaintext highlighter-rouge">free()</code> deleted nodes — memory leaks are silent bugs</li>
+  <li>Only check immediate parent when validating BST</li>
+  <li>Use recursion on extremely deep trees (stack overflow risk)</li>
+  <li>Ignore the skewed tree worst case — use AVL/Red-Black for guarantees</li>
+  <li>Assume BST operations are always O(log n) — they’re O(n) when skewed</li>
+</ul>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>Local First, Building Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/cppdev/2025-12-26-containers-std-vs-pmr/" class="flip-title"><span>Performance cost std::pmr vs std containers</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-20-automobile-cybersecurity/" class="flip-title"><span>From Regulation to Implementation- Understanding Vehicle Cybersecurity legal Compliance & How Vehicle Cybersecurity Actually Gets Done</span></a>  <time class="faded fine" datetime="2025-12-20T00:00:00+00:00">20 Dec 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "lang": "en",
+  "name": "Saptarshi Nag",
+  "short_name": "Saptarshi Nag",
+  "description": "Embedded System Engineer",
+  "start_url": "/?utm_source=homescreen",
+  "theme_color": "rgb(25, 55, 71)",
+  "background_color": "#fff",
+  "orientation": "portrait",
+  "display": "minimal-ui",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ]
+}

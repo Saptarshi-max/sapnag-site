@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility" />
+<meta property="og:description" content="Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/Dependency-injection.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/Dependency-injection.png" />
+<meta property="twitter:title" content="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-01T15:40:23+00:00","datePublished":"2026-04-17T00:00:00+00:00","description":"Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility","headline":"Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It","image":"/cover_images/posts/Dependency-injection.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2026-04-17-di-embedded/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2026-04-17-di-embedded/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/coding/2026-04-17-di-embedded/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/coding/">coding</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2026-04-17-di-embedded</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-coding-di-embedded" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time> in <span>Blog</span> / <a href="/programming/" class="flip-title">Algorithms and Programming Languages</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/Dependency-injection.png"
+    
+    
+  
+  alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul id="markdown-toc">
+  <li><a href="#the-embedded-maintenance-trap" id="markdown-toc-the-embedded-maintenance-trap">The Embedded Maintenance Trap</a></li>
+  <li><a href="#the-anti-patterns-in-detail" id="markdown-toc-the-anti-patterns-in-detail">The Anti-Patterns in Detail</a>    <ul>
+      <li><a href="#direct-hardware-access-buried-in-application-logic" id="markdown-toc-direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</a></li>
+      <li><a href="#hidden-dependencies-and-magic-globals" id="markdown-toc-hidden-dependencies-and-magic-globals">Hidden Dependencies and Magic Globals</a></li>
+      <li><a href="#dependency-inversion---what-it-actually-means" id="markdown-toc-dependency-inversion---what-it-actually-means">Dependency Inversion - What It Actually Means</a></li>
+      <li><a href="#dependency-injection---the-missing-piece" id="markdown-toc-dependency-injection---the-missing-piece">Dependency Injection - The Missing Piece</a></li>
+      <li><a href="#the-full-pattern---dip--di-together" id="markdown-toc-the-full-pattern---dip--di-together">The Full Pattern - DIP + DI Together</a></li>
+      <li><a href="#testing-without-hardware" id="markdown-toc-testing-without-hardware">Testing Without Hardware</a></li>
+      <li><a href="#performance-concerns---addressed-honestly" id="markdown-toc-performance-concerns---addressed-honestly">Performance Concerns - Addressed Honestly</a></li>
+      <li><a href="#di-and-dip-in-c" id="markdown-toc-di-and-dip-in-c">DI and DIP in C++</a></li>
+      <li><a href="#embedded-linux-and-yocto-context" id="markdown-toc-embedded-linux-and-yocto-context">Embedded Linux and Yocto Context</a></li>
+      <li><a href="#when-not-to-use-this" id="markdown-toc-when-not-to-use-this">When Not To Use This</a></li>
+      <li><a href="#migrating-an-existing-codebase" id="markdown-toc-migrating-an-existing-codebase">Migrating an Existing Codebase</a></li>
+      <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="the-embedded-maintenance-trap">The Embedded Maintenance Trap</h1>
+
+<p>Embedded products are supposed to live long lives with little or no maintenance (often 10 to 20 years). But with time, Hardware revisions happen. MCUs get discontinued. Pin assignments shift. New team members arrive. And through all of it, the codebase has to hold together.</p>
+
+<p>The typical trajectory looks like this:</p>
+<ul>
+  <li>a prototype gets written, with direct register writes and HAL calls sprinkled throughout the application logic.</li>
+  <li>Run all tests on Simulator &amp; Hardware (Prototype board)</li>
+  <li>It works. It ships. Three years later, the board changes, and a demand to update the product with latest market needs and technology. Or a new MCU in the market with extreme low power, but high performance at much lower cost. Customers will love the upgrade.</li>
+  <li>Looking back at the legacy code, and you find that <em>motor logic, display timing, and sensor reads</em> are all entangled with pin numbers and peripheral names that no longer exist.</li>
+</ul>
+
+<p>Some examples of why your existing code is in a mess:</p>
+<ul>
+  <li>Application logic directly calls GPIO, I2C, SPI with hardcoded pin numbers</li>
+  <li>Global driver singletons accessed from anywhere in the codebase</li>
+  <li><code class="language-plaintext highlighter-rouge">#ifdef</code> chains multiplying across files to handle hardware variants</li>
+  <li>Unit testing is impossible without the actual target hardware</li>
+  <li>Bugs only surface late - on hardware, in the field</li>
+</ul>
+
+<blockquote>
+  <p>Most embedded problems are not hardware problems, they’re <strong>design problems</strong>. The hardware is just where they become visible.</p>
+</blockquote>
+
+<h1 id="the-anti-patterns-in-detail">The Anti-Patterns in Detail</h1>
+
+<h3 id="direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</h3>
+
+<p>The most common offender: application code that “knows” things it shouldn’t (Direct coupling), like:</p>
+<ul>
+  <li>GPIO pin numbers</li>
+  <li>peripheral base addresses</li>
+  <li>HAL function names</li>
+</ul>
+
+<p>all of it leaking up into business logic.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Application logic shouldn't know about GPIOA pin 5</span>
+<span class="kt">void</span> <span class="nf">motor_start</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">GPIO_SetPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>  <span class="c1">// What is pin 5? Why GPIOA?</span>
+    <span class="n">TIM2</span><span class="o">-&gt;</span><span class="n">CR1</span> <span class="o">|=</span> <span class="n">TIM_CR1_CEN</span><span class="p">;</span> <span class="c1">// And what's TIM2 doing here?</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Change the board, change the timer, or port to a different MCU family, and you’re rewriting this logic from scratch. Worse, you can’t test <code class="language-plaintext highlighter-rouge">motor_start()</code> without the hardware in front of you.</p>
+
+<h3 id="hidden-dependencies-and-magic-globals">Hidden Dependencies and Magic Globals</h3>
+
+<p>Singleton HALs and global driver instances are a related problem. Why? because the Functions that silently access hardware through global state are impossible to reason about in isolation. You can never be sure what a function does without tracing its entire dependency chain through globals, which goes against good software testing principles</p>
+
+<h2 id="dependency-inversion---what-it-actually-means">Dependency Inversion - What It Actually Means</h2>
+
+<p>The Dependency Inversion Principle (DIP) is the “D” in SOLID, but you don’t need to care about the acronym. The idea is simple and practical:</p>
+
+<div class="think">
+
+  <p>High-level logic should not depend on low-level hardware details. Both should depend on an <strong>abstraction</strong>. Hence, Your application logic should not know which pin an LED is connected to.</p>
+
+</div>
+
+<p>In embedded terms: your</p>
+<ul>
+  <li>state machine</li>
+  <li>your control loop</li>
+  <li>your protocol handler 
+these are <em>high-level</em>. 
+While :</li>
+  <li>The GPIO writes</li>
+  <li>I2C transactions</li>
+  <li>timer configurations
+these are <em>low-level details</em>.</li>
+</ul>
+
+<p>DIP says they shouldn’t be directly coupled.</p>
+
+<p>Abstractions in C and C++ can take different forms. In C, a struct of function pointers acts as an interface. In C++, abstract base classes serve the same purpose. The implementation or the actual hardware access code lives behind that interface, invisible to the application.</p>
+
+<p><strong>Violates DIP</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">led_on</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span>
+    <span class="n">LED_PORT</span><span class="p">,</span>
+    <span class="n">LED_PIN</span><span class="p">,</span>
+    <span class="n">GPIO_PIN_SET</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>DIP Applied</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">on</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="p">}</span> <span class="n">led_t</span><span class="p">;</span>
+
+<span class="c1">// App only sees led_t</span>
+</code></pre></div></div>
+
+<p>The application code depends on <code class="language-plaintext highlighter-rouge">led_t</code>. It has no idea whether the LED is on GPIOA, GPIOB, active-high, or active-low. That’s someone else’s problem - and that’s the point.</p>
+
+<h2 id="dependency-injection---the-missing-piece">Dependency Injection - The Missing Piece</h2>
+
+<p>Dependency Inversion tells you <em>what</em> your code should depend on (abstractions, not concretions). Dependency Injection (DI) tells you <em>how</em> those abstractions actually reach your code.</p>
+
+<div class="important">
+
+  <p>Don’t let your module create or find its own dependencies. Have them passed in from the outside. Someone else gives your code what it needs.</p>
+
+</div>
+
+<p>If you’ve ever passed a driver struct into an initialization function, or written a BSP that hands hardware handles, to application modules - you’ve already done dependency injection. You just didn’t call it that.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Module receives its dependency - doesn't create it</span>
+<span class="kt">void</span> <span class="nf">app_init</span><span class="p">(</span><span class="n">led_t</span> <span class="o">*</span><span class="n">status_led</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">status_led</span><span class="o">-&gt;</span><span class="n">on</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// main.c or BSP wires it together</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">led_t</span> <span class="n">hw_led</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="n">hw_led_on</span><span class="p">,</span> <span class="p">.</span><span class="n">off</span> <span class="o">=</span> <span class="n">hw_led_off</span> <span class="p">};</span>
+    <span class="n">app_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hw_led</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The application module has no idea it’s talking to a real LED. It just calls the function pointer. Who sets that up? <code class="language-plaintext highlighter-rouge">main()</code>, the BSP, or a system init layer - wherever is appropriate. That’s the injection point.</p>
+
+<h2 id="the-full-pattern---dip--di-together">The Full Pattern - DIP + DI Together</h2>
+
+<p>DIP defines the abstraction while, DI wires the implementation to it. Used together, they fully decouple your hardware from your application logic. Here’s the complete pattern for an LED:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// led.h - the abstraction</span>
+<span class="c1">// This is the interface. Application code only includes this.</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">on</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">toggle</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="p">}</span> <span class="n">led_t</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hw_led.c - the hardware implementation</span>
+<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
+</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_on</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>     <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>    <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_toggle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="n">led_t</span> <span class="n">hw_led</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">on</span>     <span class="o">=</span> <span class="n">hw_led_on</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">off</span>    <span class="o">=</span> <span class="n">hw_led_off</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="n">hw_led_toggle</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// heartbeat.c - pure application logic</span>
+<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">heartbeat_task</span><span class="p">(</span><span class="n">led_t</span> <span class="o">*</span><span class="n">led</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">led</span><span class="o">-&gt;</span><span class="n">toggle</span><span class="p">();</span>
+    <span class="c1">// No hardware knowledge. No pin numbers. No HAL includes.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">heartbeat_task</code> is now completely portable. It’ll compile and run on any platform - STM32, RP2040, ESP32, or a Linux host - as long as you provide a valid <code class="language-plaintext highlighter-rouge">led_t</code>.</p>
+
+<h2 id="testing-without-hardware">Testing Without Hardware</h2>
+
+<p>This is where the design pays for itself immediately. Once your application logic depends only on abstractions, you can provide a <em>fake</em> implementation that runs on your development machine.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fake_led.c - for host-side testing</span>
+<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_on</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>  <span class="p">{</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] ON</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>  <span class="p">}</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] OFF</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_toggle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">led_state</span> <span class="o">^=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">led_state</span> <span class="o">?</span> <span class="s">"ON"</span> <span class="o">:</span> <span class="s">"OFF"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">led_t</span> <span class="n">fake_led</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">on</span>     <span class="o">=</span> <span class="n">fake_led_on</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">off</span>    <span class="o">=</span> <span class="n">fake_led_off</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="n">fake_led_toggle</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Now run your application logic - state machines, control algorithms, protocol handlers on your laptop. No MCU. No debugger. No JTAG. Fast feedback loops. CI-friendly tests. Bugs caught before the board even arrives.</p>
+
+<p><strong>What This Unlocks</strong></p>
+
+<ul>
+  <li>Run unit tests with a standard C compiler on the host</li>
+  <li>Integrate into GitHub Actions, GitLab CI, or any pipeline</li>
+  <li>Test corner cases without triggering real hardware behavior</li>
+  <li>Multiple developers can work without needing physical boards</li>
+  <li>Faster iteration - compile and test in seconds, not minutes</li>
+</ul>
+
+<h2 id="performance-concerns---addressed-honestly">Performance Concerns - Addressed Honestly</h2>
+
+<p>The first pushback from embedded engineers is always performance. Like:</p>
+<ul>
+  <li>“Function pointers have overhead.”</li>
+  <li>“Virtual functions are slow.”</li>
+</ul>
+
+<p>Legimate concern actually, let’s look at this honestly.</p>
+
+<p>A function pointer call is a single indirect branch - on most Cortex-M cores, that’s 1-3 clock cycles. For a heartbeat LED or a sensor poll running at 100 Hz, this is unmeasurable noise. For a context where every cycle matters (bit-banged SPI at 10 MHz, tight DSP loops, ISRs), you wouldn’t be using abstractions at all - you’d be writing the implementation directly.</p>
+
+<p>For everything else, there are zero-cost options. Static structs placed in flash with <code class="language-plaintext highlighter-rouge">const</code> are read directly. Link-time binding lets the linker resolve the implementation at build time. Compile-time DI using C++ templates or preprocessor configuration can achieve the same separation with no runtime cost.</p>
+
+<div class="bug">
+
+  <p>Measure before you optimize. In my personal experience with embedded work, the performance bottleneck is almost never the abstraction layer - it’s the algorithm, the protocol, or the peripheral.</p>
+
+</div>
+
+<h2 id="di-and-dip-in-c">DI and DIP in C++</h2>
+
+<p>In C++, the same pattern uses abstract base classes.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++ - constructor injection</span>
+<span class="c1">// Abstraction</span>
+<span class="k">class</span> <span class="nc">ILed</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">on</span><span class="p">()</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">off</span><span class="p">()</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">toggle</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">ILed</span><span class="p">()</span>       <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Hardware implementation</span>
+<span class="k">class</span> <span class="nc">GpioLed</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ILed</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">on</span><span class="p">()</span>     <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">off</span><span class="p">()</span>    <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">toggle</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Application receives dependency via constructor</span>
+<span class="k">class</span> <span class="nc">HeartbeatTask</span> <span class="p">{</span>
+    <span class="n">ILed</span><span class="o">&amp;</span> <span class="n">led_</span><span class="p">;</span>
+<span class="nl">public:</span>
+    <span class="k">explicit</span> <span class="n">HeartbeatTask</span><span class="p">(</span><span class="n">ILed</span><span class="o">&amp;</span> <span class="n">led</span><span class="p">)</span> <span class="o">:</span> <span class="n">led_</span><span class="p">(</span><span class="n">led</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span> <span class="n">led_</span><span class="p">.</span><span class="n">toggle</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// main.cpp</span>
+<span class="n">GpioLed</span> <span class="n">hw_led</span><span class="p">;</span>
+<span class="n">HeartbeatTask</span> <span class="nf">task</span><span class="p">(</span><span class="n">hw_led</span><span class="p">);</span> <span class="c1">// injection - no heap needed</span>
+</code></pre></div></div>
+
+<p>This pattern is safe for embedded:</p>
+<ul>
+  <li>no heap allocation</li>
+  <li>no RTTI</li>
+  <li>no exceptions.</li>
+  <li>The vtable overhead is typically a single pointer indirection</li>
+</ul>
+
+<h2 id="embedded-linux-and-yocto-context">Embedded Linux and Yocto Context</h2>
+
+<p>On Embedded Linux - whether built with Yocto, Buildroot, or a custom distro - the same principles apply at the userspace level. Drivers are accessed through device files, sysfs, or character devices. Applications that hardcode these paths and access patterns become fragile across BSP changes.</p>
+
+<p>DI in userspace means your application receives a hardware interface (a file descriptor wrapper, a driver abstraction struct, a class hierarchy for a sensor) rather than constructing it directly. The BSP layer or board configuration code does the wiring. Swapping hardware variants becomes a matter of changing what gets injected at startup - not rewriting the application.</p>
+
+<p>This also makes your application layers testable in a Linux host environment without requiring the target board, using mock file descriptors, pipe-based fakes, or simple simulation stubs.</p>
+
+<h2 id="when-not-to-use-this">When Not To Use This</h2>
+
+<p>Design principles are tools, not religion. There are legitimate cases where DI and DIP add unnecessary complexity:</p>
+
+<ul>
+  <li>Bootloaders and startup code with extreme size constraints</li>
+  <li>ISRs where every instruction is accounted for and no indirection is acceptable</li>
+  <li>Quick throwaway prototypes that will be completely rewritten</li>
+  <li>Extremely resource-constrained MCUs (sub-8KB flash) where even a vtable pointer is a budget item</li>
+</ul>
+
+<div class="think">
+
+  <p>If your code cannot tolerate a function pointer call, that limitation should be measurable and visible in the timing budget or ISR deadline. Otherwise, the maintenance and testability costs of tight coupling almost always outweigh the runtime overhead of abstraction</p>
+
+</div>
+
+<h2 id="migrating-an-existing-codebase">Migrating an Existing Codebase</h2>
+
+<p>You don’t need a big-bang rewrite of your legacy code. The path forward is incremental, and it starts at module boundaries:</p>
+
+<ul>
+  <li><strong>Identify a natural seam</strong> - a driver, a peripheral abstraction, a communication module</li>
+  <li><strong>Wrap the existing HAL</strong> - create a thin struct or class that exposes only what the application needs</li>
+  <li><strong>Replace direct calls</strong> - update the module to receive the abstraction instead of calling HAL directly</li>
+  <li><strong>Add a fake</strong> - write a simple host-side implementation and run a first test</li>
+  <li><strong>Repeat at the next boundary</strong> - work outward, module by module</li>
+</ul>
+
+<p>Each step is independently valuable. Even wrapping just one driver creates a seam you can test through. You don’t need to refactor the entire codebase to see the benefit.</p>
+
+<div class="note">
+
+  <p>“High‑quality embedded software is not defined by low‑level register manipulation; it is defined by a clean, well‑structured software architecture.”</p>
+
+</div>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li><strong>DIP</strong> separates <em>what</em> your application does from <em>how</em> the hardware implements it</li>
+  <li><strong>DI</strong> delivers those implementations cleanly, from the outside, without hidden globals</li>
+  <li>Together they make your code portable across board revisions and testable without hardware</li>
+  <li>Works in bare-metal C, C++, and Embedded Linux - no frameworks required</li>
+  <li>The overhead is negligible in almost every real-world embedded context</li>
+  <li>Migration is incremental - start at one module boundary and work outward</li>
+</ul>
+
+<div class="important">
+
+  <p>The goal is software that survives hardware changes, supports a growing team, can be tested in CI, and doesn’t collapse under its own weight after three board revisions. That’s worth a struct of function pointers.</p>
+
+</div>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/cpp-portable-pipeline.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Local First, Building Portable Embedded C++ pipeline with self-hosted CI"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title">Local First, Building Portable Embedded C++ pipeline with self-hosted CI</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      How Woodpecker CI, Cosmopolitan, and Google Pigweed give small firmware teams automated build-test-flash pipelines    </p>      <a class="fill-card no-hover" href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" tabindex="-1"><span class="sr-only">Continue reading Local First, Building Portable Embedded C++ pipeline with self-hosted CI</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/embedded-software/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>Local First, Building Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-14-borrow-checker/" class="flip-title"><span>Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)</span></a>  <time class="faded fine" datetime="2025-12-14T00:00:00+00:00">14 Dec 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

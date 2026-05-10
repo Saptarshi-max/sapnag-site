@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>C++ String Operations | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="C++ String Operations" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="C++’s for String Puzzels" />
+<meta property="og:description" content="C++’s for String Puzzels" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/cpp_leetcode.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-16T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/cpp_leetcode.webp" />
+<meta property="twitter:title" content="C++ String Operations" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-02-13T14:55:28+00:00","datePublished":"2025-12-16T00:00:00+00:00","description":"C++’s for String Puzzels","headline":"C++ String Operations","image":"/cover_images/posts/cpp_leetcode.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2025-12-16-cpp-string/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2025-12-16-cpp-string/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/coding/2025-12-16-cpp-string/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/coding/">coding</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2025-12-16-cpp-string</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-coding-cpp-string" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        C++ String Operations
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time> in <span>Blog</span> / <a href="/programming/" class="flip-title">Algorithms and Programming Languages</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/cpp_leetcode.webp"
+    
+    
+  
+  alt="C++ String Operations"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      C++’s for String Puzzels
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <p>A guide to working with strings in C++</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#1-getting-started">1. Getting Started</a></li>
+  <li><a href="#2-creating-strings">2. Creating Strings</a></li>
+  <li><a href="#3-accessing--measuring">3. Accessing &amp; Measuring</a></li>
+  <li><a href="#4-string-manipulation">4. String Manipulation</a></li>
+  <li><a href="#5-search--compare">5. Search &amp; Compare</a></li>
+  <li><a href="#6-conversions">6. Conversions</a></li>
+  <li><a href="#7-character-utilities">7. Character Utilities</a></li>
+  <li><a href="#8-essential-patterns">8. Essential Patterns</a></li>
+  <li><a href="#9-practice-problems">9. Practice Problems</a></li>
+  <li><a href="#10-common-mistakes">10. Common Mistakes</a></li>
+</ul>
+
+<hr />
+
+<h2 id="1-getting-started">1. Getting Started</h2>
+
+<h3 id="what-is-stdstring">What is std::string?</h3>
+
+<pre><code class="language-mermaid">graph LR
+    A[std::string] --&gt; B[Dynamic Array]
+    A --&gt; C[Automatic Memory]
+    A --&gt; D[Rich Operations]
+    B --&gt; E[Can grow/shrink]
+    C --&gt; F[No manual management]
+    D --&gt; G[100+ built-in methods]
+</code></pre>
+
+<p><em>std::string is a dynamic array that manages its own memory and provides many built-in methods for string operations.</em></p>
+
+<p><strong>Required headers:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1">     // For std::string</span><span class="cp">
+#include</span> <span class="cpf">&lt;cctype&gt;</span><span class="c1">     // For isdigit, toupper, etc.</span><span class="cp">
+#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="c1">  // For sort, reverse, etc.</span><span class="cp">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="2-creating-strings">2. Creating Strings</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Code</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>String literal</td>
+      <td><code class="language-plaintext highlighter-rouge">string s = "Hello";</code></td>
+      <td>“Hello”</td>
+    </tr>
+    <tr>
+      <td>Constructor</td>
+      <td><code class="language-plaintext highlighter-rouge">string s("Hello");</code></td>
+      <td>“Hello”</td>
+    </tr>
+    <tr>
+      <td>Empty string</td>
+      <td><code class="language-plaintext highlighter-rouge">string s;</code></td>
+      <td>””</td>
+    </tr>
+    <tr>
+      <td>Repeated char</td>
+      <td><code class="language-plaintext highlighter-rouge">string s(5, 'A');</code></td>
+      <td>“AAAAA”</td>
+    </tr>
+    <tr>
+      <td>Copy</td>
+      <td><code class="language-plaintext highlighter-rouge">string s2 = s1;</code></td>
+      <td>Copy of s1</td>
+    </tr>
+    <tr>
+      <td>Partial copy</td>
+      <td><code class="language-plaintext highlighter-rouge">string s(s1, 2, 3);</code></td>
+      <td>3 chars from index 2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table shows different ways to create strings in C++, from simple literals to more complex constructors that repeat characters or copy parts of other strings.</em></p>
+
+<p><strong>Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"Alice"</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">stars</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="sc">'*'</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">stars</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">stars</span><span class="p">;</span>  <span class="c1">// ***Alice***</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-accessing--measuring">3. Accessing &amp; Measuring</h2>
+
+<h3 id="access-methods-comparison">Access Methods Comparison</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Access Character] --&gt; B["s[i]"]
+    A --&gt; C["s.at(i)"]
+    A --&gt; D["s.front()"]
+    A --&gt; E["s.back()"]
+    B --&gt; F[Fast]
+    B --&gt; G[No bounds check]
+    C --&gt; H[Safe]
+    C --&gt; I[Throws exception]
+    D --&gt; J[First char]
+    E --&gt; K[Last char]
+</code></pre>
+
+<p><em>The diagram compares different ways to access characters in a string: s[i] is fast but unsafe, s.at(i) is safe but slower, while s.front() and s.back() access the first and last characters.</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Code</th>
+      <th>Time</th>
+      <th>Safe?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Index access</td>
+      <td><code class="language-plaintext highlighter-rouge">s[0]</code></td>
+      <td>O(1)</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Safe access</td>
+      <td><code class="language-plaintext highlighter-rouge">s.at(0)</code></td>
+      <td>O(1)</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>First char</td>
+      <td><code class="language-plaintext highlighter-rouge">s.front()</code></td>
+      <td>O(1)</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Last char</td>
+      <td><code class="language-plaintext highlighter-rouge">s.back()</code></td>
+      <td>O(1)</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Length</td>
+      <td><code class="language-plaintext highlighter-rouge">s.length()</code> or <code class="language-plaintext highlighter-rouge">s.size()</code></td>
+      <td>O(1)</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Is empty?</td>
+      <td><code class="language-plaintext highlighter-rouge">s.empty()</code></td>
+      <td>O(1)</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table lists common string operations with their time complexity and safety: most are fast (O(1)) but some like s[0] don’t check bounds, while s.at(0) does.</em></p>
+
+<h3 id="iteration-guide">Iteration Guide</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"CODE"</span><span class="p">;</span>
+
+    <span class="c1">// Method 1: Classic loop</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+    <span class="c1">// Method 2: Range-based (recommended)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> 
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="p">;</span>
+
+    <span class="c1">// Method 3: Iterators</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="4-string-manipulation">4. String Manipulation</h2>
+
+<h3 id="substring-extraction-example">Substring Extraction Example</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original: "Programming"
+          0123456789...
+          
+substr(0, 4)  →  "Prog"
+substr(3, 4)  →  "gram"
+substr(7)     →  "ming"
+</code></pre></div></div>
+
+<p><strong>Code:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"Programming"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>  <span class="c1">// "Prog"</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>  <span class="c1">// "gram"</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>     <span class="c1">// "ming"</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="common-operations-table">Common Operations Table</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Code</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Append</td>
+      <td><code class="language-plaintext highlighter-rouge">s += "text"</code></td>
+      <td>“Hi” → “Hitext”</td>
+    </tr>
+    <tr>
+      <td>Insert</td>
+      <td><code class="language-plaintext highlighter-rouge">s.insert(2, "XX")</code></td>
+      <td>“Hi” → “HiXX”</td>
+    </tr>
+    <tr>
+      <td>Erase</td>
+      <td><code class="language-plaintext highlighter-rouge">s.erase(1, 2)</code></td>
+      <td>“Hello” → “Hlo”</td>
+    </tr>
+    <tr>
+      <td>Replace</td>
+      <td><code class="language-plaintext highlighter-rouge">s.replace(0, 2, "YY")</code></td>
+      <td>“Hello” → “YYllo”</td>
+    </tr>
+    <tr>
+      <td>Clear</td>
+      <td><code class="language-plaintext highlighter-rouge">s.clear()</code></td>
+      <td>→ “”</td>
+    </tr>
+    <tr>
+      <td>Reverse</td>
+      <td><code class="language-plaintext highlighter-rouge">reverse(s.begin(), s.end())</code></td>
+      <td>“Hi” → “iH”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table shows basic string manipulation operations: how to add text, insert at positions, remove parts, replace sections, clear the string, or reverse it.</em></p>
+
+<hr />
+
+<h2 id="5-search--compare">5. Search &amp; Compare</h2>
+
+<h3 id="find-operation-flow">Find Operation Flow</h3>
+
+<pre><code class="language-mermaid">graph LR
+    A[s.find 'x'] --&gt; B{Found?}
+    B --&gt;|Yes| C[Returns position]
+    B --&gt;|No| D[Returns string::npos]
+    C --&gt; E[Use position]
+    D --&gt; F[Handle not found]
+</code></pre>
+
+<p><em>This flowchart shows how the find function works: it searches for a substring and returns either the position where found or string::npos if not found.</em></p>
+
+<p><strong>Search Methods:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Searches from</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find()</code></td>
+      <td>Beginning → End</td>
+      <td><code class="language-plaintext highlighter-rouge">s.find("cat")</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rfind()</code></td>
+      <td>End → Beginning</td>
+      <td><code class="language-plaintext highlighter-rouge">s.rfind("cat")</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find_first_of()</code></td>
+      <td>First occurrence of any char</td>
+      <td><code class="language-plaintext highlighter-rouge">s.find_first_of("aeiou")</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find_last_of()</code></td>
+      <td>Last occurrence of any char</td>
+      <td><code class="language-plaintext highlighter-rouge">s.find_last_of("aeiou")</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table lists different search functions: find() searches forward, rfind() searches backward, while find_first_of() and find_last_of() find any character from a set.</em></p>
+
+<p><strong>Find pattern:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"Hello World"</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"World"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Found at: "</span> <span class="o">&lt;&lt;</span> <span class="n">pos</span><span class="p">;</span>  <span class="c1">// Found at: 6</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Not found"</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="comparison-operators">Comparison Operators</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Meaning</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">==</code></td>
+      <td>Equal</td>
+      <td><code class="language-plaintext highlighter-rouge">"abc" == "abc"</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">!=</code></td>
+      <td>Not equal</td>
+      <td><code class="language-plaintext highlighter-rouge">"abc" != "xyz"</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;</code></td>
+      <td>Less than</td>
+      <td><code class="language-plaintext highlighter-rouge">"abc" &lt; "xyz"</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&gt;</code></td>
+      <td>Greater than</td>
+      <td><code class="language-plaintext highlighter-rouge">"xyz" &gt; "abc"</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;=</code></td>
+      <td>Less or equal</td>
+      <td><code class="language-plaintext highlighter-rouge">"abc" &lt;= "abc"</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&gt;=</code></td>
+      <td>Greater or equal</td>
+      <td><code class="language-plaintext highlighter-rouge">"abc" &gt;= "abc"</code> → true</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table shows how to compare strings using standard operators: strings are compared lexicographically (like dictionary order).</em></p>
+
+<hr />
+
+<h2 id="6-conversions">6. Conversions</h2>
+
+<h3 id="string--number-flow">String ↔ Number Flow</h3>
+
+<pre><code class="language-mermaid">graph LR
+    A[String] --&gt;|stoi, stoll, stod| B[Number]
+    B --&gt;|to_string| A
+    
+    style A fill:#e1f5ff
+    style B fill:#fff4e1
+</code></pre>
+
+<p><em>This diagram shows bidirectional conversion between strings and numbers: use stoi/stoll/stod to convert strings to numbers, and to_string to convert numbers back to strings.</em></p>
+
+<p><strong>Conversion Table:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>From → To</th>
+      <th>Function</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>string → int</td>
+      <td><code class="language-plaintext highlighter-rouge">stoi()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">stoi("42")</code> → 42</td>
+    </tr>
+    <tr>
+      <td>string → long long</td>
+      <td><code class="language-plaintext highlighter-rouge">stoll()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">stoll("1234567890")</code> → 1234567890LL</td>
+    </tr>
+    <tr>
+      <td>string → double</td>
+      <td><code class="language-plaintext highlighter-rouge">stod()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">stod("3.14")</code> → 3.14</td>
+    </tr>
+    <tr>
+      <td>int → string</td>
+      <td><code class="language-plaintext highlighter-rouge">to_string()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">to_string(42)</code> → “42”</td>
+    </tr>
+    <tr>
+      <td>double → string</td>
+      <td><code class="language-plaintext highlighter-rouge">to_string()</code></td>
+      <td><code class="language-plaintext highlighter-rouge">to_string(3.14)</code> → “3.140000”</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table lists functions to convert between strings and different number types: stoi for integers, stoll for long long, stod for doubles, and to_string for all numbers to strings.</em></p>
+
+<p><strong>With Error Handling:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"123abc"</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">stoi</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>  <span class="c1">// Converts "123", ignores "abc"</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Number: "</span> <span class="o">&lt;&lt;</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">invalid_argument</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Invalid format!"</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="7-character-utilities">7. Character Utilities</h2>
+
+<h3 id="character-classification">Character Classification</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Character 'c'] --&gt; B{Check Type}
+    B --&gt; C[isdigit c]
+    B --&gt; D[isalpha c]
+    B --&gt; E[isalnum c]
+    B --&gt; F[isspace c]
+    C --&gt; G[0-9?]
+    D --&gt; H[a-z, A-Z?]
+    E --&gt; I[Letter or digit?]
+    F --&gt; J[Space, tab, newline?]
+</code></pre>
+
+<p><em>This diagram shows character classification functions: isdigit checks for digits, isalpha for letters, isalnum for letters or digits, and isspace for whitespace characters.</em></p>
+
+<p><strong>Quick Reference:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Returns true if…</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isdigit(c)</code></td>
+      <td>Character is 0-9</td>
+      <td><code class="language-plaintext highlighter-rouge">isdigit('5')</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isalpha(c)</code></td>
+      <td>Character is a-z or A-Z</td>
+      <td><code class="language-plaintext highlighter-rouge">isalpha('A')</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isalnum(c)</code></td>
+      <td>Character is alphanumeric</td>
+      <td><code class="language-plaintext highlighter-rouge">isalnum('7')</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isspace(c)</code></td>
+      <td>Character is whitespace</td>
+      <td><code class="language-plaintext highlighter-rouge">isspace(' ')</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">isupper(c)</code></td>
+      <td>Character is uppercase</td>
+      <td><code class="language-plaintext highlighter-rouge">isupper('A')</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">islower(c)</code></td>
+      <td>Character is lowercase</td>
+      <td><code class="language-plaintext highlighter-rouge">islower('a')</code> → true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tolower(c)</code></td>
+      <td>Converts to lowercase</td>
+      <td><code class="language-plaintext highlighter-rouge">tolower('A')</code> → ‘a’</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">toupper(c)</code></td>
+      <td>Converts to uppercase</td>
+      <td><code class="language-plaintext highlighter-rouge">toupper('a')</code> → ‘A’</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table lists character utility functions for checking types (like isdigit for numbers) and converting case (tolower/toupper).</em></p>
+
+<p><strong>Example:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cctype&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Count digits in a string</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"abc123xyz456"</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">count</span><span class="p">;</span>  <span class="c1">// 6</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="8-essential-patterns">8. Essential Patterns</h2>
+
+<h3 id="pattern-1-frequency-counter">Pattern 1: Frequency Counter</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Count each letter's frequency</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">freq</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">freq</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// freq['h'-'a'] = 1, freq['e'-'a'] = 1, etc.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="kt">char</span><span class="p">(</span><span class="sc">'a'</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">": "</span> <span class="o">&lt;&lt;</span> <span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Mapping:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Character:  a   b   c   d   e   ...
+Index:      0   1   2   3   4   ...
+Formula:    c - 'a'
+</code></pre></div></div>
+
+<h3 id="leetcode-problems-using-frequency-counter">LeetCode Problems Using Frequency Counter</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/ransom-note/">383. Ransom Note</a></td>
+      <td>Check if ransom note can be built from magazine letters</td>
+      <td>Count magazine frequencies, then decrement for ransom note. Check if all counts remain ≥ 0.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/first-unique-character-in-a-string/">387. First Unique Character</a></td>
+      <td>Find first non-repeating character in string</td>
+      <td>Count all frequencies, then scan string to find first char with count == 1.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/valid-anagram/">242. Valid Anagram</a></td>
+      <td>Check if two strings are anagrams</td>
+      <td>Count frequencies for both strings, check if all counts match (covered in Pattern 3).</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/">438. Find All Anagrams</a></td>
+      <td>Find all starting indices of anagrams in string</td>
+      <td>Use sliding window with frequency count. Maintain window size = p.length(), slide and compare frequency maps.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="pattern-2-two-pointer-technique">Pattern 2: Two-Pointer Technique</h3>
+
+<pre><code class="language-mermaid">graph LR
+    A["Start: left=0, right=n-1"] --&gt; B["Compare s[left] vs s[right]"]
+    B --&gt; C{Equal?}
+    C --&gt;|Yes| D[Move both pointers inward]
+    C --&gt;|No| E[Not palindrome]
+    D --&gt; F{"left &lt; right?"}
+    F --&gt;|Yes| B
+    F --&gt;|No| G[Is palindrome]
+</code></pre>
+
+<p><em>This flowchart shows the two-pointer technique for palindrome checking: start pointers at ends, compare characters, and move inward until they meet or find a mismatch.</em></p>
+
+<p><strong>Palindrome Check:</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="p">])</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">right</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">test</span> <span class="o">=</span> <span class="s">"racecar"</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isPalindrome</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">test</span> <span class="o">&lt;&lt;</span> <span class="s">" is a palindrome"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">test</span> <span class="o">&lt;&lt;</span> <span class="s">" is not a palindrome"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Example:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"racecar"
+ ↑     ↑   Compare, both move inward
+  ↑   ↑    Compare, both move inward
+   ↑ ↑     Compare, both move inward
+    ↑      Left &gt;= Right, DONE
+</code></pre></div></div>
+
+<h3 id="leetcode-problems-using-two-pointer-technique">LeetCode Problems Using Two-Pointer Technique</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>What it asks (simplified)</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/valid-palindrome/">125. Valid Palindrome</a></td>
+      <td>Check if string reads same forwards and backwards</td>
+      <td>Skip non-alphanumeric chars, compare lowercase versions from both ends (covered in practice problems).</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/reverse-string/">344. Reverse String</a></td>
+      <td>Reverse characters in array in-place</td>
+      <td>Swap characters from both ends until pointers meet (covered in practice problems).</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/">167. Two Sum II</a></td>
+      <td>Find two numbers that sum to target in sorted array</td>
+      <td>Start pointers at ends, move based on sum comparison (target &gt; sum: move left pointer right, target &lt; sum: move right pointer left).</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/container-with-most-water/">11. Container With Most Water</a></td>
+      <td>Find two lines that form container with maximum water</td>
+      <td>Calculate area at each step, move the shorter line inward to potentially find larger area.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/">26. Remove Duplicates</a></td>
+      <td>Remove duplicates from sorted array in-place</td>
+      <td>Use slow pointer to track unique position, fast pointer to scan array.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="pattern-3-anagram-detection">Pattern 3: Anagram Detection</h3>
+
+<pre><code class="language-mermaid">flowchart TD
+    A[Two Strings] --&gt; B[Method 1: Sort Both]
+    A --&gt; C[Method 2: Count Frequencies]
+    
+    B --&gt; D["sort both strings"]
+    B --&gt; E["compare s1 == s2"]
+    D --&gt; E
+    E --&gt; F["O(n log n) time"]
+    
+    C --&gt; G["Create freq array"]
+    C --&gt; H["Count chars in s1"]
+    C --&gt; I["Decrement for s2"]
+    H --&gt; J["Check all counts = 0"]
+    I --&gt; J
+    J --&gt; K["O(n) time - FASTER!"]
+</code></pre>
+
+<p><em>This flowchart shows two approaches to check if two strings are anagrams: sorting both strings and comparing (slower) vs. counting character frequencies and checking for balance (faster).</em></p>
+
+<p><strong>Method 1: Sorting</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="nf">isAnagram</span><span class="p">(</span><span class="n">string</span> <span class="n">s1</span><span class="p">,</span> <span class="n">string</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s1</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">s2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"listen"</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">"silent"</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isAnagram</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Anagrams"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Not anagrams"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Method 2: Frequency Array (faster)</strong></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="nf">isAnagram</span><span class="p">(</span><span class="n">string</span> <span class="n">s1</span><span class="p">,</span> <span class="n">string</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">.</span><span class="n">length</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    
+    <span class="kt">int</span> <span class="n">freq</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s1</span><span class="p">)</span> <span class="n">freq</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s2</span><span class="p">)</span> <span class="n">freq</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">:</span> <span class="n">freq</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"listen"</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">"silent"</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isAnagram</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Anagrams"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Not anagrams"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="leetcode-problems-using-anagram-detection">LeetCode Problems Using Anagram Detection</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Problem</th>
+      <th>Difficulty</th>
+      <th>Customization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://leetcode.com/problems/valid-anagram/">242. Valid Anagram</a></td>
+      <td>Easy</td>
+      <td>Use frequency counting: count chars in s, decrement for t, check if all counts are zero.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/group-anagrams/">49. Group Anagrams</a></td>
+      <td>Medium</td>
+      <td>Sort each string to create keys, or use frequency count as key in map, group strings with same key.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/">438. Find All Anagrams</a></td>
+      <td>Medium</td>
+      <td>Use sliding window with frequency count. Maintain window size = p.length(), compare frequency maps at each position.</td>
+    </tr>
+    <tr>
+      <td><a href="https://leetcode.com/problems/palindrome-permutation/">266. Palindrome Permutation</a></td>
+      <td>Easy</td>
+      <td>Count frequencies, ensure at most one character has odd count (for palindrome possibility).</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="9-practice-problems">9. Practice Problems</h2>
+
+<h3 id="problem-1-reverse-string">Problem 1: Reverse String</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">reverseString</span><span class="p">(</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">left</span><span class="o">++</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="o">--</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
+    <span class="n">reverseString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// "olleh"</span>
+    
+    <span class="c1">// Or using algorithm:</span>
+    <span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">"world"</span><span class="p">;</span>
+    <span class="n">reverse</span><span class="p">(</span><span class="n">s2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s2</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// "dlrow"</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This demonstrates a common string manipulation task used in text processing, cryptography, and data transformation. The two-pointer technique efficiently reverses strings in-place without extra space.</p>
+
+<hr />
+
+<h3 id="problem-2-first-unique-character">Problem 2: First Unique Character</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">firstUniqChar</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">freq</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> 
+        <span class="n">freq</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="p">(</span><span class="n">freq</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"leetcode"</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">firstUniqChar</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"First unique character at index: "</span> <span class="o">&lt;&lt;</span> <span class="n">index</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"No unique character found"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This pattern is crucial for finding unique elements in strings, commonly used in data validation, compression algorithms, and text analysis. It uses frequency counting to identify the first non-repeating character.</p>
+
+<hr />
+
+<h3 id="problem-3-valid-palindrome-ignore-non-alphanumeric">Problem 3: Valid Palindrome (Ignore Non-Alphanumeric)</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cctype&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isalnum</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">left</span><span class="p">]))</span> <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isalnum</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="p">]))</span> <span class="n">right</span><span class="o">--</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">tolower</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">left</span><span class="p">])</span> <span class="o">!=</span> <span class="n">tolower</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">right</span><span class="p">]))</span> 
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        
+        <span class="n">left</span><span class="o">++</span><span class="p">;</span> <span class="n">right</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">test</span> <span class="o">=</span> <span class="s">"A man, a plan, a canal: Panama"</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isPalindrome</span><span class="p">(</span><span class="n">test</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Valid palindrome"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Not a palindrome"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Palindrome checking is essential for string validation in algorithms, word games, and DNA sequence analysis. This implementation ignores case and non-alphanumeric characters for robust text comparison.</p>
+
+<hr />
+
+<h3 id="problem-4-reverse-words">Problem 4: Reverse Words</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">string</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>  <span class="c1">// Reverse entire string</span>
+    
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">(),</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">end</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">==</span> <span class="n">n</span> <span class="o">||</span> <span class="n">s</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">start</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">end</span><span class="p">);</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"the sky is blue"</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">result</span> <span class="o">=</span> <span class="n">reverseWords</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// "blue is sky the"</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Process:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original:  "the sky is blue"
+Step 1:    "eulb si yks eht"  (reverse all)
+Step 2:    "blue is sky the"  (reverse each word)
+</code></pre></div></div>
+
+<p>Word reversal is a key technique in natural language processing, text formatting, and data preprocessing. The approach first reverses the entire string, then reverses each word individually.</p>
+
+<hr />
+
+<h3 id="problem-5-compress-string-run-length-encoding">Problem 5: Compress String (Run-Length Encoding)</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">string</span> <span class="nf">compress</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"aaabbcccc"</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">compressed</span> <span class="o">=</span> <span class="n">compress</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">compressed</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// "a3b2c4"</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Run-length encoding is a fundamental compression technique used in data storage, image processing, and network protocols. This implementation counts consecutive characters to create a compressed representation.</p>
+
+<hr />
+
+<h3 id="problem-6-remove-spaces">Problem 6: Remove Spaces</h3>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">string</span> <span class="nf">removeSpaces</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">' '</span><span class="p">)</span> <span class="n">result</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Or replace spaces:</span>
+<span class="n">string</span> <span class="nf">replaceSpaces</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">)</span> <span class="o">?</span> <span class="s">"%20"</span> <span class="o">:</span> <span class="n">string</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"hello world"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">removeSpaces</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>    <span class="c1">// "helloworld"</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">replaceSpaces</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// "hello%20world"</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Space removal is a basic text cleaning operation used in data parsing, search functionality, and user input validation. The example shows both complete removal and URL-style replacement.</p>
+
+<hr />
+
+<h3 id="problem-7-extracting-url-parts">Problem 7: Extracting URL Parts</h3>
+
+<p>Parse a URL to extract the protocol, domain, and path components.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">parseURL</span><span class="p">(</span><span class="n">string</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Find protocol (before "://")</span>
+    <span class="kt">size_t</span> <span class="n">protocolEnd</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"://"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">protocolEnd</span> <span class="o">==</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Invalid URL format"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">string</span> <span class="n">protocol</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">protocolEnd</span><span class="p">);</span>
+    
+    <span class="c1">// Find domain (after "://" until first "/" or end)</span>
+    <span class="kt">size_t</span> <span class="n">domainStart</span> <span class="o">=</span> <span class="n">protocolEnd</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">pathStart</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">domainStart</span><span class="p">);</span>
+    
+    <span class="n">string</span> <span class="n">domain</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">path</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">pathStart</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">domainStart</span><span class="p">,</span> <span class="n">pathStart</span> <span class="o">-</span> <span class="n">domainStart</span><span class="p">);</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">pathStart</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">domainStart</span><span class="p">);</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">"/"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Protocol: "</span> <span class="o">&lt;&lt;</span> <span class="n">protocol</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Domain: "</span> <span class="o">&lt;&lt;</span> <span class="n">domain</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Path: "</span> <span class="o">&lt;&lt;</span> <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://www.example.com/path/to/resource"</span><span class="p">;</span>
+    <span class="n">parseURL</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="c1">// Output:</span>
+    <span class="c1">// Protocol: https</span>
+    <span class="c1">// Domain: www.example.com</span>
+    <span class="c1">// Path: /path/to/resource</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>URL parsing is critical for web development, network programming, and data extraction. This technique breaks down URLs into components like protocol, domain, and path for further processing.</p>
+
+<hr />
+
+<h3 id="problem-8-transforming-dates-in-strings">Problem 8: Transforming Dates in Strings</h3>
+
+<p>Convert date formats like “MM/DD/YYYY” to “YYYY-MM-DD” or vice versa.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">// Convert MM/DD/YYYY to YYYY-MM-DD</span>
+<span class="n">string</span> <span class="nf">convertDateFormat</span><span class="p">(</span><span class="n">string</span> <span class="n">date</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Find positions of slashes</span>
+    <span class="kt">size_t</span> <span class="n">firstSlash</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"/"</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">secondSlash</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">firstSlash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">firstSlash</span> <span class="o">==</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span> <span class="o">||</span> <span class="n">secondSlash</span> <span class="o">==</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">"Invalid date format"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Extract month, day, year</span>
+    <span class="n">string</span> <span class="n">month</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">firstSlash</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">day</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">firstSlash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">secondSlash</span> <span class="o">-</span> <span class="n">firstSlash</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">year</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">secondSlash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="c1">// Ensure 2-digit month and day</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">month</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">month</span> <span class="o">=</span> <span class="s">"0"</span> <span class="o">+</span> <span class="n">month</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">day</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">day</span> <span class="o">=</span> <span class="s">"0"</span> <span class="o">+</span> <span class="n">day</span><span class="p">;</span>
+    
+    <span class="c1">// Return in YYYY-MM-DD format</span>
+    <span class="k">return</span> <span class="n">year</span> <span class="o">+</span> <span class="s">"-"</span> <span class="o">+</span> <span class="n">month</span> <span class="o">+</span> <span class="s">"-"</span> <span class="o">+</span> <span class="n">day</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Convert YYYY-MM-DD to MM/DD/YYYY</span>
+<span class="n">string</span> <span class="nf">convertDateFormatReverse</span><span class="p">(</span><span class="n">string</span> <span class="n">date</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Find positions of dashes</span>
+    <span class="kt">size_t</span> <span class="n">firstDash</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"-"</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">secondDash</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="n">firstDash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">firstDash</span> <span class="o">==</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span> <span class="o">||</span> <span class="n">secondDash</span> <span class="o">==</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">"Invalid date format"</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Extract year, month, day</span>
+    <span class="n">string</span> <span class="n">year</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">firstDash</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">month</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">firstDash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">secondDash</span> <span class="o">-</span> <span class="n">firstDash</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">day</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">secondDash</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="c1">// Remove leading zeros</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">month</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'0'</span><span class="p">)</span> <span class="n">month</span> <span class="o">=</span> <span class="n">month</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'0'</span><span class="p">)</span> <span class="n">day</span> <span class="o">=</span> <span class="n">day</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    
+    <span class="c1">// Return in MM/DD/YYYY format</span>
+    <span class="k">return</span> <span class="n">month</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">day</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">year</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">date1</span> <span class="o">=</span> <span class="s">"12/25/2023"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">convertDateFormat</span><span class="p">(</span><span class="n">date1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// "2023-12-25"</span>
+    
+    <span class="n">string</span> <span class="n">date2</span> <span class="o">=</span> <span class="s">"2023-07-04"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">convertDateFormatReverse</span><span class="p">(</span><span class="n">date2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// "7/4/2023"</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Date format conversion is essential for data processing, internationalization, and database operations. The example demonstrates bidirectional conversion between common date formats.</p>
+
+<hr />
+
+<h3 id="problem-9-roman-to-decimal">Problem 9: Roman to Decimal</h3>
+
+<p>Convert Roman numerals to decimal integers (I=1, V=5, X=10, L=50, C=100, D=500, M=1000).</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">romanValues</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">{</span><span class="sc">'I'</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="sc">'V'</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="sc">'X'</span><span class="p">,</span> <span class="mi">10</span><span class="p">},</span>
+        <span class="p">{</span><span class="sc">'L'</span><span class="p">,</span> <span class="mi">50</span><span class="p">},</span> <span class="p">{</span><span class="sc">'C'</span><span class="p">,</span> <span class="mi">100</span><span class="p">},</span> <span class="p">{</span><span class="sc">'D'</span><span class="p">,</span> <span class="mi">500</span><span class="p">},</span> <span class="p">{</span><span class="sc">'M'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">}</span>
+    <span class="p">};</span>
+    
+    <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">prevValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="c1">// Iterate from right to left</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">currentValue</span> <span class="o">=</span> <span class="n">romanValues</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+        
+        <span class="c1">// If current value is less than previous (right neighbor),</span>
+        <span class="c1">// subtract it, otherwise add it</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentValue</span> <span class="o">&lt;</span> <span class="n">prevValue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">total</span> <span class="o">-=</span> <span class="n">currentValue</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">currentValue</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">prevValue</span> <span class="o">=</span> <span class="n">currentValue</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">total</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">roman1</span> <span class="o">=</span> <span class="s">"III"</span><span class="p">;</span>      <span class="c1">// 3</span>
+    <span class="n">string</span> <span class="n">roman2</span> <span class="o">=</span> <span class="s">"IV"</span><span class="p">;</span>       <span class="c1">// 4</span>
+    <span class="n">string</span> <span class="n">roman3</span> <span class="o">=</span> <span class="s">"IX"</span><span class="p">;</span>       <span class="c1">// 9</span>
+    <span class="n">string</span> <span class="n">roman4</span> <span class="o">=</span> <span class="s">"LVIII"</span><span class="p">;</span>    <span class="c1">// 58</span>
+    <span class="n">string</span> <span class="n">roman5</span> <span class="o">=</span> <span class="s">"MCMXCIV"</span><span class="p">;</span>  <span class="c1">// 1994</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">roman1</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">romanToInt</span><span class="p">(</span><span class="n">roman1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">roman2</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">romanToInt</span><span class="p">(</span><span class="n">roman2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">roman3</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">romanToInt</span><span class="p">(</span><span class="n">roman3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">roman4</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">romanToInt</span><span class="p">(</span><span class="n">roman4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">roman5</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">romanToInt</span><span class="p">(</span><span class="n">roman5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The Roman numeral conversion is used in historical data processing, educational software, and legacy system integration. The algorithm handles subtractive notation correctly.</p>
+
+<hr />
+
+<h3 id="problem-10-splitting-string-into-tokens">Problem 10: Splitting String into Tokens</h3>
+
+<p>Split a string into tokens using multiple possible delimiters (spaces, commas, periods, etc.).</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">splitTokens</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">delimiters</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">while</span> <span class="p">((</span><span class="n">end</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">find_first_of</span><span class="p">(</span><span class="n">delimiters</span><span class="p">,</span> <span class="n">start</span><span class="p">))</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Add token if there's content between delimiters</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">tokens</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// Skip the delimiter</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Add the last token if there's remaining content</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">tokens</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">start</span><span class="p">));</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">tokens</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Alternative approach using stringstream (simpler for single delimiters)</span>
+<span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp">
+</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">splitBySpace</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span><span class="p">;</span>
+    <span class="n">stringstream</span> <span class="n">ss</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">token</span><span class="p">;</span>
+    
+    <span class="k">while</span> <span class="p">(</span><span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">token</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">tokens</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">tokens</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Hello, world! How are you? I'm fine."</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">delimiters</span> <span class="o">=</span> <span class="s">" ,.!?"</span><span class="p">;</span>  <span class="c1">// Space, comma, period, exclamation, question mark</span>
+    
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">splitTokens</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">delimiters</span><span class="p">);</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Original: "</span> <span class="o">&lt;&lt;</span> <span class="n">text</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Tokens:"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">token</span> <span class="o">:</span> <span class="n">tokens</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">token</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\"</span><span class="s">"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Output:</span>
+    <span class="c1">// "Hello"</span>
+    <span class="c1">// "world"</span>
+    <span class="c1">// "How"</span>
+    <span class="c1">// "are"</span>
+    <span class="c1">// "you"</span>
+    <span class="c1">// "I'm"</span>
+    <span class="c1">// "fine"</span>
+    
+    <span class="c1">// Example with space-only splitting</span>
+    <span class="n">string</span> <span class="n">sentence</span> <span class="o">=</span> <span class="s">"The quick brown fox jumps over the lazy dog"</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">splitBySpace</span><span class="p">(</span><span class="n">sentence</span><span class="p">);</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Words:"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">word</span> <span class="o">:</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">word</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>This covers a fundamental string processing technique that’s essential for parsing text data, CSV files, command-line arguments, and many other real-world applications. The example shows splitting a sentence with punctuation into clean word tokens.</p>
+
+<hr />
+
+<h2 id="10-common-mistakes">10. Common Mistakes</h2>
+
+<h3 id="mistake-1-off-by-one-errors">Mistake 1: Off-by-One Errors</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wrong</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// Goes beyond!</span>
+
+<span class="c1">// Correct</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="mistake-2-modifying-while-iterating">Mistake 2: Modifying While Iterating</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Wrong</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'x'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// Changes length!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Correct</span>
+<span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">'x'</span><span class="p">)</span> <span class="n">result</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="mistake-3-input-buffer-issues">Mistake 3: Input Buffer Issues</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+
+    <span class="c1">// ❌ WRONG</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter a number: "</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter a line: "</span><span class="p">;</span>
+    <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>  <span class="c1">// Gets empty line because cin leaves newline!</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Line: '"</span> <span class="o">&lt;&lt;</span> <span class="n">line</span> <span class="o">&lt;&lt;</span> <span class="s">"'"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// ✅ CORRECT</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter another number: "</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cin</span><span class="p">.</span><span class="n">ignore</span><span class="p">();</span>        <span class="c1">// Clear the newline character</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Enter another line: "</span><span class="p">;</span>
+    <span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>  <span class="c1">// Now works!</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Line: '"</span> <span class="o">&lt;&lt;</span> <span class="n">line</span> <span class="o">&lt;&lt;</span> <span class="s">"'"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>When to use what:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Need</th>
+      <th>Use</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One word</td>
+      <td><code class="language-plaintext highlighter-rouge">cin &gt;&gt; s</code></td>
+      <td>Input: “Hello World” → s = “Hello”</td>
+    </tr>
+    <tr>
+      <td>Full line</td>
+      <td><code class="language-plaintext highlighter-rouge">getline(cin, s)</code></td>
+      <td>Input: “Hello World” → s = “Hello World”</td>
+    </tr>
+    <tr>
+      <td>Multiple words separately</td>
+      <td>Multiple <code class="language-plaintext highlighter-rouge">cin &gt;&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">cin &gt;&gt; a &gt;&gt; b</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table shows different input methods: cin » for single words, getline for entire lines, and multiple cin » for separate words.</em></p>
+
+<hr />
+
+<h2 id="reference">Reference</h2>
+
+<h3 id="time-complexity-guide">Time Complexity Guide</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Complexity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Access <code class="language-plaintext highlighter-rouge">s[i]</code></td>
+      <td>O(1)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">length()</code> / <code class="language-plaintext highlighter-rouge">size()</code></td>
+      <td>O(1)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find()</code></td>
+      <td>O(n·m)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">substr()</code></td>
+      <td>O(m)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">+</code> / <code class="language-plaintext highlighter-rouge">append</code></td>
+      <td>O(n)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">compare()</code></td>
+      <td>O(n)</td>
+    </tr>
+    <tr>
+      <td>Sort string</td>
+      <td>O(n log n)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>This table shows the time complexity of common string operations: most basic operations are fast (O(1)), while searching and sorting take longer.</em></p>
+
+<h3 id="most-used-operations">Most Used Operations</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Measuring</span>
+<span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span>
+
+<span class="c1">// Accessing</span>
+<span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">s</span><span class="p">.</span><span class="n">front</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">back</span><span class="p">()</span>
+
+<span class="c1">// Modifying</span>
+<span class="n">s</span> <span class="o">+=</span> <span class="s">"text"</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">"text"</span><span class="p">),</span> <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="s">"text"</span><span class="p">)</span>
+<span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">len</span><span class="p">),</span> <span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span>
+
+<span class="c1">// Searching</span>
+<span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"text"</span><span class="p">),</span> <span class="n">s</span><span class="p">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">"text"</span><span class="p">),</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span>
+
+<span class="c1">// Substring</span>
+<span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span>
+
+<span class="c1">// Conversion</span>
+<span class="n">stoi</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">stoll</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">stod</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">to_string</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="c1">// Character checks</span>
+<span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">isalpha</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">isalnum</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> 
+<span class="n">tolower</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1">// Algorithms (need &lt;algorithm&gt;)</span>
+<span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+<span class="n">sort</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="final-tips">Final Tips</h2>
+
+<p><strong>Do:</strong></p>
+<ul>
+  <li>Use range-based for loops for readability</li>
+  <li>Check <code class="language-plaintext highlighter-rouge">string::npos</code> when using find</li>
+  <li>Use frequency arrays for character counting</li>
+  <li>Practice two-pointer technique</li>
+  <li>Handle edge cases (empty strings, single char)</li>
+</ul>
+
+<p><strong>Don’t:</strong></p>
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">&lt;=</code> in loop conditions with <code class="language-plaintext highlighter-rouge">.length()</code></li>
+  <li>Modify strings while iterating</li>
+  <li>Forget <code class="language-plaintext highlighter-rouge">cin.ignore()</code> after <code class="language-plaintext highlighter-rouge">cin &gt;&gt;</code></li>
+  <li>Ignore bounds checking for critical code</li>
+</ul>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-20-automobile-cybersecurity/" class="flip-title"><span>From Regulation to Implementation- Understanding Vehicle Cybersecurity legal Compliance & How Vehicle Cybersecurity Actually Gets Done</span></a>  <time class="faded fine" datetime="2025-12-20T00:00:00+00:00">20 Dec 2025</time></li>          <li class="h4">  <a href="/blog/embedded-software/2025-12-16-pigweed-build-tools/" class="flip-title"><span>Build Systems in Embedded Development: From Make to Pigweed</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>

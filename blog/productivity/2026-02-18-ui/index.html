@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Embedded Engineer’s Second Brain: PARA and CODE Systems | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="The Embedded Engineer’s Second Brain: PARA and CODE Systems" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte’s the CODE and PARA methods." />
+<meta property="og:description" content="More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte’s the CODE and PARA methods." />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/notes.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/notes.webp" />
+<meta property="twitter:title" content="The Embedded Engineer’s Second Brain: PARA and CODE Systems" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-24T07:01:58+00:00","datePublished":"2026-02-18T00:00:00+00:00","description":"More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte’s the CODE and PARA methods.","headline":"The Embedded Engineer’s Second Brain: PARA and CODE Systems","image":"/cover_images/posts/notes.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/productivity/2026-02-18-ui/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/productivity/2026-02-18-ui/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/blog/productivity/2026-02-18-ui/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-10T22:01:46+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #2E75B6;--accent-color-faded: rgba(46, 117, 182, 0.5);--accent-color-highlight: rgba(46, 117, 182, 0.1);--accent-color-darkened: rgb(38.2828947368, 97.3717105263, 151.4671052632);--theme-color: #1A3C5E;--dark-mode-body-bg: hsl(210, 7.0833333333%, 17.5%);--dark-mode-border-color: hsl(210, 7.0833333333%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/">blog</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/blog/productivity/">productivity</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2026-02-18-ui</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-productivity-ui" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        The Embedded Engineer's Second Brain: PARA and CODE Systems
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2026-02-18T00:00:00+00:00">18 Feb 2026</time> in <span>Blog</span> / <a href="/productivity/" class="flip-title">Productivity & Technical Communication</a> , Tags: <span>Notetaking</span>, <span>Evernote</span>, <span>Para</span>, <span>Code</span>, <span>Second-brain</span>, <span>Firmware</span>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/cover_images/posts/notes.webp"
+    
+    
+  
+  alt="The Embedded Engineer's Second Brain: PARA and CODE Systems"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into  clarity using Tiago Forte’s the CODE and PARA methods.
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul id="markdown-toc">
+  <li><a href="#the-embedded-engineers-second-brain" id="markdown-toc-the-embedded-engineers-second-brain">The Embedded Engineer’s Second Brain</a>    <ul>
+      <li><a href="#1-the-problem-information-overload" id="markdown-toc-1-the-problem-information-overload">1. The Problem: Information Overload</a></li>
+      <li><a href="#2-why-it-happens" id="markdown-toc-2-why-it-happens">2. Why It Happens</a></li>
+      <li><a href="#3-collecting-is-easy--retrieval-is-where-things-break-down" id="markdown-toc-3-collecting-is-easy--retrieval-is-where-things-break-down">3. Collecting is Easy — Retrieval is Where Things Break Down</a></li>
+      <li><a href="#4-seeing-the-bigger-picture-connecting-dots" id="markdown-toc-4-seeing-the-bigger-picture-connecting-dots">4. Seeing the Bigger Picture: Connecting Dots</a></li>
+      <li><a href="#5-too-many-apps-too-many-approaches" id="markdown-toc-5-too-many-apps-too-many-approaches">5. Too Many Apps, Too Many Approaches</a></li>
+      <li><a href="#6-sticking-with-the-basics-code-and-para" id="markdown-toc-6-sticking-with-the-basics-code-and-para">6. Sticking with the Basics: CODE and PARA</a>        <ul>
+          <li><a href="#the-code-method--lifecycle-of-every-note" id="markdown-toc-the-code-method--lifecycle-of-every-note">The CODE Method — lifecycle of every note</a></li>
+          <li><a href="#the-para-structure--where-notes-live" id="markdown-toc-the-para-structure--where-notes-live">The PARA Structure — where notes live</a></li>
+        </ul>
+      </li>
+      <li><a href="#7-how-code-fits-into-everything-else" id="markdown-toc-7-how-code-fits-into-everything-else">7. How CODE Fits Into Everything Else</a>        <ul>
+          <li><a href="#integrating-with-your-task-system" id="markdown-toc-integrating-with-your-task-system">Integrating with your task system</a></li>
+          <li><a href="#weekly-review-integration" id="markdown-toc-weekly-review-integration">Weekly review integration</a></li>
+          <li><a href="#automating-the-system" id="markdown-toc-automating-the-system">Automating the system</a></li>
+        </ul>
+      </li>
+      <li><a href="#8-binding-it-all-together-tell-your-story" id="markdown-toc-8-binding-it-all-together-tell-your-story">8. Binding It All Together: Tell Your Story</a></li>
+      <li><a href="#case-example-organising-engineering-notes-with-code-and-para" id="markdown-toc-case-example-organising-engineering-notes-with-code-and-para">Case Example: Organising Engineering Notes with CODE and PARA</a>        <ul>
+          <li><a href="#problem-statement" id="markdown-toc-problem-statement">Problem Statement</a></li>
+          <li><a href="#c--capture-use-the-curators-perspective" id="markdown-toc-c--capture-use-the-curators-perspective">C — Capture: Use the Curator’s Perspective</a></li>
+          <li><a href="#o--organise-para-in-embedded-practice" id="markdown-toc-o--organise-para-in-embedded-practice">O — Organise: PARA in Embedded Practice</a>            <ul>
+              <li><a href="#tagging-cross-cutting-themes-para-folders-cannot-handle" id="markdown-toc-tagging-cross-cutting-themes-para-folders-cannot-handle">Tagging: Cross-Cutting Themes PARA Folders Cannot Handle</a></li>
+              <li><a href="#retrieval-planning-matrix" id="markdown-toc-retrieval-planning-matrix">Retrieval Planning Matrix</a></li>
+            </ul>
+          </li>
+          <li><a href="#d--distill-progressive-summarization" id="markdown-toc-d--distill-progressive-summarization">D — Distill: Progressive Summarization</a></li>
+          <li><a href="#e--express-intermediate-packets" id="markdown-toc-e--express-intermediate-packets">E — Express: Intermediate Packets</a></li>
+        </ul>
+      </li>
+      <li><a href="#design-decisions-making-choices-justifiable" id="markdown-toc-design-decisions-making-choices-justifiable">Design Decisions: Making Choices Justifiable</a>        <ul>
+          <li><a href="#core-questions-before-opening-any-datasheet" id="markdown-toc-core-questions-before-opening-any-datasheet">Core Questions Before Opening Any Datasheet</a></li>
+          <li><a href="#navigating-documentation-with-code" id="markdown-toc-navigating-documentation-with-code">Navigating Documentation with CODE</a></li>
+          <li><a href="#1-design-pattern-justification-notes" id="markdown-toc-1-design-pattern-justification-notes">1. Design Pattern Justification Notes</a></li>
+          <li><a href="#2-risk-and-security-analysis-note" id="markdown-toc-2-risk-and-security-analysis-note">2. Risk and Security Analysis Note</a></li>
+        </ul>
+      </li>
+      <li><a href="#retrieval--bigger-picture-a-worked-example" id="markdown-toc-retrieval--bigger-picture-a-worked-example">Retrieval → Bigger Picture: A Worked Example</a>        <ul>
+          <li><a href="#note-1--datasheet-snippet-afe4404-texas-instruments" id="markdown-toc-note-1--datasheet-snippet-afe4404-texas-instruments">Note 1 — Datasheet snippet: AFE4404 (Texas Instruments)</a></li>
+          <li><a href="#note-2--reference-manual-snippet-stm32l476-stmicroelectronics" id="markdown-toc-note-2--reference-manual-snippet-stm32l476-stmicroelectronics">Note 2 — Reference manual snippet: STM32L476 (STMicroelectronics)</a></li>
+          <li><a href="#note-3--forum-edge-case-i2c-hang-after-stop-2-wakeup" id="markdown-toc-note-3--forum-edge-case-i2c-hang-after-stop-2-wakeup">Note 3 — Forum edge case: I2C hang after Stop 2 wakeup</a></li>
+          <li><a href="#note-4--client-requirements-capture" id="markdown-toc-note-4--client-requirements-capture">Note 4 — Client requirements capture</a></li>
+          <li><a href="#the-insight-that-retrieval-produces" id="markdown-toc-the-insight-that-retrieval-produces">The insight that retrieval produces</a></li>
+        </ul>
+      </li>
+      <li><a href="#using-notes-for-presentations-and-communication" id="markdown-toc-using-notes-for-presentations-and-communication">Using Notes for Presentations and Communication</a>        <ul>
+          <li><a href="#for-technical-presentations" id="markdown-toc-for-technical-presentations">For technical presentations</a></li>
+          <li><a href="#for-team-communication" id="markdown-toc-for-team-communication">For team communication</a></li>
+        </ul>
+      </li>
+      <li><a href="#note-templates-fill-in-structures-for-your-evernote" id="markdown-toc-note-templates-fill-in-structures-for-your-evernote">Note Templates: Fill-In Structures for Your Evernote</a>        <ul>
+          <li><a href="#template-1--datasheet--reference-manual-summary" id="markdown-toc-template-1--datasheet--reference-manual-summary">Template 1 — Datasheet &amp; Reference Manual Summary</a>            <ul>
+              <li><a href="#what-does-this-device-do-in-one-sentence" id="markdown-toc-what-does-this-device-do-in-one-sentence">What does this device do in one sentence?</a></li>
+              <li><a href="#what-are-the-critical-electrical-limits-i-must-not-violate" id="markdown-toc-what-are-the-critical-electrical-limits-i-must-not-violate">What are the critical electrical limits I must not violate?</a></li>
+              <li><a href="#what-timing-constraints-affect-my-firmware" id="markdown-toc-what-timing-constraints-affect-my-firmware">What timing constraints affect my firmware?</a></li>
+              <li><a href="#what-are-the-non-obvious-gotchas-or-errata-i-found" id="markdown-toc-what-are-the-non-obvious-gotchas-or-errata-i-found">What are the non-obvious gotchas or errata I found?</a></li>
+              <li><a href="#which-application-circuit-or-reference-schematic-applies-to-my-design" id="markdown-toc-which-application-circuit-or-reference-schematic-applies-to-my-design">Which application circuit or reference schematic applies to my design?</a></li>
+              <li><a href="#which-driver-registers-or-init-sequence-matter-most-for-my-use-case" id="markdown-toc-which-driver-registers-or-init-sequence-matter-most-for-my-use-case">Which driver registers or init sequence matter most for my use case?</a></li>
+            </ul>
+          </li>
+          <li><a href="#template-2--client-requirements-capture" id="markdown-toc-template-2--client-requirements-capture">Template 2 — Client Requirements Capture</a>            <ul>
+              <li><a href="#system-overview" id="markdown-toc-system-overview">System Overview</a>                <ul>
+                  <li><a href="#what-problem-does-this-device-solve-for-the-end-user" id="markdown-toc-what-problem-does-this-device-solve-for-the-end-user">What problem does this device solve for the end user?</a></li>
+                  <li><a href="#who-are-the-users-and-what-is-their-technical-level" id="markdown-toc-who-are-the-users-and-what-is-their-technical-level">Who are the users and what is their technical level?</a></li>
+                </ul>
+              </li>
+              <li><a href="#functional-requirements" id="markdown-toc-functional-requirements">Functional Requirements</a>                <ul>
+                  <li><a href="#what-must-the-system-measure-control-or-communicate" id="markdown-toc-what-must-the-system-measure-control-or-communicate">What must the system measure, control, or communicate?</a></li>
+                  <li><a href="#what-interfaces-must-it-expose" id="markdown-toc-what-interfaces-must-it-expose">What interfaces must it expose?</a></li>
+                </ul>
+              </li>
+              <li><a href="#performance--power-constraints" id="markdown-toc-performance--power-constraints">Performance &amp; Power Constraints</a>                <ul>
+                  <li><a href="#what-are-the-battery-life-and-power-targets" id="markdown-toc-what-are-the-battery-life-and-power-targets">What are the battery life and power targets?</a></li>
+                  <li><a href="#what-are-the-real-time-constraints" id="markdown-toc-what-are-the-real-time-constraints">What are the real-time constraints?</a></li>
+                </ul>
+              </li>
+              <li><a href="#environmental--reliability-constraints" id="markdown-toc-environmental--reliability-constraints">Environmental &amp; Reliability Constraints</a>                <ul>
+                  <li><a href="#what-are-the-operating-and-storage-temperature-ranges" id="markdown-toc-what-are-the-operating-and-storage-temperature-ranges">What are the operating and storage temperature ranges?</a></li>
+                  <li><a href="#what-are-the-ingress-protection-drop-or-vibration-requirements" id="markdown-toc-what-are-the-ingress-protection-drop-or-vibration-requirements">What are the ingress protection, drop, or vibration requirements?</a></li>
+                </ul>
+              </li>
+              <li><a href="#regulatory--safety" id="markdown-toc-regulatory--safety">Regulatory &amp; Safety</a>                <ul>
+                  <li><a href="#what-regulatory-certifications-are-required" id="markdown-toc-what-regulatory-certifications-are-required">What regulatory certifications are required?</a></li>
+                  <li><a href="#what-are-the-edge-cases-or-failure-modes-the-client-has-already-considered" id="markdown-toc-what-are-the-edge-cases-or-failure-modes-the-client-has-already-considered">What are the edge cases or failure modes the client has already considered?</a></li>
+                </ul>
+              </li>
+              <li><a href="#surprises-and-non-obvious-constraints" id="markdown-toc-surprises-and-non-obvious-constraints">Surprises and Non-Obvious Constraints</a>                <ul>
+                  <li><a href="#what-requirements-surprised-you-or-seem-under-specified" id="markdown-toc-what-requirements-surprised-you-or-seem-under-specified">What requirements surprised you or seem under-specified?</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#template-3--design-decision-record" id="markdown-toc-template-3--design-decision-record">Template 3 — Design Decision Record</a>            <ul>
+              <li><a href="#what-decision-needed-to-be-made" id="markdown-toc-what-decision-needed-to-be-made">What decision needed to be made?</a></li>
+              <li><a href="#what-were-the-options-considered" id="markdown-toc-what-were-the-options-considered">What were the options considered?</a></li>
+              <li><a href="#what-constraints-or-requirements-drove-the-decision" id="markdown-toc-what-constraints-or-requirements-drove-the-decision">What constraints or requirements drove the decision?</a></li>
+              <li><a href="#what-was-decided-and-why" id="markdown-toc-what-was-decided-and-why">What was decided, and why?</a></li>
+              <li><a href="#what-are-the-implementation-consequences" id="markdown-toc-what-are-the-implementation-consequences">What are the implementation consequences?</a></li>
+              <li><a href="#what-was-explicitly-rejected-and-why" id="markdown-toc-what-was-explicitly-rejected-and-why">What was explicitly rejected and why?</a></li>
+              <li><a href="#what-could-invalidate-this-decision-later" id="markdown-toc-what-could-invalidate-this-decision-later">What could invalidate this decision later?</a></li>
+              <li><a href="#which-notes-does-this-decision-draw-on" id="markdown-toc-which-notes-does-this-decision-draw-on">Which notes does this decision draw on?</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#common-questions" id="markdown-toc-common-questions">Common Questions</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="the-embedded-engineers-second-brain">The Embedded Engineer’s Second Brain</h1>
+
+<p><em>How I stopped drowning in datasheets and started actually using my notes</em></p>
+
+<hr />
+
+<h2 id="1-the-problem-information-overload">1. The Problem: Information Overload</h2>
+
+<p>When was the last time you felt overwhelmed by your own notes, bookmarks, or saved articles?</p>
+
+<p><img src="/cover_images/posts/lot-papers.jpg" alt="" /></p>
+
+<div class="think">
+  <p>The average person now consumes roughly <strong>34 gigabytes of information daily</strong> (as per 2008 study by the University of California, San Diego (UCSD) titled “How Much Information? - <a href="https://www.kdnuggets.com/2009/12/pub-how-much-information-us-consumes.html">Source</a>). For embedded engineers this is compounded by a relentless stream of new vendor specifications, silicon errata, GitHub updates, and evolving standards. Instead of empowering you, this deluge creates <em>Information Exhaustion</em> — a chronic anxiety that you are about to forget a critical technical detail, it gets worst when delivery deadline is close.</p>
+
+</div>
+
+<p>In embedded development the problem has a particular shape. You are managing two very different categories of knowledge simultaneously:</p>
+
+<ul>
+  <li><strong>Volatile market knowledge:</strong> datasheets, hardware errata, GitHub issues, SDK changelogs, community forum workarounds — knowledge that shifts with every silicon revision and project requirement.</li>
+  <li><strong>Fundamental engineering knowledge:</strong> software design principles, debugging heuristics, right questions to ask clients before kick-off, architectural patterns — knowledge that compounds over a career.</li>
+</ul>
+
+<p>Without a deliberate system, both categories pile into the same undifferentiated heap. This is the Information Paradox: <strong>more notes = less clarity</strong>.</p>
+
+<hr />
+
+<h2 id="2-why-it-happens">2. Why It Happens</h2>
+
+<p>Information overload occurs because we act as <em>information hoarders</em> — saving content we do not have time to apply, driven by a scarcity mindset and FOMO. <strong>Saving a 500-page datasheet <em>feels</em> productive. But that comfort comes at a cost.</strong></p>
+
+<p><img src="/cover_images/general/yoda.webp" alt="" /></p>
+
+<ul>
+  <li><strong>The illusion of control:</strong> 200 saved datasheets feels like having options. It is really procrastination disguised as preparation.</li>
+  <li><strong>The emotional attachment:</strong> Some notes represent late-night debugging sessions and hard-won breakthroughs. Letting go feels like erasing part of your engineering history.</li>
+  <li><strong>The anxiety of letting go:</strong> What if you delete that forum thread and need it tomorrow? What if you miss the one errata that bricks a production run? This fear keeps you hoarding digital clutter.</li>
+  <li><strong>The scarcity mindset:</strong> In practice, most insights are rediscoverable. What matters is curating what serves your <em>current</em> project, <strong>not stockpiling for every possible future.</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="3-collecting-is-easy--retrieval-is-where-things-break-down">3. Collecting is Easy — Retrieval is Where Things Break Down</h2>
+
+<p>We confuse saving with understanding. Ask yourself honestly: how many of your saved articles, datasheets, and bookmarks do you actually use?</p>
+
+<p><img src="/cover_images/posts/lib-retrive.jpg" alt="" /></p>
+
+<p>When you organise notes by broad academic subjects — a folder called <em>Embedded Systems</em> or <em>Microcontrollers</em> — finding information becomes a herculean endeavour as your note count grows. Without <strong>discoverability</strong>, your notes become an <em>idea graveyard</em> where the specific fix for an I2C clock-stretching bug is buried under a wall of generic technical content.</p>
+
+<p>The fundamental mistake is organising by <strong>where information came from</strong> rather than <strong>where it is going</strong>. A note filed under “STMicroelectronics” sits in the same place whether you need it today or in three years. That is a filing cabinet, not a thinking tool.</p>
+
+<div class="important">
+  <p>The right question is not “What is this about?” -&gt; it is <strong>“Which active project will this serve?”</strong></p>
+</div>
+
+<hr />
+
+<h2 id="4-seeing-the-bigger-picture-connecting-dots">4. Seeing the Bigger Picture: Connecting Dots</h2>
+
+<p>Real original ideas are formed when you treat notes as <strong>knowledge building blocks</strong> — discrete units of information that can be combined and reassembled like LEGOs. By keeping diverse technical and conceptual material in one structured system, you begin to surface associations between seemingly unrelated ideas.</p>
+
+<p>For an embedded engineer this is where the leverage lives. A software design pattern from a high-level enterprise library can be adapted for a resource-constrained bare-metal driver. A debugging heuristic from one vendor’s silicon can transfer directly to a competitor’s. A risk analysis technique from safety-critical automotive firmware can sharpen the design of an IoT consumer device.</p>
+
+<p>This kind of cross-domain thinking only emerges when your Second Brain is organised for <strong>action and association</strong>, not for storage.</p>
+
+<hr />
+
+<h2 id="5-too-many-apps-too-many-approaches">5. Too Many Apps, Too Many Approaches</h2>
+
+<p>The digital landscape offers no shortage of tools: Obsidian, Notion, OneNote, Evernote, Roam, Logseq, Bear. It is easy to get caught in the trap of <strong>tool perfectionism</strong> — endlessly searching for the perfect app instead of building a reliable system.</p>
+
+<p>The truth is that <strong>the tool matters far less than the method</strong>. Your Second Brain needs a single, consistent neural centre - a digital workspace that is multimedia, informal, and action-oriented. Pick one and commit. Evernote maps cleanly onto the PARA system and its search is fast enough to make retrieval genuinely painless. Obsidian works if you prefer linking. OneNote works if you live in Microsoft 365. The system below is software-agnostic, run it in <em>whatever</em> app you will actually open every day.</p>
+
+<hr />
+
+<h2 id="6-sticking-with-the-basics-code-and-para">6. Sticking with the Basics: CODE and PARA</h2>
+
+<p>These methods were developed &amp; demonstrated by author Tiago Forte in his book “Building a second brain”</p>
+
+<p><img src="/cover_images/posts/notes.webp" alt="" /></p>
+
+<p>Two complementary systems to do the heavy lifting with resourse organisation &amp; retrival . Both shift your focus from where information came from to where it is going.</p>
+
+<h3 id="the-code-method--lifecycle-of-every-note">The CODE Method — lifecycle of every note</h3>
+
+<pre><code class="language-mermaid">flowchart LR
+    C["C — CAPTURE\n───────────\nWeb clipper for forums\nDatasheet sections only\nGitHub errata &amp; fixes\nClient spec snippets"]
+    O["O — ORGANISE\n───────────\nFile by project first\nThen Area or Resource\nTag cross-cutting themes\nArchive on close"]
+    D["D — DISTILL\n───────────\nBold critical constraints\nHighlight design rationale\n3-bullet summary (rare)\nRemove the noise"]
+    E["E — EXPRESS\n───────────\nReuse driver stubs\nShip checklists as IPs\nWrite decision records\nAssemble, don't create"]
+
+    C --&gt; O --&gt; D --&gt; E
+</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>What it means</th>
+      <th>In embedded practice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Capture</strong></td>
+      <td>Save only what resonates</td>
+      <td>Clip forum workarounds, Theory of Operation sections, race condition fixes — not entire 500-page manuals</td>
+    </tr>
+    <tr>
+      <td><strong>Organise</strong></td>
+      <td>File by actionability (PARA)</td>
+      <td>Ask: which active project does this serve? File there first. Resources only if no current home</td>
+    </tr>
+    <tr>
+      <td><strong>Distill</strong></td>
+      <td>Extract the essence progressively</td>
+      <td>Bold critical constraints; highlight design rationale; write a 3-bullet summary for foundational notes</td>
+    </tr>
+    <tr>
+      <td><strong>Express</strong></td>
+      <td>Turn notes into output</td>
+      <td>Reuse driver stubs, checklists, architecture sketches — assemble before creating from scratch</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="the-para-structure--where-notes-live">The PARA Structure — where notes live</h3>
+
+<pre><code class="language-mermaid">flowchart LR
+    note(["New note captured"])
+
+    note --&gt; q1{"Active project\ndeadline?"}
+    q1 -- "Yes" --&gt; P["[P] Projects\n─────────\n[P] STM32H750B Bring-up\n[P] Debug I2C Clock-Stretch\n[P] OV7670 AI Inference"]
+    q1 -- "No" --&gt; q2{"Ongoing\nresponsibility?"}
+    q2 -- "Yes" --&gt; A["[A] Areas\n─────────\n[A] Firmware Coding Standards\n[A] HW Testing Procedures\n[A] Client Req. Management"]
+    q2 -- "No" --&gt; q3{"Reference with\nno current project?"}
+    q3 -- "Yes" --&gt; R["[R] Resources\n─────────\n[R] Vendor: STMicro\n[R] RTOS Design Patterns\n[R] BLE Protocol Stack"]
+    q3 -- "No" --&gt; X["[X] Archive\n─────────\n[X] HeartRate Monitor v1\n[X] ESP32-CAM Streamer\n[X] Client A — Closed 2024"]
+
+    P -. "project closes" .-&gt; X
+</code></pre>
+
+<div class="warning">
+  <p>When a note is captured during an active project, it goes into the <code class="language-plaintext highlighter-rouge">[P]</code> Project notebook <strong>directly</strong> — not Resources. Resources are only for material with no current home.</p>
+</div>
+
+<hr />
+
+<h2 id="7-how-code-fits-into-everything-else">7. How CODE Fits Into Everything Else</h2>
+
+<p>CODE works with whatever system you are already using. It adds a <strong>knowledge layer</strong> on top of your existing task workflow.</p>
+
+<h3 id="integrating-with-your-task-system">Integrating with your task system</h3>
+
+<p>Your task system handles <em>what you do</em>. CODE handles <em>what you know</em>. They work better together:</p>
+
+<ul>
+  <li><strong>Quick tasks:</strong> use distilled notes for 2-minute reference lookups — no re-reading required.</li>
+  <li><strong>Scheduled work:</strong> block time to express ideas from organised notes into drivers, docs, or specs.</li>
+  <li><strong>Backlog research:</strong> keep captured notes in Archives for future projects — searchable, not cluttering.</li>
+</ul>
+
+<h3 id="weekly-review-integration">Weekly review integration</h3>
+
+<p>I do a weekly reset. Adding CODE to it takes about 15 minutes:</p>
+
+<ol>
+  <li><strong>Review captured items</strong> — decide what resonates vs. what to archive immediately.</li>
+  <li><strong>Reorganise notes</strong> — move completed projects to <code class="language-plaintext highlighter-rouge">[X] Archive</code>, promote Resource notes to active <code class="language-plaintext highlighter-rouge">[P]</code> notebooks if a project has started.</li>
+  <li><strong>Distill backlog</strong> — take any notes tagged <code class="language-plaintext highlighter-rouge">.ToDistill</code> and apply Layer 2 bolding.</li>
+  <li><strong>Plan expression</strong> — schedule time to create from your knowledge base: a blog post, a driver PR, a client update.</li>
+</ol>
+
+<h3 id="automating-the-system">Automating the system</h3>
+
+<p>Once the structure is stable, you can reduce friction significantly:</p>
+
+<ul>
+  <li><strong>Note templates:</strong> reuse distilled structures for repeated note types (datasheet summaries, client kickoff notes, post-mortems). The three templates at the end of this post are your starting point.</li>
+  <li><strong>Tag shortcuts:</strong> create saved searches in Evernote for your most common tag combos — <code class="language-plaintext highlighter-rouge">tag:.EdgeCase tag:.Vendor_ST</code> becomes a one-click lookup.</li>
+  <li><strong>Quick capture:</strong> use Evernote’s mobile clipper or a dedicated capture app so saving has zero friction. The curation happens later, not at capture time.</li>
+</ul>
+
+<hr />
+
+<h2 id="8-binding-it-all-together-tell-your-story">8. Binding It All Together: Tell Your Story</h2>
+
+<p>Ultimately, personal knowledge management exists to support <strong>action</strong>. Your Second Brain should function not as a warehouse but as a factory — turning raw information into tangible engineering output: a finished PCB design, a robust firmware driver, a client-ready requirements justification document.</p>
+
+<p>The test of whether your system is working: when you start a new project, how long does it take to find a reusable driver stub, a past edge-case note, or a client requirements template? If the answer is more than two minutes, the system needs refining.</p>
+
+<hr />
+
+<h2 id="case-example-organising-engineering-notes-with-code-and-para">Case Example: Organising Engineering Notes with CODE and PARA</h2>
+
+<h3 id="problem-statement">Problem Statement</h3>
+
+<p>Embedded systems development demands mastery of two parallel knowledge tracks: volatile market knowledge (datasheets, errata, GitHub issues) and fundamental engineering knowledge (design principles, debugging methods, client communication). Without a deliberate system, both collapse into an undifferentiated pile and the retrieval problem described above takes hold.</p>
+
+<hr />
+
+<h3 id="c--capture-use-the-curators-perspective">C — Capture: Use the Curator’s Perspective</h3>
+
+<p>Do not save entire 500-page datasheets. Apply the <strong>Curator’s Perspective</strong>: save only what is surprising, counterintuitive, or directly relevant to a current goal.</p>
+
+<ul>
+  <li><strong>Datasheets and reference manuals:</strong> save only the “Theory of Operation” and “Application Information” sections. These contain the API-like logic for driver development. Link to the full PDF — do not paste it.</li>
+  <li><strong>GitHub issues and forum threads:</strong> clip workarounds only — undocumented errata, race condition fixes, timing gotchas. Generic “how to init UART” tutorials add noise.</li>
+  <li><strong>Newsletters and articles:</strong> use a read-later app, highlight 2–3 insights that resonate, export only those highlights.</li>
+  <li><strong>Client requirement documents:</strong> extract the constraints that are surprising or non-obvious — the standard stuff goes in the template, the edge constraints get their own note.</li>
+</ul>
+
+<div class="tip">
+  <p><strong>Research like a detective, not a librarian.</strong><br />
+Don’t read datasheets cover-to-cover. Scan for the 3–5 specs that directly impact your current requirements. Ask: “Does this help me decide yes/no on this component?” If not, skip it. Set a 30-minute timer per component research session.</p>
+</div>
+
+<hr />
+
+<h3 id="o--organise-para-in-embedded-practice">O — Organise: PARA in Embedded Practice</h3>
+
+<p>File by actionability. The most important rule: when a note is captured during an active project, it goes into that Project notebook directly — not into a Resources folder.</p>
+
+<h4 id="tagging-cross-cutting-themes-para-folders-cannot-handle">Tagging: Cross-Cutting Themes PARA Folders Cannot Handle</h4>
+
+<p>The same silicon may appear in three different projects over two years. Tags let you surface all of it instantly regardless of which project folder it lives in.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tag category</th>
+      <th>Example tags</th>
+      <th>When to apply</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Vendor</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.Vendor_ST</code> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code> <code class="language-plaintext highlighter-rouge">.Vendor_Nordic</code> <code class="language-plaintext highlighter-rouge">.Vendor_Espressif</code></td>
+      <td>Any note touching that vendor’s silicon, SDK, or toolchain — regardless of which project folder it lives in</td>
+    </tr>
+    <tr>
+      <td><strong>Requirement type</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.Req_Hardware</code> <code class="language-plaintext highlighter-rouge">.Req_Software</code> <code class="language-plaintext highlighter-rouge">.Req_Safety</code> <code class="language-plaintext highlighter-rouge">.Req_Security</code></td>
+      <td>Notes that document a specific requirement — lets you surface all impact when a client changes a spec</td>
+    </tr>
+    <tr>
+      <td><strong>Edge cases</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.EdgeCase</code> <code class="language-plaintext highlighter-rouge">.CornerCase</code></td>
+      <td>Undocumented errata, broken hardware behaviour, inexplicable user commands — your institutional testing memory</td>
+    </tr>
+    <tr>
+      <td><strong>Work state</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> <code class="language-plaintext highlighter-rouge">.ToDistill</code> <code class="language-plaintext highlighter-rouge">.PostMortem</code></td>
+      <td>Tracks whether a note is a reusable asset, needs processing, or documents a past failure</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="retrieval-planning-matrix">Retrieval Planning Matrix</h4>
+
+<p>Before starting a new project, spend 10 minutes planning how you will <em>find</em> information later — not just how you will store it. Poor tag planning creates <strong>organisation debt</strong>: you will spend more time searching than researching.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>When I need to…</th>
+      <th>Search tags</th>
+      <th>Folder location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Debug a peripheral issue</td>
+      <td><code class="language-plaintext highlighter-rouge">tag:.EdgeCase tag:.Vendor_XX</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[P] Current Project</code> or <code class="language-plaintext highlighter-rouge">[X] Archive</code></td>
+    </tr>
+    <tr>
+      <td>Find a past driver implementation</td>
+      <td><code class="language-plaintext highlighter-rouge">tag:.IntermediatePacket tag:.Vendor_XX</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[R] Vendor: XX</code></td>
+    </tr>
+    <tr>
+      <td>Review all open requirements</td>
+      <td><code class="language-plaintext highlighter-rouge">tag:.Req_Hardware tag:.Req_Software</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[P] Current Project</code></td>
+    </tr>
+    <tr>
+      <td>Look up a protocol gotcha</td>
+      <td><code class="language-plaintext highlighter-rouge">tag:.EdgeCase tag:i2c</code> (or spi, uart…)</td>
+      <td>Any stack — search cuts across all</td>
+    </tr>
+    <tr>
+      <td>Start a similar future project</td>
+      <td><code class="language-plaintext highlighter-rouge">tag:.PostMortem tag:.IntermediatePacket</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[X] Archive</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="warning">
+  <p><strong>Organisation Debt</strong><br />
+Poor folder/tag planning means you will spend more time searching than engineering. Fix your structure before you start a project, not during crunch time at 2am.</p>
+</div>
+
+<hr />
+
+<h3 id="d--distill-progressive-summarization">D — Distill: Progressive Summarization</h3>
+
+<p>Apply layers incrementally — only distill notes you actually return to. The goal is rapid retrieval during a high-pressure debugging session.</p>
+
+<ul>
+  <li><strong>Layer 1 — Raw excerpt:</strong> the captured note as-is. Register map, timing diagram, forum post. No editing.</li>
+  <li><strong>Layer 2 — Bold critical constraints:</strong> bold specific numbers your future self will need fast: max SPI clock, PSRAM alignment requirement, reset vector address, required pull-up value.</li>
+  <li><strong>Layer 3 — Highlight design rationale:</strong> highlight the bolded points that explain <em>why</em> a design choice was made. The “why” is what gets lost over time.</li>
+  <li><strong>Layer 4 — Executive summary (rare):</strong> for foundational principles only. Three bullets at the top so context is visible before reading a single line of detail.</li>
+</ul>
+
+<p><strong>Example distillation — MCU comparison table (Layer 3 output):</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Criteria</th>
+      <th>STM32L476</th>
+      <th>ESP32-S3</th>
+      <th>Decision factor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Stop 2 current</td>
+      <td><strong>120 nA</strong></td>
+      <td>5 µA</td>
+      <td>STM32 wins for battery life</td>
+    </tr>
+    <tr>
+      <td>BLE stack</td>
+      <td>External (SoftDevice)</td>
+      <td>Built-in</td>
+      <td>ESP32 simpler if BLE is core</td>
+    </tr>
+    <tr>
+      <td>ADC resolution</td>
+      <td>12-bit, 16 ch</td>
+      <td>12-bit, 20 ch</td>
+      <td>Tie</td>
+    </tr>
+    <tr>
+      <td>FreeRTOS support</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Tie</td>
+    </tr>
+    <tr>
+      <td>Wake latency</td>
+      <td><strong>5 µs (HSI16)</strong></td>
+      <td>~2 ms (full boot)</td>
+      <td>STM32 wins for real-time wakeup</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note">
+  <p>Apply layers incrementally, not all at once. Only distill notes you actually return to. The goal is rapid retrieval for your future self — not perfect documentation for its own sake. <strong>Distillation = decision acceleration.</strong></p>
+</div>
+
+<hr />
+
+<h3 id="e--express-intermediate-packets">E — Express: Intermediate Packets</h3>
+
+<p>Before writing any new code or documentation, spend 15 minutes searching your IP library first. The goal is to <em>assemble</em>, not to create from scratch.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>IP type</th>
+      <th>Examples</th>
+      <th>Tag to find it</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Driver stubs</strong></td>
+      <td>I/O map header template, SPI/I2C init scaffold, DMA Tx boilerplate</td>
+      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> + <code class="language-plaintext highlighter-rouge">.Vendor_XX</code></td>
+    </tr>
+    <tr>
+      <td><strong>Process checklists</strong></td>
+      <td>Project kick-off checklist, HW bring-up sequence, code review checklist</td>
+      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> + <code class="language-plaintext highlighter-rouge">[A] HW Testing</code></td>
+    </tr>
+    <tr>
+      <td><strong>Architecture sketches</strong></td>
+      <td>FreeRTOS task layout, layering diagram, context diagram</td>
+      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code></td>
+    </tr>
+    <tr>
+      <td><strong>Post-mortems</strong></td>
+      <td>Bug symptom → root cause → fix → time lost</td>
+      <td><code class="language-plaintext highlighter-rouge">.EdgeCase</code> + <code class="language-plaintext highlighter-rouge">.PostMortem</code></td>
+    </tr>
+    <tr>
+      <td><strong>Logging abstraction</strong></td>
+      <td>Interface that swaps UART / RTT / semihosting without changing call sites</td>
+      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="design-decisions-making-choices-justifiable">Design Decisions: Making Choices Justifiable</h2>
+
+<p>Your Second Brain should make design decisions justifiable — to yourself six months later, to teammates, and to non-technical stakeholders. Before opening any datasheet, answer these core questions first:</p>
+
+<div class="warning">
+  <p><strong>Don’t skip requirements capture.</strong><br />
+Many engineers jump straight to component shopping without clarifying requirements. This leads to picking familiar parts instead of optimal ones. Spend 15 minutes answering the questions below — your future self will thank you during debugging.</p>
+</div>
+
+<h3 id="core-questions-before-opening-any-datasheet">Core Questions Before Opening Any Datasheet</h3>
+
+<pre><code class="language-mermaid">flowchart TD
+    A["Core Questions\n──────────\nWhat must it do?\nFor whom? How many units?"] --&gt; B["Requirements Capture\n──────────\nFunctional: measure, control, communicate\nPerformance: speed, accuracy, power\nInterface: how does it connect?"]
+    B --&gt; C["Constraints Assessment\n──────────\nBudget &amp; timeline\nTeam experience level\nTask parallelism needs\nEnvironmental limits"]
+    C --&gt; D["Decision Categories\n──────────\nMCU selection\nCommunication protocol\nSensor / actuator choice\nPower management"]
+    D --&gt; E["Success Criteria\n──────────\nMust-haves (deal-breakers)\nNice-to-haves\nRisk factors"]
+</code></pre>
+
+<p>Answer these before comparing chips. Otherwise you will spend three days reading datasheets before realising none of them fit your actual requirements.</p>
+
+<hr />
+
+<h3 id="navigating-documentation-with-code">Navigating Documentation with CODE</h3>
+
+<p>For each major decision (MCU, protocol, sensors, power), run one CODE cycle:</p>
+
+<pre><code class="language-mermaid">flowchart LR
+    subgraph Design["Hardware Design Flow"]
+        A[Requirements] --&gt; B[MCU Selection]
+        B --&gt; C[Protocols]
+        C --&gt; D[Sensors]
+        D --&gt; E[Power]
+        E --&gt; F[Prototype]
+    end
+
+    subgraph CODE_cycle["CODE at each step"]
+        G["Capture\nresearch"] --&gt; H["Organise\nby decision"]
+        H --&gt; I["Distill\ncompare options"]
+        I --&gt; J["Express\ndocument choice"]
+    end
+
+    B -.-&gt; G
+    C -.-&gt; G
+    D -.-&gt; G
+    E -.-&gt; G
+</code></pre>
+
+<p>The result: decisions in hours instead of days, with documented reasoning that is easy to adapt later.</p>
+
+<hr />
+
+<h3 id="1-design-pattern-justification-notes">1. Design Pattern Justification Notes</h3>
+
+<p>For each significant architectural choice, record not just what pattern was used but why it was chosen over the alternatives and what it protects you from in the future:</p>
+
+<ul>
+  <li><strong>Facade pattern:</strong> chosen to simplify complex library interfaces and hide hardware details from the application layer. Future-proofs against SDK version changes.</li>
+  <li><strong>Adapter pattern:</strong> chosen to let hardware change without rewriting upper-level software. Document the exact interface contract being stabilised and which concrete driver implements it today.</li>
+  <li><strong>MVP / MVC:</strong> chosen to segregate algorithms from hardware for independent host-side testing. Pair with FreeRTOS task boundaries: model in one task, display in another.</li>
+  <li><strong>Dependency Injection / DIP:</strong> chosen for testability — mock the HAL layer in unit tests without real hardware. Document which interfaces are injected and which are concrete.</li>
+</ul>
+
+<h3 id="2-risk-and-security-analysis-note">2. Risk and Security Analysis Note</h3>
+
+<p>One note per project: list specific threats you are defending against, the weakest link identified, and cost-of-mitigation versus cost-of-breach. This makes security spending justifiable to non-engineers and provides an audit trail if requirements change mid-project.</p>
+
+<hr />
+
+<h2 id="retrieval--bigger-picture-a-worked-example">Retrieval → Bigger Picture: A Worked Example</h2>
+
+<p>This is where the system pays off. You are mid-project — <em>designing a low-power wearable heart-rate monitor</em> with an STM32L476 MCU, an AFE4404 optical front-end, and a BLE link — and you need to decide whether to put the AFE in continuous-sample mode or triggered-sample mode. You open Evernote and pull four notes. Together they produce a decision you would not have reached by looking at any one note alone.</p>
+
+<hr />
+
+<h3 id="note-1--datasheet-snippet-afe4404-texas-instruments">Note 1 — Datasheet snippet: AFE4404 (Texas Instruments)</h3>
+
+<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">SBAS700B — AFE4404 Datasheet, Section 8.3 "Theory of Operation"</code><br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code><br />
+<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: TI</code></p>
+
+<div class="info">
+  <p><strong>Raw capture (Layer 1)</strong></p>
+
+  <p>AFE4404 Dynamic Power-Down mode: the device can power down all analog blocks between LED pulses. Wake-up time from DPD to first valid sample: <strong>50 µs typical, 100 µs worst-case (−40°C)</strong>. LED driver average current in continuous mode at 50 mA peak, 25% duty cycle: <strong>12.5 mA average — dominant power term</strong>. PRF (pulse repetition frequency) range: 10 Hz to 1000 Hz.</p>
+
+  <p><strong>Layer 2 bold:</strong> wake-up latency 100 µs worst-case; LED average current 12.5 mA at 25% duty; minimum PRF 10 Hz.</p>
+</div>
+
+<hr />
+
+<h3 id="note-2--reference-manual-snippet-stm32l476-stmicroelectronics">Note 2 — Reference manual snippet: STM32L476 (STMicroelectronics)</h3>
+
+<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">RM0351 Rev 9, Section 5.3.7 "Low-Power Timer (LPTIM)"</code><br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_ST</code><br />
+<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: STMicro</code></p>
+
+<div class="info">
+  <p><strong>Raw capture (Layer 1)</strong></p>
+
+  <p>LPTIM can trigger an ADC conversion and wake the core from Stop 2 mode. Wakeup latency from Stop 2: <strong>approx. 5 µs with HSI16 as wakeup clock</strong>. Stop 2 current (all peripherals off, SRAM retained): <strong>120 nA typical at 25°C</strong>. LPTIM runs on LSE (32.768 kHz) — minimum timer resolution 30.5 µs.</p>
+
+  <p><strong>Layer 2 bold:</strong> Stop 2 = 120 nA; wakeup 5 µs; LPTIM resolution 30.5 µs — total wakeup chain fits inside AFE’s 100 µs worst-case window.</p>
+</div>
+
+<hr />
+
+<h3 id="note-3--forum-edge-case-i2c-hang-after-stop-2-wakeup">Note 3 — Forum edge case: I2C hang after Stop 2 wakeup</h3>
+
+<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">ST Community forum — "I2C lockup after STM32 Stop Mode wakeup" (Jan 2023)</code><br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_ST</code> <code class="language-plaintext highlighter-rouge">.EdgeCase</code><br />
+<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[P] HR Monitor Design</code></p>
+
+<div class="bug">
+  <p><strong>Edge case (Layer 2 bolded)</strong></p>
+
+  <p>Multiple users report I2C bus lockup after exiting Stop mode if SCL is released while a byte transfer is in progress. The AFE4404 holds SDA low mid-byte. <strong>Workaround: issue a 9-clock pulse sequence on SCL before re-enabling the I2C peripheral after wakeup, or use bit-bang recovery.</strong> ST HAL does not handle this automatically as of HAL v1.11.</p>
+
+  <p><strong>Layer 2 bold:</strong> must add I2C bus recovery after every Stop 2 exit before issuing AFE config writes.</p>
+</div>
+
+<hr />
+
+<h3 id="note-4--client-requirements-capture">Note 4 — Client requirements capture</h3>
+
+<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">Client kickoff call notes — Project [P] HR Monitor Design</code><br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code> <code class="language-plaintext highlighter-rouge">.Req_Software</code><br />
+<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[P] HR Monitor Design</code></p>
+
+<div class="important">
+  <p><strong>Requirements (Layer 2 bolded)</strong></p>
+
+  <p>Battery life target: <strong>72 hours continuous monitoring</strong> on a 180 mAh LiPo. BLE advertising interval: 1 second. Heart-rate sample rate: <strong>minimum 25 Hz to meet PPG motion artifact rejection algorithm requirement</strong>. Display: none (data streamed over BLE only). Maximum average system current budget: <strong>~2.1 mA (180 mAh ÷ 72 h × 0.85 derating)</strong>.</p>
+</div>
+
+<hr />
+
+<h3 id="the-insight-that-retrieval-produces">The insight that retrieval produces</h3>
+
+<div class="success">
+  <p><strong>What four notes together produce that none of them states alone</strong></p>
+
+  <p>Triggered-sample mode is not just preferable — it is the <strong>only option that fits the power budget</strong>. At 25 Hz PRF, continuous mode draws 12.5 mA from the LED driver alone against a 2.1 mA system budget. Triggered mode using LPTIM + Stop 2 keeps the MCU at 120 nA between samples. The AFE’s 100 µs wakeup window is comfortably cleared by the STM32’s 5 µs Stop 2 exit.</p>
+
+  <p>The edge-case note flags a <strong>non-obvious implementation requirement</strong>: I2C bus recovery must be added after every wakeup — something the AFE datasheet and the MCU reference manual each in isolation give no reason to expect.</p>
+</div>
+
+<p>The <strong>datasheet note</strong> gave you the power numbers. The <strong>reference manual note</strong> gave you the wakeup timing. The <strong>edge-case note</strong> gave you the implementation trap. The <strong>requirements note</strong> gave you the constraint that made the decision obvious. Stored separately they are raw material. Retrieved together they produce original engineering judgement.</p>
+
+<hr />
+
+<h2 id="using-notes-for-presentations-and-communication">Using Notes for Presentations and Communication</h2>
+
+<p>Your Second Brain is not just a personal tool — it is also the source material for everything you communicate outward. This is the Express stage applied at a team and client level.</p>
+
+<h3 id="for-technical-presentations">For technical presentations</h3>
+
+<ul>
+  <li><strong>Gather across notes:</strong> use tag searches to collect related information from multiple projects and stacks.</li>
+  <li><strong>Build the narrative:</strong> connect technical details with practical implications — the “why we chose this” story lives in your Design Decision Records.</li>
+  <li><strong>Add visuals:</strong> reference diagrams and pinouts already captured in your notes rather than recreating them.</li>
+</ul>
+
+<p><strong>Example: presenting a motor control solution assembled from notes</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Slide</th>
+      <th>What you pull</th>
+      <th>Source note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Problem statement</td>
+      <td>“Customer needs precise speed control”</td>
+      <td><code class="language-plaintext highlighter-rouge">[P] Motor Control — Client B</code> kickoff notes</td>
+    </tr>
+    <tr>
+      <td>Technical approach</td>
+      <td>“TIM2 + PWM output, PID algorithm”</td>
+      <td>STM32 timer distillation note + PID IP</td>
+    </tr>
+    <tr>
+      <td>Implementation details</td>
+      <td>“TIM2 ch1–3 for 3-phase PWM; watch for timer overflow at high speeds”</td>
+      <td>Datasheet note + <code class="language-plaintext highlighter-rouge">.EdgeCase</code> tag</td>
+    </tr>
+    <tr>
+      <td>Results &amp; gotchas</td>
+      <td>“±1% accuracy achieved; filter encoder noise; calibrate PID gains”</td>
+      <td>Post-mortem note from previous motor project</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="for-team-communication">For team communication</h3>
+
+<ul>
+  <li><strong>Code reviews:</strong> reference specific datasheet sections or past implementations directly from notes rather than rewriting context from scratch.</li>
+  <li><strong>Design discussions:</strong> share your distilled notes instead of full manuals — a 5-bullet summary of a 200-page reference manual is more useful in a meeting.</li>
+  <li><strong>Client documentation:</strong> turn distilled notes into API docs, setup guides, or design rationale documents. The structure is already there.</li>
+</ul>
+
+<div class="tip">
+  <p>Keep a “Communication” sub-section in each project notebook where you maintain plain-language summaries for different audiences: one for managers (what it does, what it costs), one for junior devs (how to use it), one for clients (what they asked for and what you built).</p>
+</div>
+
+<hr />
+
+<h2 id="note-templates-fill-in-structures-for-your-evernote">Note Templates: Fill-In Structures for Your Evernote</h2>
+
+<p>Copy each template into a new note at the start of a project or when you encounter new hardware. The questions are the headings — fill in the answers as you learn them, not all at once.</p>
+
+<hr />
+
+<h3 id="template-1--datasheet--reference-manual-summary">Template 1 — Datasheet &amp; Reference Manual Summary</h3>
+
+<p><strong>Where to file:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: XX</code> initially; move to <code class="language-plaintext highlighter-rouge">[P] Project Name</code> when it becomes active.<br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_XX</code> <code class="language-plaintext highlighter-rouge">.ToDistill</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Part number</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Manufacturer</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Document reference (title + rev)</td>
+      <td>e.g. <code class="language-plaintext highlighter-rouge">RM0351 Rev 9</code> / <code class="language-plaintext highlighter-rouge">SBAS700B</code></td>
+    </tr>
+    <tr>
+      <td>Relevant section(s) captured</td>
+      <td>e.g. Sec 8.3 Theory of Operation, Sec 9.2 Application Circuit</td>
+    </tr>
+    <tr>
+      <td>Link to full datasheet / PDF</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h4 id="what-does-this-device-do-in-one-sentence">What does this device do in one sentence?</h4>
+
+<p><em>Write it in your own words, not the marketing summary.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-are-the-critical-electrical-limits-i-must-not-violate">What are the critical electrical limits I must not violate?</h4>
+
+<p><em>e.g. VDDIO max 3.6 V; SDA/SCL max clock 400 kHz in Fast-mode; Tamb max 85°C. Bold these in your answer.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-timing-constraints-affect-my-firmware">What timing constraints affect my firmware?</h4>
+
+<p><em>e.g. AFE4404: 100 µs worst-case wakeup from DPD; I2S BCLK must be stable before CODEC RESET deasserted.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-are-the-non-obvious-gotchas-or-errata-i-found">What are the non-obvious gotchas or errata I found?</h4>
+
+<p><em>e.g. I2C SDA held low after Stop mode exit. PLL lock time not mentioned in brief but 300 µs in RM. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if relevant.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="which-application-circuit-or-reference-schematic-applies-to-my-design">Which application circuit or reference schematic applies to my design?</h4>
+
+<p><em>Note figure number and page. Sketch or photograph key parts. Link to the eval board schematic if it exists.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="which-driver-registers-or-init-sequence-matter-most-for-my-use-case">Which driver registers or init sequence matter most for my use case?</h4>
+
+<p><em>e.g. AFE4404 CONTROL0 register bit 3 = DPD enable; must write <code class="language-plaintext highlighter-rouge">0x000000</code> to TIAGAIN before first sample.</em></p>
+
+<p> </p>
+
+<hr />
+
+<div class="tip">
+  <p>Once you have filled in these fields, go back and <strong>bold the 3–5 numbers</strong> that your future self will need in 2 seconds. That is Layer 2 done.</p>
+</div>
+
+<hr />
+
+<h3 id="template-2--client-requirements-capture">Template 2 — Client Requirements Capture</h3>
+
+<p><strong>Where to file:</strong> <code class="language-plaintext highlighter-rouge">[P] Project Name</code> immediately.<br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code> <code class="language-plaintext highlighter-rouge">.Req_Software</code> <code class="language-plaintext highlighter-rouge">.Req_Safety</code> <em>(apply whichever are relevant)</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Client / project name</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Date of requirements capture</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Who provided these requirements?</td>
+      <td>e.g. John Smith, CTO — verbal in kickoff call + email thread 2024-11-14</td>
+    </tr>
+    <tr>
+      <td>Document reference (if formal)</td>
+      <td>e.g. SRS v0.3, <code class="language-plaintext highlighter-rouge">ClientX_PRD_2024.pdf</code></td>
+    </tr>
+    <tr>
+      <td>Requirements status</td>
+      <td>e.g. Draft / Under review / Signed-off</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h4 id="system-overview">System Overview</h4>
+
+<h5 id="what-problem-does-this-device-solve-for-the-end-user">What problem does this device solve for the end user?</h5>
+
+<p><em>Not what it does technically — what job does the user hire it for? e.g. “Allows a nurse to monitor patient SpO2 continuously without disturbing sleep.”</em></p>
+
+<p> </p>
+
+<hr />
+
+<h5 id="who-are-the-users-and-what-is-their-technical-level">Who are the users and what is their technical level?</h5>
+
+<p><em>e.g. Clinical staff — non-technical. Device must operate correctly with no configuration. Firmware updates handled by IT department only.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="functional-requirements">Functional Requirements</h4>
+
+<h5 id="what-must-the-system-measure-control-or-communicate">What must the system measure, control, or communicate?</h5>
+
+<p><em>List each function with its minimum acceptable performance. e.g. Measure HR ±2 BPM; BLE range minimum 5 m in open air; data logged at 25 Hz.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h5 id="what-interfaces-must-it-expose">What interfaces must it expose?</h5>
+
+<p><em>e.g. USB-C for charging only (no data). BLE 5.0 for data streaming. No physical buttons — gesture or proximity sensor for wake.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="performance--power-constraints">Performance &amp; Power Constraints</h4>
+
+<h5 id="what-are-the-battery-life-and-power-targets">What are the battery life and power targets?</h5>
+
+<p><em>State the battery capacity and required operating duration. e.g. 180 mAh LiPo, 72 h continuous. Derive the average current budget and note it here.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h5 id="what-are-the-real-time-constraints">What are the real-time constraints?</h5>
+
+<p><em>e.g. HR algorithm requires 25 Hz minimum sample rate. BLE notify latency &lt; 1 s. Alarm must trigger within 500 ms of threshold crossing.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="environmental--reliability-constraints">Environmental &amp; Reliability Constraints</h4>
+
+<h5 id="what-are-the-operating-and-storage-temperature-ranges">What are the operating and storage temperature ranges?</h5>
+
+<p><em>e.g. Operating: 0–50°C. Storage: −20 to 60°C. Note if medical / industrial / automotive standard applies.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h5 id="what-are-the-ingress-protection-drop-or-vibration-requirements">What are the ingress protection, drop, or vibration requirements?</h5>
+
+<p><em>e.g. IP54 splash resistant. 1 m drop onto concrete (IEC 60068-2-31). No formal vibration spec but must survive normal handling.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="regulatory--safety">Regulatory &amp; Safety</h4>
+
+<h5 id="what-regulatory-certifications-are-required">What regulatory certifications are required?</h5>
+
+<p><em>e.g. CE marking. FCC Part 15 (BLE). IEC 60601-1 (medical electrical). ISO 13485 QMS. Note whether certification is the client’s responsibility or yours.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h5 id="what-are-the-edge-cases-or-failure-modes-the-client-has-already-considered">What are the edge cases or failure modes the client has already considered?</h5>
+
+<p><em>e.g. Device must not alarm falsely &gt; 1×/day. Must survive sensor disconnect without firmware crash. Low battery warning at 15% SoC.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="surprises-and-non-obvious-constraints">Surprises and Non-Obvious Constraints</h4>
+
+<h5 id="what-requirements-surprised-you-or-seem-under-specified">What requirements surprised you or seem under-specified?</h5>
+
+<p><em>This is the most important field. Note constraints that are easy to miss: implicit safety assumptions, missing tolerances, conflicting specs. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if needed.</em></p>
+
+<p> </p>
+
+<hr />
+
+<div class="think">
+  <p>Write a 3-bullet <strong>Layer 4 executive summary</strong> at the top of this note after your first design review. Something like:</p>
+
+  <ol>
+    <li>72 h battery budget = 2.1 mA average — this is the single tightest constraint.</li>
+    <li>25 Hz minimum sample rate is a hard floor set by the algorithm, not a nice-to-have.</li>
+    <li>No physical UI — firmware must handle all error states silently and log them over BLE.</li>
+  </ol>
+</div>
+
+<hr />
+
+<h3 id="template-3--design-decision-record">Template 3 — Design Decision Record</h3>
+
+<p><strong>Where to file:</strong> <code class="language-plaintext highlighter-rouge">[P] Project Name</code>. Create one note per major decision.<br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code> or <code class="language-plaintext highlighter-rouge">.Req_Software</code> (whichever applies) + <code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> once the decision is final and reusable.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Decision title</td>
+      <td>e.g. AFE sampling mode — triggered vs continuous</td>
+    </tr>
+    <tr>
+      <td>Project</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Date decided</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Decision made by</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>e.g. Proposed / Under review / Final / Superseded</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h4 id="what-decision-needed-to-be-made">What decision needed to be made?</h4>
+
+<p><em>State it as a question. e.g. Should the AFE4404 run in continuous-sample mode or LPTIM-triggered DPD mode?</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-were-the-options-considered">What were the options considered?</h4>
+
+<p><em>List each option briefly. e.g. (A) Continuous mode — constant 12.5 mA LED avg. (B) Triggered DPD mode — LED off between pulses, MCU in Stop 2.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-constraints-or-requirements-drove-the-decision">What constraints or requirements drove the decision?</h4>
+
+<p><em>Reference your requirements note. e.g. 2.1 mA average system budget makes option A immediately non-viable. 25 Hz minimum PRF is satisfied by LPTIM at 25 Hz trigger.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-was-decided-and-why">What was decided, and why?</h4>
+
+<p><em>State the chosen option and the explicit reasoning. Bold the key technical justification.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-are-the-implementation-consequences">What are the implementation consequences?</h4>
+
+<p><em>e.g. Must add I2C bus recovery (9-clock pulse) after every Stop 2 exit. LPTIM must be initialised before Stop 2 entry. AFE CONTROL0 bit 3 must be set in init sequence.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-was-explicitly-rejected-and-why">What was explicitly rejected and why?</h4>
+
+<p><em>Documenting rejected options prevents the same debate recurring. e.g. Continuous mode rejected: 12.5 mA LED draw alone exceeds total 2.1 mA budget by 6×.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="what-could-invalidate-this-decision-later">What could invalidate this decision later?</h4>
+
+<p><em>e.g. If client increases BLE advertising rate to 100 ms, wakeup frequency may make Stop 2 overhead negligible — revisit triggered vs continuous tradeoff.</em></p>
+
+<p> </p>
+
+<hr />
+
+<h4 id="which-notes-does-this-decision-draw-on">Which notes does this decision draw on?</h4>
+
+<p><em>Link or reference the source notes: datasheet note, forum edge-case note, requirements note. This is the connective tissue that makes retrieval produce insight.</em></p>
+
+<p> </p>
+
+<hr />
+
+<div class="success">
+  <p>A filled Design Decision Record is not just documentation — it is the <strong>Express</strong> stage of the CODE cycle. It turns the raw material in your four captured notes into an engineering judgement you can defend, share with teammates, and reuse on the next project that involves the same tradeoff.</p>
+</div>
+
+<hr />
+
+<h2 id="common-questions">Common Questions</h2>
+
+<p><strong>“But I might need that datasheet someday!”</strong><br />
+Archive it. <code class="language-plaintext highlighter-rouge">[X] Archive</code> is fully searchable but does not clutter your active workspace. Nothing is lost, just out of the way.</p>
+
+<p><strong>“This seems like extra work on top of real engineering.”</strong><br />
+It takes less time than constantly searching through disorganised notes at 2am the night before a client review.</p>
+
+<p><strong>“What if I organise something in the wrong folder?”</strong><br />
+Notes are digital — reorganise any time. The only wrong choice is no organisation at all.</p>
+
+<p><strong>“My brain doesn’t work in folders.”</strong><br />
+Use tags and search instead of hierarchy. The PARA structure is a starting point, not a cage. The tag system in this post works just as well in a flat note structure as in a folder hierarchy.</p>
+
+<p><strong>“I don’t have time to distill every note.”</strong><br />
+You don’t. Only distill notes you return to more than once. Layer 2 bolding takes 2 minutes and that is the only layer most notes ever need.</p>
+
+<hr />
+
+<p><em>Look, it is not about having perfect notes. It is about having notes you can actually find and use under pressure. Everything else is just noise.</em></p>
+
+  
+</article>
+
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-05-01-started-with-metricmq/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-05-01-started-with-metricmq/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-05-01-started-with-metricmq/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/coding/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Dependency-injection.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/coding/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/coding/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/pydev/2025-12-16-pytests-good-practice/" class="flip-title"><span>Pytest for Embedded Developers- Reliable, Maintainable Test Design</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-21-rust-composition/" class="flip-title"><span>7 C++ Inheritance pain-points Rust Fixes Forever</span></a>  <time class="faded fine" datetime="2025-12-21T00:00:00+00:00">21 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2026-02-16-portable-C/" class="flip-title"><span>Portable and Secure C- A Practical Guide to MISRA C & CERT C</span></a>  <time class="faded fine" datetime="2026-02-16T00:00:00+00:00">16 Feb 2026</time></li>      </ul></aside>
+
+  
+
+  
+    
+<aside class="comments related" role="complementary">
+  <h2 class="hr-bottom">Comments</h2>
+  
+<script src="https://giscus.app/client.js"
+        data-repo="Saptarshi-max/saptarshi-max.github.io"
+        data-repo-id="REPLACE_WITH_REPO_ID"
+        data-category="Announcements"
+        data-category-id="REPLACE_WITH_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Sync giscus theme with Hydejack dark mode toggle -->
+<script>
+(function() {
+  function getGiscusTheme() {
+    var cl = document.documentElement.classList;
+    return cl.contains('dark-mode') ? 'dark' : 'light';
+  }
+  function setGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme } } },
+      'https://giscus.app'
+    );
+  }
+  // Watch for Hydejack dark-mode class changes
+  var observer = new MutationObserver(function() {
+    setGiscusTheme(getGiscusTheme());
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
+
+
+</aside>
+
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#1A3C5E;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#1A3C5E;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>
