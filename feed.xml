@@ -1,28 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-10T22:01:46+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ</title><link href="/blog/2026-05-01-started-with-metricmq/" rel="alternate" type="text/html" title="Getting Started with MetricMQ" /><published>2026-05-01T00:00:00+00:00</published><updated>2026-05-10T21:05:07+00:00</updated><id>/blog/started-with-metricmq</id><content type="html" xml:base="/blog/2026-05-01-started-with-metricmq/"><![CDATA[<p><img src="/cover_images/posts/IMG_0048.jpg" alt="" />
-MetricMQ is a low memory footprint, highly secured (with Ed25519 encryption) broker library I created for embedded devices with limited memory and deployed for secured data transmission.</p>
-
-<p>In this blog post, I will walk you step by step on how to get started with the metricMQ libary from initialisation to deployment with ‘2’ ESP32- S3 modules (Sender &amp; Watcher) exchanging information in real-time (wireless) through different test cases.</p>
-
-<h2 id="when--where-to-use-the-library-">When &amp; Where to use the Library ?</h2>
-
-<ul>
-  <li><strong>Security</strong>- Secure authentication and authorization of devices</li>
-  <li><strong>Low memory footprint</strong>- Optimized for embedded systems with limited memory</li>
-  <li><strong>Real-time data transmission</strong>- Low latency data transfer</li>
-  <li><strong>Reliable data delivery</strong>- Guarantees data delivery</li>
-</ul>
-
-<h2 id="what-the-metricmq-lib-has-to-offer-">What the MetricMQ Lib has to offer ?</h2>
-
-<h2 id="how-to-configure-">How to configure ?</h2>
-
-<h3 id="working-with-the-esp32-or-arduino-setup-">working with the ESP32 or Arduino Setup ?</h3>
-
-<h3 id="working-with-the-stm32-or-custom-mcu-">Working with the Stm32 or custom MCU ?</h3>
-
-<h2 id="testing--profiling--debugging-">Testing , Profiling &amp; Debugging ?</h2>
-
-<h2 id="case-examples">Case Examples</h2>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><summary type="html"><![CDATA[MetricMQ is a low memory footprint, highly secured (with Ed25519 encryption) broker library I created for embedded devices with limited memory and deployed for secured data transmission.]]></summary></entry><entry><title type="html">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</title><link href="/blog/coding/2026-04-17-di-embedded/" rel="alternate" type="text/html" title="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It" /><published>2026-04-17T00:00:00+00:00</published><updated>2026-05-01T15:40:23+00:00</updated><id>/blog/coding/di-embedded</id><content type="html" xml:base="/blog/coding/2026-04-17-di-embedded/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-10T22:28:22+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</title><link href="/blog/coding/2026-04-17-di-embedded/" rel="alternate" type="text/html" title="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It" /><published>2026-04-17T00:00:00+00:00</published><updated>2026-05-01T15:40:23+00:00</updated><id>/blog/coding/di-embedded</id><content type="html" xml:base="/blog/coding/2026-04-17-di-embedded/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#the-embedded-maintenance-trap" id="markdown-toc-the-embedded-maintenance-trap">The Embedded Maintenance Trap</a></li>
   <li><a href="#the-anti-patterns-in-detail" id="markdown-toc-the-anti-patterns-in-detail">The Anti-Patterns in Detail</a>    <ul>
       <li><a href="#direct-hardware-access-buried-in-application-logic" id="markdown-toc-direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</a></li>
@@ -7508,4 +7484,202 @@ Data saved to power_test.csv
 <ul>
   <li>SemiEngineering — Curbing Automotive Cybersecurity Attacks: https://semiengineering.com/curbing-automotive-cybersecurity-attacks/</li>
   <li>upGrad — 18 Key Automotive Cyber Security &amp; Vehicle Cybersecurity Measures for 2025: https://www.upgrad.com/blog/automotive-cybersecurity/</li>
-</ul>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="industry" /><summary type="html"><![CDATA[UNECE R155/R156 are regulatory requirements for vehicle cybersecurity and software updates, while ISO 26262 (functional safety) and IEC 62443 (industrial/IoT cybersecurity) are technical standards. The relationship is that UNECE mandates compliance at a regulatory level, and ISO/IEC standards provide the engineering frameworks and evidence manufacturers use to demonstrate compliance]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/unece-iso.webp" /><media:content medium="image" url="/cover_images/posts/unece-iso.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ul>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="industry" /><summary type="html"><![CDATA[UNECE R155/R156 are regulatory requirements for vehicle cybersecurity and software updates, while ISO 26262 (functional safety) and IEC 62443 (industrial/IoT cybersecurity) are technical standards. The relationship is that UNECE mandates compliance at a regulatory level, and ISO/IEC standards provide the engineering frameworks and evidence manufacturers use to demonstrate compliance]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/unece-iso.webp" /><media:content medium="image" url="/cover_images/posts/unece-iso.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector</title><link href="/blog/rust-dev/2025-12-17-raii-cpp-rust/" rel="alternate" type="text/html" title="RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector" /><published>2025-12-17T00:00:00+00:00</published><updated>2026-02-13T14:55:28+00:00</updated><id>/blog/rust-dev/raii-cpp-rust</id><content type="html" xml:base="/blog/rust-dev/2025-12-17-raii-cpp-rust/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#what-is-raii" id="markdown-toc-what-is-raii">What is RAII?</a></li>
+  <li><a href="#raii-in-c" id="markdown-toc-raii-in-c">RAII in C++</a>    <ul>
+      <li><a href="#example-managing-a-file" id="markdown-toc-example-managing-a-file">Example: Managing a File</a></li>
+      <li><a href="#c-raii-lifecycle" id="markdown-toc-c-raii-lifecycle">C++ RAII Lifecycle</a></li>
+      <li><a href="#challenges-in-c" id="markdown-toc-challenges-in-c">Challenges in C++</a></li>
+    </ul>
+  </li>
+  <li><a href="#raii-in-rust" id="markdown-toc-raii-in-rust">RAII in Rust</a>    <ul>
+      <li><a href="#example-managing-a-file-1" id="markdown-toc-example-managing-a-file-1">Example: Managing a File</a></li>
+      <li><a href="#rust-ownership--raii" id="markdown-toc-rust-ownership--raii">Rust Ownership &amp; RAII</a></li>
+      <li><a href="#rusts-advantages" id="markdown-toc-rusts-advantages">Rust’s Advantages</a></li>
+    </ul>
+  </li>
+  <li><a href="#key-differences" id="markdown-toc-key-differences">Key Differences</a></li>
+  <li><a href="#real-world-example-smart-pointers" id="markdown-toc-real-world-example-smart-pointers">Real-World Example: Smart Pointers</a>    <ul>
+      <li><a href="#c-smart-pointers" id="markdown-toc-c-smart-pointers">C++ Smart Pointers</a></li>
+      <li><a href="#rust-box" id="markdown-toc-rust-box">Rust Box</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ul>
+
+<h2 id="what-is-raii">What is RAII?</h2>
+
+<p>RAII is a programming pattern where resources are acquired during object initialization and released during destruction. This ensures automatic cleanup without manual intervention.</p>
+
+<h2 id="raii-in-c">RAII in C++</h2>
+
+<p>In C++, RAII relies on <strong>constructors</strong> and <strong>destructors</strong>. When an object goes out of scope, its destructor is called automatically.</p>
+
+<h3 id="example-managing-a-file">Example: Managing a File</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FileHandler</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">FILE</span><span class="o">*</span> <span class="n">file</span><span class="p">;</span>
+<span class="nl">public:</span>
+    <span class="c1">// Constructor: Acquire resource</span>
+    <span class="n">FileHandler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Destructor: Release resource</span>
+    <span class="o">~</span><span class="n">FileHandler</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">processFile</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">FileHandler</span> <span class="n">handler</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="c1">// Use the file...</span>
+    <span class="c1">// File automatically closes when handler goes out of scope</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="c-raii-lifecycle">C++ RAII Lifecycle</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Object Created] --&gt;|Constructor Called| B[Resource Acquired]
+    B --&gt; C[Object Used]
+    C --&gt; D[Object Goes Out of Scope]
+    D --&gt;|Destructor Called| E[Resource Released]
+    E --&gt; F[Memory Cleaned Up]
+</code></pre>
+
+<h3 id="challenges-in-c">Challenges in C++</h3>
+
+<ul>
+  <li><strong>Manual implementation</strong>: You must write destructors correctly</li>
+  <li><strong>Ownership issues</strong>: Who owns the resource? Easy to create bugs with copies</li>
+  <li><strong>Exception safety</strong>: Need careful design to avoid leaks during exceptions</li>
+</ul>
+
+<h2 id="raii-in-rust">RAII in Rust</h2>
+
+<p>Rust takes RAII further with its <strong>ownership system</strong> and <strong>Drop trait</strong>. The compiler enforces strict rules about who owns resources, eliminating entire classes of bugs.</p>
+
+<h3 id="example-managing-a-file-1">Example: Managing a File</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">process_file</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="c1">// Use the file...</span>
+    <span class="c1">// File automatically closes when it goes out of scope</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Rust’s <code class="language-plaintext highlighter-rouge">File</code> type implements the <code class="language-plaintext highlighter-rouge">Drop</code> trait, which works like C++’s destructor but with compiler-enforced ownership.</p>
+
+<h3 id="rust-ownership--raii">Rust Ownership &amp; RAII</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Variable Created] --&gt;|Takes Ownership| B[Resource Acquired]
+    B --&gt; C[Variable Used]
+    C --&gt; D{Ownership Transferred?}
+    D --&gt;|No| E[Goes Out of Scope]
+    D --&gt;|Yes| F[New Owner Manages It]
+    E --&gt;|Drop Called| G[Resource Released]
+    F --&gt; E
+</code></pre>
+
+<h3 id="rusts-advantages">Rust’s Advantages</h3>
+
+<ul>
+  <li><strong>Compiler-enforced ownership</strong>: Only one owner at a time (or explicit borrowing)</li>
+  <li><strong>No dangling pointers</strong>: Compiler prevents use-after-free bugs</li>
+  <li><strong>Automatic Drop</strong>: No need to manually implement cleanup (unless custom behavior needed)</li>
+</ul>
+
+<h2 id="key-differences">Key Differences</h2>
+
+<pre><code class="language-mermaid">graph LR
+    subgraph C++
+        A1[Developer Responsibility] --&gt; B1[Manual RAII Implementation]
+        B1 --&gt; C1[Runtime Flexibility]
+        C1 --&gt; D1[Potential for Bugs]
+    end
+    
+    subgraph Rust
+        A2[Compiler Enforced] --&gt; B2[Built-in Ownership]
+        B2 --&gt; C2[Compile-time Safety]
+        C2 --&gt; D2[Zero-cost Abstractions]
+    end
+</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>C++</th>
+      <th>Rust</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Who enforces RAII?</strong></td>
+      <td>Developer discipline</td>
+      <td>Compiler (borrow checker)</td>
+    </tr>
+    <tr>
+      <td><strong>Ownership model</strong></td>
+      <td>Manual (smart pointers help)</td>
+      <td>Built-in, enforced</td>
+    </tr>
+    <tr>
+      <td><strong>Memory safety</strong></td>
+      <td>Easy to make mistakes</td>
+      <td>Prevents bugs at compile time</td>
+    </tr>
+    <tr>
+      <td><strong>Learning curve</strong></td>
+      <td>Moderate</td>
+      <td>Steep initially</td>
+    </tr>
+    <tr>
+      <td><strong>Flexibility</strong></td>
+      <td>Very high</td>
+      <td>High, but within safety rules</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="real-world-example-smart-pointers">Real-World Example: Smart Pointers</h2>
+
+<h3 id="c-smart-pointers">C++ Smart Pointers</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">example</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+    <span class="c1">// Memory automatically freed when unique_ptr goes out of scope</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="rust-box">Rust Box</h3>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">example</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">data</span> <span class="o">=</span> <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+    <span class="c1">// Memory automatically freed when Box goes out of scope</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Both achieve the same goal, but Rust’s compiler prevents you from accidentally creating two owners of the same resource.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>C++ and Rust both employ RAII for resource management without garbage collection, but differ in approach:</p>
+
+<ul>
+  <li>C++ requires developer discipline for implementation and ownership.</li>
+  <li>Rust enforces safety through its compiler and ownership model.</li>
+</ul>
+
+<p>Rust’s strict rules may seem restrictive initially but prevent many bugs. C++ offers flexibility at the cost of potential errors.</p>
+
+<p>Effective resource management is key to safe, efficient code in both languages.</p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="rust-dev" /><category term="c++" /><summary type="html"><![CDATA[Managing memory and resources like files, network connections, or locks is essential in programming. While some languages rely on garbage collectors for automatic cleanup (Java), C++ and Rust use RAII (Resource Acquisition Is Initialization) to handle this deterministically.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/RAII-cpp-rust.webp" /><media:content medium="image" url="/cover_images/posts/RAII-cpp-rust.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
