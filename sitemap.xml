@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>/cpp-dev/</loc>
-<lastmod>2026-01-09T21:25:13+00:00</lastmod>
+<loc>/cppdev/</loc>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
+</url>
+<url>
+<loc>/eh/</loc>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
+</url>
+<url>
+<loc>/es/</loc>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
 </url>
 <url>
 <loc>/productivity/</loc>
 <lastmod>2025-12-30T17:10:08+00:00</lastmod>
 </url>
 <url>
-<loc>/python-dev/</loc>
-<lastmod>2026-02-25T12:19:08+00:00</lastmod>
+<loc>/pydev/</loc>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
 </url>
 <url>
 <loc>/random-bits/</loc>
@@ -93,8 +101,8 @@
 <lastmod>2026-02-13T14:55:28+00:00</lastmod>
 </url>
 <url>
-<loc>/blog/embedded-software/2025-12-16-pigweed-build-tools/</loc>
-<lastmod>2026-04-18T07:07:51+00:00</lastmod>
+<loc>/blog/es/2025-12-16-pigweed-build-tools/</loc>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
 </url>
 <url>
 <loc>/blog/rust-dev/2025-12-17-raii-cpp-rust/</loc>
@@ -174,7 +182,7 @@
 </url>
 <url>
 <loc>/resources/</loc>
-<lastmod>2026-05-12T09:42:08+00:00</lastmod>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
 </url>
 <url>
 <loc>/resume/</loc>
@@ -194,7 +202,7 @@
 </url>
 <url>
 <loc>/embedded-Software/</loc>
-<lastmod>2026-05-12T09:42:08+00:00</lastmod>
+<lastmod>2026-05-12T10:43:51+00:00</lastmod>
 </url>
 <url>
 <loc>/gallery/2025-10-03-Boat/</loc>
@@ -238,10 +246,10 @@
 </url>
 <url>
 <loc>/Profile_NAG_Saptarshi_Embedded_Developer.pdf</loc>
-<lastmod>2026-05-12T09:42:44+00:00</lastmod>
+<lastmod>2026-05-12T10:45:38+00:00</lastmod>
 </url>
 <url>
 <loc>/assets/Resume.pdf</loc>
-<lastmod>2026-05-12T09:42:44+00:00</lastmod>
+<lastmod>2026-05-12T10:45:38+00:00</lastmod>
 </url>
 </urlset>
