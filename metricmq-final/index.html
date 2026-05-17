@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Getting Started with MetricMQ | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Getting Started with MetricMQ" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Embedded System Engineer" />
+<meta property="og:description" content="Embedded System Engineer" />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Getting Started with MetricMQ" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","dateModified":"2026-05-17T19:40:38+00:00","description":"Embedded System Engineer","headline":"Getting Started with MetricMQ","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/metricmq-final/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/metricmq-final/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-05-17T19:44:06+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(79,177,186);--accent-color-faded: rgba(79, 177, 186, 0.5);--accent-color-highlight: rgba(79, 177, 186, 0.1);--accent-color-darkened: rgb(63.8602040816, 154.5602040816, 162.8897959184);--theme-color: rgb(25, 55, 71);--dark-mode-body-bg: hsl(200.8695652174, 5.9895833333%, 17.5%);--dark-mode-border-color: hsl(200.8695652174, 5.9895833333%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-page"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>metricmq-final</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  <article class="page mb6" role="article">
+  <header>
+    <h1 class="page-title">Getting Started with MetricMQ</h1>
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  <blockquote>
+  <p><strong>Audience:</strong> Beginner to intermediate embedded developers and IoT enthusiasts.  </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Hardware used:</strong> 2× ESP32-S3-DevKitC-1-N16R8, Windows PC.  </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>What you will build:</strong> A two-board sensor telemetry system with delivery guarantees, wildcard routing, and cryptographic message signing — running on a broker smaller than most JPEGs.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="1-the-problem-with-just-use-mqtt">1. The Problem with “Just Use MQTT”</h2>
+
+<p>You have two microcontrollers on your desk. You want them to talk to each other through your laptop. Someone on the internet tells you to “just use MQTT.”</p>
+
+<p>So you install Mosquitto. You write a broker config. You fight the firewall. You try to figure out why <code class="language-plaintext highlighter-rouge">redis-cli</code> can’t connect to port 1883. An hour later you have a broker running, and you realise you still haven’t written a single line of application code.</p>
+
+<p>This is the gap MetricMQ was built to fill.</p>
+
+<p>On one end you have fire-and-forget solutions — raw UDP, basic MQTT QoS 0 — fast and simple, but no delivery guarantees. On the other end you have RabbitMQ and Kafka: reliable, but these are 50 MB+ server applications that want a config file, a dedicated port, and ideally a dedicated ops person.</p>
+
+<p>MetricMQ sits between them. The broker is a <strong>328 KB single executable</strong>. The ESP32 client uses <strong>under 2 KB of RAM at idle</strong>. It gives you exactly-once delivery, Ed25519 message signing, Prometheus metrics, and it speaks Redis’s text protocol — so <code class="language-plaintext highlighter-rouge">redis-cli</code> just works against it out of the box.</p>
+
+<p>No Docker. No YAML. No certificate authority.</p>
+
+<hr />
+
+<h2 id="2-when-should-you-use-metricmq">2. When Should You Use MetricMQ?</h2>
+
+<p>MetricMQ is the right tool when:</p>
+
+<ul>
+  <li>
+    <p>You are building an <strong>IoT sensor network</strong> and need to know that readings actually arrived — not just fire-and-forget.</p>
+  </li>
+  <li>
+    <p>You want a <strong>local broker</strong> that runs on the same PC as your development environment without standing up a server.</p>
+  </li>
+  <li>
+    <p>You need <strong>per-device cryptographic identity</strong> so that a compromised sensor cannot inject fake readings into your system.</p>
+  </li>
+  <li>
+    <p>You want <strong>live metrics</strong> on message rates and latency without writing any extra code.</p>
+  </li>
+  <li>
+    <p>Your devices are <strong>resource-constrained</strong> — the ESP32 client fits comfortably alongside your application code.</p>
+  </li>
+</ul>
+
+<p>MetricMQ is <em>not</em> the right tool if you need TLS-encrypted payloads (it signs but does not encrypt — add a VPN if confidentiality is required), if you need to connect to an existing MQTT infrastructure, or if you need more than 1,000 simultaneous connections.</p>
+
+<hr />
+
+<h2 id="3-key-features-at-a-glance">3. Key Features at a Glance</h2>
+
+<p>Before touching any code, here is what the library actually provides.</p>
+
+<h3 id="dual-protocol-with-auto-detection">Dual Protocol with Auto-Detection</h3>
+
+<p>MetricMQ serves two protocols on the <strong>same port</strong> (6379):</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Protocol</td>
+      <td>Use Case</td>
+      <td>Overhead</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>|—|—|—|</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>RESP</strong> (Redis text protocol)</td>
+      <td>Debugging, scripting, <code class="language-plaintext highlighter-rouge">redis-cli</code></td>
+      <td>Human-readable</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Binary</strong> (MetricMQ native)</td>
+      <td>Embedded devices, production</td>
+      <td>16-byte header, ~40% smaller on wire</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The broker reads the first byte of every connection and routes accordingly. You do not configure anything — a <code class="language-plaintext highlighter-rouge">redis-cli</code> client and an ESP32 binary client can talk through the same broker simultaneously.</p>
+
+<h3 id="exactly-once-delivery">Exactly-Once Delivery</h3>
+
+<p>Every published message gets a monotonically increasing <strong>sequence ID</strong>. The subscriber sends an ACK frame. The broker persists ACK state to an embedded LMDB database. If the subscriber disconnects and reconnects, the broker replays only the messages that were never acknowledged — no duplicates, no gaps.</p>
+
+<h3 id="ed25519-message-signing">Ed25519 Message Signing</h3>
+
+<p>MetricMQ uses <strong>libsodium Ed25519</strong> for message authentication. Each device has a 32-byte public key and a 64-byte secret key. The publisher signs every message; the broker verifies the signature before routing. Topics prefixed with <code class="language-plaintext highlighter-rouge">secure/</code> reject unsigned publishes at the wire level — before they reach any subscriber.</p>
+
+<p>Subscribers can also verify signatures locally, without trusting the broker. This means even a compromised broker cannot inject fake signed messages.</p>
+
+<h3 id="built-in-observability">Built-In Observability</h3>
+
+<p>A Prometheus-compatible HTTP endpoint runs on port 9091. Point any Prometheus scraper or just <code class="language-plaintext highlighter-rouge">curl</code> at it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+http://localhost:9091/metrics
+
+</code></pre></div></div>
+
+<p>You get message rates, active connections, latency histograms (p50/p99/p99.9), per-topic counters, and ACK efficiency — all with zero extra configuration.</p>
+
+<h3 id="lightweight-lmdb-storage">Lightweight LMDB Storage</h3>
+
+<p>All messages are written to an embedded LMDB key-value database before delivery. Random reads hit 1.56 million ops/s. The database compacts automatically every 1,000 publishes, so it never grows unboundedly.</p>
+
+<hr />
+
+<h2 id="4-system-architecture">4. System Architecture</h2>
+
+<p>Here is what you are going to build in this guide:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  ┌──────────────────────┐                      ┌──────────────────────┐
+
+  │   ESP32-S3 Board #1  │                      │   ESP32-S3 Board #2  │
+
+  │      PUBLISHER       │       WiFi           │      SUBSCRIBER      │
+
+  │                      │                      │                      │
+
+  │  Publishes JSON      │──────────────────►   │  Receives messages   │
+
+  │  telemetry data      │          ┌───────┐   │  via wildcard sub    │
+
+  │  (binary protocol)   │─────────►│  PC   │◄──│  LED blinks on msg  │
+
+  │                      │          │Broker │   │                      │
+
+  │  LED blinks on send  │          │ :6379 │   │  Prints stats to     │
+
+  │                      │          │ :9091 │   │  Serial Monitor      │
+
+  └──────────────────────┘          └───────┘   └──────────────────────┘
+
+                                        │
+
+                                   Prometheus
+
+                                   /metrics
+
+</code></pre></div></div>
+
+<p><strong>Three roles:</strong></p>
+
+<ul>
+  <li>
+    <p><strong>PC</strong> — runs the MetricMQ broker (TCP :6379 + HTTP :9091)</p>
+  </li>
+  <li>
+    <p><strong>Board #1</strong> — publisher, simulates a sensor node</p>
+  </li>
+  <li>
+    <p><strong>Board #2</strong> — subscriber, receives and displays all data</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="5-what-you-need">5. What You Need</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Item</td>
+      <td>Details</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>|—|—|</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2× ESP32-S3-DevKitC-1-N16R8</td>
+      <td>16 MB Flash, 8 MB OPI PSRAM</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>2× USB-C cables</td>
+      <td>For flashing and Serial Monitor</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Windows PC</td>
+      <td>On the same WiFi network as both boards</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Arduino IDE 2.x</td>
+      <td>With ESP32 board package installed</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>MetricMQ repo</td>
+      <td>Already cloned and built</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="6-step-0--find-your-pcs-ip-address">6. Step 0 — Find Your PC’s IP Address</h2>
+
+<p>Both boards need to know your PC’s local IP address. Open PowerShell:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">ipconfig</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select-String</span><span class="w"> </span><span class="s2">"IPv4"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Note the address (e.g., <code class="language-plaintext highlighter-rouge">192.168.1.100</code>). You will paste this into both sketches.</p>
+
+<hr />
+
+<h2 id="7-step-1--build-and-start-the-broker">7. Step 1 — Build and Start the Broker</h2>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="nx">C:\Users\Sapta\Documents\Projects\MetricMQ</span><span class="w">
+
+  
+
+</span><span class="c"># Build (if not already done)</span><span class="w">
+
+</span><span class="n">cmake</span><span class="w"> </span><span class="nt">--build</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">--config</span><span class="w"> </span><span class="nx">Release</span><span class="w"> </span><span class="nt">--target</span><span class="w"> </span><span class="nx">metricmq-broker</span><span class="w">
+
+  
+
+</span><span class="c"># Start the broker</span><span class="w">
+
+</span><span class="o">.</span><span class="n">\build\Release\metricmq-broker.exe</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>You will see:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+MetricMQ broker starting on port 6379
+
+Prometheus metrics on port 9091
+
+</code></pre></div></div>
+
+<p><strong>Leave this terminal open.</strong> The broker runs until you press <code class="language-plaintext highlighter-rouge">Ctrl+C</code>.</p>
+
+<p>To verify it is working before touching any board:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c"># In a second terminal — subscribe via redis-cli (or sub_only.exe)</span><span class="w">
+
+</span><span class="n">redis-cli</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">6379</span><span class="w"> </span><span class="nx">SUBSCRIBE</span><span class="w"> </span><span class="nx">sensors/test</span><span class="w">
+
+  
+
+</span><span class="c"># In a third terminal — publish a test message</span><span class="w">
+
+</span><span class="n">redis-cli</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">6379</span><span class="w"> </span><span class="nx">PUBLISH</span><span class="w"> </span><span class="nx">sensors/test</span><span class="w"> </span><span class="s2">"hello"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>You should see <code class="language-plaintext highlighter-rouge">"hello"</code> appear in the subscriber terminal. That confirms the broker is running correctly.</p>
+
+<hr />
+
+<h2 id="8-step-2--arduino-ide-setup-one-time">8. Step 2 — Arduino IDE Setup (One-Time)</h2>
+
+<h3 id="install-esp32-s3-board-support">Install ESP32-S3 Board Support</h3>
+
+<ol>
+  <li>Open <strong>File → Preferences → Additional Board Manager URLs</strong> and add:</li>
+</ol>
+
+<p>   ```</p>
+
+<p>   https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</p>
+
+<p>   ```</p>
+
+<ol>
+  <li>Go to <strong>Tools → Board → Boards Manager</strong>, search <code class="language-plaintext highlighter-rouge">esp32</code>, and install <strong>esp32 by Espressif Systems</strong> (v2.0.0 or newer — required for bundled libsodium support).</li>
+</ol>
+
+<h3 id="install-the-metricmq-library">Install the MetricMQ Library</h3>
+
+<p>Copy the ESP32 client library into your Arduino libraries folder:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">Copy-Item</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="se">`
+</span><span class="w">
+</span><span class="err"> </span><span class="w"> </span><span class="s2">"C:\Users\Sapta\Documents\Projects\MetricMQ\esp32-metricmq"</span><span class="w"> </span><span class="se">`</span><span class="w">
+
+</span><span class="err"> </span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">USERPROFILE</span><span class="s2">\Documents\Arduino\libraries\MetricMQ"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>The result should look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Arduino/libraries/MetricMQ/
+
+├── library.properties
+
+├── src/
+
+│   ├── MetricMQ.h
+
+│   └── MetricMQ.cpp
+
+└── examples/
+
+    ├── DemoPublisher/
+
+    ├── DemoSubscriber/
+
+    ├── SimplePublish/
+
+    └── SimpleSubscribe/
+
+</code></pre></div></div>
+
+<h3 id="board-settings-apply-to-both-boards">Board Settings (Apply to Both Boards)</h3>
+
+<p>In Arduino IDE under <strong>Tools</strong>:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Setting</td>
+      <td>Value</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>|—|—|</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Board</td>
+      <td><code class="language-plaintext highlighter-rouge">ESP32S3 Dev Module</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>USB CDC On Boot</td>
+      <td><code class="language-plaintext highlighter-rouge">Enabled</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>PSRAM</td>
+      <td><code class="language-plaintext highlighter-rouge">OPI PSRAM</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Flash Size</td>
+      <td><code class="language-plaintext highlighter-rouge">16MB (128Mb)</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Upload Speed</td>
+      <td><code class="language-plaintext highlighter-rouge">921600</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="9-step-3--flash-board-1-the-publisher">9. Step 3 — Flash Board #1: The Publisher</h2>
+
+<ol>
+  <li>
+    <p>Connect <strong>Board #1</strong> via USB.</p>
+  </li>
+  <li>
+    <p>In Arduino IDE: <strong>File → Examples → MetricMQ → DemoPublisher</strong>.</p>
+  </li>
+  <li>
+    <p>At the top of the sketch, update:</p>
+  </li>
+</ol>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_SSID</span> <span class="err"> </span> <span class="err"> </span> <span class="o">=</span> <span class="s">"YourWiFiSSID"</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_PASSWORD</span> <span class="o">=</span> <span class="s">"YourWiFiPassword"</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">BROKER_HOST</span> <span class="err"> </span> <span class="o">=</span> <span class="s">"192.168.1.100"</span><span class="p">;</span> <span class="err"> </span><span class="c1">// &lt;-- your PC's IP from Step 0</span>
+
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Select the correct COM port under <strong>Tools → Port</strong>, then press <strong>Upload</strong> (<code class="language-plaintext highlighter-rouge">Ctrl+U</code>).</p>
+  </li>
+  <li>
+    <p>Open <strong>Serial Monitor</strong> at <strong>115200 baud</strong>. You should see:</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+╔══════════════════════════════════════════╗
+
+║  MetricMQ Demo - ESP32-S3 PUBLISHER      ║
+
+╚══════════════════════════════════════════╝
+
+Connecting to WiFi... Connected!
+
+&gt;&gt;&gt; CONNECTED to broker (binary protocol v1)
+
+&gt;&gt;&gt; Exactly-once delivery: ENABLED
+
+--- Phase 1: Sensor Telemetry ---
+
+[    5s] PUB #1 -&gt; sensors/esp32/telemetry (87 bytes, 1234us)
+
+</code></pre></div></div>
+
+<p>The board is now publishing JSON telemetry to the broker every 5 seconds using the binary protocol.</p>
+
+<hr />
+
+<h2 id="10-step-4--flash-board-2-the-subscriber">10. Step 4 — Flash Board #2: The Subscriber</h2>
+
+<ol>
+  <li>
+    <p>Connect <strong>Board #2</strong> via USB (disconnect Board #1 first, or use separate COM ports).</p>
+  </li>
+  <li>
+    <p>In Arduino IDE: <strong>File → Examples → MetricMQ → DemoSubscriber</strong>.</p>
+  </li>
+  <li>
+    <p>Update the same three config lines (same WiFi credentials and broker IP).</p>
+  </li>
+  <li>
+    <p>Upload and open Serial Monitor at 115200 baud.</p>
+  </li>
+</ol>
+
+<p>You should immediately see messages arriving from Board #1:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+╔══════════════════════════════════════════╗
+
+║  MetricMQ Demo - ESP32-S3 SUBSCRIBER     ║
+
+╚══════════════════════════════════════════╝
+
+&gt;&gt;&gt; Subscribed: sensors/esp32/# (wildcard)
+
+READY - Waiting for messages...
+
+  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MSG #1
+
+  Topic:    sensors/esp32/telemetry
+
+  Payload:  {"temp":22.3,"hum":54.2,"rssi":-45,"uptime":5012}
+
+  Seq:      1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+</code></pre></div></div>
+
+<p>The subscriber uses a <strong>wildcard subscription</strong> (<code class="language-plaintext highlighter-rouge">sensors/esp32/#</code>), which means it catches every topic that starts with <code class="language-plaintext highlighter-rouge">sensors/esp32/</code> — all three phases of the demo, with a single <code class="language-plaintext highlighter-rouge">subscribe()</code> call.</p>
+
+<hr />
+
+<h2 id="11-project-walkthroughs">11. Project Walkthroughs</h2>
+
+<p>The publisher sketch automatically progresses through three phases. Here is what each one demonstrates and what to look for.</p>
+
+<hr />
+
+<h3 id="project-1--basic-sensor-telemetry-0-to-60-seconds">Project 1 — Basic Sensor Telemetry (0 to 60 seconds)</h3>
+
+<p><strong>What happens:</strong> Board #1 publishes a JSON payload to <code class="language-plaintext highlighter-rouge">sensors/esp32/telemetry</code> every 5 seconds.</p>
+
+<p><strong>What to observe:</strong></p>
+
+<ul>
+  <li>
+    <p>Board #2 Serial Monitor prints each incoming message with its sequence number.</p>
+  </li>
+  <li>
+    <p>The broker terminal logs the connection and message count.</p>
+  </li>
+  <li>
+    <p>Open <code class="language-plaintext highlighter-rouge">http://localhost:9091/metrics</code> in a browser and watch <code class="language-plaintext highlighter-rouge">metricmq_messages_published_total</code> increment.</p>
+  </li>
+</ul>
+
+<p><strong>The code behind it (simplified):</strong></p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Publisher side — Board #1</span>
+
+<span class="n">MetricMQClient</span> <span class="n">pub</span><span class="p">;</span>
+
+<span class="n">pub</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">BROKER_HOST</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+
+  
+
+<span class="n">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">temp</span><span class="se">\"</span><span class="s">:22.3,</span><span class="se">\"</span><span class="s">hum</span><span class="se">\"</span><span class="s">:54.2,</span><span class="se">\"</span><span class="s">rssi</span><span class="se">\"</span><span class="s">:"</span> <span class="o">+</span> <span class="n">String</span><span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">RSSI</span><span class="p">())</span> <span class="o">+</span> <span class="s">"}"</span><span class="p">;</span>
+
+<span class="n">pub</span><span class="p">.</span><span class="n">publishSigned</span><span class="p">(</span><span class="s">"sensors/esp32/telemetry"</span><span class="p">,</span> <span class="n">payload</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+
+</code></pre></div></div>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Subscriber side — Board #2</span>
+
+<span class="n">MetricMQClient</span> <span class="n">sub</span><span class="p">;</span>
+
+<span class="n">sub</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">BROKER_HOST</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+
+  
+
+<span class="n">sub</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"sensors/esp32/#"</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">topic</span><span class="p">,</span>
+
+<span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span><span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">payload</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span>
+
+<span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span><span class="kt">uint64_t</span> <span class="n">seq</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="err"> </span> <span class="err"> </span> <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"MSG seq=%llu  topic=%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">topic</span><span class="p">);</span>
+
+<span class="err"> </span> <span class="err"> </span> <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"  %.*s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">len</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<p>This is the baseline IoT data flow. Two boards, one broker, one API call each.</p>
+
+<hr />
+
+<h3 id="project-2--high-frequency-burst-mode-60-to-90-seconds">Project 2 — High-Frequency Burst Mode (60 to 90 seconds)</h3>
+
+<p><strong>What happens:</strong> The publisher ramps up to <strong>one message per second</strong> on <code class="language-plaintext highlighter-rouge">sensors/esp32/burst</code>.</p>
+
+<p><strong>What to observe:</strong></p>
+
+<ul>
+  <li>
+    <p>Messages arrive at Board #2 at 1 Hz. Watch the sequence numbers increment continuously.</p>
+  </li>
+  <li>
+    <p>Check <code class="language-plaintext highlighter-rouge">http://localhost:9091/metrics</code> — <code class="language-plaintext highlighter-rouge">metricmq_publish_latency_us</code> will show live latency histograms.</p>
+  </li>
+  <li>
+    <p>Binary protocol wire size: a 90-byte JSON payload produces a <strong>106-byte frame</strong> (16-byte header + topic + payload). An equivalent RESP frame would be ~180 bytes. That ~40% reduction matters when you are pushing data over a congested WiFi channel.</p>
+  </li>
+</ul>
+
+<p><strong>What this demonstrates:</strong> The binary protocol is not just a micro-optimisation. At 1 message/second with a 90-byte payload, the binary protocol saves around 74 bytes per message — roughly 4.4 KB/minute of saved bandwidth per device. In a 20-node sensor network running on battery-backed WiFi, that adds up.</p>
+
+<hr />
+
+<h3 id="project-3--multi-topic-fan-out-with-wildcards-90-seconds">Project 3 — Multi-Topic Fan-Out with Wildcards (90+ seconds)</h3>
+
+<p><strong>What happens:</strong> The publisher sends to three separate topics every 5 seconds:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sensors/esp32/temperature</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sensors/esp32/humidity</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sensors/esp32/status</code></p>
+  </li>
+</ul>
+
+<p>Board #2, subscribed to <code class="language-plaintext highlighter-rouge">sensors/esp32/#</code>, receives all three with a single subscription.</p>
+
+<p><strong>What to observe:</strong></p>
+
+<ul>
+  <li>
+    <p>The subscriber Serial Monitor shows messages arriving on three different topic paths, all caught by one wildcard.</p>
+  </li>
+  <li>
+    <p>Per-topic message counts are visible at <code class="language-plaintext highlighter-rouge">/metrics</code> under <code class="language-plaintext highlighter-rouge">metricmq_topic_messages_total</code>.</p>
+  </li>
+</ul>
+
+<p><strong>The code behind it:</strong></p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Publisher — one call per topic</span>
+
+<span class="n">pub</span><span class="p">.</span><span class="n">publishSigned</span><span class="p">(</span><span class="s">"sensors/esp32/temperature"</span><span class="p">,</span> <span class="s">"{</span><span class="se">\"</span><span class="s">celsius</span><span class="se">\"</span><span class="s">:22.3}"</span><span class="p">);</span>
+
+<span class="n">pub</span><span class="p">.</span><span class="n">publishSigned</span><span class="p">(</span><span class="s">"sensors/esp32/humidity"</span><span class="p">,</span> <span class="err"> </span> <span class="err"> </span><span class="s">"{</span><span class="se">\"</span><span class="s">percent</span><span class="se">\"</span><span class="s">:54.2}"</span><span class="p">);</span>
+
+<span class="n">pub</span><span class="p">.</span><span class="n">publishSigned</span><span class="p">(</span><span class="s">"sensors/esp32/status"</span><span class="p">,</span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span><span class="s">"{</span><span class="se">\"</span><span class="s">rssi</span><span class="se">\"</span><span class="s">:-45}"</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Subscriber — one wildcard catches all three</span>
+
+<span class="n">sub</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"sensors/esp32/#"</span><span class="p">,</span> <span class="n">onMessage</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>This is the routing model that makes MetricMQ useful for multi-sensor deployments. You can add a third board publishing to <code class="language-plaintext highlighter-rouge">sensors/esp32/vibration</code> and Board #2 will receive it automatically — no subscriber code changes required.</p>
+
+<hr />
+
+<h3 id="project-4--cross-protocol-communication-bonus">Project 4 — Cross-Protocol Communication (Bonus)</h3>
+
+<p><strong>What happens:</strong> You publish from your PC using the RESP text protocol (redis-cli), and Board #2 receives it over its binary protocol connection.</p>
+
+<p>Open a new terminal while both boards are running:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">redis-cli</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">6379</span><span class="w"> </span><span class="nx">PUBLISH</span><span class="w"> </span><span class="nx">sensors/esp32/telemetry</span><span class="w"> </span><span class="s2">"{\"</span><span class="nx">source\</span><span class="s2">":\"</span><span class="nx">desktop\</span><span class="s2">",\"</span><span class="nx">value\</span><span class="s2">":99}"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Watch Board #2’s Serial Monitor — that message arrives on the same wildcard subscription, indistinguishable from messages sent by Board #1.</p>
+
+<p><strong>What this demonstrates:</strong> The broker routes messages by topic regardless of what protocol each client used to connect. A Python script, a <code class="language-plaintext highlighter-rouge">redis-cli</code> one-liner, and an ESP32 all participate in the same message bus. Useful for injecting test data, sending commands from a laptop, or bridging to legacy tooling that only speaks Redis.</p>
+
+<hr />
+
+<h3 id="project-5--ed25519-signed-publishing-advanced">Project 5 — Ed25519 Signed Publishing (Advanced)</h3>
+
+<p><strong>What happens:</strong> You generate a per-device Ed25519 keypair for Board #1. The publisher signs every message with its 64-byte secret key. The broker verifies the signature before routing. Board #2 verifies the signature again locally — without trusting the broker.</p>
+
+<h4 id="step-a--generate-a-keypair">Step A — Generate a Keypair</h4>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">.</span><span class="n">\build\Release\metricmq-keygen.exe</span><span class="w"> </span><span class="s2">"sensor_node_1"</span><span class="w"> </span><span class="s2">"secure/sensors/*"</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>The tool prints:</p>
+
+<ul>
+  <li>
+    <p>A <strong>C array</strong> for the secret key → paste into <code class="language-plaintext highlighter-rouge">SecurePublisher.ino</code></p>
+  </li>
+  <li>
+    <p>A <strong>C array</strong> for the public key → paste into <code class="language-plaintext highlighter-rouge">SecureSubscriber.ino</code> and the broker registration</p>
+  </li>
+  <li>
+    <p>Broker registration code → add to <code class="language-plaintext highlighter-rouge">src/main.cpp</code> before the broker starts</p>
+  </li>
+</ul>
+
+<h4 id="step-b--register-the-key-in-the-broker">Step B — Register the Key in the Broker</h4>
+
+<p>The keygen tool prints the exact snippet to paste into <code class="language-plaintext highlighter-rouge">src/main.cpp</code>:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// In main(), before broker.run():</span>
+
+<span class="kt">uint8_t</span> <span class="n">sensor_node_1_pk</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mh">0xAB</span><span class="p">,</span> <span class="mh">0xCD</span><span class="p">,</span> <span class="cm">/* ... 32 bytes ... */</span> <span class="p">};</span>
+
+<span class="n">broker</span><span class="p">.</span><span class="n">get_keystore</span><span class="p">().</span><span class="n">register_key</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sensor_node_1_pk</span><span class="p">,</span> <span class="p">{</span><span class="s">"secure/sensors/*"</span><span class="p">});</span>
+
+</code></pre></div></div>
+
+<p>Rebuild and restart the broker after this change.</p>
+
+<h4 id="step-c--use-the-secure-examples">Step C — Use the Secure Examples</h4>
+
+<p>Flash <strong>SecurePublisher.ino</strong> to Board #1 and <strong>SecureSubscriber.ino</strong> to Board #2. You will see this in Board #2’s Serial Monitor:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+[SIGNED ✓] Verified  topic=secure/sensors/temp  key_id=1
+
+  Payload: {"celsius":22.3}
+
+</code></pre></div></div>
+
+<p>If anyone tampers with the payload in transit:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+[SIGNED ✗] TAMPERING DETECTED — dropping message
+
+</code></pre></div></div>
+
+<p>If an unregistered device tries to publish to a <code class="language-plaintext highlighter-rouge">secure/</code> topic:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+[BROKER] Rejected: unknown key_id=999
+
+</code></pre></div></div>
+
+<p>You can also run the standalone desktop test to see all cases exercised:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="o">.</span><span class="n">\build\Release\signed_publish_test.exe</span><span class="w">
+
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+[PASS] Valid signed message accepted
+
+[PASS] Tampered payload rejected
+
+[PASS] Unknown key rejected
+
+[PASS] Disabled key rejected
+
+[PASS] Wrong topic scope rejected
+
+All 9/9 tests passed
+
+</code></pre></div></div>
+
+<p><strong>Important note:</strong> Ed25519 authenticates — it proves the message came from the device that holds the secret key. It does <strong>not</strong> encrypt. The payload bytes are visible on the wire. If you need confidentiality, run the broker behind a VPN or add stunnel. Authentication and encryption are separate concerns.</p>
+
+<hr />
+
+<h2 id="12-resilience-testing--the-pull-the-plug-test">12. Resilience Testing — The “Pull the Plug” Test</h2>
+
+<p>This is where exactly-once delivery becomes concrete rather than theoretical.</p>
+
+<h3 id="test-1-unplug-the-subscriber">Test 1: Unplug the Subscriber</h3>
+
+<ol>
+  <li>
+    <p>While both boards are running (Phase 1 or 3), <strong>unplug Board #2</strong> from USB.</p>
+  </li>
+  <li>
+    <p>Board #1 keeps publishing. The broker keeps assigning sequence IDs and persisting messages to LMDB.</p>
+  </li>
+  <li>
+    <p>Plug Board #2 back in. It reconnects, re-subscribes, and the broker replays every unacknowledged message from where it left off.</p>
+  </li>
+  <li>
+    <p>Board #2’s Serial Monitor will show: <code class="language-plaintext highlighter-rouge">Duplicates: 0 (exactly-once working!)</code></p>
+  </li>
+</ol>
+
+<p>No messages lost. No duplicates. The sequence numbers are continuous.</p>
+
+<h3 id="test-2-restart-the-broker">Test 2: Restart the Broker</h3>
+
+<ol>
+  <li>
+    <p>Press <code class="language-plaintext highlighter-rouge">Ctrl+C</code> in the broker terminal to stop it.</p>
+  </li>
+  <li>
+    <p>Wait 5 seconds. Both boards will log <code class="language-plaintext highlighter-rouge">MetricMQ disconnected</code>.</p>
+  </li>
+  <li>
+    <p>Restart the broker: <code class="language-plaintext highlighter-rouge">.\build\Release\metricmq-broker.exe</code></p>
+  </li>
+  <li>
+    <p>Both boards reconnect automatically. The broker loads ACK state from LMDB on startup, so it knows exactly which messages each client has already processed.</p>
+  </li>
+</ol>
+
+<h3 id="test-3-wifi-interruption">Test 3: WiFi Interruption</h3>
+
+<ol>
+  <li>
+    <p>On your router, briefly disable and re-enable WiFi (or move a board far enough away to drop signal).</p>
+  </li>
+  <li>
+    <p>Both boards detect the TCP disconnect and attempt reconnection.</p>
+  </li>
+  <li>
+    <p>Once WiFi is restored, they reconnect and resume where they left off.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><strong>One honest caveat:</strong> The ESP32 client does not auto-reconnect by itself — your sketch must check <code class="language-plaintext highlighter-rouge">isConnected()</code> and call <code class="language-plaintext highlighter-rouge">connect()</code> manually. Both demo sketches do this in <code class="language-plaintext highlighter-rouge">loop()</code>. If you write your own sketch, copy that pattern:</p>
+</blockquote>
+
+<blockquote>
+  <p>```cpp</p>
+</blockquote>
+
+<blockquote>
+  <p>void loop() {</p>
+</blockquote>
+
+<blockquote>
+  <p>    if (!client.isConnected()) {</p>
+</blockquote>
+
+<blockquote>
+  <p>        client.connect(BROKER_HOST, BROKER_PORT);</p>
+</blockquote>
+
+<blockquote>
+  <p>    }</p>
+</blockquote>
+
+<blockquote>
+  <p>    client.loop();</p>
+</blockquote>
+
+<blockquote>
+  <p>    // … your application code</p>
+</blockquote>
+
+<blockquote>
+  <p>}</p>
+</blockquote>
+
+<blockquote>
+  <p>```</p>
+</blockquote>
+
+<hr />
+
+<h2 id="13-observability--the-metrics-endpoint">13. Observability — The Metrics Endpoint</h2>
+
+<p>While everything is running, open a browser and navigate to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+http://localhost:9091/metrics
+
+</code></pre></div></div>
+
+<p>You will see a Prometheus text-format page with live data:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+# HELP metricmq_messages_published_total Total messages received from publishers
+
+# TYPE metricmq_messages_published_total counter
+
+metricmq_messages_published_total 42
+
+  
+
+# HELP metricmq_publish_latency_us Publish latency in microseconds
+
+# TYPE metricmq_publish_latency_us histogram
+
+metricmq_publish_latency_us_bucket{le="100"} 38
+
+metricmq_publish_latency_us_bucket{le="500"} 42
+
+...
+
+  
+
+# HELP metricmq_active_connections Current open TCP connections
+
+# TYPE metricmq_active_connections gauge
+
+metricmq_active_connections 2
+
+  
+
+# HELP metricmq_topic_messages_total Per-topic message count
+
+metricmq_topic_messages_total{topic="sensors/esp32/telemetry"} 12
+
+metricmq_topic_messages_total{topic="sensors/esp32/burst"} 18
+
+</code></pre></div></div>
+
+<p>If you have Prometheus and Grafana installed, point a scrape job at <code class="language-plaintext highlighter-rouge">localhost:9091</code> and you have a full dashboard with zero broker-side configuration. If you do not, <code class="language-plaintext highlighter-rouge">curl localhost:9091/metrics</code> in a terminal is enough to confirm everything is working.</p>
+
+<hr />
+
+<h2 id="14-understanding-the-numbers">14. Understanding the Numbers</h2>
+
+<p>The README claims 106,000 messages/second and 46.5 µs p50 latency. Those numbers are real — but they were measured on a loopback interface on a developer machine. Here is what to expect in practice:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Scenario</td>
+      <td>Realistic expectation</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>|—|—|</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ESP32 over WiFi, 1 subscriber</td>
+      <td>500–2,000 msg/s</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ESP32 over WiFi, 5 subscribers</td>
+      <td>200–500 msg/s</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Desktop loopback (binary protocol)</td>
+      <td>80,000–106,000 msg/s</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>p50 latency, loopback</td>
+      <td>~46 µs</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>p50 latency, ESP32 over WiFi</td>
+      <td>2–15 ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For a sensor polling at 1 Hz or even 10 Hz, the WiFi numbers are more than sufficient. The benchmark figures matter for desktop or Linux server deployments where you are pushing high-volume data pipelines.</p>
+
+<p>The 328 KB binary size comparison is straightforward: Mosquitto is ~1.5 MB, a minimal Node.js MQTT server pulls in ~15 MB of <code class="language-plaintext highlighter-rouge">node_modules</code>, RabbitMQ starts at 50 MB. MetricMQ fits on a USB stick next to a README.</p>
+
+<hr />
+
+<h2 id="15-troubleshooting">15. Troubleshooting</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Symptom</td>
+      <td>Probable cause</td>
+      <td>Fix</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>|—|—|—|</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ESP32 won’t connect to WiFi</td>
+      <td>5 GHz network</td>
+      <td>ESP32 only supports 2.4 GHz</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Connection refused</code> on broker port</td>
+      <td>Broker not running or firewall</td>
+      <td>Start the broker; add inbound rule for TCP 6379 in Windows Firewall</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Wrong <code class="language-plaintext highlighter-rouge">BROKER_HOST</code></td>
+      <td>IP changed after router restart</td>
+      <td>Re-run <code class="language-plaintext highlighter-rouge">ipconfig</code> and update both sketches</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Board not detected in Arduino</td>
+      <td>Missing USB driver</td>
+      <td>Install CP210x or CH340 driver for your board’s USB chip</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Upload fails with “Connecting…”</td>
+      <td>Boot mode</td>
+      <td>Hold the <code class="language-plaintext highlighter-rouge">BOOT</code> button on the board while clicking Upload; release after “Connecting…” appears</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>PSRAM not detected</td>
+      <td>Wrong board setting</td>
+      <td>Set <strong>PSRAM: OPI PSRAM</strong> in Tools menu, not “Disabled”</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Subscriber shows 0 messages</td>
+      <td>Both boards must use identical <code class="language-plaintext highlighter-rouge">BROKER_HOST</code></td>
+      <td>Verify with Serial Monitor output</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">MDB_MAP_FULL</code> in broker logs</td>
+      <td>LMDB database full</td>
+      <td>This should not occur under normal use (auto-compacts at 100K messages); if it does, delete <code class="language-plaintext highlighter-rouge">metricmq.db</code> and restart</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="16-when-not-to-use-metricmq">16. When NOT to Use MetricMQ</h2>
+
+<p>Being honest about limits builds trust more than overselling:</p>
+
+<ul>
+  <li>
+    <p><strong>You need TLS-encrypted payloads</strong> — MetricMQ signs but does not encrypt. Use a VPN layer or stunnel if the data must be confidential in transit.</p>
+  </li>
+  <li>
+    <p><strong>You need MQTT QoS 1/2 compatibility</strong> — If your project must speak standard MQTT to existing infrastructure, use Mosquitto.</p>
+  </li>
+  <li>
+    <p><strong>You need more than 1,000 concurrent connections</strong> — MetricMQ has a hard cap of 1,000 simultaneous connections by design.</p>
+  </li>
+  <li>
+    <p><strong>You need RESP authentication</strong> — The RESP protocol has no credentials. Any device that can reach port 6379 can publish. Restrict access at the firewall for any production LAN deployment.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="17-what-to-explore-next">17. What to Explore Next</h2>
+
+<p>You have a working two-board system with delivery guarantees, wildcard routing, and live metrics. Here is what to try next:</p>
+
+<p><strong>Queue Mode (Push/Pull)</strong> — Instead of broadcast pub/sub, use <code class="language-plaintext highlighter-rouge">QueueProducer</code> and <code class="language-plaintext highlighter-rouge">QueueConsumer</code> for round-robin task distribution across multiple workers. Useful for offloading computation from sensor nodes.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Desktop producer pushes jobs</span>
+
+<span class="n">metricmq</span><span class="o">::</span><span class="n">QueueProducer</span> <span class="nf">prod</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+
+<span class="n">prod</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="s">"jobs/process"</span><span class="p">,</span> <span class="s">"{</span><span class="se">\"</span><span class="s">sensor_id</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">node_01</span><span class="se">\"</span><span class="s">,</span><span class="se">\"</span><span class="s">raw</span><span class="se">\"</span><span class="s">:1042}"</span><span class="p">);</span>
+
+  
+
+<span class="c1">// Multiple ESP32 workers pull and process one-at-a-time</span>
+
+<span class="n">metricmq</span><span class="o">::</span><span class="n">QueueConsumer</span> <span class="nf">worker</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+
+<span class="n">worker</span><span class="p">.</span><span class="n">pull</span><span class="p">(</span><span class="s">"jobs/process"</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">payload</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="err"> </span> <span class="err"> </span> <span class="n">process</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<p><strong>Wokwi Simulation</strong> — The <code class="language-plaintext highlighter-rouge">wokwi/</code> folder in the repo contains browser-simulatable projects. You can run the demo without any physical hardware using <a href="https://wokwi.com">wokwi.com</a>.</p>
+
+<p><strong>Grafana Dashboard</strong> — Point Prometheus at <code class="language-plaintext highlighter-rouge">localhost:9091</code>, import a dashboard, and get live graphs of message rates, latency percentiles, and per-device topic counts.</p>
+
+<p><strong>Multiple Secure Devices</strong> — Each ESP32 gets its own keypair. The broker’s <code class="language-plaintext highlighter-rouge">TrustedKeyStore</code> holds each device’s public key scoped to its own topic prefix. One call to <code class="language-plaintext highlighter-rouge">set_enabled(key_id, false)</code> to instantly revoke a compromised device — no certificate rotation, no infrastructure changes.</p>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<p>MetricMQ is not trying to replace Kafka or compete with cloud IoT platforms. It is trying to answer a specific question: <em>what is the simplest possible setup that still gives you delivery guarantees, device identity, and observability?</em></p>
+
+<p>The answer turns out to be a 328 KB binary, a 50-line Arduino sketch, and a <code class="language-plaintext highlighter-rouge">redis-cli</code> command to verify it is working.</p>
+
+<p>The two-board demo in this guide runs everything locally, requires no accounts, no cloud services, and no configuration files beyond updating three constants in a sketch. That is the point.</p>
+
+<hr />
+
+<p><em>MetricMQ is open-source and MIT-licensed. Source code and documentation are in the project repository.</em></p>
+
+</article>
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:rgb(25, 55, 71);background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:rgb(25, 55, 71);background-image:url(/cover_images/posts/temple_lite.png)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/blog/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>
