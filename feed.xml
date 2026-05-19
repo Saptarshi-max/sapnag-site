@@ -1,4 +1,1293 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-17T19:44:06+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</title><link href="/blog/es/2026-04-17-di-embedded/" rel="alternate" type="text/html" title="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It" /><published>2026-04-17T00:00:00+00:00</published><updated>2026-05-17T19:40:38+00:00</updated><id>/blog/es/di-embedded</id><content type="html" xml:base="/blog/es/2026-04-17-di-embedded/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-19T21:16:43+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq1/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-19T21:16:02+00:00</updated><id>/blog/es/metricmq1</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq1/"><![CDATA[<p><em>A 328 KB broker that survives network drops, routes to multiple subscribers, and cryptographically proves every reading is real — running on your desk in 15 minutes.</em></p>
+
+<hr />
+
+<h2 id="1-the-gap-in-iot-messaging">1. The Gap in IoT Messaging</h2>
+
+<p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0—fast, but no guarantees. On the other end, you have RabbitMQ or Kafka—extremely reliable, but they are heavy 50MB+ server applications.</p>
+
+<p><strong>MetricMQ fills this gap.</strong> It is a <strong>328 KB single-executable broker</strong> that gives you exactly-once delivery, built-in Ed25519 message signing, and Prometheus metrics out of the box.</p>
+
+<p>Three questions follow every IoT project:</p>
+
+<p><strong>What happens when WiFi drops?</strong> Do those readings disappear, or can they be recovered?</p>
+
+<p><strong>How do you send one reading to many places?</strong> Does every subscriber get its own copy?</p>
+
+<p><strong>How do you know a reading is real?</strong> If something on your network sends fake sensor data, can you detect it?</p>
+
+<p>Most messaging tools answer one of these well. MetricMQ tries to answer all three in a broker that compiles to 328 KB and ships a native Arduino/PlatformIO library for the ESP32.</p>
+
+<blockquote>
+  <p><strong>Use MetricMQ when:</strong> You need guaranteed delivery (you want to know a message actually arrived), local deployments without complex config, and cryptographically verified messages on constrained microcontrollers like the ESP32.</p>
+</blockquote>
+
+<p>This post walks through four demos, each building on the last. You need one ESP32, a PC running the broker, and PlatformIO. No prior message broker experience needed.</p>
+
+<hr />
+
+<h1 id="core-features-in-a-nutshell">Core Features in a Nutshell</h1>
+
+<p>MetricMQ provides powerful features directly out of the box without complicated plugins:</p>
+
+<ul>
+  <li><strong>Dual Protocol Auto-Detection:</strong> Connect using the human-readable Redis text protocol (RESP) for debugging via <code class="language-plaintext highlighter-rouge">redis-cli</code>, or use the <strong>Binary Protocol</strong> (40% smaller footprint) for embedded production. The broker auto-detects based on the first byte!</li>
+  <li><strong>Exactly-Once Delivery:</strong> Messages are persisted to an embedded LMDB database. If a subscriber disconnects and reconnects, only unacknowledged messages are replayed. No gaps, no duplicates.</li>
+  <li><strong>Ed25519 Message Signing:</strong> Publishers sign messages, and the broker rejects tampered packets at the wire level before they reach subscribers.</li>
+  <li><strong>Zero-Config Observability:</strong> A Prometheus-compatible endpoint automatically runs on port 9091.</li>
+</ul>
+
+<hr />
+
+<h3 id="metricmq-vs-the-alternatives">MetricMQ vs. The Alternatives</h3>
+
+<p>Here is a realistic comparison of when to use what:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Pros</th>
+      <th>Cons</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Raw UDP/TCP</strong></td>
+      <td>Zero overhead, extremely fast</td>
+      <td>No delivery guarantees, requires custom framing</td>
+      <td>Video streaming, local LAN discovery</td>
+    </tr>
+    <tr>
+      <td><strong>Mosquitto (MQTT)</strong></td>
+      <td>Industry standard, QoS 1/2 support</td>
+      <td>Complex setup, fire-and-forget by default</td>
+      <td>Large enterprise integrations, legacy IoT</td>
+    </tr>
+    <tr>
+      <td><strong>RabbitMQ/Kafka</strong></td>
+      <td>Massive scale, highly reliable</td>
+      <td>Requires a server/cluster, high memory usage</td>
+      <td>Cloud data pipelines, heavy backends</td>
+    </tr>
+    <tr>
+      <td><strong>MetricMQ</strong></td>
+      <td>328 KB broker, exactly-once, auto Redis protocol</td>
+      <td>No TLS yet, capped at 1000 connections</td>
+      <td>Edge computing, constrained sensor networks</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="a-map-of-this-post">A Map of This Post</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Concepts]  What is pub/sub? Why not just MQTT?
+[Setup]     Build the broker on your PC. Verify with redis-cli.
+[Demo 1]    Pub/Sub  — ESP32 publishes → PC receives live
+[Demo 2]    Exactly-Once — unplug mid-stream → reconnect → missed messages return
+[Demo 3]    Fan-Out — one publish → multiple subscribers simultaneously
+[Demo 4]    Signed Messages — broker rejects fake data cryptographically
+[Metrics]   Prometheus + Grafana — see your system live
+[Docs]      How to navigate the MetricMQ reference docs
+[Roadmap]   What MetricMQ needs next and why it matters for real IoT
+</code></pre></div></div>
+
+<p>Each demo has its own complete <code class="language-plaintext highlighter-rouge">platformio.ini</code> and sketch. Skip to any section independently or work through in order.</p>
+
+<hr />
+
+<h2 id="what-is-a-message-broker">What Is a Message Broker?</h2>
+
+<blockquote>
+  <p><strong>Already know pub/sub and MQTT? <a href="#setting-up-the-broker">Skip to Setup.</a></strong></p>
+</blockquote>
+
+<p>A <strong>message broker</strong> is a program that sits between devices that produce data (publishers) and devices or services that consume it (subscribers). Think of it like a post office: publishers drop messages off addressed to a topic, the broker sorts and routes them, subscribers collect what matches their subscription.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ESP32 (Publisher)                         PC Terminal (Subscriber)
+      │                                           │
+      │  publish("sensors/temp", "23.4")          │
+      │─────────────► [Broker] ──────────────────►│
+      │                                           │
+      │                               receives:   │
+      │                       "sensors/temp"      │
+      │                           "23.4"          │
+</code></pre></div></div>
+
+<p>This pattern — pub/sub — means the ESP32 doesn’t need to know how many things are listening or where they are. It just publishes. New subscribers can join at any time without touching the firmware.</p>
+
+<h3 id="topics-and-wildcards">Topics and Wildcards</h3>
+
+<p>Topics are strings that work like file paths, using <code class="language-plaintext highlighter-rouge">/</code> as a separator:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subscription</th>
+      <th>What it receives</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sensors/temperature</code></td>
+      <td>Only exactly that topic</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sensors/+</code></td>
+      <td><code class="language-plaintext highlighter-rouge">sensors/temperature</code>, <code class="language-plaintext highlighter-rouge">sensors/humidity</code> — any single segment</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sensors/#</code></td>
+      <td>Everything under <code class="language-plaintext highlighter-rouge">sensors/</code> at any depth</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">#</code></td>
+      <td>Every single message on the broker</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="why-not-just-use-mqtt">Why Not Just Use MQTT?</h3>
+
+<p>MQTT is excellent and widely used. But its delivery guarantees have tradeoffs worth understanding before you pick anything:</p>
+
+<p><strong>QoS 0 (fire and forget)</strong> — fast, zero overhead, but if the network drops mid-publish, the message is gone with no record of it.</p>
+
+<p><strong>QoS 1 (at least once)</strong> — the broker acknowledges receipt, so messages get through. But a reconnect at the wrong moment can deliver the same message twice. Your code has to handle duplicates.</p>
+
+<p><strong>QoS 2 (exactly once)</strong> — four-packet handshake, guaranteed no loss, no duplicates. But the broker (Mosquitto, EMQX, HiveMQ) is a separate service you install, configure, and maintain. These range from 3 MB to 50 MB and need persistent configuration.</p>
+
+<p>MetricMQ aims for exactly-once in a 328 KB broker with no configuration file. The tradeoff is that it’s newer and less battle-tested. For a fleet of thousands of devices in production, use EMQX. For prototyping, edge deployments, or any situation where you own the full stack and want delivery guarantees without broker infrastructure overhead, MetricMQ is worth understanding.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>MetricMQ</th>
+      <th>MQTT QoS 0</th>
+      <th>MQTT QoS 2</th>
+      <th>RabbitMQ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Broker size</td>
+      <td><strong>328 KB</strong></td>
+      <td>~3 MB</td>
+      <td>~3 MB</td>
+      <td>~50 MB</td>
+    </tr>
+    <tr>
+      <td>Exactly-once</td>
+      <td>✅</td>
+      <td>❌</td>
+      <td>✅</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Message signing</td>
+      <td>✅ Built-in</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>Native ESP32 client</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">redis-cli</code> works</td>
+      <td>✅</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>Config file needed</td>
+      <td>❌</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Production maturity</td>
+      <td>Early/beta</td>
+      <td>High</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="setting-up-the-broker">Setting Up the Broker</h2>
+
+<p>The broker runs on your PC. Your ESP32 connects to it over your local WiFi. The steps below are verified on <strong>Windows 11 with Visual Studio 2022</strong>.</p>
+
+<h3 id="what-you-need">What You Need</h3>
+
+<ul>
+  <li><strong>Windows:</strong> Visual Studio 2022 Community (free) with “Desktop development with C++” workload</li>
+  <li><strong>Linux:</strong> <code class="language-plaintext highlighter-rouge">sudo apt install build-essential</code></li>
+  <li><strong>macOS:</strong> <code class="language-plaintext highlighter-rouge">xcode-select --install</code></li>
+  <li><strong>CMake 3.20+</strong> — <a href="https://cmake.org/download">cmake.org/download</a></li>
+  <li><strong>Conan 2.x</strong> — <code class="language-plaintext highlighter-rouge">pip install conan</code> then <code class="language-plaintext highlighter-rouge">conan profile detect</code></li>
+</ul>
+
+<h3 id="build-the-broker">Build the Broker</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span><span class="w"> </span><span class="nx">clone</span><span class="w"> </span><span class="nx">https://github.com/Saptarshi-max/MetricMQ.git</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="nx">MetricMQ</span><span class="w">
+</span><span class="n">mkdir</span><span class="w"> </span><span class="nx">build</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="nx">build</span><span class="w">
+</span><span class="n">conan</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nt">--build</span><span class="o">=</span><span class="n">missing</span><span class="w"> </span><span class="nt">-of</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="o">..</span><span class="w">
+</span><span class="n">cmake</span><span class="w"> </span><span class="nt">-S</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="nt">-B</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span><span class="s2">"build/conan_toolchain.cmake"</span><span class="w"> </span><span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span><span class="w">
+</span><span class="nx">cmake</span><span class="w"> </span><span class="nt">--build</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">--config</span><span class="w"> </span><span class="nx">Release</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The first build takes 5–15 minutes while Conan downloads libsodium, LMDB, Boost, spdlog, and Google Benchmark. Subsequent builds use the local cache and are near-instant.</p>
+
+<p>You will see <code class="language-plaintext highlighter-rouge">'pwsh.exe' is not recognized</code> warnings during the build — these are harmless. The CMakeLists.txt has optional post-build scripts that look for PowerShell Core, which is different from standard <code class="language-plaintext highlighter-rouge">powershell.exe</code>. They don’t affect any output binaries.</p>
+
+<h3 id="what-gets-built">What Gets Built</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dir</span><span class="w"> </span><span class="nx">build\Release\</span><span class="o">*.</span><span class="nf">exe</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Binary</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq-broker.exe</code></td>
+      <td><strong>The broker — start this first, always</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq-keygen.exe</code></td>
+      <td>Ed25519 key pair generator (Demo 4)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">binary_pub_only.exe</code></td>
+      <td>Desktop binary publisher for testing</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">binary_sub_only.exe</code></td>
+      <td>Desktop binary subscriber for testing</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">exactly_once_test.exe</code></td>
+      <td>ACK/replay automated test suite</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">signed_publish_test.exe</code></td>
+      <td>Ed25519 crypto test suite</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">latency_benchmark.exe</code></td>
+      <td>p50/p99/p99.9 latency measurement</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">throughput_benchmark.exe</code></td>
+      <td>msg/s throughput measurement</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="windows-antivirus--expected-false-positive">Windows Antivirus — Expected False Positive</h3>
+
+<p>Avast, Defender, and most Windows antivirus tools will quarantine <code class="language-plaintext highlighter-rouge">metricmq-broker.exe</code> the first time you run it. This is a false positive — the <code class="language-plaintext highlighter-rouge">IDP.Generic</code> detection fires because the binary is unsigned, opens a TCP server socket, and uses a cryptographic library. All three together look suspicious to heuristic scanners even when completely benign.</p>
+
+<p><strong>Fix in Avast:</strong> Quarantine → find <code class="language-plaintext highlighter-rouge">metricmq-broker.exe</code> → Restore → Menu → Settings → Exceptions → add <code class="language-plaintext highlighter-rouge">build\Release\</code>.</p>
+
+<p><strong>Fix in Windows Defender:</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-MpPreference</span><span class="w"> </span><span class="nt">-ExclusionPath</span><span class="w"> </span><span class="s2">"C:\path\to\MetricMQ\build\Release\"</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="start-the-broker">Start the Broker</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\build\Release\metricmq-broker.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Expected output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MetricMQ Broker v1.0 — Lightweight Message Queue for IoT
+
+Starting broker on port 6379...
+Starting metrics server on port 9091...
+Press Ctrl+C for graceful shutdown
+
+[info] Metrics server started on http://0.0.0.0:9091/metrics
+[info] Broker listening on 0.0.0.0:6379
+Broker listening on port 6379
+</code></pre></div></div>
+
+<blockquote>
+  <p>The banner may show garbled Unicode characters on some Windows terminals — cosmetic only, does not affect anything.</p>
+</blockquote>
+
+<p><strong>Keep this terminal open for all four demos.</strong></p>
+
+<h3 id="open-the-firewall">Open the Firewall</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">New-NetFirewallRule</span><span class="w"> </span><span class="nt">-DisplayName</span><span class="w"> </span><span class="s2">"MetricMQ"</span><span class="w"> </span><span class="se">`
+</span><span class="w">    </span><span class="nt">-Direction</span><span class="w"> </span><span class="nx">Inbound</span><span class="w"> </span><span class="nt">-LocalPort</span><span class="w"> </span><span class="nx">6379</span><span class="p">,</span><span class="nx">9091</span><span class="w"> </span><span class="se">`
+</span><span class="w">    </span><span class="nt">-Protocol</span><span class="w"> </span><span class="nx">TCP</span><span class="w"> </span><span class="nt">-Action</span><span class="w"> </span><span class="nx">Allow</span><span class="w"> </span><span class="nt">-Profile</span><span class="w"> </span><span class="nx">Any</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="install-redis-cli-and-verify">Install redis-cli and Verify</h3>
+
+<p><code class="language-plaintext highlighter-rouge">redis-cli</code> is how you interact with the broker from a terminal — you’ll use it in every demo:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">winget</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">Redis.Redis</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Close and reopen PowerShell after installing so the PATH refreshes, then:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">redis-cli</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">6379</span><span class="w"> </span><span class="nx">PING</span><span class="w">
+</span><span class="c"># Should return: PONG</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If you see <code class="language-plaintext highlighter-rouge">PONG</code>, the broker is running and reachable. If not, fix this before touching the ESP32 — debugging network problems from a terminal is much easier than from Serial Monitor.</p>
+
+<h3 id="find-your-pcs-ip-address">Find Your PC’s IP Address</h3>
+
+<p>Your ESP32 sketch needs your PC’s local network IP:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Windows</span><span class="w">
+</span><span class="n">ipconfig</span><span class="w">
+</span><span class="c"># Look for "IPv4 Address" under your WiFi adapter</span><span class="w">
+</span></code></pre></div></div>
+
+<p>It will look like <code class="language-plaintext highlighter-rouge">192.168.1.X</code> or <code class="language-plaintext highlighter-rouge">10.0.0.X</code>. Your ESP32 and PC must be on the <strong>same WiFi network</strong> — same router, same subnet.</p>
+
+<hr />
+
+<h2 id="setting-up-the-esp32-library">Setting Up the ESP32 Library</h2>
+
+<h3 id="installing-the-library">Installing the Library</h3>
+
+<p>Copy the three files from <code class="language-plaintext highlighter-rouge">esp32-metricmq/src/</code> into your PlatformIO project’s <code class="language-plaintext highlighter-rouge">lib/MetricMQ/</code> folder:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>your-project/
+├── lib/
+│   └── MetricMQ/
+│       ├── MetricMQ.h
+│       ├── MetricMQ.cpp
+│       └── library.properties
+├── src/
+│   └── main.cpp
+└── platformio.ini
+</code></pre></div></div>
+
+<p>No <code class="language-plaintext highlighter-rouge">lib_deps</code> needed — PlatformIO finds libraries in <code class="language-plaintext highlighter-rouge">lib/</code> automatically.</p>
+
+<h3 id="the-platformioini-for-all-demos">The platformio.ini for All Demos</h3>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[env:4d_systems_esp32s3_gen4_r8n16]</span><span class="w">
+</span><span class="py">platform</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">espressif32</span>
+<span class="py">board</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">4d_systems_esp32s3_gen4_r8n16</span>
+<span class="py">framework</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">arduino</span>
+<span class="py">monitor_speed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">115200</span>
+<span class="py">monitor_rts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">0</span>
+<span class="py">monitor_dtr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">0</span>
+<span class="py">build_flags</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="py">-DCORE_DEBUG_LEVEL</span><span class="p">=</span><span class="s">3</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">monitor_rts = 0</code> and <code class="language-plaintext highlighter-rouge">monitor_dtr = 0</code> prevent the USB CDC disconnect cycle on Windows that causes the Serial Monitor to repeatedly reconnect after flashing. After uploading, wait 3 seconds before opening the monitor:</p>
+
+  <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pio</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">--target</span><span class="w"> </span><span class="nx">upload</span><span class="w">
+</span><span class="n">Start-Sleep</span><span class="w"> </span><span class="nt">-Seconds</span><span class="w"> </span><span class="nx">3</span><span class="w">
+</span><span class="n">pio</span><span class="w"> </span><span class="nx">device</span><span class="w"> </span><span class="nx">monitor</span><span class="w"> </span><span class="nt">--port</span><span class="w"> </span><span class="nx">COM8</span><span class="w"> </span><span class="nt">--baud</span><span class="w"> </span><span class="nx">115200</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<h3 id="the-two-call-connect-pattern">The Two-Call Connect Pattern</h3>
+
+<p>Every MetricMQ sketch uses the same two-step connect. This is the most important thing to memorise:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Step 1 — store broker address (does NOT open TCP yet)</span>
+<span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="s">"192.168.1.100"</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+
+<span class="c1">// Step 2 — open TCP connection with a stable client ID</span>
+<span class="c1">// The client ID is how the broker tracks your ACK offset for replay.</span>
+<span class="c1">// Use the same ID every boot — changing it means starting fresh.</span>
+<span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"my-device-01"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And in every <code class="language-plaintext highlighter-rouge">loop()</code>:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The library does NOT auto-reconnect — you must do this</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BROKER_IP</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>   <span class="c1">// re-set address before reconnecting</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">CLIENT_ID</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// MUST run every loop() iteration — drives the 60s keep-alive PING</span>
+<span class="c1">// Long blocking delays will cause the broker to drop the connection</span>
+<span class="n">client</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="the-callback-signature">The Callback Signature</h3>
+
+<p>When you subscribe to a topic, your callback receives four parameters:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">client</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"sensors/#"</span><span class="p">,</span>
+    <span class="p">[](</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">topic</span><span class="p">,</span>    <span class="c1">// topic the message arrived on</span>
+       <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">payload</span><span class="p">,</span> <span class="c1">// raw payload bytes</span>
+       <span class="kt">size_t</span> <span class="n">length</span><span class="p">,</span>          <span class="c1">// payload length</span>
+       <span class="kt">uint64_t</span> <span class="n">sequence</span><span class="p">)</span>      <span class="c1">// broker-assigned sequence number</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">msg</span><span class="p">((</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">payload</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[MSG] %s → %s (seq=%llu)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                      <span class="n">topic</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">msg</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">sequence</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>Note: <code class="language-plaintext highlighter-rouge">topic</code> is <code class="language-plaintext highlighter-rouge">const String&amp;</code>, not <code class="language-plaintext highlighter-rouge">const char*</code>. Use <code class="language-plaintext highlighter-rouge">.c_str()</code> when you need a raw C string.</p>
+
+<hr />
+
+<h2 id="demo-1-basic-pubsub--hello-broker">Demo 1: Basic Pub/Sub — “Hello, Broker”</h2>
+
+<p><strong>What you learn:</strong> Publishing from the ESP32, subscribing from your PC, and seeing cross-protocol interop — the ESP32 speaks binary protocol, <code class="language-plaintext highlighter-rouge">redis-cli</code> speaks RESP text protocol, the broker routes between them transparently.</p>
+
+<p><strong>Hardware:</strong> One ESP32-S3, USB cable, PC running the broker.</p>
+
+<h3 id="srcmaincpp">src/main.cpp</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * MetricMQ Demo 1 — Basic Pub/Sub
+ *
+ * ESP32 publishes a simulated temperature reading every 3 seconds.
+ * Subscribe on your PC: redis-cli -p 6379 SUBSCRIBE "sensors/#"
+ *
+ * The interesting part: the ESP32 uses MetricMQ's 16-byte binary protocol.
+ * redis-cli uses RESP (Redis text protocol).
+ * The broker detects both from the first byte and routes between them.
+ * No configuration on either side.
+ */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;WiFi.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;MetricMQ.h&gt;</span><span class="cp">
+</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_SSID</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_SSID"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_PASS</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_PASSWORD"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">BROKER_IP</span> <span class="o">=</span> <span class="s">"192.168.1.100"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="s">"esp32-demo1"</span><span class="p">;</span>
+
+<span class="n">MetricMQClient</span> <span class="n">client</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">msgCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">lastPub</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">connectWiFi</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[WiFi] Connecting to %s"</span><span class="p">,</span> <span class="n">WIFI_SSID</span><span class="p">);</span>
+    <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PASS</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span> <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">[WiFi] Connected: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">WiFi</span><span class="p">.</span><span class="n">localIP</span><span class="p">().</span><span class="n">toString</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">connectBroker</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[Broker] Connecting as '%s'...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">CLIENT_ID</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BROKER_IP</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">CLIENT_ID</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">()</span>
+                   <span class="o">?</span> <span class="s">"[Broker] Connected OK"</span>
+                   <span class="o">:</span> <span class="s">"[Broker] FAILED — check IP and firewall"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">=== MetricMQ Demo 1: Basic Pub/Sub ==="</span><span class="p">);</span>
+    <span class="n">connectWiFi</span><span class="p">();</span>
+    <span class="n">connectBroker</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+        <span class="n">connectBroker</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">lastPub</span> <span class="o">&gt;</span> <span class="mi">3000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastPub</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+        <span class="n">msgCount</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="kt">float</span> <span class="n">temp</span> <span class="o">=</span> <span class="mf">20.0f</span> <span class="o">+</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0f</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">payload</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+        <span class="n">snprintf</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span>
+                 <span class="s">"{</span><span class="se">\"</span><span class="s">msg</span><span class="se">\"</span><span class="s">:%u,</span><span class="se">\"</span><span class="s">temp</span><span class="se">\"</span><span class="s">:%.1f}"</span><span class="p">,</span> <span class="n">msgCount</span><span class="p">,</span> <span class="n">temp</span><span class="p">);</span>
+
+        <span class="n">client</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="s">"sensors/temperature"</span><span class="p">),</span> <span class="n">String</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[PUB #%u] sensors/temperature → %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">msgCount</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="how-to-run-it">How to Run It</h3>
+
+<p>Flash the sketch. Open Serial Monitor. In a second PC terminal:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis-cli <span class="nt">-p</span> 6379 SUBSCRIBE <span class="s2">"sensors/#"</span>
+</code></pre></div></div>
+
+<h3 id="what-to-expect">What to Expect</h3>
+
+<p>Serial Monitor:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=== MetricMQ Demo 1: Basic Pub/Sub ===
+[WiFi] Connected: 192.168.1.10
+[MetricMQ] Connected to 192.168.1.100:6379
+[MetricMQ] Client ID: esp32-demo1 | Signing: OFF
+[Broker] Connected OK
+[PUB #1] sensors/temperature → {"msg":1,"temp":23.4}
+[PUB #2] sensors/temperature → {"msg":2,"temp":21.1}
+</code></pre></div></div>
+
+<p>PC terminal:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1) "message"
+2) "sensors/temperature"
+3) "{\"msg\":1,\"temp\":23.4}"
+</code></pre></div></div>
+
+<p>The ESP32 spoke binary protocol. <code class="language-plaintext highlighter-rouge">redis-cli</code> spoke RESP. The broker translated automatically.</p>
+
+<h3 id="what-the-broker-metrics-show">What the Broker Metrics Show</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">curl</span><span class="w"> </span><span class="nx">http://localhost:9091/metrics</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select-String</span><span class="w"> </span><span class="s2">"metricmq_messages"</span><span class="w">
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>metricmq_messages_published_total   4
+metricmq_messages_delivered_total   4
+metricmq_active_connections         2
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">published == delivered</code> — zero routing loss. <code class="language-plaintext highlighter-rouge">active_connections = 2</code> — one binary publisher (ESP32), one RESP subscriber (redis-cli).</p>
+
+<hr />
+
+<h2 id="demo-2-exactly-once-delivery--surviving-a-network-drop">Demo 2: Exactly-Once Delivery — Surviving a Network Drop</h2>
+
+<p><strong>What you learn:</strong> What happens to messages while the device is offline, and how MetricMQ replays them on reconnect with no gaps and no duplicates.</p>
+
+<h3 id="how-it-works">How It Works</h3>
+
+<p>Every message in binary protocol mode gets a sequence number assigned by the broker. The broker stores every message to LMDB and tracks each subscriber’s last acknowledged sequence. When you reconnect with the same <code class="language-plaintext highlighter-rouge">client_id</code>, the broker replays from <code class="language-plaintext highlighter-rouge">last_ack + 1</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Publishes:  seq=1  seq=2  seq=3  seq=4  seq=5  seq=6  seq=7
+                              │
+                        Device drops              │
+                        (offline)         Device reconnects
+                                          same client_id
+                                          last ACK was seq=3
+
+Broker: "replay seq=4, 5, 6, 7 for this client"
+
+Device receives: seq=4 (REPLAY) seq=5 (REPLAY) seq=6 (LIVE) seq=7 (LIVE)
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">client_id</code> is how the broker identifies you on reconnect. Without a stable ID, replay doesn’t happen.</p>
+
+<h3 id="srcmaincpp-1">src/main.cpp</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * MetricMQ Demo 2 — Exactly-Once Delivery
+ *
+ * Subscribes with a stable client_id. Tracks sequence numbers.
+ * On reconnect, the broker replays any messages that arrived while offline.
+ *
+ * How to test:
+ *   1. Flash and open Serial Monitor
+ *   2. Start publishing from PC (command in comment below)
+ *   3. While messages 5-10 are publishing, press RST or pull USB
+ *   4. Reconnect after 5 seconds — watch the REPLAY labels
+ *   5. Total == 20, Duplicates == 0 confirms exactly-once held
+ *
+ * PC publisher:
+ *   Windows: 1..20 | ForEach-Object { redis-cli -p 6379 PUBLISH sensors/temperature "{`"reading`":$_}"; Start-Sleep 1 }
+ *   Linux:   for i in $(seq 1 20); do redis-cli -p 6379 PUBLISH sensors/temperature "{\"reading\":$i}"; sleep 1; done
+ */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;WiFi.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;MetricMQ.h&gt;</span><span class="cp">
+</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_SSID</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_SSID"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_PASS</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_PASSWORD"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">BROKER_IP</span> <span class="o">=</span> <span class="s">"192.168.1.100"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="s">"esp32-demo2-sub"</span><span class="p">;</span>  <span class="c1">// MUST be stable across reboots</span>
+
+<span class="n">MetricMQClient</span> <span class="n">client</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">totalReceived</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">duplicates</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint64_t</span> <span class="n">lastSeq</span>       <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">bool</span>     <span class="n">wasOffline</span>    <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">onMessage</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">topic</span><span class="p">,</span>
+               <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">payload</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">length</span><span class="p">,</span>
+               <span class="kt">uint64_t</span> <span class="n">sequence</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">totalReceived</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sequence</span> <span class="o">&lt;=</span> <span class="n">lastSeq</span> <span class="o">&amp;&amp;</span> <span class="n">lastSeq</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">duplicates</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[!!DUPE] seq=%llu (expected &gt; %llu)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">lastSeq</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">wasOffline</span> <span class="o">?</span> <span class="s">"REPLAY"</span> <span class="o">:</span> <span class="s">"LIVE  "</span><span class="p">;</span>
+        <span class="n">lastSeq</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">;</span>
+        <span class="n">String</span> <span class="n">msg</span><span class="p">((</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">payload</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[%s] seq=%-4llu | %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"         Total: %u | Duplicates: %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                  <span class="n">totalReceived</span><span class="p">,</span> <span class="n">duplicates</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">connectAndSubscribe</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[Broker] Connecting as '%s' (last seq=%llu)...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                  <span class="n">CLIENT_ID</span><span class="p">,</span> <span class="n">lastSeq</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BROKER_IP</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">CLIENT_ID</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Broker] Connected — broker will replay missed messages"</span><span class="p">);</span>
+        <span class="n">client</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"sensors/temperature"</span><span class="p">,</span> <span class="n">onMessage</span><span class="p">);</span>
+        <span class="n">wasOffline</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"[Broker] FAILED"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">=== MetricMQ Demo 2: Exactly-Once Delivery ==="</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Pull USB or press RST while messages are publishing.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PASS</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span> <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">[WiFi] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">WiFi</span><span class="p">.</span><span class="n">localIP</span><span class="p">().</span><span class="n">toString</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="n">connectAndSubscribe</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">wasOffline</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">[Broker] Disconnected at seq=%llu — reconnecting...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                      <span class="n">lastSeq</span><span class="p">);</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+        <span class="n">connectAndSubscribe</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="what-to-expect-1">What to Expect</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[LIVE  ] seq=1    | {"reading":1}
+         Total: 1 | Duplicates: 0
+[LIVE  ] seq=4    | {"reading":4}
+         Total: 4 | Duplicates: 0
+
+--- RST pressed here ---
+
+[Broker] Disconnected at seq=4 — reconnecting...
+[Broker] Connected — broker will replay missed messages
+[REPLAY] seq=5    | {"reading":5}
+[REPLAY] seq=6    | {"reading":6}
+[REPLAY] seq=7    | {"reading":7}
+[LIVE  ] seq=8    | {"reading":8}
+...
+         Total: 20 | Duplicates: 0
+</code></pre></div></div>
+
+<p>The ScreenShot, of the Platformio Serial Terminal :</p>
+
+<p><img src="/cover_images/posts/Demo2-platformio-serialport.png" alt="" /></p>
+<h3 id="what-the-broker-metrics-show-1">What the Broker Metrics Show</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># While device is offline:
+metricmq_ack_tracking_efficiency    62   ← drops during outage — expected
+metricmq_lmdb_stored_messages       8    ← broker kept storing
+
+# After reconnect and replay:
+metricmq_ack_tracking_efficiency    100  ← restored after replay ACKs
+metricmq_replay_messages_total      4    ← exactly how many were recovered
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ack_tracking_efficiency</code> returning to 100 after reconnect is the broker confirming the replay worked and everything was acknowledged.</p>
+
+<blockquote>
+  <p><strong>Replay window:</strong> The broker retains the last 100,000 messages in LMDB. At 1 message/second that’s 27 hours of replay coverage — more than enough for typical WiFi outages.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="demo-3-fan-out-with-wildcards--one-publish-many-subscribers">Demo 3: Fan-Out with Wildcards — One Publish, Many Subscribers</h2>
+
+<p><strong>What you learn:</strong> How one ESP32 publishing to a topic can be received by multiple subscribers simultaneously using wildcard patterns, with no firmware changes.</p>
+
+<h3 id="srcmaincpp-2">src/main.cpp</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * MetricMQ Demo 3 — Fan-Out with Wildcards
+ *
+ * Publishes temperature, humidity, and CO2 to three subtopics every 5 seconds.
+ *
+ * Open three PC terminals and run:
+ *   Terminal A: redis-cli -p 6379 SUBSCRIBE "sensors/env/temperature"
+ *   Terminal B: redis-cli -p 6379 SUBSCRIBE "sensors/env/+"
+ *   Terminal C: redis-cli -p 6379 SUBSCRIBE "sensors/#"
+ *
+ * A gets 1 message/cycle. B and C each get 3.
+ * The publisher never changes — just add more subscribers.
+ */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;WiFi.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;MetricMQ.h&gt;</span><span class="cp">
+</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_SSID</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_SSID"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_PASS</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_PASSWORD"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">BROKER_IP</span> <span class="o">=</span> <span class="s">"192.168.1.100"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="s">"esp32-demo3"</span><span class="p">;</span>
+
+<span class="n">MetricMQClient</span> <span class="n">client</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">cycle</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">lastPub</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">=== MetricMQ Demo 3: Fan-Out with Wildcards ==="</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Open 3 PC terminals (commands in sketch comment).</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PASS</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span> <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[WiFi] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">WiFi</span><span class="p">.</span><span class="n">localIP</span><span class="p">().</span><span class="n">toString</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BROKER_IP</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">CLIENT_ID</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">()</span> <span class="o">?</span> <span class="s">"[Broker] Connected"</span> <span class="o">:</span> <span class="s">"[Broker] FAILED"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+        <span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BROKER_IP</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+        <span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">CLIENT_ID</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">lastPub</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastPub</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+        <span class="n">cycle</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="kt">float</span> <span class="n">temp</span> <span class="o">=</span> <span class="mf">21.0f</span> <span class="o">+</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0f</span><span class="p">;</span>
+        <span class="kt">float</span> <span class="n">hum</span>  <span class="o">=</span> <span class="mf">45.0f</span> <span class="o">+</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0f</span><span class="p">;</span>
+        <span class="kt">int</span>   <span class="n">co2</span>  <span class="o">=</span> <span class="mi">400</span> <span class="o">+</span> <span class="n">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+
+        <span class="n">client</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"sensors/env/temperature"</span><span class="p">,</span> <span class="n">String</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="n">client</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"sensors/env/humidity"</span><span class="p">,</span>    <span class="n">String</span><span class="p">(</span><span class="n">hum</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="n">client</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="s">"sensors/env/co2"</span><span class="p">,</span>         <span class="n">String</span><span class="p">(</span><span class="n">co2</span><span class="p">));</span>
+
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[Cycle %u] temp=%.1f°C  hum=%.1f%%  co2=%d ppm</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                      <span class="n">cycle</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">hum</span><span class="p">,</span> <span class="n">co2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="what-to-expect-2">What to Expect</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Terminal A (exact):   1 message/cycle  (temperature only)
+Terminal B (+ wild):  3 messages/cycle (temp + hum + co2)
+Terminal C (# wild):  3 messages/cycle (everything under sensors/)
+</code></pre></div></div>
+
+<p>Check the fan-out multiplier live:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Invoke-WebRequest</span><span class="w"> </span><span class="nx">http://localhost:9091/metrics</span><span class="p">)</span><span class="o">.</span><span class="nf">Content</span><span class="w"> </span><span class="o">|</span><span class="w">
+    </span><span class="n">Select-String</span><span class="w"> </span><span class="s2">"delivered|published"</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>metricmq_messages_published_total   9    ← 3 topics × 3 cycles
+metricmq_messages_delivered_total   21   ← A(3) + B(9) + C(9)
+</code></pre></div></div>
+
+<p>Fan-out ratio = <code class="language-plaintext highlighter-rouge">21 / 9 = 2.33</code>. Add a fourth subscriber and watch it climb to ~3.0 without touching the sketch.</p>
+
+<hr />
+
+<h2 id="demo-4-signed-messages--proving-your-data-is-real">Demo 4: Signed Messages — Proving Your Data Is Real</h2>
+
+<p><strong>What you learn:</strong> Ed25519 message signing on the device. The broker verifies the signature before routing. Unsigned messages to <code class="language-plaintext highlighter-rouge">secure/</code> topics are rejected at the wire level.</p>
+
+<h3 id="why-this-matters">Why This Matters</h3>
+
+<p>Your ESP32 publishes <code class="language-plaintext highlighter-rouge">{"temp":23.4}</code>. Someone on the same WiFi publishes <code class="language-plaintext highlighter-rouge">{"temp":-99}</code> to the same topic. Both look identical to your backend. Ed25519 signing closes this gap: your device signs every message with a private key (64 bytes, never transmitted). The broker has the corresponding public key and verifies before routing. A message without a valid signature never reaches any subscriber.</p>
+
+<p>This is <strong>authentication, not encryption.</strong> The payload is still visible on the wire. Signing proves <em>who</em> sent it and that it <em>wasn’t modified</em>.</p>
+
+<h3 id="step-1-generate-a-key-pair">Step 1: Generate a Key Pair</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\build\Release\metricmq-keygen.exe</span><span class="w"> </span><span class="s2">"esp32-demo4"</span><span class="w"> </span><span class="s2">"secure/sensors/*"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Secret key (64 bytes) — device only, never share:
+  { 0x4a, 0x3f, ... }
+
+Public key (32 bytes) — register on broker:
+  { 0x8c, 0x1d, ... }
+</code></pre></div></div>
+
+<p><strong>The screenshot on your terminal:</strong></p>
+
+<p><img src="/cover_images/posts/GetImage.png" alt="" /></p>
+
+<p>Create <code class="language-plaintext highlighter-rouge">include/device_secrets.h</code> (add to <code class="language-plaintext highlighter-rouge">.gitignore</code>):</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// include/device_secrets.h — NEVER commit this file</span>
+<span class="cp">#pragma once
+</span><span class="k">static</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">SECRET_KEY</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mh">0x4a</span><span class="p">,</span> <span class="mh">0x3f</span><span class="p">,</span> <span class="cm">/* ... 64 bytes */</span> <span class="p">};</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">uint32_t</span> <span class="n">KEY_ID</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="step-2-register-the-public-key-on-the-broker">Step 2: Register the Public Key on the Broker</h3>
+
+<p>In <code class="language-plaintext highlighter-rouge">MetricMQ/src/main.cpp</code>, add before <code class="language-plaintext highlighter-rouge">broker.run()</code>:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="n">pk</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mh">0x8c</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="cm">/* ... 32 bytes */</span> <span class="p">};</span>
+<span class="n">broker</span><span class="p">.</span><span class="n">get_keystore</span><span class="p">().</span><span class="n">register_key</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="p">{</span><span class="s">"secure/sensors/*"</span><span class="p">});</span>
+</code></pre></div></div>
+
+<p>Rebuild and restart:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cmake</span><span class="w"> </span><span class="nt">--build</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">--config</span><span class="w"> </span><span class="nx">Release</span><span class="w">
+</span><span class="o">.</span><span class="n">\build\Release\metricmq-broker.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="srcmaincpp-3">src/main.cpp</h3>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * MetricMQ Demo 4 — Ed25519 Signed Messages
+ *
+ * Prerequisites (complete before flashing):
+ *   1. Run metricmq-keygen "esp32-demo4" "secure/sensors/*"
+ *   2. Paste secret key into include/device_secrets.h (in .gitignore)
+ *   3. Register public key in broker src/main.cpp, rebuild, restart broker
+ *
+ * To test:
+ *   Subscriber: redis-cli -p 6379 SUBSCRIBE "secure/sensors/#"
+ *   Spoof:      redis-cli -p 6379 PUBLISH secure/sensors/temperature '{"fake":true}'
+ *               → broker prints SIGNATURE_REQUIRED, subscriber gets NOTHING
+ */</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;WiFi.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;MetricMQ.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">"device_secrets.h"</span><span class="cp">
+</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_SSID</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_SSID"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">WIFI_PASS</span> <span class="o">=</span> <span class="s">"YOUR_WIFI_PASSWORD"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">BROKER_IP</span> <span class="o">=</span> <span class="s">"192.168.1.100"</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="s">"esp32-demo4"</span><span class="p">;</span>
+
+<span class="n">MetricMQClient</span> <span class="n">client</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">msgCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint32_t</span> <span class="n">lastPub</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">connectBroker</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// setSigningKey MUST come before begin()/connect()</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">setSigningKey</span><span class="p">(</span><span class="n">SECRET_KEY</span><span class="p">,</span> <span class="n">KEY_ID</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[Broker] Connecting in signed mode (key_id=%u)...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">KEY_ID</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">BROKER_IP</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">CLIENT_ID</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">()</span>
+                   <span class="o">?</span> <span class="s">"[Broker] Connected — signed mode active"</span>
+                   <span class="o">:</span> <span class="s">"[Broker] FAILED"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">=== MetricMQ Demo 4: Signed Messages ==="</span><span class="p">);</span>
+
+    <span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="n">WIFI_SSID</span><span class="p">,</span> <span class="n">WIFI_PASS</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">WiFi</span><span class="p">.</span><span class="n">status</span><span class="p">()</span> <span class="o">!=</span> <span class="n">WL_CONNECTED</span><span class="p">)</span> <span class="p">{</span> <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[WiFi] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">WiFi</span><span class="p">.</span><span class="n">localIP</span><span class="p">().</span><span class="n">toString</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="n">connectBroker</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="p">.</span><span class="n">isConnected</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+        <span class="n">connectBroker</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">lastPub</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastPub</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+        <span class="n">msgCount</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="kt">float</span> <span class="n">temp</span> <span class="o">=</span> <span class="mf">22.5f</span> <span class="o">+</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">random</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0f</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">payload</span><span class="p">[</span><span class="mi">96</span><span class="p">];</span>
+        <span class="n">snprintf</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span>
+                 <span class="s">"{</span><span class="se">\"</span><span class="s">msg</span><span class="se">\"</span><span class="s">:%u,</span><span class="se">\"</span><span class="s">temp</span><span class="se">\"</span><span class="s">:%.1f,</span><span class="se">\"</span><span class="s">device</span><span class="se">\"</span><span class="s">:</span><span class="se">\"</span><span class="s">%s</span><span class="se">\"</span><span class="s">}"</span><span class="p">,</span>
+                 <span class="n">msgCount</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">CLIENT_ID</span><span class="p">);</span>
+
+        <span class="n">client</span><span class="p">.</span><span class="n">publishSigned</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="s">"secure/sensors/temperature"</span><span class="p">),</span>
+                             <span class="n">String</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"[SIGNED #%u] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">msgCount</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="what-to-expect-3">What to Expect</h3>
+
+<p>Broker console after a legitimate signed message:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[info] Key 1 verified OK — routing secure/sensors/temperature
+</code></pre></div></div>
+
+<p>After the spoof attempt:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[warn] SIGNATURE_REQUIRED — rejecting unsigned publish on secure/sensors/temperature
+</code></pre></div></div>
+
+<p>The subscriber receives nothing from the spoof.</p>
+
+<h3 id="what-the-broker-metrics-show-2">What the Broker Metrics Show</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>metricmq_signature_verifications_total   8    ← legitimate signed messages
+metricmq_signature_failures_total        1    ← the rejected spoof
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">signature_failures_total</code> should be 0 in a healthy deployment. Any non-zero value means either a device has a corrupted key or someone is probing your broker with unsigned frames.</p>
+
+<hr />
+
+<h2 id="prometheus--grafana-seeing-your-system-live">Prometheus + Grafana: Seeing Your System Live</h2>
+
+<p>This is the part most tutorials skip. The broker exposes live metrics on port 9091 from the moment it starts — you don’t enable anything extra. Here’s why it matters and how to use it.</p>
+
+<h3 id="what-value-does-this-actually-serve">What Value Does This Actually Serve?</h3>
+
+<p>Without observability, your IoT system is a black box. You know the broker process is running, but you don’t know:</p>
+
+<ul>
+  <li>How many devices are currently connected?</li>
+  <li>Are messages actually being delivered, or silently dropped?</li>
+  <li>Has any device been offline long enough to risk losing data?</li>
+  <li>Did someone just inject fake sensor data?</li>
+  <li>Is the broker getting slower under load?</li>
+</ul>
+
+<p>Prometheus collects these numbers continuously. Grafana makes them visible. Together they answer all five questions in real time without SSH’ing into anything.</p>
+
+<p>The Prometheus data (raw format) in the browser, Open up http://localhost:9091/metrics in your broswer when the broker is running: 
+<img src="/cover_images/posts/prometheus-browser.png" alt="" /></p>
+<h3 id="the-metrics-that-matter">The Metrics That Matter</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># One-shot snapshot</span><span class="w">
+</span><span class="p">(</span><span class="n">Invoke-WebRequest</span><span class="w"> </span><span class="nx">http://localhost:9091/metrics</span><span class="p">)</span><span class="o">.</span><span class="nf">Content</span><span class="w"> </span><span class="o">|</span><span class="w">
+    </span><span class="n">Select-String</span><span class="w"> </span><span class="s2">"^metricmq_"</span><span class="w">
+
+</span><span class="c"># Live view, refreshes every 2 seconds</span><span class="w">
+</span><span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="bp">$true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">Clear-Host</span><span class="w">
+    </span><span class="p">(</span><span class="n">Invoke-WebRequest</span><span class="w"> </span><span class="nx">http://localhost:9091/metrics</span><span class="w"> </span><span class="nt">-UseBasicParsing</span><span class="p">)</span><span class="o">.</span><span class="nf">Content</span><span class="w"> </span><span class="se">`
+</span><span class="w">        </span><span class="o">-split</span><span class="w"> </span><span class="s2">"</span><span class="se">`n</span><span class="s2">"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">$_</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"^metricmq_"</span><span class="w"> </span><span class="o">-and</span><span class="w"> </span><span class="bp">$_</span><span class="w"> </span><span class="o">-notmatch</span><span class="w"> </span><span class="s2">"^#"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="n">Start-Sleep</span><span class="w"> </span><span class="nx">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>What it tells you</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_active_connections</code></td>
+      <td>How many clients are connected right now</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_messages_published_total</code></td>
+      <td>Total publishes the broker accepted</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_messages_delivered_total</code></td>
+      <td>Total deliveries that reached a subscriber</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_ack_tracking_efficiency</code></td>
+      <td>% of binary messages ACKed — target: ~100</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_replay_messages_total</code></td>
+      <td>Messages replayed from LMDB after reconnects</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_publish_latency_microseconds</code></td>
+      <td>p50/p99/p99.9 routing latency</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_signature_verifications_total</code></td>
+      <td>Successful Ed25519 verifications</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_signature_failures_total</code></td>
+      <td>Rejected/unsigned frames — target: 0</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">metricmq_lmdb_stored_messages</code></td>
+      <td>Messages currently persisted in LMDB</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="setting-up-prometheus-10-minutes">Setting Up Prometheus (10 Minutes)</h3>
+
+<blockquote>
+  <p><strong>Note:</strong> Prometheus is not available via <code class="language-plaintext highlighter-rouge">winget</code> — it is distributed as a
+zip archive from the official GitHub releases page. The commands below
+download, extract, and configure it in one go.</p>
+</blockquote>
+
+<p><strong>Step 1:</strong> Download and extract Prometheus:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run this in PowerShell — downloads Prometheus and extracts to C:\prometheus</span><span class="w">
+</span><span class="nv">$version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3.4.0"</span><span class="w">
+</span><span class="nv">$url</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://github.com/prometheus/prometheus/releases/download/"</span><span class="w"> </span><span class="o">+</span><span class="w">
+           </span><span class="s2">"v</span><span class="nv">$version</span><span class="s2">/prometheus-</span><span class="nv">$version</span><span class="s2">.windows-amd64.zip"</span><span class="w">
+
+</span><span class="n">Invoke-WebRequest</span><span class="w"> </span><span class="nt">-Uri</span><span class="w"> </span><span class="nv">$url</span><span class="w"> </span><span class="nt">-OutFile</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">TEMP</span><span class="s2">\prometheus.zip"</span><span class="w">
+</span><span class="n">Expand-Archive</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">TEMP</span><span class="s2">\prometheus.zip"</span><span class="w"> </span><span class="se">`
+</span><span class="w">               </span><span class="nt">-DestinationPath</span><span class="w"> </span><span class="s2">"C:\prometheus"</span><span class="w"> </span><span class="nt">-Force</span><span class="w">
+
+</span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"Prometheus extracted to C:\prometheus"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Step 2:</strong> Create <code class="language-plaintext highlighter-rouge">C:\prometheus\prometheus.yml</code> — open Notepad and save
+this content to that path:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">global</span><span class="pi">:</span>
+  <span class="na">scrape_interval</span><span class="pi">:</span> <span class="s">5s</span>
+
+<span class="na">scrape_configs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">job_name</span><span class="pi">:</span> <span class="s">metricmq</span>
+    <span class="na">static_configs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">targets</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">localhost:9091'</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<p><strong>Step 3:</strong> Start Prometheus (keep this terminal open):</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Navigate into the extracted folder and start</span><span class="w">
+</span><span class="nv">$version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"3.4.0"</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="s2">"C:\prometheus\prometheus-</span><span class="nv">$version</span><span class="s2">.windows-amd64"</span><span class="w">
+</span><span class="o">.</span><span class="n">\prometheus.exe</span><span class="w"> </span><span class="nt">--config</span><span class="o">.</span><span class="nf">file</span><span class="o">=</span><span class="s2">"..\prometheus.yml"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You should see:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ts=... level=info msg="Server is ready to receive web requests."
+</code></pre></div></div>
+
+<p><strong>Step 4:</strong> Open <code class="language-plaintext highlighter-rouge">http://localhost:9090</code> in your browser. Type
+<code class="language-plaintext highlighter-rouge">metricmq_messages_published_total</code> in the query box and press Enter.
+You should see data points immediately if the broker is running.</p>
+
+<p>If you see “No data”, check that the broker is running and that port 9091
+is reachable: <code class="language-plaintext highlighter-rouge">curl http://localhost:9091/metrics</code> should return metric lines.</p>
+
+<h3 id="setting-up-grafana-10-more-minutes">Setting Up Grafana (10 More Minutes)</h3>
+
+<blockquote>
+  <p><strong>Note:</strong> <code class="language-plaintext highlighter-rouge">winget install GrafanaLabs.Grafana</code> does not exist. Use the
+official MSI installer below.</p>
+</blockquote>
+
+<p><strong>Step 1:</strong> Download and install Grafana:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Downloads the Grafana MSI and installs it as a Windows service</span><span class="w">
+</span><span class="nv">$grafanaVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"12.0.1"</span><span class="w">
+</span><span class="nv">$url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://dl.grafana.com/oss/release/grafana-</span><span class="nv">$grafanaVersion</span><span class="s2">.windows-amd64.msi"</span><span class="w">
+
+</span><span class="n">Invoke-WebRequest</span><span class="w"> </span><span class="nt">-Uri</span><span class="w"> </span><span class="nv">$url</span><span class="w"> </span><span class="nt">-OutFile</span><span class="w"> </span><span class="s2">"</span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">TEMP</span><span class="s2">\grafana.msi"</span><span class="w">
+</span><span class="n">Start-Process</span><span class="w"> </span><span class="nx">msiexec</span><span class="w"> </span><span class="nt">-ArgumentList</span><span class="w"> </span><span class="s2">"/i </span><span class="nv">$</span><span class="nn">env</span><span class="p">:</span><span class="nv">TEMP</span><span class="s2">\grafana.msi /quiet"</span><span class="w"> </span><span class="nt">-Wait</span><span class="w">
+
+</span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"Grafana installed. Starting service..."</span><span class="w">
+</span><span class="n">Start-Service</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"Grafana"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Grafana installs as a Windows service and starts automatically. If the
+service doesn’t start automatically, run <code class="language-plaintext highlighter-rouge">Start-Service -Name "Grafana"</code>
+from an elevated PowerShell window.</p>
+
+<p><strong>Step 2:</strong> Open <code class="language-plaintext highlighter-rouge">http://localhost:3000</code> in your browser.
+Default login: <code class="language-plaintext highlighter-rouge">admin</code> / <code class="language-plaintext highlighter-rouge">admin</code>. Grafana will ask you to set a new password
+on first login — do that and continue.</p>
+
+<p><strong>Step 3:</strong> Add Prometheus as a data source:</p>
+<ul>
+  <li>Left sidebar → Connections → Data Sources → Add data source</li>
+  <li>Select <strong>Prometheus</strong></li>
+  <li>URL: <code class="language-plaintext highlighter-rouge">http://localhost:9090</code></li>
+  <li>Click <strong>Save &amp; Test</strong> — you should see “Data source is working”</li>
+</ul>
+
+<p><strong>Step 4:</strong> Create a new dashboard with four panels:</p>
+<ul>
+  <li>Top right → <strong>New Dashboard</strong> → <strong>Add visualization</strong></li>
+  <li>For each panel: paste the PromQL query, set the panel type, set the title</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Panel 1 — Message Rate
+PromQL: rate(metricmq_messages_published_total[1m])
+Type: Time series | Shows: messages per second live
+
+Panel 2 — Delivery Efficiency
+PromQL: metricmq_messages_delivered_total / metricmq_messages_published_total
+Type: Stat | Alert if: &lt; 0.95
+
+Panel 3 — ACK Tracking
+PromQL: metricmq_ack_tracking_efficiency
+Type: Gauge | Alert if: &lt; 95 for &gt; 60s
+
+Panel 4 — Security Events
+PromQL: increase(metricmq_signature_failures_total[5m])
+Type: Stat | Alert if: &gt; 0
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Panel 1 — Message Rate
+PromQL: rate(metricmq_messages_published_total[1m])
+Type: Time series | Shows: messages per second live
+
+Panel 2 — Delivery Efficiency
+PromQL: metricmq_messages_delivered_total / metricmq_messages_published_total
+Type: Stat | Alert if: &lt; 0.95
+
+Panel 3 — ACK Tracking
+PromQL: metricmq_ack_tracking_efficiency
+Type: Gauge | Alert if: &lt; 95 for &gt; 60s
+
+Panel 4 — Security Events
+PromQL: increase(metricmq_signature_failures_total[5m])
+Type: Stat | Alert if: &gt; 0
+</code></pre></div></div>
+
+<h3 id="what-each-alert-catches-in-a-real-deployment">What Each Alert Catches in a Real Deployment</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">delivery efficiency</code> drops below 0.95:</strong> Some messages are not reaching subscribers. Could be a crashed consumer, a network partition, or a topic mismatch. In a building automation system with five consumers on a temperature stream, this dropping from 1.0 to 0.6 means three consumers silently went offline.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">ack_tracking_efficiency</code> drops below 95 for more than 60 seconds:</strong> A subscriber is falling behind — WiFi instability, device overload, or a bug in the application layer consuming messages too slowly. This fires before any data is actually lost.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">signature_failures_total</code> increments:</strong> Either a device has a corrupted key after a failed OTA update, or someone on the network is probing the broker with unsigned frames. This is your intrusion detection in a single counter — one alert rule covers the entire fleet.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">lmdb_stored_messages</code> grows without <code class="language-plaintext highlighter-rouge">replay_messages_total</code> growing:</strong> Messages are accumulating in LMDB but no subscriber is claiming them. A device has been permanently offline. At 100,000 stored messages the broker starts compacting and the oldest readings are lost. This gives you advance warning.</p>
+
+<hr />
+
+<h2 id="how-to-navigate-the-metricmq-docs">How to Navigate the MetricMQ Docs</h2>
+
+<p>The official docs live at <a href="https://metricmq-docs.netlify.app/">metricmq-docs.netlify.app</a>. Here’s how to use them efficiently depending on what you’re trying to do.</p>
+
+<h3 id="if-youre-just-getting-started">If You’re Just Getting Started</h3>
+
+<p>Start with the <strong>Quick Start — ESP32</strong> section on the main page. It shows the minimal <code class="language-plaintext highlighter-rouge">setup()</code> and <code class="language-plaintext highlighter-rouge">loop()</code> pattern. Then come back to this blog post for the full working sketches — the docs show the pattern, the demos here show the complete code.</p>
+
+<h3 id="if-you-want-to-understand-the-wire-protocol">If You Want to Understand the Wire Protocol</h3>
+
+<p>The <strong>Wire Protocol</strong> table on the main page defines the exact 16-byte header layout:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Offset 0    : version (0x01)
+Offset 1    : command byte
+Offset 2–3  : topic length  (uint16 big-endian)
+Offset 4–7  : payload length (uint32 big-endian)
+Offset 8–15 : sequence number (uint64 big-endian)
+Offset 16+  : topic bytes, then payload bytes
+</code></pre></div></div>
+
+<p>This is the ground truth for anyone implementing a client on a new platform. If you’re writing a client for STM32, Raspberry Pi, or any other platform, this table plus the <code class="language-plaintext highlighter-rouge">BinaryCommand</code> enum values (SUBSCRIBE=0x01, PUBLISH=0x03, MESSAGE=0x04, etc.) is everything you need.</p>
+
+<h3 id="if-youre-integrating-metricmq-into-an-existing-project">If You’re Integrating MetricMQ Into an Existing Project</h3>
+
+<p><strong>For ESP32/Arduino:</strong> Copy the three files from <code class="language-plaintext highlighter-rouge">esp32-metricmq/src/</code> into your project’s <code class="language-plaintext highlighter-rouge">lib/MetricMQ/</code> folder. That’s the complete integration — no package manager, no CMake, no external dependencies beyond arduino-esp32 v2.0.0+ which ships libsodium. Your existing WiFi code, sensor reads, and display code stay exactly as they are. MetricMQ adds three things: <code class="language-plaintext highlighter-rouge">begin()</code> + <code class="language-plaintext highlighter-rouge">connect()</code> in <code class="language-plaintext highlighter-rouge">setup()</code>, <code class="language-plaintext highlighter-rouge">client.loop()</code> in <code class="language-plaintext highlighter-rouge">loop()</code>, and <code class="language-plaintext highlighter-rouge">client.publish()</code> wherever you currently <code class="language-plaintext highlighter-rouge">Serial.printf()</code> your data.</p>
+
+<p><strong>For native C++:</strong> Include <code class="language-plaintext highlighter-rouge">metricmq/pubsub.hpp</code> for RESP or <code class="language-plaintext highlighter-rouge">metricmq/binary_pubsub.hpp</code> for the binary protocol. The <code class="language-plaintext highlighter-rouge">BinaryPublisher</code> class handles frame construction and Ed25519 signing. The <code class="language-plaintext highlighter-rouge">BinarySubscriber</code> handles ACK tracking and replay. Add <code class="language-plaintext highlighter-rouge">metricmq</code> as a Conan dependency to your existing <code class="language-plaintext highlighter-rouge">conanfile.txt</code>.</p>
+
+<h3 id="if-youre-evaluating-for-a-production-deployment">If You’re Evaluating for a Production Deployment</h3>
+
+<p>Read the <strong>Production Risks</strong> table on the main page before anything else. The most important entries are: the single global mutex (limits concurrency above ~500 clients), no RESP authentication (any TCP client on port 6379 has full access), no session idle timeout (crashed clients leave zombie threads), and LMDB filling to 1 GB with no compaction or TTL. These are real constraints — understand them before deciding if MetricMQ is the right tool for your scale.</p>
+
+<h3 id="if-youre-running-tests">If You’re Running Tests</h3>
+
+<p>The <strong>Running Tests</strong> section on the main page lists every test binary and whether it needs a live broker. Start with <code class="language-plaintext highlighter-rouge">signed_publish_test</code> — it needs no broker and confirms your Ed25519 setup is correct. Then <code class="language-plaintext highlighter-rouge">exactly_once_test</code> with the broker running to confirm ACK tracking and replay. The <code class="language-plaintext highlighter-rouge">persistence_test</code> is the most useful for Demo 2 validation.</p>
+
+<hr />
+
+<h2 id="how-to-make-metricmq-better--and-why-it-matters-for-real-iot">How to Make MetricMQ Better — and Why It Matters for Real IoT</h2>
+
+<p>MetricMQ is an early-stage project. These are the genuine gaps that matter most for real-world IoT deployments, in order of impact:</p>
+
+<h3 id="1-tls-transport-encryption">1. TLS Transport Encryption</h3>
+
+<p><strong>Current state:</strong> Ed25519 signing authenticates who sent a message and detects tampering. But the payload bytes are still visible on the wire. Anyone who can see the TCP stream reads the data.</p>
+
+<p><strong>Why it matters:</strong> In a factory environment where sensor data travels over a shared network, a passive observer can read every temperature, pressure, and status reading. For consumer IoT or any medical/financial application, this is a showstopper.</p>
+
+<p><strong>What the fix looks like:</strong> Wrapping the TCP socket in TLS 1.3. The libsodium dependency is already there — <code class="language-plaintext highlighter-rouge">crypto_secretstream</code> provides an efficient encrypted channel without the full X.509 overhead. The Ed25519 keypair already on each device can serve as the client certificate. This adds ~15 KB to the broker binary and ~4 KB RAM per session.</p>
+
+<h3 id="2-auto-reconnect-on-the-esp32-client">2. Auto-Reconnect on the ESP32 Client</h3>
+
+<p><strong>Current state:</strong> When the TCP connection drops, <code class="language-plaintext highlighter-rouge">client.loop()</code> calls <code class="language-plaintext highlighter-rouge">resetConnection()</code> and returns. Your sketch must detect <code class="language-plaintext highlighter-rouge">!isConnected()</code> and call <code class="language-plaintext highlighter-rouge">begin()</code> + <code class="language-plaintext highlighter-rouge">connect()</code> manually. This works, but it means every user sketch has to implement the same reconnect logic correctly.</p>
+
+<p><strong>Why it matters:</strong> A device deployed in a warehouse with intermittent WiFi will drop and reconnect regularly. If the application developer forgets the reconnect check (easy to do), the device silently stops publishing with no error. This is a reliability trap.</p>
+
+<p><strong>What the fix looks like:</strong> Adding an optional exponential backoff reconnect inside <code class="language-plaintext highlighter-rouge">MetricMQClient::loop()</code> with a configurable <code class="language-plaintext highlighter-rouge">setAutoReconnect(bool, uint32_t max_backoff_ms)</code>. The current manual pattern stays as the default — auto-reconnect opts in. The exactly-once replay already handles the LMDB-side of reconnect correctly; this is purely the TCP-layer retry.</p>
+
+<h3 id="3-runtime-key-provisioning">3. Runtime Key Provisioning</h3>
+
+<p><strong>Current state:</strong> Public keys for Ed25519 verification are registered by editing <code class="language-plaintext highlighter-rouge">src/main.cpp</code> in the broker repo and recompiling. Adding a new device means a broker rebuild and restart.</p>
+
+<p><strong>Why it matters:</strong> A fleet of 50 sensor nodes where each device has a unique key pair requires 50 broker rebuilds if you do it one at a time — or one rebuild with 50 keys hardcoded at deployment. Neither scales. A new device added in the field means either shipping a pre-built broker binary or having a development environment on the gateway.</p>
+
+<p><strong>What the fix looks like:</strong> A simple REST API on the broker’s HTTP port (<code class="language-plaintext highlighter-rouge">POST /keys</code> with JSON body <code class="language-plaintext highlighter-rouge">{"device_id": "...", "public_key_hex": "..."}</code>) that adds keys to the in-memory keystore with optional LMDB persistence. This is a weekend-sized addition with the Poco HTTP server already in the dependency tree.</p>
+
+<h3 id="4-resp-authentication">4. RESP Authentication</h3>
+
+<p><strong>Current state:</strong> Any TCP client that can reach port 6379 can publish and subscribe to any non-<code class="language-plaintext highlighter-rouge">secure/</code> topic. The only access control is the firewall.</p>
+
+<p><strong>Why it matters:</strong> In a shared network environment — a university lab, a co-working space, a multi-tenant IoT platform — the firewall assumption breaks down. An authenticated RESP connection would let you deploy MetricMQ without a dedicated network segment.</p>
+
+<p><strong>What the fix looks like:</strong> Adding Redis’s <code class="language-plaintext highlighter-rouge">AUTH</code> command support — <code class="language-plaintext highlighter-rouge">AUTH &lt;password&gt;</code> on connection, rejected with an error if not provided. Single shared password is a starting point; per-client tokens with the keystore infrastructure already in place is the clean version.</p>
+
+<h3 id="5-broker-sharding-for-scale">5. Broker Sharding for Scale</h3>
+
+<p><strong>Current state:</strong> A single global mutex protects all broker state. p99 latency stays under 1 ms at a handful of devices but climbs measurably above ~500 concurrent clients.</p>
+
+<p><strong>Why it matters:</strong> A smart building with 2,000 sensors publishing at 1 Hz generates 2,000 concurrent sessions. The single-mutex architecture becomes the bottleneck.</p>
+
+<p><strong>What the fix looks like:</strong> Consistent hashing of topics to broker shards, each with its own mutex and LMDB partition. A coordinator layer handles cross-shard subscriptions for wildcards. This is a significant architecture change — not a weekend fix — but the LMDB storage layer and the binary protocol are already designed for it.</p>
+
+<hr />]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[MetricMQ is a low memory footprint, LMDB based MQTT broker and publisher for embedded systems, built with C++20, MIT licensed and is a single header file.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/IMG_0313.jpeg" /><media:content medium="image" url="/cover_images/posts/IMG_0313.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</title><link href="/blog/es/2026-04-17-di-embedded/" rel="alternate" type="text/html" title="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It" /><published>2026-04-17T00:00:00+00:00</published><updated>2026-05-17T19:40:38+00:00</updated><id>/blog/es/di-embedded</id><content type="html" xml:base="/blog/es/2026-04-17-di-embedded/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#the-embedded-maintenance-trap" id="markdown-toc-the-embedded-maintenance-trap">The Embedded Maintenance Trap</a></li>
   <li><a href="#the-anti-patterns-in-detail" id="markdown-toc-the-anti-patterns-in-detail">The Anti-Patterns in Detail</a>    <ul>
       <li><a href="#direct-hardware-access-buried-in-application-logic" id="markdown-toc-direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</a></li>
@@ -7484,202 +8773,4 @@ Data saved to power_test.csv
 <ul>
   <li>SemiEngineering — Curbing Automotive Cybersecurity Attacks: https://semiengineering.com/curbing-automotive-cybersecurity-attacks/</li>
   <li>upGrad — 18 Key Automotive Cyber Security &amp; Vehicle Cybersecurity Measures for 2025: https://www.upgrad.com/blog/automotive-cybersecurity/</li>
-</ul>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="industry" /><summary type="html"><![CDATA[UNECE R155/R156 are regulatory requirements for vehicle cybersecurity and software updates, while ISO 26262 (functional safety) and IEC 62443 (industrial/IoT cybersecurity) are technical standards. The relationship is that UNECE mandates compliance at a regulatory level, and ISO/IEC standards provide the engineering frameworks and evidence manufacturers use to demonstrate compliance]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/unece-iso.webp" /><media:content medium="image" url="/cover_images/posts/unece-iso.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector</title><link href="/blog/rust-dev/2025-12-17-raii-cpp-rust/" rel="alternate" type="text/html" title="RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector" /><published>2025-12-17T00:00:00+00:00</published><updated>2026-02-13T14:55:28+00:00</updated><id>/blog/rust-dev/raii-cpp-rust</id><content type="html" xml:base="/blog/rust-dev/2025-12-17-raii-cpp-rust/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#what-is-raii" id="markdown-toc-what-is-raii">What is RAII?</a></li>
-  <li><a href="#raii-in-c" id="markdown-toc-raii-in-c">RAII in C++</a>    <ul>
-      <li><a href="#example-managing-a-file" id="markdown-toc-example-managing-a-file">Example: Managing a File</a></li>
-      <li><a href="#c-raii-lifecycle" id="markdown-toc-c-raii-lifecycle">C++ RAII Lifecycle</a></li>
-      <li><a href="#challenges-in-c" id="markdown-toc-challenges-in-c">Challenges in C++</a></li>
-    </ul>
-  </li>
-  <li><a href="#raii-in-rust" id="markdown-toc-raii-in-rust">RAII in Rust</a>    <ul>
-      <li><a href="#example-managing-a-file-1" id="markdown-toc-example-managing-a-file-1">Example: Managing a File</a></li>
-      <li><a href="#rust-ownership--raii" id="markdown-toc-rust-ownership--raii">Rust Ownership &amp; RAII</a></li>
-      <li><a href="#rusts-advantages" id="markdown-toc-rusts-advantages">Rust’s Advantages</a></li>
-    </ul>
-  </li>
-  <li><a href="#key-differences" id="markdown-toc-key-differences">Key Differences</a></li>
-  <li><a href="#real-world-example-smart-pointers" id="markdown-toc-real-world-example-smart-pointers">Real-World Example: Smart Pointers</a>    <ul>
-      <li><a href="#c-smart-pointers" id="markdown-toc-c-smart-pointers">C++ Smart Pointers</a></li>
-      <li><a href="#rust-box" id="markdown-toc-rust-box">Rust Box</a></li>
-    </ul>
-  </li>
-  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
-</ul>
-
-<h2 id="what-is-raii">What is RAII?</h2>
-
-<p>RAII is a programming pattern where resources are acquired during object initialization and released during destruction. This ensures automatic cleanup without manual intervention.</p>
-
-<h2 id="raii-in-c">RAII in C++</h2>
-
-<p>In C++, RAII relies on <strong>constructors</strong> and <strong>destructors</strong>. When an object goes out of scope, its destructor is called automatically.</p>
-
-<h3 id="example-managing-a-file">Example: Managing a File</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FileHandler</span> <span class="p">{</span>
-<span class="nl">private:</span>
-    <span class="kt">FILE</span><span class="o">*</span> <span class="n">file</span><span class="p">;</span>
-<span class="nl">public:</span>
-    <span class="c1">// Constructor: Acquire resource</span>
-    <span class="n">FileHandler</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Destructor: Release resource</span>
-    <span class="o">~</span><span class="n">FileHandler</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="nf">processFile</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">FileHandler</span> <span class="n">handler</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
-    <span class="c1">// Use the file...</span>
-    <span class="c1">// File automatically closes when handler goes out of scope</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="c-raii-lifecycle">C++ RAII Lifecycle</h3>
-
-<pre><code class="language-mermaid">graph TD
-    A[Object Created] --&gt;|Constructor Called| B[Resource Acquired]
-    B --&gt; C[Object Used]
-    C --&gt; D[Object Goes Out of Scope]
-    D --&gt;|Destructor Called| E[Resource Released]
-    E --&gt; F[Memory Cleaned Up]
-</code></pre>
-
-<h3 id="challenges-in-c">Challenges in C++</h3>
-
-<ul>
-  <li><strong>Manual implementation</strong>: You must write destructors correctly</li>
-  <li><strong>Ownership issues</strong>: Who owns the resource? Easy to create bugs with copies</li>
-  <li><strong>Exception safety</strong>: Need careful design to avoid leaks during exceptions</li>
-</ul>
-
-<h2 id="raii-in-rust">RAII in Rust</h2>
-
-<p>Rust takes RAII further with its <strong>ownership system</strong> and <strong>Drop trait</strong>. The compiler enforces strict rules about who owns resources, eliminating entire classes of bugs.</p>
-
-<h3 id="example-managing-a-file-1">Example: Managing a File</h3>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
-
-<span class="k">fn</span> <span class="nf">process_file</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="c1">// Use the file...</span>
-    <span class="c1">// File automatically closes when it goes out of scope</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Rust’s <code class="language-plaintext highlighter-rouge">File</code> type implements the <code class="language-plaintext highlighter-rouge">Drop</code> trait, which works like C++’s destructor but with compiler-enforced ownership.</p>
-
-<h3 id="rust-ownership--raii">Rust Ownership &amp; RAII</h3>
-
-<pre><code class="language-mermaid">graph TD
-    A[Variable Created] --&gt;|Takes Ownership| B[Resource Acquired]
-    B --&gt; C[Variable Used]
-    C --&gt; D{Ownership Transferred?}
-    D --&gt;|No| E[Goes Out of Scope]
-    D --&gt;|Yes| F[New Owner Manages It]
-    E --&gt;|Drop Called| G[Resource Released]
-    F --&gt; E
-</code></pre>
-
-<h3 id="rusts-advantages">Rust’s Advantages</h3>
-
-<ul>
-  <li><strong>Compiler-enforced ownership</strong>: Only one owner at a time (or explicit borrowing)</li>
-  <li><strong>No dangling pointers</strong>: Compiler prevents use-after-free bugs</li>
-  <li><strong>Automatic Drop</strong>: No need to manually implement cleanup (unless custom behavior needed)</li>
-</ul>
-
-<h2 id="key-differences">Key Differences</h2>
-
-<pre><code class="language-mermaid">graph LR
-    subgraph C++
-        A1[Developer Responsibility] --&gt; B1[Manual RAII Implementation]
-        B1 --&gt; C1[Runtime Flexibility]
-        C1 --&gt; D1[Potential for Bugs]
-    end
-    
-    subgraph Rust
-        A2[Compiler Enforced] --&gt; B2[Built-in Ownership]
-        B2 --&gt; C2[Compile-time Safety]
-        C2 --&gt; D2[Zero-cost Abstractions]
-    end
-</code></pre>
-
-<table>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>C++</th>
-      <th>Rust</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Who enforces RAII?</strong></td>
-      <td>Developer discipline</td>
-      <td>Compiler (borrow checker)</td>
-    </tr>
-    <tr>
-      <td><strong>Ownership model</strong></td>
-      <td>Manual (smart pointers help)</td>
-      <td>Built-in, enforced</td>
-    </tr>
-    <tr>
-      <td><strong>Memory safety</strong></td>
-      <td>Easy to make mistakes</td>
-      <td>Prevents bugs at compile time</td>
-    </tr>
-    <tr>
-      <td><strong>Learning curve</strong></td>
-      <td>Moderate</td>
-      <td>Steep initially</td>
-    </tr>
-    <tr>
-      <td><strong>Flexibility</strong></td>
-      <td>Very high</td>
-      <td>High, but within safety rules</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="real-world-example-smart-pointers">Real-World Example: Smart Pointers</h2>
-
-<h3 id="c-smart-pointers">C++ Smart Pointers</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
-</span>
-<span class="kt">void</span> <span class="nf">example</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-    <span class="c1">// Memory automatically freed when unique_ptr goes out of scope</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="rust-box">Rust Box</h3>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">example</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="n">data</span> <span class="o">=</span> <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-    <span class="c1">// Memory automatically freed when Box goes out of scope</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Both achieve the same goal, but Rust’s compiler prevents you from accidentally creating two owners of the same resource.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>C++ and Rust both employ RAII for resource management without garbage collection, but differ in approach:</p>
-
-<ul>
-  <li>C++ requires developer discipline for implementation and ownership.</li>
-  <li>Rust enforces safety through its compiler and ownership model.</li>
-</ul>
-
-<p>Rust’s strict rules may seem restrictive initially but prevent many bugs. C++ offers flexibility at the cost of potential errors.</p>
-
-<p>Effective resource management is key to safe, efficient code in both languages.</p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="rust-dev" /><category term="c++" /><summary type="html"><![CDATA[Managing memory and resources like files, network connections, or locks is essential in programming. While some languages rely on garbage collectors for automatic cleanup (Java), C++ and Rust use RAII (Resource Acquisition Is Initialization) to handle this deterministically.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/RAII-cpp-rust.webp" /><media:content medium="image" url="/cover_images/posts/RAII-cpp-rust.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</ul>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="industry" /><summary type="html"><![CDATA[UNECE R155/R156 are regulatory requirements for vehicle cybersecurity and software updates, while ISO 26262 (functional safety) and IEC 62443 (industrial/IoT cybersecurity) are technical standards. The relationship is that UNECE mandates compliance at a regulatory level, and ISO/IEC standards provide the engineering frameworks and evidence manufacturers use to demonstrate compliance]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/unece-iso.webp" /><media:content medium="image" url="/cover_images/posts/unece-iso.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
