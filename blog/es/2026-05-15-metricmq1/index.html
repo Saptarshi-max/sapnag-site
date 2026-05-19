@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/IMG_0313.jpeg" />
 <meta property="twitter:title" content="Getting Started with MetricMQ on ESP32" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-19T21:16:02+00:00","datePublished":"2026-05-15T00:00:00+00:00","description":"MetricMQ is a low memory footprint, LMDB based MQTT broker and publisher for embedded systems, built with C++20, MIT licensed and is a single header file.","headline":"Getting Started with MetricMQ on ESP32","image":"/cover_images/posts/IMG_0313.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-05-15-metricmq1/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-05-15-metricmq1/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-19T21:26:36+00:00","datePublished":"2026-05-15T00:00:00+00:00","description":"MetricMQ is a low memory footprint, LMDB based MQTT broker and publisher for embedded systems, built with C++20, MIT licensed and is a single header file.","headline":"Getting Started with MetricMQ on ESP32","image":"/cover_images/posts/IMG_0313.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-05-15-metricmq1/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-05-15-metricmq1/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-19T21:16:43+00:00',
+    INDEX_KEY: 'index--2026-05-19T21:27:12+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -309,8 +309,6 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>This post walks through four demos, each building on the last. You need one ESP32, a PC running the broker, and PlatformIO. No prior message broker experience needed.</p>
 
-<hr />
-
 <h1 id="core-features-in-a-nutshell">Core Features in a Nutshell</h1>
 
 <p>MetricMQ provides powerful features directly out of the box without complicated plugins:</p>
@@ -322,7 +320,70 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   <li><strong>Zero-Config Observability:</strong> A Prometheus-compatible endpoint automatically runs on port 9091.</li>
 </ul>
 
-<hr />
+<h2 id="metricmqs-architecture">MetricMQ’s Architecture</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Publishers (ESP32 / desktop)
+    │  binary protocol (16-byte header)
+    │  or RESP (redis-compatible text)
+    ▼
+┌─────────────────────────────────────┐
+│  Session Manager                    │
+│  Auto-detects protocol (first byte) │
+│  Per-session thread, idle timeout   │
+├─────────────────────────────────────┤
+│  Security Layer                     │
+│  Ed25519 verify (libsodium)         │
+│  Topic ACL enforcement per key_id   │
+├─────────────────────────────────────┤
+│  Message Router                     │
+│  Wildcard topic matching            │
+│  Pub/sub + queue/worker patterns    │
+├─────────────────────────────────────┤
+│  LMDB Persistence                   │
+│  Sequence IDs + ACK tracking        │
+│  Compaction at 100K messages        │
+├─────────────────────────────────────┤
+│  Prometheus Metrics (port 9091)     │
+│  Counters, gauges, histograms       │
+│  Grafana-ready, standard PromQL     │
+└─────────────────────────────────────┘
+    │
+    ▼
+Subscribers (ESP32 / desktop / redis-cli)
+</code></pre></div></div>
+
+<p><strong>Key design decisions:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decision</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Custom 16-byte binary header</td>
+      <td>40% smaller frames than RESP — matters on cellular and congested WiFi</td>
+    </tr>
+    <tr>
+      <td>Ed25519 over TLS for auth</td>
+      <td>Per-message identity without session overhead - MCUs verify without a full TLS stack, saves MCU’s memory significantly</td>
+    </tr>
+    <tr>
+      <td>LMDB over SQLite</td>
+      <td>Memory-mapped, zero-copy reads, O(1) sequence ID lookups, no query parser</td>
+    </tr>
+    <tr>
+      <td>RESP compatibility</td>
+      <td>Any <code class="language-plaintext highlighter-rouge">redis-cli</code> works for debugging — zero additional tooling</td>
+    </tr>
+    <tr>
+      <td>Prometheus over custom metrics</td>
+      <td>Drop-in Grafana integration, standard PromQL, production alerting rules</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="metricmq-vs-the-alternatives">MetricMQ vs. The Alternatives</h3>
 
@@ -588,7 +649,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   </tbody>
 </table>
 
-<h3 id="windows-antivirus--expected-false-positive">Windows Antivirus — Expected False Positive</h3>
+<h3 id="windows-antivirus---expected-false-positive">Windows Antivirus - Expected False Positive</h3>
 
 <p>Avast, Defender, and most Windows antivirus tools will quarantine <code class="language-plaintext highlighter-rouge">metricmq-broker.exe</code> the first time you run it. This is a false positive — the <code class="language-plaintext highlighter-rouge">IDP.Generic</code> detection fires because the binary is unsigned, opens a TCP server socket, and uses a cryptographic library. All three together look suspicious to heuristic scanners even when completely benign.</p>
 
@@ -1982,7 +2043,7 @@ Offset 16+  : topic bytes, then payload bytes
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-20-automobile-cybersecurity/" class="flip-title"><span>From Regulation to Implementation- Understanding Vehicle Cybersecurity legal Compliance & How Vehicle Cybersecurity Actually Gets Done</span></a>  <time class="faded fine" datetime="2025-12-20T00:00:00+00:00">20 Dec 2025</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cppdev/2025-12-26-containers-std-vs-pmr/" class="flip-title"><span>Performance cost std::pmr vs std containers</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>      </ul></aside>
 
   
 
