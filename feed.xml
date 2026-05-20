@@ -1,8 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-19T21:27:12+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq1/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-19T21:26:36+00:00</updated><id>/blog/es/metricmq1</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq1/"><![CDATA[<p><em>A 328 KB broker that survives network drops, routes to multiple subscribers, and cryptographically proves every reading is real — running on your desk in 15 minutes.</em></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-20T10:53:28+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq1/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-20T10:53:03+00:00</updated><id>/blog/es/metricmq1</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq1/"><![CDATA[<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
 
-<hr />
+<p>MetricMQ Github REPO - https://github.com/Saptarshi-max/MetricMQ
+MetricMQ Documenation - https://metricmq-docs.netlify.app/
+MetricMQ My Project Page - https://www.sapnag.me/projects/2025-11-24-metricMQ/</p>
 
-<h2 id="1-the-gap-in-iot-messaging">1. The Gap in IoT Messaging</h2>
+<div class="warning">
+
+  <p>MetricMQ is still in its early beta stage, If you encounter any issues please report it at <a href="https://github.com/Saptarshi-max/MetricMQ/issues">https://github.com/Saptarshi-max/MetricMQ/issues</a>  that will help in making the lib better</p>
+</div>
+
+<h2 id="the-gap-in-iot-messaging">The Gap in IoT Messaging</h2>
 
 <p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0—fast, but no guarantees. On the other end, you have RabbitMQ or Kafka—extremely reliable, but they are heavy 50MB+ server applications.</p>
 
@@ -365,6 +372,8 @@ Subscribers (ESP32 / desktop / redis-cli)
 </table>
 
 <h3 id="windows-antivirus---expected-false-positive">Windows Antivirus - Expected False Positive</h3>
+
+<p><img src="/cover_images/posts/Screenshot%202026-05-15%20153116.png" alt="518" /></p>
 
 <p>Avast, Defender, and most Windows antivirus tools will quarantine <code class="language-plaintext highlighter-rouge">metricmq-broker.exe</code> the first time you run it. This is a false positive — the <code class="language-plaintext highlighter-rouge">IDP.Generic</code> detection fires because the binary is unsigned, opens a TCP server socket, and uses a cryptographic library. All three together look suspicious to heuristic scanners even when completely benign.</p>
 

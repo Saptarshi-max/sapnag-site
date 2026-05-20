@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/IMG_0313.jpeg" />
 <meta property="twitter:title" content="Getting Started with MetricMQ on ESP32" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-19T21:26:36+00:00","datePublished":"2026-05-15T00:00:00+00:00","description":"MetricMQ is a low memory footprint, LMDB based MQTT broker and publisher for embedded systems, built with C++20, MIT licensed and is a single header file.","headline":"Getting Started with MetricMQ on ESP32","image":"/cover_images/posts/IMG_0313.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-05-15-metricmq1/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-05-15-metricmq1/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-20T10:53:03+00:00","datePublished":"2026-05-15T00:00:00+00:00","description":"MetricMQ is a low memory footprint, LMDB based MQTT broker and publisher for embedded systems, built with C++20, MIT licensed and is a single header file.","headline":"Getting Started with MetricMQ on ESP32","image":"/cover_images/posts/IMG_0313.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-05-15-metricmq1/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-05-15-metricmq1/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-19T21:27:12+00:00',
+    INDEX_KEY: 'index--2026-05-20T10:53:28+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -283,11 +283,18 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   </header>
 
   
-    <p><em>A 328 KB broker that survives network drops, routes to multiple subscribers, and cryptographically proves every reading is real — running on your desk in 15 minutes.</em></p>
+    <h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
 
-<hr />
+<p>MetricMQ Github REPO - https://github.com/Saptarshi-max/MetricMQ
+MetricMQ Documenation - https://metricmq-docs.netlify.app/
+MetricMQ My Project Page - https://www.sapnag.me/projects/2025-11-24-metricMQ/</p>
 
-<h2 id="1-the-gap-in-iot-messaging">1. The Gap in IoT Messaging</h2>
+<div class="warning">
+
+  <p>MetricMQ is still in its early beta stage, If you encounter any issues please report it at <a href="https://github.com/Saptarshi-max/MetricMQ/issues">https://github.com/Saptarshi-max/MetricMQ/issues</a>  that will help in making the lib better</p>
+</div>
+
+<h2 id="the-gap-in-iot-messaging">The Gap in IoT Messaging</h2>
 
 <p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0—fast, but no guarantees. On the other end, you have RabbitMQ or Kafka—extremely reliable, but they are heavy 50MB+ server applications.</p>
 
@@ -650,6 +657,8 @@ Subscribers (ESP32 / desktop / redis-cli)
 </table>
 
 <h3 id="windows-antivirus---expected-false-positive">Windows Antivirus - Expected False Positive</h3>
+
+<p><img src="/cover_images/posts/Screenshot%202026-05-15%20153116.png" alt="518" /></p>
 
 <p>Avast, Defender, and most Windows antivirus tools will quarantine <code class="language-plaintext highlighter-rouge">metricmq-broker.exe</code> the first time you run it. This is a false positive — the <code class="language-plaintext highlighter-rouge">IDP.Generic</code> detection fires because the binary is unsigned, opens a TCP server socket, and uses a cryptographic library. All three together look suspicious to heuristic scanners even when completely benign.</p>
 
@@ -2043,7 +2052,7 @@ Offset 16+  : topic bytes, then payload bytes
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cppdev/2025-12-26-containers-std-vs-pmr/" class="flip-title"><span>Performance cost std::pmr vs std containers</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/productivity/2026-02-18-ui/" class="flip-title"><span>The Embedded Engineer's Second Brain: PARA and CODE Systems</span></a>  <time class="faded fine" datetime="2026-02-18T00:00:00+00:00">18 Feb 2026</time></li>          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>      </ul></aside>
 
   
 
