@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-20T15:29:49+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq1/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-20T15:29:16+00:00</updated><id>/blog/es/metricmq1</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq1/"><![CDATA[<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-25T15:47:38+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-25T15:47:07+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
 
 <ul>
   <li>MetricMQ Github REPO - <a href="https://github.com/Saptarshi-max/MetricMQ">https://github.com/Saptarshi-max/MetricMQ</a></li>
@@ -11,144 +11,61 @@
   <p>MetricMQ is still in its early beta stage, If you encounter any issues please report it at <a href="https://github.com/Saptarshi-max/MetricMQ/issues">https://github.com/Saptarshi-max/MetricMQ/issues</a>  that will help in making the lib better</p>
 </div>
 
-<h2 id="the-gap-in-iot-messaging">The Gap in IoT Messaging</h2>
-
-<p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0—fast, but no guarantees. On the other end, you have RabbitMQ or Kafka—extremely reliable, but they are heavy 50MB+ server applications.</p>
-
-<p><strong>MetricMQ fills this gap.</strong> It is a <strong>328 KB single-executable broker</strong> that gives you exactly-once delivery, built-in Ed25519 message signing, and Prometheus metrics out of the box.</p>
-
-<p>Three questions follow every IoT project:</p>
-
-<p><strong>What happens when WiFi drops?</strong> Do those readings disappear, or can they be recovered?</p>
-
-<p><strong>How do you send one reading to many places?</strong> Does every subscriber get its own copy?</p>
-
-<p><strong>How do you know a reading is real?</strong> If something on your network sends fake sensor data, can you detect it?</p>
-
-<p>Most messaging tools answer one of these well. MetricMQ tries to answer all three in a broker that compiles to 328 KB and ships a native Arduino/PlatformIO library for the ESP32.</p>
-
-<blockquote>
-  <p><strong>Use MetricMQ when:</strong> You need guaranteed delivery (you want to know a message actually arrived), local deployments without complex config, and cryptographically verified messages on constrained microcontrollers like the ESP32.</p>
-</blockquote>
-
-<p>This post walks through four demos, each building on the last. You need one ESP32, a PC running the broker, and PlatformIO. No prior message broker experience needed.</p>
-
-<h1 id="core-features-in-a-nutshell">Core Features in a Nutshell</h1>
-
-<p>MetricMQ provides powerful features directly out of the box without complicated plugins:</p>
-
+<p><strong>Key characteristics:</strong></p>
 <ul>
-  <li><strong>Dual Protocol Auto-Detection:</strong> Connect using the human-readable Redis text protocol (RESP) for debugging via <code class="language-plaintext highlighter-rouge">redis-cli</code>, or use the <strong>Binary Protocol</strong> (40% smaller footprint) for embedded production. The broker auto-detects based on the first byte!</li>
-  <li><strong>Exactly-Once Delivery:</strong> Messages are persisted to an embedded LMDB database. If a subscriber disconnects and reconnects, only unacknowledged messages are replayed. No gaps, no duplicates.</li>
-  <li><strong>Ed25519 Message Signing:</strong> Publishers sign messages, and the broker rejects tampered packets at the wire level before they reach subscribers.</li>
-  <li><strong>Zero-Config Observability:</strong> A Prometheus-compatible endpoint automatically runs on port 9091.</li>
+  <li>328 KB binary size</li>
+  <li>Embedded LMDB storage</li>
+  <li>Dual protocol support (RESP + Binary)</li>
+  <li>Runs on ESP32/ESP8266 and desktop platforms</li>
+  <li>106K msg/s throughput (measured, 10KB messages)</li>
 </ul>
 
-<h2 id="metricmqs-architecture">MetricMQ’s Architecture</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Publishers (ESP32 / desktop)
-    │  binary protocol (16-byte header)
-    │  or RESP (redis-compatible text)
-    ▼
-┌─────────────────────────────────────┐
-│  Session Manager                    │
-│  Auto-detects protocol (first byte) │
-│  Per-session thread, idle timeout   │
-├─────────────────────────────────────┤
-│  Security Layer                     │
-│  Ed25519 verify (libsodium)         │
-│  Topic ACL enforcement per key_id   │
-├─────────────────────────────────────┤
-│  Message Router                     │
-│  Wildcard topic matching            │
-│  Pub/sub + queue/worker patterns    │
-├─────────────────────────────────────┤
-│  LMDB Persistence                   │
-│  Sequence IDs + ACK tracking        │
-│  Compaction at 100K messages        │
-├─────────────────────────────────────┤
-│  Prometheus Metrics (port 9091)     │
-│  Counters, gauges, histograms       │
-│  Grafana-ready, standard PromQL     │
-└─────────────────────────────────────┘
-    │
-    ▼
-Subscribers (ESP32 / desktop / redis-cli)
-</code></pre></div></div>
-
-<p><strong>Key design decisions:</strong></p>
+<h2 id="features">Features</h2>
 
 <table>
   <thead>
     <tr>
-      <th>Decision</th>
-      <th>Why</th>
+      <th>Feature</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Custom 16-byte binary header</td>
-      <td>40% smaller frames than RESP — matters on cellular and congested WiFi</td>
+      <td>Dual Protocol</td>
+      <td>RESP (Redis-compatible) + Binary Protocol</td>
     </tr>
     <tr>
-      <td>Ed25519 over TLS for auth</td>
-      <td>Per-message identity without session overhead - MCUs verify without a full TLS stack, saves MCU’s memory significantly</td>
+      <td>Protocol Detection</td>
+      <td>Automatic detection on first byte</td>
     </tr>
     <tr>
-      <td>LMDB over SQLite</td>
-      <td>Memory-mapped, zero-copy reads, O(1) sequence ID lookups, no query parser</td>
+      <td>Pub/Sub</td>
+      <td>Topic-based routing with wildcards</td>
     </tr>
     <tr>
-      <td>RESP compatibility</td>
-      <td>Any <code class="language-plaintext highlighter-rouge">redis-cli</code> works for debugging — zero additional tooling</td>
+      <td>Queue Mode</td>
+      <td>PUSH/PULL with round-robin distribution</td>
     </tr>
     <tr>
-      <td>Prometheus over custom metrics</td>
-      <td>Drop-in Grafana integration, standard PromQL, production alerting rules</td>
+      <td>Exactly-Once Delivery</td>
+      <td>Sequence IDs with ACK tracking</td>
+    </tr>
+    <tr>
+      <td>Persistence</td>
+      <td>LMDB embedded database</td>
+    </tr>
+    <tr>
+      <td>Metrics</td>
+      <td>Prometheus endpoint on port 9091</td>
+    </tr>
+    <tr>
+      <td>Platforms</td>
+      <td>Windows, Linux, macOS, ESP32, ESP8266</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="metricmq-vs-the-alternatives">MetricMQ vs. The Alternatives</h3>
-
-<p>Here is a realistic comparison of when to use what:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tool</th>
-      <th>Pros</th>
-      <th>Cons</th>
-      <th>Use Case</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Raw UDP/TCP</strong></td>
-      <td>Zero overhead, extremely fast</td>
-      <td>No delivery guarantees, requires custom framing</td>
-      <td>Video streaming, local LAN discovery</td>
-    </tr>
-    <tr>
-      <td><strong>Mosquitto (MQTT)</strong></td>
-      <td>Industry standard, QoS 1/2 support</td>
-      <td>Complex setup, fire-and-forget by default</td>
-      <td>Large enterprise integrations, legacy IoT</td>
-    </tr>
-    <tr>
-      <td><strong>RabbitMQ/Kafka</strong></td>
-      <td>Massive scale, highly reliable</td>
-      <td>Requires a server/cluster, high memory usage</td>
-      <td>Cloud data pipelines, heavy backends</td>
-    </tr>
-    <tr>
-      <td><strong>MetricMQ</strong></td>
-      <td>328 KB broker, exactly-once, auto Redis protocol</td>
-      <td>No TLS yet, capped at 1000 connections</td>
-      <td>Edge computing, constrained sensor networks</td>
-    </tr>
-  </tbody>
-</table>
+<hr />
 
 <h2 id="a-map-of-this-post">A Map of This Post</h2>
 
@@ -292,8 +209,6 @@ Subscribers (ESP32 / desktop / redis-cli)
     </tr>
   </tbody>
 </table>
-
-<hr />
 
 <h2 id="setting-up-the-broker">Setting Up the Broker</h2>
 

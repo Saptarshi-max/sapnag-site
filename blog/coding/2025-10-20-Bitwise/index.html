@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/Bitwise1.webp" />
 <meta property="twitter:title" content="Bitwise Operations in C/C++" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-02-13T14:55:28+00:00","datePublished":"2025-10-20T00:00:00+00:00","description":"A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming.","headline":"Bitwise Operations in C/C++","image":"/cover_images/posts/Bitwise1.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2025-10-20-Bitwise/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2025-10-20-Bitwise/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-25T15:47:07+00:00","datePublished":"2025-10-20T00:00:00+00:00","description":"A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming.","headline":"Bitwise Operations in C/C++","image":"/cover_images/posts/Bitwise1.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2025-10-20-Bitwise/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2025-10-20-Bitwise/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-20T15:29:49+00:00',
+    INDEX_KEY: 'index--2026-05-25T15:47:38+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -300,7 +300,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>Computers store and process data as binary digits (bits). Bitwise operations allow direct manipulation of individual bits, providing efficiency gains that high-level operations cannot match.</p>
 
-<pre><code class="language-mermaid">graph LR
+<pre><code class="language-mermaid">graph TD
     A[High-Level Code] --&gt; B[Compiler]
     B --&gt; C[Assembly/Machine Code]
     C --&gt; D[Binary Operations]
@@ -343,6 +343,8 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   </tbody>
 </table>
 
+<p>Bitwise operations are powerful tools. Use them where they provide clear benefits in performance or memory efficiency, but prioritize code readability when the gains are marginal.</p>
+
 <p><strong>Real-World Impact:</strong></p>
 <ul>
   <li><strong>Embedded Systems:</strong> Control LEDs, read sensors, configure hardware</li>
@@ -350,6 +352,8 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   <li><strong>Networking:</strong> IP address manipulation, packet parsing</li>
   <li><strong>Algorithms:</strong> Fast mathematical operations, optimization tricks</li>
 </ul>
+
+<h2 id="all-the-core-bitwise-operations-you-need-to-know-">All the Core Bitwise Operations you need to know …</h2>
 
 <hr />
 
@@ -1591,8 +1595,6 @@ AND= 1100 = 12
   <li>When team members don’t understand it</li>
 </ul>
 
-<p>Bitwise operations are powerful tools. Use them where they provide clear benefits in performance or memory efficiency, but prioritize code readability when the gains are marginal.</p>
-
   
 </article>
 
@@ -1993,7 +1995,7 @@ AND= 1100 = 12
     
 
 
-  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-05-15-metricmq1/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/IMG_0313.jpeg"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Getting Started with MetricMQ on ESP32"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-05-15-metricmq1/" class="flip-title">Getting Started with MetricMQ on ESP32</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.    </p>      <a class="fill-card no-hover" href="/blog/es/2026-05-15-metricmq1/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ on ESP32</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Di.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/es/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/IMG_0313.jpeg"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Getting Started with MetricMQ on ESP32"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title">Getting Started with MetricMQ on ESP32</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.    </p>      <a class="fill-card no-hover" href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ on ESP32</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Di.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/es/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It</span></a></article>              </div>      </div></aside>
 
   
 
@@ -2001,7 +2003,7 @@ AND= 1100 = 12
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>Local First, Building Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq1/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2025-12-16-pigweed-build-tools/" class="flip-title"><span>Build Systems in Embedded Development: From Make to Pigweed</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-14-borrow-checker/" class="flip-title"><span>Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)</span></a>  <time class="faded fine" datetime="2025-12-14T00:00:00+00:00">14 Dec 2025</time></li>      </ul></aside>
 
   
 

@@ -34,7 +34,7 @@
 <meta property="twitter:image" content="/%5Ccover_images%5Cposts%5CMetricMQ.webp" />
 <meta property="twitter:title" content="MetricMQ" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-20T13:44:51+00:00","datePublished":"2025-11-24T00:00:00+00:00","description":"Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.","headline":"MetricMQ","image":"/%5Ccover_images%5Cposts%5CMetricMQ.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2025-11-24-metricMQ/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2025-11-24-metricMQ/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-25T15:47:07+00:00","datePublished":"2025-11-24T00:00:00+00:00","description":"Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.","headline":"MetricMQ","image":"/%5Ccover_images%5Cposts%5CMetricMQ.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2025-11-24-metricMQ/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2025-11-24-metricMQ/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -106,7 +106,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-20T15:29:49+00:00',
+    INDEX_KEY: 'index--2026-05-25T15:47:38+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -305,74 +305,267 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 </div>
 
-<p><strong>Key characteristics:</strong></p>
+<h2 id="the-gap-in-iot-messaging">The Gap in IoT Messaging</h2>
+
+<p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0—fast, but no guarantees. On the other end, you have RabbitMQ or Kafka—extremely reliable, but they are heavy 50MB+ server applications.</p>
+
+<p><strong>MetricMQ fills this gap.</strong> It is a <strong>328 KB single-executable broker</strong> that gives you exactly-once delivery, built-in Ed25519 message signing, and Prometheus metrics out of the box.</p>
+
+<p>Three questions follow every IoT project:</p>
+
+<p><strong>What happens when WiFi drops?</strong> Do those readings disappear, or can they be recovered?</p>
+
+<p><strong>How do you send one reading to many places?</strong> Does every subscriber get its own copy?</p>
+
+<p><strong>How do you know a reading is real?</strong> If something on your network sends fake sensor data, can you detect it?</p>
+
+<p>Most messaging tools answer one of these well. MetricMQ tries to answer all three in a broker that compiles to 328 KB and ships a native Arduino/PlatformIO library for the ESP32.</p>
+
+<blockquote>
+  <p><strong>Use MetricMQ when:</strong> You need guaranteed delivery (you want to know a message actually arrived), local deployments without complex config, and cryptographically verified messages on constrained microcontrollers like the ESP32.</p>
+</blockquote>
+
+<p>This post walks through four demos, each building on the last. You need one ESP32, a PC running the broker, and PlatformIO. No prior message broker experience needed.</p>
+
+<h1 id="core-features-in-a-nutshell">Core Features in a Nutshell</h1>
+
+<p>MetricMQ provides powerful features directly out of the box without complicated plugins:</p>
+
 <ul>
-  <li>328 KB binary size</li>
-  <li>Embedded LMDB storage</li>
-  <li>Dual protocol support (RESP + Binary)</li>
-  <li>Runs on ESP32/ESP8266 and desktop platforms</li>
-  <li>106K msg/s throughput (measured, 10KB messages)</li>
+  <li><strong>Dual Protocol Auto-Detection:</strong> Connect using the human-readable Redis text protocol (RESP) for debugging via <code class="language-plaintext highlighter-rouge">redis-cli</code>, or use the <strong>Binary Protocol</strong> (40% smaller footprint) for embedded production. The broker auto-detects based on the first byte!</li>
+  <li><strong>Exactly-Once Delivery:</strong> Messages are persisted to an embedded LMDB database. If a subscriber disconnects and reconnects, only unacknowledged messages are replayed. No gaps, no duplicates.</li>
+  <li><strong>Ed25519 Message Signing:</strong> Publishers sign messages, and the broker rejects tampered packets at the wire level before they reach subscribers.</li>
+  <li><strong>Zero-Config Observability:</strong> A Prometheus-compatible endpoint automatically runs on port 9091.</li>
 </ul>
 
-<h2 id="features">Features</h2>
+<h2 id="metricmqs-architecture">MetricMQ’s Architecture</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Publishers (ESP32 / desktop)
+    │  binary protocol (16-byte header)
+    │  or RESP (redis-compatible text)
+    ▼
+┌─────────────────────────────────────┐
+│  Session Manager                    │
+│  Auto-detects protocol (first byte) │
+│  Per-session thread, idle timeout   │
+├─────────────────────────────────────┤
+│  Security Layer                     │
+│  Ed25519 verify (libsodium)         │
+│  Topic ACL enforcement per key_id   │
+├─────────────────────────────────────┤
+│  Message Router                     │
+│  Wildcard topic matching            │
+│  Pub/sub + queue/worker patterns    │
+├─────────────────────────────────────┤
+│  LMDB Persistence                   │
+│  Sequence IDs + ACK tracking        │
+│  Compaction at 100K messages        │
+├─────────────────────────────────────┤
+│  Prometheus Metrics (port 9091)     │
+│  Counters, gauges, histograms       │
+│  Grafana-ready, standard PromQL     │
+└─────────────────────────────────────┘
+    │
+    ▼
+Subscribers (ESP32 / desktop / redis-cli)
+</code></pre></div></div>
+
+<p><strong>Key design decisions:</strong></p>
 
 <table>
   <thead>
     <tr>
-      <th>Feature</th>
-      <th>Description</th>
+      <th>Decision</th>
+      <th>Why</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Dual Protocol</td>
-      <td>RESP (Redis-compatible) + Binary Protocol</td>
+      <td>Custom 16-byte binary header</td>
+      <td>40% smaller frames than RESP — matters on cellular and congested WiFi</td>
     </tr>
     <tr>
-      <td>Protocol Detection</td>
-      <td>Automatic detection on first byte</td>
+      <td>Ed25519 over TLS for auth</td>
+      <td>Per-message identity without session overhead - MCUs verify without a full TLS stack, saves MCU’s memory significantly</td>
     </tr>
     <tr>
-      <td>Pub/Sub</td>
-      <td>Topic-based routing with wildcards</td>
+      <td>LMDB over SQLite</td>
+      <td>Memory-mapped, zero-copy reads, O(1) sequence ID lookups, no query parser</td>
     </tr>
     <tr>
-      <td>Queue Mode</td>
-      <td>PUSH/PULL with round-robin distribution</td>
+      <td>RESP compatibility</td>
+      <td>Any <code class="language-plaintext highlighter-rouge">redis-cli</code> works for debugging — zero additional tooling</td>
     </tr>
     <tr>
-      <td>Exactly-Once Delivery</td>
-      <td>Sequence IDs with ACK tracking</td>
-    </tr>
-    <tr>
-      <td>Persistence</td>
-      <td>LMDB embedded database</td>
-    </tr>
-    <tr>
-      <td>Metrics</td>
-      <td>Prometheus endpoint on port 9091</td>
-    </tr>
-    <tr>
-      <td>Platforms</td>
-      <td>Windows, Linux, macOS, ESP32, ESP8266</td>
+      <td>Prometheus over custom metrics</td>
+      <td>Drop-in Grafana integration, standard PromQL, production alerting rules</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="messaging-patterns">Messaging Patterns</h3>
+<h3 id="metricmq-vs-the-alternatives">MetricMQ vs. The Alternatives</h3>
 
-<p><strong>Pub/Sub:</strong> Multiple subscribers receive broadcast messages</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">publisher</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="s">"sensors/temp"</span><span class="p">,</span> <span class="s">"25.5°C"</span><span class="p">);</span>
-<span class="n">subscriber1</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"sensors/temp"</span><span class="p">);</span>  <span class="c1">// receives message</span>
-<span class="n">subscriber2</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"sensors/temp"</span><span class="p">);</span>  <span class="c1">// receives message</span>
-</code></pre></div></div>
+<p>Here is a realistic comparison of when to use what:</p>
 
-<p><strong>Queue (PUSH/PULL):</strong> Round-robin distribution to consumers</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">producer</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="s">"jobs"</span><span class="p">,</span> <span class="s">"task-1"</span><span class="p">);</span>
-<span class="n">producer</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="s">"jobs"</span><span class="p">,</span> <span class="s">"task-2"</span><span class="p">);</span>
-<span class="n">worker1</span><span class="p">.</span><span class="n">pull</span><span class="p">(</span><span class="s">"jobs"</span><span class="p">);</span>  <span class="c1">// gets task-1</span>
-<span class="n">worker2</span><span class="p">.</span><span class="n">pull</span><span class="p">(</span><span class="s">"jobs"</span><span class="p">);</span>  <span class="c1">// gets task-2</span>
-</code></pre></div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Pros</th>
+      <th>Cons</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Raw UDP/TCP</strong></td>
+      <td>Zero overhead, extremely fast</td>
+      <td>No delivery guarantees, requires custom framing</td>
+      <td>Video streaming, local LAN discovery</td>
+    </tr>
+    <tr>
+      <td><strong>Mosquitto (MQTT)</strong></td>
+      <td>Industry standard, QoS 1/2 support</td>
+      <td>Complex setup, fire-and-forget by default</td>
+      <td>Large enterprise integrations, legacy IoT</td>
+    </tr>
+    <tr>
+      <td><strong>RabbitMQ/Kafka</strong></td>
+      <td>Massive scale, highly reliable</td>
+      <td>Requires a server/cluster, high memory usage</td>
+      <td>Cloud data pipelines, heavy backends</td>
+    </tr>
+    <tr>
+      <td><strong>MetricMQ</strong></td>
+      <td>328 KB broker, exactly-once, auto Redis protocol</td>
+      <td>No TLS yet, capped at 1000 connections</td>
+      <td>Edge computing, constrained sensor networks</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="metricmq-vs-nanomq">MetricMQ vs NanoMQ</h2>
+
+<p>The MetricMQ’s architecture do come close to the NanoMQ, They solve different problems.</p>
+
+<h3 id="side-by-side-comparison">Side-by-Side Comparison</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>NanoMQ</strong></th>
+      <th><strong>MetricMQ</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Binary size</strong></td>
+      <td>Under 200 KB in minimum feature set <a href="https://metricmq-docs.netlify.app/">netlify</a></td>
+      <td>328 KB</td>
+    </tr>
+    <tr>
+      <td><strong>Protocol</strong></td>
+      <td>MQTT 3.1.1 and MQTT 5.0, industry standard</td>
+      <td>Custom binary + RESP (Redis-compatible)</td>
+    </tr>
+    <tr>
+      <td><strong>Throughput</strong></td>
+      <td>Million-level TPS, up to 10× faster than Mosquitto on multi-core <a href="https://metricmq-docs.netlify.app/">netlify</a></td>
+      <td>~106K msg/s (single thread, 10 KB messages)</td>
+    </tr>
+    <tr>
+      <td><strong>Concurrency model</strong></td>
+      <td>Built on NNG (Nanomsg-Next-Generation), async I/O, actor model, multi-threaded</td>
+      <td>Single global mutex — contention above ~500 clients</td>
+    </tr>
+    <tr>
+      <td><strong>TLS/SSL</strong></td>
+      <td>Yes — full TLS/SSL support</td>
+      <td>❌ Not yet</td>
+    </tr>
+    <tr>
+      <td><strong>Message signing</strong></td>
+      <td>❌ None</td>
+      <td>✅ Ed25519 at wire level</td>
+    </tr>
+    <tr>
+      <td><strong>Exactly-once delivery</strong></td>
+      <td>MQTT QoS 2 (standard)</td>
+      <td>Custom sequence ID + LMDB ACK tracking</td>
+    </tr>
+    <tr>
+      <td><strong>Persistence</strong></td>
+      <td>Built-in message persistence, resume uploading on reconnect</td>
+      <td>LMDB — last 100K messages</td>
+    </tr>
+    <tr>
+      <td><strong>Rule engine</strong></td>
+      <td>SQL-based rule engine, integrates with eKuiper for stream processing</td>
+      <td>❌ None</td>
+    </tr>
+    <tr>
+      <td><strong>Protocol bridging</strong></td>
+      <td>DDS, ZMQ, SOME/IP, Iceoryx, cloud MQTT bridging</td>
+      <td>❌ None</td>
+    </tr>
+    <tr>
+      <td><strong>Native ESP32 client</strong></td>
+      <td>❌ No official Arduino library</td>
+      <td>✅ Arduino/PlatformIO library</td>
+    </tr>
+    <tr>
+      <td><strong><code class="language-plaintext highlighter-rouge">redis-cli</code> compatible</strong></td>
+      <td>❌</td>
+      <td>✅ RESP protocol auto-detected</td>
+    </tr>
+    <tr>
+      <td><strong>Prometheus metrics</strong></td>
+      <td>❌ Not built-in</td>
+      <td>✅ Port 9091 from startup</td>
+    </tr>
+    <tr>
+      <td><strong>Config file</strong></td>
+      <td>Yes — <code class="language-plaintext highlighter-rouge">nanomq.conf</code> required</td>
+      <td>❌ Zero config needed</td>
+    </tr>
+    <tr>
+      <td><strong>Maturity</strong></td>
+      <td>Active project, one of the most active MQTT brokers available, backed by EMQ Technologies</td>
+      <td>Early/beta, solo project</td>
+    </tr>
+    <tr>
+      <td><strong>Community</strong></td>
+      <td>Thousands of GitHub stars, corporate backing</td>
+      <td>Small, early stage</td>
+    </tr>
+    <tr>
+      <td><strong>License</strong></td>
+      <td>MIT</td>
+      <td>MIT</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="where-nanomq-clearly-wins">Where NanoMQ Clearly Wins</h3>
+
+<p><strong>Throughput and concurrency.</strong> NanoMQ achieves million-level TPS using a built-in actor model with thread-level parallelism, while MetricMQ uses a single global mutex that limits it to around 500 concurrent clients before contention degrades performance. This is not a close comparison, NanoMQ’s architecture is fundamentally more scalable.</p>
+
+<p><strong>Production maturity.</strong> NanoMQ is one of the most active MQTT brokers available, backed by EMQ Technologies who also build EMQX (the most starred MQTT broker on GitHub). MetricMQ is a solo project.</p>
+
+<h3 id="where-metricmq-does-something-different">Where MetricMQ Does Something Different</h3>
+
+<p><strong>Ed25519 signing at the wire level.</strong> NanoMQ has no equivalent. MQTT’s security model is TLS for transport + username/password or client certificates for authentication. There is no concept of per-message cryptographic signing in any MQTT broker. MetricMQ’s approach is to sign the payload so the broker verifies the publisher’s identity for every single message before routing , This enhances security in an IOT applications, and is architecturally distinct from NanoMQ.</p>
+
+<p><strong>Native ESP32 Arduino library.</strong> NanoMQ has no official ESP32 client. You’d use an existing MQTT library (PubSubClient, AsyncMQTT) with NanoMQ  which works fine, but you’re back to standard MQTT semantics. MetricMQ’s client was written specifically for Arduino/PlatformIO and exposes the exactly-once and signing features directly.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">redis-cli</code> interop.</strong> NanoMQ requires MQTT tooling like, MQTTX, mosquitto_sub, etc. MetricMQ lets you use <code class="language-plaintext highlighter-rouge">redis-cli</code> for instant debugging from any terminal, which is genuinely convenient during development.</p>
+
+<p><strong>Zero configuration.</strong> NanoMQ needs a <code class="language-plaintext highlighter-rouge">nanomq.conf</code>. MetricMQ starts with no config file, The fewer steps to first <code class="language-plaintext highlighter-rouge">PONG</code>, the better.</p>
+
+<p><strong>Prometheus built in.</strong> NanoMQ doesn’t expose a Prometheus endpoint natively. MetricMQ does, from port 9091 at startup.</p>
 
 <h2 id="build-requirements">Build Requirements</h2>
 
@@ -406,40 +599,6 @@ cmake <span class="nt">--build</span> <span class="nb">.</span> <span class="nt"
 
 <p>Terminal 3:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pub_only.exe
-</code></pre></div></div>
-
-<h2 id="architecture">Architecture</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────┐
-│              MetricMQ Broker                    │
-│  Port 6379 (RESP + Binary Protocol)             │
-│  Port 9091 (Prometheus Metrics)                 │
-└───────────┬─────────────────────────────────────┘
-            │
-    ┌───────┴────────┐
-    │                │
-┌───▼────┐      ┌───▼────┐
-│ RESP   │      │ Binary │
-│Protocol│      │Protocol│
-└───┬────┘      └───┬────┘
-    │               │
-    └───────┬───────┘
-            │
-    ┌───────▼───────┐
-    │ Session Layer │  (Auto-detect protocol)
-    └───────┬───────┘
-            │
-    ┌───────▼───────────────┐
-    │  Message Router       │
-    │  • Pub/Sub Topics     │
-    │  • Queue Mode         │
-    │  • Wildcard Matching  │
-    └───────┬───────────────┘
-            │
-    ┌───────▼──────────┐
-    │  LMDB Storage    │
-    │  (metricmq.db)   │
-    └──────────────────┘
 </code></pre></div></div>
 
 <h2 id="protocol-support">Protocol Support</h2>
