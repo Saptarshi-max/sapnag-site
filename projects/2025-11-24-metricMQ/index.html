@@ -34,7 +34,7 @@
 <meta property="twitter:image" content="/%5Ccover_images%5Cposts%5CMetricMQ.webp" />
 <meta property="twitter:title" content="MetricMQ" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-25T21:07:04+00:00","datePublished":"2025-11-24T00:00:00+00:00","description":"Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.","headline":"MetricMQ","image":"/%5Ccover_images%5Cposts%5CMetricMQ.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2025-11-24-metricMQ/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2025-11-24-metricMQ/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-27T21:39:02+00:00","datePublished":"2025-11-24T00:00:00+00:00","description":"Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.","headline":"MetricMQ","image":"/%5Ccover_images%5Cposts%5CMetricMQ.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2025-11-24-metricMQ/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2025-11-24-metricMQ/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -106,7 +106,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-26T04:32:40+00:00',
+    INDEX_KEY: 'index--2026-05-27T21:39:45+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -310,9 +310,9 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h2 id="the-gap-in-iot-messaging">The Gap in IoT Messaging</h2>
 
-<p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0—fast, but no guarantees. On the other end, you have RabbitMQ or Kafka—extremely reliable, but they are heavy 50MB+ server applications.</p>
+<p>On one end of the spectrum, you have fire-and-forget solutions like raw UDP or standard MQTT QoS 0. they are fast, but no guarantees. On the other end, you have RabbitMQ or Kafka, extremely reliable, but they are heavy 50MB+ server applications.</p>
 
-<p><strong>MetricMQ fills this gap.</strong> It is a <strong>328 KB single-executable broker</strong> that gives you exactly-once delivery, built-in Ed25519 message signing, and Prometheus metrics out of the box.</p>
+<p><strong>MetricMQ fills this gap.</strong> It is a <strong>328 KB single-executable broker</strong> build with C++20 , POCO lib and libSodium, that gives you exactly-once delivery, built-in Ed25519 message signing, and Prometheus metrics out of the box.</p>
 
 <p>Three questions follow every IoT project:</p>
 
