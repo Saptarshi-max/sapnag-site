@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/IMG_0313.jpeg" />
 <meta property="twitter:title" content="Getting Started with MetricMQ on ESP32" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-28T16:09:13+00:00","datePublished":"2026-05-15T00:00:00+00:00","description":"MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.","headline":"Getting Started with MetricMQ on ESP32","image":"/cover_images/posts/IMG_0313.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-28T16:56:58+00:00","datePublished":"2026-05-15T00:00:00+00:00","description":"MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.","headline":"Getting Started with MetricMQ on ESP32","image":"/cover_images/posts/IMG_0313.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-28T16:09:46+00:00',
+    INDEX_KEY: 'index--2026-05-28T16:57:49+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -1517,52 +1517,6 @@ Offset 16+  : topic bytes, then payload bytes
 
 <hr />
 
-<h2 id="how-to-make-metricmq-better--and-why-it-matters-for-real-iot">How to Make MetricMQ Better — and Why It Matters for Real IoT</h2>
-
-<p>MetricMQ is an early-stage project. These are the genuine gaps that matter most for real-world IoT deployments, in order of impact:</p>
-
-<h3 id="1-tls-transport-encryption">1. TLS Transport Encryption</h3>
-
-<p><strong>Current state:</strong> Ed25519 signing authenticates who sent a message and detects tampering. But the payload bytes are still visible on the wire. Anyone who can see the TCP stream reads the data.</p>
-
-<p><strong>Why it matters:</strong> In a factory environment where sensor data travels over a shared network, a passive observer can read every temperature, pressure, and status reading. For consumer IoT or any medical/financial application, this is a showstopper.</p>
-
-<p><strong>What the fix looks like:</strong> Wrapping the TCP socket in TLS 1.3. The libsodium dependency is already there — <code class="language-plaintext highlighter-rouge">crypto_secretstream</code> provides an efficient encrypted channel without the full X.509 overhead. The Ed25519 keypair already on each device can serve as the client certificate. This adds ~15 KB to the broker binary and ~4 KB RAM per session.</p>
-
-<h3 id="2-auto-reconnect-on-the-esp32-client">2. Auto-Reconnect on the ESP32 Client</h3>
-
-<p><strong>Current state:</strong> When the TCP connection drops, <code class="language-plaintext highlighter-rouge">client.loop()</code> calls <code class="language-plaintext highlighter-rouge">resetConnection()</code> and returns. Your sketch must detect <code class="language-plaintext highlighter-rouge">!isConnected()</code> and call <code class="language-plaintext highlighter-rouge">begin()</code> + <code class="language-plaintext highlighter-rouge">connect()</code> manually. This works, but it means every user sketch has to implement the same reconnect logic correctly.</p>
-
-<p><strong>Why it matters:</strong> A device deployed in a warehouse with intermittent WiFi will drop and reconnect regularly. If the application developer forgets the reconnect check (easy to do), the device silently stops publishing with no error. This is a reliability trap.</p>
-
-<p><strong>What the fix looks like:</strong> Adding an optional exponential backoff reconnect inside <code class="language-plaintext highlighter-rouge">MetricMQClient::loop()</code> with a configurable <code class="language-plaintext highlighter-rouge">setAutoReconnect(bool, uint32_t max_backoff_ms)</code>. The current manual pattern stays as the default — auto-reconnect opts in. The exactly-once replay already handles the LMDB-side of reconnect correctly; this is purely the TCP-layer retry.</p>
-
-<h3 id="3-runtime-key-provisioning">3. Runtime Key Provisioning</h3>
-
-<p><strong>Current state:</strong> Public keys for Ed25519 verification are registered by editing <code class="language-plaintext highlighter-rouge">src/main.cpp</code> in the broker repo and recompiling. Adding a new device means a broker rebuild and restart.</p>
-
-<p><strong>Why it matters:</strong> A fleet of 50 sensor nodes where each device has a unique key pair requires 50 broker rebuilds if you do it one at a time — or one rebuild with 50 keys hardcoded at deployment. Neither scales. A new device added in the field means either shipping a pre-built broker binary or having a development environment on the gateway.</p>
-
-<p><strong>What the fix looks like:</strong> A simple REST API on the broker’s HTTP port (<code class="language-plaintext highlighter-rouge">POST /keys</code> with JSON body <code class="language-plaintext highlighter-rouge">{"device_id": "...", "public_key_hex": "..."}</code>) that adds keys to the in-memory keystore with optional LMDB persistence. This is a weekend-sized addition with the Poco HTTP server already in the dependency tree.</p>
-
-<h3 id="4-resp-authentication">4. RESP Authentication</h3>
-
-<p><strong>Current state:</strong> Any TCP client that can reach port 6379 can publish and subscribe to any non-<code class="language-plaintext highlighter-rouge">secure/</code> topic. The only access control is the firewall.</p>
-
-<p><strong>Why it matters:</strong> In a shared network environment — a university lab, a co-working space, a multi-tenant IoT platform — the firewall assumption breaks down. An authenticated RESP connection would let you deploy MetricMQ without a dedicated network segment.</p>
-
-<p><strong>What the fix looks like:</strong> Adding Redis’s <code class="language-plaintext highlighter-rouge">AUTH</code> command support — <code class="language-plaintext highlighter-rouge">AUTH &lt;password&gt;</code> on connection, rejected with an error if not provided. Single shared password is a starting point; per-client tokens with the keystore infrastructure already in place is the clean version.</p>
-
-<h3 id="5-broker-sharding-for-scale">5. Broker Sharding for Scale</h3>
-
-<p><strong>Current state:</strong> A single global mutex protects all broker state. p99 latency stays under 1 ms at a handful of devices but climbs measurably above ~500 concurrent clients.</p>
-
-<p><strong>Why it matters:</strong> A smart building with 2,000 sensors publishing at 1 Hz generates 2,000 concurrent sessions. The single-mutex architecture becomes the bottleneck.</p>
-
-<p><strong>What the fix looks like:</strong> Consistent hashing of topics to broker shards, each with its own mutex and LMDB partition. A coordinator layer handles cross-shard subscriptions for wildcards. This is a significant architecture change — not a weekend fix — but the LMDB storage layer and the binary protocol are already designed for it.</p>
-
-<hr />
-
   
 </article>
 
@@ -1971,7 +1925,7 @@ Offset 16+  : topic bytes, then payload bytes
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-21-rust-composition/" class="flip-title"><span>7 C++ Inheritance pain-points Rust Fixes Forever</span></a>  <time class="faded fine" datetime="2025-12-21T00:00:00+00:00">21 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-21-rust-composition/" class="flip-title"><span>7 C++ Inheritance pain-points Rust Fixes Forever</span></a>  <time class="faded fine" datetime="2025-12-21T00:00:00+00:00">21 Dec 2025</time></li>      </ul></aside>
 
   
 
