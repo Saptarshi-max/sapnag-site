@@ -1,4 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-28T16:57:49+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-28T16:56:58+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-28T20:31:47+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Table of Contents</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Table of Contents" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-28T20:31:12+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#getting-started-with-metricmq-on-esp32" id="markdown-toc-getting-started-with-metricmq-on-esp32">Getting Started with MetricMQ on ESP32</a>    <ul>
+      <li><a href="#link-to-the-github-repo" id="markdown-toc-link-to-the-github-repo">Link to the Github Repo</a></li>
+      <li><a href="#features" id="markdown-toc-features">Features</a></li>
+      <li><a href="#the-demos-presented-in-this-post" id="markdown-toc-the-demos-presented-in-this-post">The Demos presented in this Post</a></li>
+      <li><a href="#what-is-a-message-broker" id="markdown-toc-what-is-a-message-broker">What Is a Message Broker?</a>        <ul>
+          <li><a href="#topics-and-wildcards" id="markdown-toc-topics-and-wildcards">Topics and Wildcards</a></li>
+        </ul>
+      </li>
+      <li><a href="#setting-up-the-broker" id="markdown-toc-setting-up-the-broker">Setting Up the Broker</a>        <ul>
+          <li><a href="#what-you-need" id="markdown-toc-what-you-need">What You Need</a></li>
+          <li><a href="#build-the-broker" id="markdown-toc-build-the-broker">Build the Broker</a></li>
+          <li><a href="#what-gets-built" id="markdown-toc-what-gets-built">What Gets Built</a></li>
+          <li><a href="#windows-antivirus---expected-false-positive" id="markdown-toc-windows-antivirus---expected-false-positive">Windows Antivirus - Expected False Positive</a></li>
+          <li><a href="#start-the-broker" id="markdown-toc-start-the-broker">Start the Broker</a></li>
+          <li><a href="#open-the-firewall" id="markdown-toc-open-the-firewall">Open the Firewall</a></li>
+          <li><a href="#install-redis-cli-and-verify" id="markdown-toc-install-redis-cli-and-verify">Install redis-cli and Verify</a></li>
+          <li><a href="#find-your-pcs-ip-address" id="markdown-toc-find-your-pcs-ip-address">Find Your PC’s IP Address</a></li>
+        </ul>
+      </li>
+      <li><a href="#setting-up-the-esp32-library" id="markdown-toc-setting-up-the-esp32-library">Setting Up the ESP32 Library</a>        <ul>
+          <li><a href="#installing-the-library" id="markdown-toc-installing-the-library">Installing the Library</a></li>
+          <li><a href="#the-platformioini-for-all-demos" id="markdown-toc-the-platformioini-for-all-demos">The platformio.ini for All Demos</a></li>
+          <li><a href="#the-two-call-connect-pattern" id="markdown-toc-the-two-call-connect-pattern">The Two-Call Connect Pattern</a></li>
+          <li><a href="#the-callback-signature" id="markdown-toc-the-callback-signature">The Callback Signature</a></li>
+        </ul>
+      </li>
+      <li><a href="#demo-1-basic-pubsub--hello-broker" id="markdown-toc-demo-1-basic-pubsub--hello-broker">Demo 1: Basic Pub/Sub — “Hello, Broker”</a>        <ul>
+          <li><a href="#srcmaincpp" id="markdown-toc-srcmaincpp">src/main.cpp</a></li>
+          <li><a href="#how-to-run-it" id="markdown-toc-how-to-run-it">How to Run It</a></li>
+          <li><a href="#what-to-expect" id="markdown-toc-what-to-expect">What to Expect</a></li>
+          <li><a href="#what-the-broker-metrics-show" id="markdown-toc-what-the-broker-metrics-show">What the Broker Metrics Show</a></li>
+        </ul>
+      </li>
+      <li><a href="#demo-2-exactly-once-delivery--surviving-a-network-drop" id="markdown-toc-demo-2-exactly-once-delivery--surviving-a-network-drop">Demo 2: Exactly-Once Delivery — Surviving a Network Drop</a>        <ul>
+          <li><a href="#how-it-works" id="markdown-toc-how-it-works">How It Works</a></li>
+          <li><a href="#srcmaincpp-1" id="markdown-toc-srcmaincpp-1">src/main.cpp</a></li>
+          <li><a href="#what-to-expect-1" id="markdown-toc-what-to-expect-1">What to Expect</a></li>
+          <li><a href="#what-the-broker-metrics-show-1" id="markdown-toc-what-the-broker-metrics-show-1">What the Broker Metrics Show</a></li>
+        </ul>
+      </li>
+      <li><a href="#demo-3-fan-out-with-wildcards--one-publish-many-subscribers" id="markdown-toc-demo-3-fan-out-with-wildcards--one-publish-many-subscribers">Demo 3: Fan-Out with Wildcards — One Publish, Many Subscribers</a>        <ul>
+          <li><a href="#srcmaincpp-2" id="markdown-toc-srcmaincpp-2">src/main.cpp</a></li>
+          <li><a href="#what-to-expect-2" id="markdown-toc-what-to-expect-2">What to Expect</a></li>
+        </ul>
+      </li>
+      <li><a href="#demo-4-signed-messages--proving-your-data-is-real" id="markdown-toc-demo-4-signed-messages--proving-your-data-is-real">Demo 4: Signed Messages — Proving Your Data Is Real</a>        <ul>
+          <li><a href="#why-this-matters" id="markdown-toc-why-this-matters">Why This Matters</a></li>
+          <li><a href="#step-1-generate-a-key-pair" id="markdown-toc-step-1-generate-a-key-pair">Step 1: Generate a Key Pair</a></li>
+          <li><a href="#step-2-register-the-public-key-on-the-broker" id="markdown-toc-step-2-register-the-public-key-on-the-broker"><strong>Step 2:</strong> Register the Public Key on the Broker</a></li>
+          <li><a href="#srcmaincpp-3" id="markdown-toc-srcmaincpp-3">src/main.cpp</a></li>
+          <li><a href="#what-to-expect-3" id="markdown-toc-what-to-expect-3">What to Expect</a></li>
+          <li><a href="#what-the-broker-metrics-show-2" id="markdown-toc-what-the-broker-metrics-show-2">What the Broker Metrics Show</a></li>
+        </ul>
+      </li>
+      <li><a href="#prometheus--grafana-seeing-your-system-live" id="markdown-toc-prometheus--grafana-seeing-your-system-live">Prometheus + Grafana: Seeing Your System Live</a>        <ul>
+          <li><a href="#what-value-does-this-actually-serve" id="markdown-toc-what-value-does-this-actually-serve">What Value Does This Actually Serve?</a></li>
+          <li><a href="#the-metrics-that-matter" id="markdown-toc-the-metrics-that-matter">The Metrics That Matter</a></li>
+          <li><a href="#setting-up-prometheus-10-minutes" id="markdown-toc-setting-up-prometheus-10-minutes">Setting Up Prometheus (10 Minutes)</a></li>
+          <li><a href="#setting-up-grafana-10-more-minutes" id="markdown-toc-setting-up-grafana-10-more-minutes">Setting Up Grafana (10 More Minutes)</a></li>
+          <li><a href="#what-each-alert-catches-in-a-real-deployment" id="markdown-toc-what-each-alert-catches-in-a-real-deployment">What Each Alert Catches in a Real Deployment</a></li>
+        </ul>
+      </li>
+      <li><a href="#how-to-navigate-the-metricmq-docs" id="markdown-toc-how-to-navigate-the-metricmq-docs">How to Navigate the MetricMQ Docs</a>        <ul>
+          <li><a href="#if-youre-just-getting-started" id="markdown-toc-if-youre-just-getting-started">If You’re Just Getting Started</a></li>
+          <li><a href="#if-you-want-to-understand-the-wire-protocol" id="markdown-toc-if-you-want-to-understand-the-wire-protocol">If You Want to Understand the Wire Protocol</a></li>
+          <li><a href="#if-youre-integrating-metricmq-into-an-existing-project" id="markdown-toc-if-youre-integrating-metricmq-into-an-existing-project">If You’re Integrating MetricMQ Into an Existing Project</a></li>
+          <li><a href="#if-youre-evaluating-for-a-production-deployment" id="markdown-toc-if-youre-evaluating-for-a-production-deployment">If You’re Evaluating for a Production Deployment</a></li>
+          <li><a href="#if-youre-running-tests" id="markdown-toc-if-youre-running-tests">If You’re Running Tests</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="getting-started-with-metricmq-on-esp32">Getting Started with MetricMQ on ESP32</h1>
+
+<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
 
 <div class="note">
   <ul>
@@ -69,7 +146,7 @@
 
 <hr />
 
-<h2 id="a-map-of-this-post">A Map of This Post</h2>
+<h2 id="the-demos-presented-in-this-post">The Demos presented in this Post</h2>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Concepts]  What is pub/sub? Why not just MQTT?
 [Setup]     Build the broker on your PC. Verify with redis-cli.
@@ -77,9 +154,6 @@
 [Demo 2]    Exactly-Once — unplug mid-stream → reconnect → missed messages return
 [Demo 3]    Fan-Out — one publish → multiple subscribers simultaneously
 [Demo 4]    Signed Messages — broker rejects fake data cryptographically
-[Metrics]   Prometheus + Grafana — see your system live
-[Docs]      How to navigate the MetricMQ reference docs
-[Roadmap]   What MetricMQ needs next and why it matters for real IoT
 </code></pre></div></div>
 
 <p>Each demo has its own complete <code class="language-plaintext highlighter-rouge">platformio.ini</code> and sketch. Skip to any section independently or work through in order.</p>
@@ -137,80 +211,7 @@
   </tbody>
 </table>
 
-<h3 id="why-not-just-use-mqtt">Why Not Just Use MQTT?</h3>
-
-<p>MQTT is excellent and widely used. But its delivery guarantees have tradeoffs worth understanding before you pick anything:</p>
-
-<p><strong>QoS 0 (fire and forget)</strong> — fast, zero overhead, but if the network drops mid-publish, the message is gone with no record of it.</p>
-
-<p><strong>QoS 1 (at least once)</strong> — the broker acknowledges receipt, so messages get through. But a reconnect at the wrong moment can deliver the same message twice. Your code has to handle duplicates.</p>
-
-<p><strong>QoS 2 (exactly once)</strong> — four-packet handshake, guaranteed no loss, no duplicates. But the broker (Mosquitto, EMQX, HiveMQ) is a separate service you install, configure, and maintain. These range from 3 MB to 50 MB and need persistent configuration.</p>
-
-<p>MetricMQ aims for exactly-once in a 328 KB broker with no configuration file. The tradeoff is that it’s newer and less battle-tested. For a fleet of thousands of devices in production, use EMQX. For prototyping, edge deployments, or any situation where you own the full stack and want delivery guarantees without broker infrastructure overhead, MetricMQ is worth understanding.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>MetricMQ</th>
-      <th>MQTT QoS 0</th>
-      <th>MQTT QoS 2</th>
-      <th>RabbitMQ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Broker size</td>
-      <td><strong>328 KB</strong></td>
-      <td>~3 MB</td>
-      <td>~3 MB</td>
-      <td>~50 MB</td>
-    </tr>
-    <tr>
-      <td>Exactly-once</td>
-      <td>✅</td>
-      <td>❌</td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>Message signing</td>
-      <td>✅ Built-in</td>
-      <td>❌</td>
-      <td>❌</td>
-      <td>❌</td>
-    </tr>
-    <tr>
-      <td>Native ESP32 client</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td>❌</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">redis-cli</code> works</td>
-      <td>✅</td>
-      <td>❌</td>
-      <td>❌</td>
-      <td>❌</td>
-    </tr>
-    <tr>
-      <td>Config file needed</td>
-      <td>❌</td>
-      <td>✅</td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>Production maturity</td>
-      <td>Early/beta</td>
-      <td>High</td>
-      <td>High</td>
-      <td>High</td>
-    </tr>
-  </tbody>
-</table>
+<p>#</p>
 
 <h2 id="setting-up-the-broker">Setting Up the Broker</h2>
 
@@ -858,7 +859,7 @@ Public key (32 bytes) — register on broker:
 <span class="k">static</span> <span class="k">const</span> <span class="kt">uint32_t</span> <span class="n">KEY_ID</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h3 id="step-2-register-the-public-key-on-the-broker">Step 2: Register the Public Key on the Broker</h3>
+<h3 id="step-2-register-the-public-key-on-the-broker"><strong>Step 2:</strong> Register the Public Key on the Broker</h3>
 
 <p>In <code class="language-plaintext highlighter-rouge">MetricMQ/src/main.cpp</code>, add before <code class="language-plaintext highlighter-rouge">broker.run()</code>:</p>
 
@@ -989,8 +990,13 @@ metricmq_signature_failures_total        1    ← the rejected spoof
 
 <p>Prometheus collects these numbers continuously. Grafana makes them visible. Together they answer all five questions in real time without SSH’ing into anything.</p>
 
-<p>The Prometheus data (raw format) in the browser, Open up http://localhost:9091/metrics in your broswer when the broker is running: 
-<img src="/cover_images/posts/prometheus-browser.png" alt="" /></p>
+<div class="note">
+
+  <p>The Prometheus data (raw format) in the browser, Open up http://localhost:9091/metrics in your broswer when the broker is running: (ScreenShot Below)</p>
+
+</div>
+
+<p><img src="/cover_images/posts/prometheus-browser.png" alt="" /></p>
 <h3 id="the-metrics-that-matter">The Metrics That Matter</h3>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># One-shot snapshot</span><span class="w">
@@ -1186,7 +1192,7 @@ Type: Stat | Alert if: &gt; 0
 
 <p><strong><code class="language-plaintext highlighter-rouge">delivery efficiency</code> drops below 0.95:</strong> Some messages are not reaching subscribers. Could be a crashed consumer, a network partition, or a topic mismatch. In a building automation system with five consumers on a temperature stream, this dropping from 1.0 to 0.6 means three consumers silently went offline.</p>
 
-<p><strong><code class="language-plaintext highlighter-rouge">ack_tracking_efficiency</code> drops below 95 for more than 60 seconds:</strong> A subscriber is falling behind — WiFi instability, device overload, or a bug in the application layer consuming messages too slowly. This fires before any data is actually lost.</p>
+<p><strong><code class="language-plaintext highlighter-rouge">ack_tracking_efficiency</code> drops below 95 for more than 60 seconds:</strong> A subscriber is falling behind - WiFi instability, device overload, or a bug in the application layer consuming messages too slowly. This fires before any data is actually lost.</p>
 
 <p><strong><code class="language-plaintext highlighter-rouge">signature_failures_total</code> increments:</strong> Either a device has a corrupted key after a failed OTA update, or someone on the network is probing the broker with unsigned frames. This is your intrusion detection in a single counter — one alert rule covers the entire fleet.</p>
 

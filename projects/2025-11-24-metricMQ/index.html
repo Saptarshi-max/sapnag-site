@@ -34,7 +34,7 @@
 <meta property="twitter:image" content="/%5Ccover_images%5Cposts%5CMetricMQ.webp" />
 <meta property="twitter:title" content="MetricMQ" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-27T21:39:02+00:00","datePublished":"2025-11-24T00:00:00+00:00","description":"Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.","headline":"MetricMQ","image":"/%5Ccover_images%5Cposts%5CMetricMQ.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2025-11-24-metricMQ/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2025-11-24-metricMQ/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-28T20:31:12+00:00","datePublished":"2025-11-24T00:00:00+00:00","description":"Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.","headline":"MetricMQ","image":"/%5Ccover_images%5Cposts%5CMetricMQ.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2025-11-24-metricMQ/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2025-11-24-metricMQ/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -106,7 +106,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-05-28T16:57:49+00:00',
+    INDEX_KEY: 'index--2026-05-28T20:31:47+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -340,6 +340,81 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   <li><strong>Ed25519 Message Signing:</strong> Publishers sign messages, and the broker rejects tampered packets at the wire level before they reach subscribers.</li>
   <li><strong>Zero-Config Observability:</strong> A Prometheus-compatible endpoint automatically runs on port 9091.</li>
 </ul>
+
+<h2 id="why-not-just-use-mqtt">Why Not Just Use MQTT?</h2>
+
+<p>MQTT is excellent and widely used. But its delivery guarantees have tradeoffs worth understanding before you pick anything:</p>
+
+<p><strong>QoS 0 (fire and forget)</strong> — fast, zero overhead, but if the network drops mid-publish, the message is gone with no record of it.</p>
+
+<p><strong>QoS 1 (at least once)</strong> — the broker acknowledges receipt, so messages get through. But a reconnect at the wrong moment can deliver the same message twice. Your code has to handle duplicates.</p>
+
+<p><strong>QoS 2 (exactly once)</strong> — four-packet handshake, guaranteed no loss, no duplicates. But the broker (Mosquitto, EMQX, HiveMQ) is a separate service you install, configure, and maintain. These range from 3 MB to 50 MB and need persistent configuration.</p>
+
+<p>MetricMQ is built to deliver exactly-once semantics in a 328 KB broker with no configuration overhead. The tradeoff is maturity: it is still early and not yet as battle-tested as established platforms. If you are running large, production-scale fleets, NanoMQ remains the safer choice. But for prototyping, edge deployments, and full-stack environments where you need delivery guarantees without heavyweight broker infrastructure, MetricMQ is a strong fit.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>MetricMQ</th>
+      <th>MQTT QoS 0</th>
+      <th>MQTT QoS 2</th>
+      <th>RabbitMQ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Broker size</td>
+      <td><strong>328 KB</strong></td>
+      <td>~3 MB</td>
+      <td>~3 MB</td>
+      <td>~50 MB</td>
+    </tr>
+    <tr>
+      <td>Exactly-once</td>
+      <td>✅</td>
+      <td>❌</td>
+      <td>✅</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Message signing</td>
+      <td>✅ Built-in</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>Native ESP32 client</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">redis-cli</code> works</td>
+      <td>✅</td>
+      <td>❌</td>
+      <td>❌</td>
+      <td>❌</td>
+    </tr>
+    <tr>
+      <td>Config file needed</td>
+      <td>❌</td>
+      <td>✅</td>
+      <td>✅</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Production maturity</td>
+      <td>Early/beta</td>
+      <td>High</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="metricmqs-architecture">MetricMQ’s Architecture</h2>
 
