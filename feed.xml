@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-28T20:31:47+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Table of Contents</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Table of Contents" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-28T20:31:12+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-29T18:01:43+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Table of Contents</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Table of Contents" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-05-28T20:31:12+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#getting-started-with-metricmq-on-esp32" id="markdown-toc-getting-started-with-metricmq-on-esp32">Getting Started with MetricMQ on ESP32</a>    <ul>
       <li><a href="#link-to-the-github-repo" id="markdown-toc-link-to-the-github-repo">Link to the Github Repo</a></li>
       <li><a href="#features" id="markdown-toc-features">Features</a></li>
@@ -3169,7 +3169,7 @@ You don’t. Only distill notes you return to more than once. Layer 2 bolding ta
 
 <hr />
 
-<p><em>Look, it is not about having perfect notes. It is about having notes you can actually find and use under pressure. Everything else is just noise.</em></p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="productivity" /><category term="notetaking" /><category term="evernote" /><category term="para" /><category term="code" /><category term="second-brain" /><category term="firmware" /><summary type="html"><![CDATA[More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte's the CODE and PARA methods.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/notes.webp" /><media:content medium="image" url="/cover_images/posts/notes.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C</title><link href="/blog/industry/2026-02-16-portable-C/" rel="alternate" type="text/html" title="Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C" /><published>2026-02-16T00:00:00+00:00</published><updated>2026-05-12T08:39:56+00:00</updated><id>/blog/industry/portable-C</id><content type="html" xml:base="/blog/industry/2026-02-16-portable-C/"><![CDATA[<ul id="markdown-toc">
+<p><em>Look, it is not about having perfect notes. It is about having notes you can actually find and use under pressure. Everything else is just noise.</em></p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="productivity" /><category term="notetaking" /><category term="evernote" /><category term="para" /><category term="code" /><category term="second-brain" /><category term="firmware" /><summary type="html"><![CDATA[More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte's the CODE and PARA methods.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/notes.webp" /><media:content medium="image" url="/cover_images/posts/notes.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C</title><link href="/blog/industry/2026-02-16-portable-C/" rel="alternate" type="text/html" title="Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C" /><published>2026-02-16T00:00:00+00:00</published><updated>2026-05-29T17:09:12+00:00</updated><id>/blog/industry/portable-C</id><content type="html" xml:base="/blog/industry/2026-02-16-portable-C/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#why-portability-matters-and-why-its-harder-than-you-think" id="markdown-toc-why-portability-matters-and-why-its-harder-than-you-think">Why portability matters, and why it’s harder than you think</a></li>
   <li><a href="#the-great-myth-of-embedded-c-vs-c" id="markdown-toc-the-great-myth-of-embedded-c-vs-c">The great myth of “Embedded C vs C”</a>    <ul>
       <li><a href="#the-misconception" id="markdown-toc-the-misconception"><strong>The misconception</strong></a></li>
@@ -3196,7 +3196,7 @@ You don’t. Only distill notes you return to more than once. Layer 2 bolding ta
     </ul>
   </li>
   <li><a href="#the-future-of-c-c23-new-iso-directions-and-the-long-game" id="markdown-toc-the-future-of-c-c23-new-iso-directions-and-the-long-game">The future of C: C23, new ISO directions, and the long game</a>    <ul>
-      <li><a href="#nullptr-and-bitintn" id="markdown-toc-nullptr-and-bitintn"><code class="language-plaintext highlighter-rouge">nullptr</code> and <code class="language-plaintext highlighter-rouge">_BitInt(N)</code></a></li>
+      <li><a href="#nullptr-and-_bitintn" id="markdown-toc-nullptr-and-_bitintn"><code class="language-plaintext highlighter-rouge">nullptr</code> and <code class="language-plaintext highlighter-rouge">_BitInt(N)</code></a></li>
       <li><a href="#typeof-and-auto" id="markdown-toc-typeof-and-auto"><code class="language-plaintext highlighter-rouge">typeof</code> and <code class="language-plaintext highlighter-rouge">auto</code></a></li>
       <li><a href="#why-this-helps" id="markdown-toc-why-this-helps">Why this helps:</a></li>
       <li><a href="#standardised-attributes" id="markdown-toc-standardised-attributes">Standardised attributes</a></li>
@@ -3462,153 +3462,152 @@ You don’t. Only distill notes you return to more than once. Layer 2 bolding ta
 
 <p>The inertial reference system reused from Ariane 4 attempted to convert a 64-bit floating-point velocity value to a 16-bit signed integer. The value was outside the representable range. The conversion triggered a hardware exception. The backup SRI failed identically. The rocket self-destructed 37 seconds after launch.</p>
 
-<iframe>
-  <div class="danger">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/i10na3xjYW4?si=NZFUQMe4VwrZgcNE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<p><img src="/cover_images/posts/ARIANE-5.png" alt="" /></p>
 
-    <p><strong>Root cause:</strong> Undefined behaviour on integer conversion. MISRA Rule 10.3 — a value must be within the range of the target type — would have flagged this at static analysis time. Cost: approximately $370M USD.</p>
+<p>Source - <a href="https://www.youtube.com/watch?v=wGeZEUjUKvc">https://www.youtube.com/watch?v=wGeZEUjUKvc</a></p>
 
-  </div>
+<p><strong>Root cause:</strong> Undefined behaviour on integer conversion. MISRA Rule 10.3 — a value must be within the range of the target type — would have flagged this at static analysis time. Cost: approximately $370M USD.</p>
 
-  <h3 id="therac-25-radiation-therapy-device-19851987">Therac-25 Radiation Therapy Device (1985–1987)</h3>
+<p>&lt;/div&gt;</p>
 
-  <p>Race conditions in the control software allowed a high-power beam to fire without the physical safety shield in place. At least six patients received massive radiation overdoses. Three died.</p>
+<h3 id="therac-25-radiation-therapy-device-19851987">Therac-25 Radiation Therapy Device (1985–1987)</h3>
 
-  <p><img src="/cover_images/posts/therapy.png" alt="" /></p>
-  <div class="danger">
-    <p>Source and Read Further - <a href="https://pvs-studio.com/en/blog/posts/0438/">Killer Bug. Therac-25: Quick-and-Dirty</a></p>
+<p>Race conditions in the control software allowed a high-power beam to fire without the physical safety shield in place. At least six patients received massive radiation overdoses. Three died.</p>
 
-    <p><strong>Root cause:</strong> Shared mutable state accessed without synchronisation. CERT CON32-C (prevent data races when accessing bit-fields from multiple threads) directly addresses this class of vulnerability. No software coding standard was in use.</p>
+<p><img src="/cover_images/posts/therapy.png" alt="" /></p>
+<div class="danger">
+  <p>Source and Read Further - <a href="https://pvs-studio.com/en/blog/posts/0438/">Killer Bug. Therac-25: Quick-and-Dirty</a></p>
 
-  </div>
+  <p><strong>Root cause:</strong> Shared mutable state accessed without synchronisation. CERT CON32-C (prevent data races when accessing bit-fields from multiple threads) directly addresses this class of vulnerability. No software coding standard was in use.</p>
 
-  <h3 id="boeing-737-max-mcas-20182019">Boeing 737 MAX MCAS (2018–2019)</h3>
+</div>
 
-  <p>The Maneuvering Characteristics Augmentation System relied on input from a single angle-of-attack sensor. Insufficient validation of sensor inputs and a lack of defensive coding around single-point-of-failure data paths contributed to two crashes killing 346 people.</p>
+<h3 id="boeing-737-max-mcas-20182019">Boeing 737 MAX MCAS (2018–2019)</h3>
 
-  <div class="danger">
+<p>The Maneuvering Characteristics Augmentation System relied on input from a single angle-of-attack sensor. Insufficient validation of sensor inputs and a lack of defensive coding around single-point-of-failure data paths contributed to two crashes killing 346 people.</p>
 
-    <p><strong>Root cause:</strong> Insufficient input validation and defensive programming. CERT input validation guidelines apply directly. Boeing paid over $2.5 billion in settlements and penalties. The FAA and EASA have since tightened software assurance requirements for aviation.</p>
+<div class="danger">
 
-  </div>
+  <p><strong>Root cause:</strong> Insufficient input validation and defensive programming. CERT input validation guidelines apply directly. Boeing paid over $2.5 billion in settlements and penalties. The FAA and EASA have since tightened software assurance requirements for aviation.</p>
 
-  <h3 id="the-regulatory-shift">The regulatory shift</h3>
+</div>
 
-  <p>Since 2020, the regulatory environment for software-intensive embedded systems has shifted measurably. UNECE WP.29 requires automotive OEMs to demonstrate cybersecurity management processes, including coding standards. The EU Cyber Resilience Act (2024) extends software security requirements to all connected products sold in Europe. FDA guidance on medical device software explicitly references IEC 62443 and CERT-aligned practices.
+<h3 id="the-regulatory-shift">The regulatory shift</h3>
+
+<p>Since 2020, the regulatory environment for software-intensive embedded systems has shifted measurably. UNECE WP.29 requires automotive OEMs to demonstrate cybersecurity management processes, including coding standards. The EU Cyber Resilience Act (2024) extends software security requirements to all connected products sold in Europe. FDA guidance on medical device software explicitly references IEC 62443 and CERT-aligned practices.
 Source - https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act</p>
 
-  <p>In regulated markets, shipping without demonstrable adherence to appropriate coding standards is a compliance exposure. Engineering teams that treat MISRA and CERT as optional will increasingly find themselves in front of procurement questionnaires, regulatory auditors, and after incidents, liability lawyers who understand the standards as well as they do.</p>
+<p>In regulated markets, shipping without demonstrable adherence to appropriate coding standards is a compliance exposure. Engineering teams that treat MISRA and CERT as optional will increasingly find themselves in front of procurement questionnaires, regulatory auditors, and after incidents, liability lawyers who understand the standards as well as they do.</p>
 
-  <hr />
+<hr />
 
-  <h2 id="the-future-of-c-c23-new-iso-directions-and-the-long-game">The future of C: C23, new ISO directions, and the long game</h2>
+<h2 id="the-future-of-c-c23-new-iso-directions-and-the-long-game">The future of C: C23, new ISO directions, and the long game</h2>
 
-  <p>C is not standing still. C23 (ISO/IEC 9899:2024, formally published in October 2024) is the most significant revision in over a decade, and several of its additions directly address the portability and safety concerns that drove MISRA and CERT in the first place.</p>
+<p>C is not standing still. C23 (ISO/IEC 9899:2024, formally published in October 2024) is the most significant revision in over a decade, and several of its additions directly address the portability and safety concerns that drove MISRA and CERT in the first place.</p>
 
-  <h3 id="nullptr-and-bitintn"><code class="language-plaintext highlighter-rouge">nullptr</code> and <code class="language-plaintext highlighter-rouge">_BitInt(N)</code></h3>
+<h3 id="nullptr-and-_bitintn"><code class="language-plaintext highlighter-rouge">nullptr</code> and <code class="language-plaintext highlighter-rouge">_BitInt(N)</code></h3>
 
-  <p>A proper null pointer constant eliminates the <code class="language-plaintext highlighter-rouge">NULL</code>/<code class="language-plaintext highlighter-rouge">0</code> ambiguity that has caused subtle bugs in type-generic code for decades. <code class="language-plaintext highlighter-rouge">_BitInt(N)</code> provides arbitrary-width integers — a direct answer to MISRA’s long-standing concern about implementation-defined integer sizes on 16-bit and 32-bit targets. You can now declare <code class="language-plaintext highlighter-rouge">_BitInt(12)</code> and get exactly 12 bits, portably.</p>
+<p>A proper null pointer constant eliminates the <code class="language-plaintext highlighter-rouge">NULL</code>/<code class="language-plaintext highlighter-rouge">0</code> ambiguity that has caused subtle bugs in type-generic code for decades. <code class="language-plaintext highlighter-rouge">_BitInt(N)</code> provides arbitrary-width integers — a direct answer to MISRA’s long-standing concern about implementation-defined integer sizes on 16-bit and 32-bit targets. You can now declare <code class="language-plaintext highlighter-rouge">_BitInt(12)</code> and get exactly 12 bits, portably.</p>
 
-  <h3 id="typeof-and-auto"><code class="language-plaintext highlighter-rouge">typeof</code> and <code class="language-plaintext highlighter-rouge">auto</code></h3>
+<h3 id="typeof-and-auto"><code class="language-plaintext highlighter-rouge">typeof</code> and <code class="language-plaintext highlighter-rouge">auto</code></h3>
 
-  <p>Type inference joins standard C. Used carefully, <code class="language-plaintext highlighter-rouge">typeof</code> can eliminate dangerous implicit conversions in macro-heavy embedded code, like the kind of macro gymnastics that previously forced engineers to choose between portability and readability. MISRA C may treat these cautiously in its next edition, but the direction is sound.</p>
+<p>Type inference joins standard C. Used carefully, <code class="language-plaintext highlighter-rouge">typeof</code> can eliminate dangerous implicit conversions in macro-heavy embedded code, like the kind of macro gymnastics that previously forced engineers to choose between portability and readability. MISRA C may treat these cautiously in its next edition, but the direction is sound.</p>
 
-  <p>For example:</p>
+<p>For example:</p>
 
-  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))
-</span></code></pre></div>  </div>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))
+</span></code></pre></div></div>
 
-  <p>Looks harmless,</p>
+<p>Looks harmless,</p>
 
-  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
 <span class="n">printf</span><span class="p">(</span><span class="s">"%u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">));</span>
-</code></pre></div>  </div>
-  <p>but <code class="language-plaintext highlighter-rouge">a</code> gets implicitly converted to <code class="language-plaintext highlighter-rouge">unsigned</code> and comparision becomes unexpected.</p>
+</code></pre></div></div>
+<p>but <code class="language-plaintext highlighter-rouge">a</code> gets implicitly converted to <code class="language-plaintext highlighter-rouge">unsigned</code> and comparision becomes unexpected.</p>
 
-  <p>Thats goes against MISRA</p>
+<p>Thats goes against MISRA</p>
 
-  <p>To protect against the implicit typedef conversion use <code class="language-plaintext highlighter-rouge">typedef</code>:</p>
+<p>To protect against the implicit typedef conversion use <code class="language-plaintext highlighter-rouge">typedef</code>:</p>
 
-  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX(a, b) ({            \
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX(a, b) ({            \
     typeof(a) _a = (a);         \
     typeof(b) _b = (b);         \
     _a &gt; _b ? _a : _b;          \
 })
-</span></code></pre></div>  </div>
-  <h3 id="why-this-helps">Why this helps:</h3>
+</span></code></pre></div></div>
+<h3 id="why-this-helps">Why this helps:</h3>
 
-  <ul>
-    <li>Each argument evaluated once</li>
-    <li>Preserves original types</li>
-    <li>Avoids unintended promotions
+<ul>
+  <li>Each argument evaluated once</li>
+  <li>Preserves original types</li>
+  <li>Avoids unintended promotions
 So if you run the program again :</li>
-  </ul>
+</ul>
 
-  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
 <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">));</span>
-</code></pre></div>  </div>
+</code></pre></div></div>
 
-  <p>Behavior now is predictable based on actual types stored in <code class="language-plaintext highlighter-rouge">_a</code> and <code class="language-plaintext highlighter-rouge">_b</code></p>
-  <h3 id="standardised-attributes">Standardised attributes</h3>
+<p>Behavior now is predictable based on actual types stored in <code class="language-plaintext highlighter-rouge">_a</code> and <code class="language-plaintext highlighter-rouge">_b</code></p>
+<h3 id="standardised-attributes">Standardised attributes</h3>
 
-  <p><code class="language-plaintext highlighter-rouge">[[nodiscard]]</code>, <code class="language-plaintext highlighter-rouge">[[deprecated]]</code>, and <code class="language-plaintext highlighter-rouge">[[noreturn]]</code> are now standard C, not GCC extensions. This reduces reliance on <code class="language-plaintext highlighter-rouge">__attribute__</code> compiler-specific syntax — a portability win that MISRA has long advocated through its restrictions on implementation extensions. Your toolchain-agnostic attribute usage no longer requires a portability shim.</p>
+<p><code class="language-plaintext highlighter-rouge">[[nodiscard]]</code>, <code class="language-plaintext highlighter-rouge">[[deprecated]]</code>, and <code class="language-plaintext highlighter-rouge">[[noreturn]]</code> are now standard C, not GCC extensions. This reduces reliance on <code class="language-plaintext highlighter-rouge">__attribute__</code> compiler-specific syntax — a portability win that MISRA has long advocated through its restrictions on implementation extensions. Your toolchain-agnostic attribute usage no longer requires a portability shim.</p>
 
-  <h3 id="checked-integer-arithmetic">Checked integer arithmetic</h3>
+<h3 id="checked-integer-arithmetic">Checked integer arithmetic</h3>
 
-  <p><code class="language-plaintext highlighter-rouge">ckd_add</code>, <code class="language-plaintext highlighter-rouge">ckd_sub</code>, <code class="language-plaintext highlighter-rouge">ckd_mul</code> provide a standard way to detect integer overflow without invoking undefined behaviour. This addresses the single most common source of both MISRA violations and CERT-catalogued CVEs. There is no longer any excuse for unchecked arithmetic on values whose range you cannot statically guarantee.</p>
+<p><code class="language-plaintext highlighter-rouge">ckd_add</code>, <code class="language-plaintext highlighter-rouge">ckd_sub</code>, <code class="language-plaintext highlighter-rouge">ckd_mul</code> provide a standard way to detect integer overflow without invoking undefined behaviour. This addresses the single most common source of both MISRA violations and CERT-catalogued CVEs. There is no longer any excuse for unchecked arithmetic on values whose range you cannot statically guarantee.</p>
 
-  <h3 id="misra-c-and-c23-alignment">MISRA C and C23 alignment</h3>
+<h3 id="misra-c-and-c23-alignment">MISRA C and C23 alignment</h3>
 
-  <p>MISRA C 2023 was released before C23 finalised. Expect MISRA C 2026 or a technical corrigendum to address C23 constructs, particularly <code class="language-plaintext highlighter-rouge">_BitInt</code>, checked arithmetic, and the new attribute syntax.</p>
+<p>MISRA C 2023 was released before C23 finalised. Expect MISRA C 2026 or a technical corrigendum to address C23 constructs, particularly <code class="language-plaintext highlighter-rouge">_BitInt</code>, checked arithmetic, and the new attribute syntax.</p>
 
-  <p>The direction is towards tighter integration between language-level safety features and the rule sets that enforce their correct use.</p>
+<p>The direction is towards tighter integration between language-level safety features and the rule sets that enforce their correct use.</p>
 
-  <h2 id="rust-as-a-reference-point">Rust as a reference point</h2>
+<h2 id="rust-as-a-reference-point">Rust as a reference point</h2>
 
-  <p>Rust is the most hyped programming language of 2025-26, driven by its compile-time memory-safety guarantees via ownership and lifetimes. These features are accelerating C standards work on bounded pointers (Annex V concepts) and lifetime annotations for verifiable static constraints. Rather than wholesale Rust ports, C is evolving ownership as native idioms. NSA’s 2022 guidance on memory-safe languages has pushed the C community toward language changes beyond mere coding practices</p>
+<p>Rust is the most hyped programming language of 2025-26, driven by its compile-time memory-safety guarantees via ownership and lifetimes. These features are accelerating C standards work on bounded pointers (Annex V concepts) and lifetime annotations for verifiable static constraints. Rather than wholesale Rust ports, C is evolving ownership as native idioms. NSA’s 2022 guidance on memory-safe languages has pushed the C community toward language changes beyond mere coding practices</p>
 
-  <p>Source - <a href="https://industrialcyber.co/secure-by-design/nsa-cisa-guidance-push-for-adoption-of-memory-safe-languages-in-software-development-to-boost-resilience/">NSA, CISA guidance push for adoption of memory safe languages in software development to boost resilience - Industrial Cyber</a></p>
-  <h3 id="the-question-nobody-is-asking-loudly-enough">The question nobody is asking loudly enough</h3>
+<p>Source - <a href="https://industrialcyber.co/secure-by-design/nsa-cisa-guidance-push-for-adoption-of-memory-safe-languages-in-software-development-to-boost-resilience/">NSA, CISA guidance push for adoption of memory safe languages in software development to boost resilience - Industrial Cyber</a></p>
+<h3 id="the-question-nobody-is-asking-loudly-enough">The question nobody is asking loudly enough</h3>
 
-  <p>C has survived because nothing else reliably delivers deterministic performance, minimal runtime overhead, direct hardware access, and cross-compiler portability at scale. Rust is genuinely better at memory safety. It is not yet better at the full embedded development workflow , build system fragility, toolchain maturity for exotic targets (custom MCU’s), and the sheer mass of existing validated C codebases all slow adoption. That industry is changing, faster than most embedded teams realise.</p>
+<p>C has survived because nothing else reliably delivers deterministic performance, minimal runtime overhead, direct hardware access, and cross-compiler portability at scale. Rust is genuinely better at memory safety. It is not yet better at the full embedded development workflow , build system fragility, toolchain maturity for exotic targets (custom MCU’s), and the sheer mass of existing validated C codebases all slow adoption. That industry is changing, faster than most embedded teams realise.</p>
 
-  <blockquote>
-    <p><em>“The future of safe C is not C that has learned to be Rust (Better memory safety guarantee). It’s C that has learned to be honest about its own undefined behaviour, and provides language-level tools to manage it.”</em></p>
-  </blockquote>
+<blockquote>
+  <p><em>“The future of safe C is not C that has learned to be Rust (Better memory safety guarantee). It’s C that has learned to be honest about its own undefined behaviour, and provides language-level tools to manage it.”</em></p>
+</blockquote>
 
-  <p>MISRA and CERT are documenting, systematically, the discipline that makes C survivable. C23’s checked arithmetic functions and <code class="language-plaintext highlighter-rouge">_BitInt</code> are the standard committee’s acknowledgment that MISRA and CERT identified real problems, and the language needed to respond.</p>
+<p>MISRA and CERT are documenting, systematically, the discipline that makes C survivable. C23’s checked arithmetic functions and <code class="language-plaintext highlighter-rouge">_BitInt</code> are the standard committee’s acknowledgment that MISRA and CERT identified real problems, and the language needed to respond.</p>
 
-  <p>For working embedded engineers, the practical takeaway is simple:</p>
+<p>For working embedded engineers, the practical takeaway is simple:</p>
 
-  <blockquote>
-    <p>learn both standards. Not to satisfy auditors, but because they encode hard-won knowledge about how C actually behaves in production on constrained hardware.</p>
-  </blockquote>
+<blockquote>
+  <p>learn both standards. Not to satisfy auditors, but because they encode hard-won knowledge about how C actually behaves in production on constrained hardware.</p>
+</blockquote>
 
-  <p>The rules are not arbitrary. Every MISRA rule has a horror story behind it. Every CERT recommendation has a CVE attached.</p>
+<p>The rules are not arbitrary. Every MISRA rule has a horror story behind it. Every CERT recommendation has a CVE attached.</p>
 
-  <p>Read the standards. Run the tools. And the next time someone tells you that portability doesn’t matter because “this is just embedded code”  tell them the Ariane 5 telemetry story.</p>
+<p>Read the standards. Run the tools. And the next time someone tells you that portability doesn’t matter because “this is just embedded code”  tell them the Ariane 5 telemetry story.</p>
 
-  <hr />
+<hr />
 
-  <div class="info">
+<div class="info">
 
-    <p><strong>Further reading</strong></p>
+  <p><strong>Further reading</strong></p>
 
-    <ul>
-      <li><strong>MISRA C 2023</strong> — <a href="https://misra.org.uk">misra.org.uk</a></li>
-      <li><strong>CERT C Coding Standard</strong> — <a href="https://wiki.sei.cmu.edu/confluence/display/c">wiki.sei.cmu.edu/confluence/display/c</a></li>
-      <li><strong>C23 final draft (N3220)</strong> — <a href="https://www.open-std.org/jtc1/sc22/wg14/">open-std.org/jtc1/sc22/wg14</a></li>
-      <li><strong>Static analysis tooling</strong> — PC-lint Plus, Helix QAC (Perforce), Polyspace (MathWorks), Cppcheck with MISRA addon</li>
-    </ul>
+  <ul>
+    <li><strong>MISRA C 2023</strong> — <a href="https://misra.org.uk">misra.org.uk</a></li>
+    <li><strong>CERT C Coding Standard</strong> — <a href="https://wiki.sei.cmu.edu/confluence/display/c">wiki.sei.cmu.edu/confluence/display/c</a></li>
+    <li><strong>C23 final draft (N3220)</strong> — <a href="https://www.open-std.org/jtc1/sc22/wg14/">open-std.org/jtc1/sc22/wg14</a></li>
+    <li><strong>Static analysis tooling</strong> — PC-lint Plus, Helix QAC (Perforce), Polyspace (MathWorks), Cppcheck with MISRA addon</li>
+  </ul>
 
-  </div>
+</div>
 
-  <hr />
-</iframe>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="industry" /><category term="c" /><category term="security" /><summary type="html"><![CDATA[The C language has powered satellites, pacemakers, and aircraft flight computers for five decades. That longevity is not accidental, and neither is the discipline required to keep it safe.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/portable-c.png" /><media:content medium="image" url="/cover_images/posts/portable-c.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Binary Search Tree in C</title><link href="/blog/coding/2026-02-01-c-bst/" rel="alternate" type="text/html" title="Binary Search Tree in C" /><published>2026-02-01T00:00:00+00:00</published><updated>2026-02-26T08:48:48+00:00</updated><id>/blog/coding/c-bst</id><content type="html" xml:base="/blog/coding/2026-02-01-c-bst/"><![CDATA[<p>A guide to BST operations in C with LeetCode problem mappings</p>
+<hr />]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="industry" /><category term="c" /><category term="security" /><summary type="html"><![CDATA[The C language has powered satellites, pacemakers, and aircraft flight computers for five decades. That longevity is not accidental, and neither is the discipline required to keep it safe.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/portable-c.png" /><media:content medium="image" url="/cover_images/posts/portable-c.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Binary Search Tree in C</title><link href="/blog/coding/2026-02-01-c-bst/" rel="alternate" type="text/html" title="Binary Search Tree in C" /><published>2026-02-01T00:00:00+00:00</published><updated>2026-02-26T08:48:48+00:00</updated><id>/blog/coding/c-bst</id><content type="html" xml:base="/blog/coding/2026-02-01-c-bst/"><![CDATA[<p>A guide to BST operations in C with LeetCode problem mappings</p>
 
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
