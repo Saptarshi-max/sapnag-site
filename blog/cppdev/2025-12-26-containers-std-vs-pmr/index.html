@@ -20,21 +20,21 @@
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Performance cost std::pmr vs std containers | Saptarshi Nag</title>
+<title>std::pmr in Embedded C++ - Predictable Memory Without the Heap | Saptarshi Nag</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Performance cost std::pmr vs std containers" />
+<meta property="og:title" content="std::pmr in Embedded C++ - Predictable Memory Without the Heap" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="This blog post explores why memory management is a critical bottleneck in embedded systems and how C++17’s Polymorphic Memory Resources (PMR) can dramatically improve performance, determinism, and memory efficiency compared to traditional std containers." />
-<meta property="og:description" content="This blog post explores why memory management is a critical bottleneck in embedded systems and how C++17’s Polymorphic Memory Resources (PMR) can dramatically improve performance, determinism, and memory efficiency compared to traditional std containers." />
+<meta name="description" content="A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead." />
+<meta property="og:description" content="A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead." />
 <meta property="og:site_name" content="Saptarshi Nag" />
-<meta property="og:image" content="/cover_images/posts/std-pmr.webp" />
+<meta property="og:image" content="/cover_images/std-pmr.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-12-26T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/cover_images/posts/std-pmr.webp" />
-<meta property="twitter:title" content="Performance cost std::pmr vs std containers" />
+<meta property="twitter:image" content="/cover_images/std-pmr.png" />
+<meta property="twitter:title" content="std::pmr in Embedded C++ - Predictable Memory Without the Heap" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-10T17:17:18+00:00","datePublished":"2025-12-26T00:00:00+00:00","description":"This blog post explores why memory management is a critical bottleneck in embedded systems and how C++17’s Polymorphic Memory Resources (PMR) can dramatically improve performance, determinism, and memory efficiency compared to traditional std containers.","headline":"Performance cost std::pmr vs std containers","image":"/cover_images/posts/std-pmr.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-02T21:10:52+00:00","datePublished":"2025-12-26T00:00:00+00:00","description":"A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead.","headline":"std::pmr in Embedded C++ - Predictable Memory Without the Heap","image":"/cover_images/std-pmr.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -106,7 +106,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-06-02T14:11:12+00:00',
+    INDEX_KEY: 'index--2026-06-02T21:11:46+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -232,7 +232,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   <header>
     <h1 class="post-title flip-project-title">
       
-        Performance cost std::pmr vs std containers
+        std::pmr in Embedded C++ - Predictable Memory Without the Heap
       
     </h1>
 
@@ -253,11 +253,11 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <img
   
-    src="/cover_images/posts/std-pmr.webp"
+    src="/cover_images/std-pmr.png"
     
     
   
-  alt="Performance cost std::pmr vs std containers"
+  alt="std::pmr in Embedded C++ - Predictable Memory Without the Heap"
   
   
   width="864"
@@ -276,7 +276,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
   
     <p class="note-sm" >
-      This blog post explores why memory management is a critical bottleneck in embedded systems and how C++17’s Polymorphic Memory Resources (PMR) can dramatically improve performance, determinism, and memory efficiency compared to traditional std containers.
+      A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead.
 
     </p>
   
@@ -286,1392 +286,576 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
   
     <ul id="markdown-toc">
-  <li><a href="#why-memory-management-matters-in-embedded-systems" id="markdown-toc-why-memory-management-matters-in-embedded-systems">Why Memory Management Matters in Embedded Systems</a></li>
-  <li><a href="#traditional-approaches" id="markdown-toc-traditional-approaches">Traditional Approaches</a>    <ul>
-      <li><a href="#1-static-allocation" id="markdown-toc-1-static-allocation">1. Static Allocation</a></li>
-      <li><a href="#2-fixed-size-pools" id="markdown-toc-2-fixed-size-pools">2. Fixed-Size Pools</a></li>
-      <li><a href="#3-arenaregion-allocators" id="markdown-toc-3-arenaregion-allocators">3. Arena/Region Allocators</a></li>
+  <li><a href="#stdpmr-in-embedded-c---predictable-memory-without-the-heap" id="markdown-toc-stdpmr-in-embedded-c---predictable-memory-without-the-heap">std::pmr in Embedded C++ - Predictable Memory Without the Heap</a>    <ul>
+      <li><a href="#what-is-the-stdpmr-introduced-in-c17" id="markdown-toc-what-is-the-stdpmr-introduced-in-c17">What is the std::pmr introduced in C++17</a>        <ul>
+          <li><a href="#core-idea" id="markdown-toc-core-idea">Core Idea</a></li>
+          <li><a href="#main-components" id="markdown-toc-main-components">Main Components</a></li>
+          <li><a href="#important-predefined-memory-resources" id="markdown-toc-important-predefined-memory-resources">Important Predefined Memory Resources</a></li>
+          <li><a href="#pmr-enabled-containers" id="markdown-toc-pmr-enabled-containers">pmr-enabled Containers</a></li>
+        </ul>
+      </li>
+      <li><a href="#stdpmr-is-about-control--predictibility" id="markdown-toc-stdpmr-is-about-control--predictibility">std::pmr is about Control &amp; Predictibility</a></li>
+      <li><a href="#quick-embedded-background-for-non-embedded-readers" id="markdown-toc-quick-embedded-background-for-non-embedded-readers">Quick embedded background (for non-embedded readers)</a></li>
+      <li><a href="#why-embedded-engineers-care" id="markdown-toc-why-embedded-engineers-care">Why embedded engineers care</a></li>
+      <li><a href="#what-pmr-actually-changes" id="markdown-toc-what-pmr-actually-changes">What PMR actually changes</a></li>
+      <li><a href="#where-pmr-fits-best" id="markdown-toc-where-pmr-fits-best">Where PMR fits best</a>        <ul>
+          <li><a href="#1-request-scoped-processing" id="markdown-toc-1-request-scoped-processing">1. Request-scoped processing</a></li>
+          <li><a href="#2-bounded-buffers-in-real-time-code" id="markdown-toc-2-bounded-buffers-in-real-time-code">2. Bounded buffers in real-time code</a></li>
+          <li><a href="#3-systems-that-need-runtime-allocator-choice" id="markdown-toc-3-systems-that-need-runtime-allocator-choice">3. Systems that need runtime allocator choice</a></li>
+        </ul>
+      </li>
+      <li><a href="#what-pmr-does-not-solve" id="markdown-toc-what-pmr-does-not-solve">What PMR does not solve</a></li>
+      <li><a href="#the-embedded-mental-model" id="markdown-toc-the-embedded-mental-model">The embedded mental model</a></li>
+      <li><a href="#a-practical-buffer-sizing-strategy" id="markdown-toc-a-practical-buffer-sizing-strategy">A practical buffer sizing strategy</a></li>
+      <li><a href="#how-to-think-about-performance" id="markdown-toc-how-to-think-about-performance">How to think about performance</a></li>
+      <li><a href="#the-failure-mode-that-matters-most" id="markdown-toc-the-failure-mode-that-matters-most">The failure mode that matters most</a></li>
+      <li><a href="#a-stricter-option-remove-the-heap-from-the-path-entirely" id="markdown-toc-a-stricter-option-remove-the-heap-from-the-path-entirely">A stricter option: remove the heap from the path entirely</a></li>
+      <li><a href="#pmr-versus-other-embedded-options" id="markdown-toc-pmr-versus-other-embedded-options">PMR versus other embedded options</a></li>
+      <li><a href="#a-simple-decision-tree" id="markdown-toc-a-simple-decision-tree">A simple decision tree</a></li>
+      <li><a href="#why-i-used-a-custom-benchmark-harness-instead-of-google-benchmark" id="markdown-toc-why-i-used-a-custom-benchmark-harness-instead-of-google-benchmark">Why I used a custom benchmark harness instead of Google Benchmark</a></li>
+      <li><a href="#the-benchmark-plots-and-what-they-indicate" id="markdown-toc-the-benchmark-plots-and-what-they-indicate">The Benchmark plots and what they indicate</a>        <ul>
+          <li><a href="#vector-workload" id="markdown-toc-vector-workload">Vector workload</a></li>
+          <li><a href="#string-workload" id="markdown-toc-string-workload">String workload</a></li>
+          <li><a href="#map-workload" id="markdown-toc-map-workload">Map workload</a></li>
+          <li><a href="#mixed-realistic-workload" id="markdown-toc-mixed-realistic-workload">Mixed realistic workload</a></li>
+        </ul>
+      </li>
+      <li><a href="#when-i-would-recommend-stdpmr" id="markdown-toc-when-i-would-recommend-stdpmr">When I would recommend STD::PMR</a></li>
+      <li><a href="#when-i-would-not" id="markdown-toc-when-i-would-not">When I would not</a></li>
+      <li><a href="#bottom-line" id="markdown-toc-bottom-line">Bottom line</a></li>
+      <li><a href="#references-and-code" id="markdown-toc-references-and-code">References and code</a></li>
     </ul>
   </li>
-  <li><a href="#standard-containers-of-c-but-why-embedded-developers-are-skeptical-of-stl" id="markdown-toc-standard-containers-of-c-but-why-embedded-developers-are-skeptical-of-stl">Standard Containers of C++, But Why Embedded Developers Are Skeptical of STL</a>    <ul>
-      <li><a href="#the-problems" id="markdown-toc-the-problems">The Problems</a></li>
-    </ul>
-  </li>
-  <li><a href="#dynamic-memory-management-the-hidden-costs" id="markdown-toc-dynamic-memory-management-the-hidden-costs">Dynamic Memory Management: The Hidden Costs</a>    <ul>
-      <li><a href="#fragmentation" id="markdown-toc-fragmentation">Fragmentation</a></li>
-      <li><a href="#call-stack-example" id="markdown-toc-call-stack-example">Call Stack Example</a></li>
-    </ul>
-  </li>
-  <li><a href="#understanding-stdpmr-polymorphic-memory-resources" id="markdown-toc-understanding-stdpmr-polymorphic-memory-resources">Understanding std::pmr (Polymorphic Memory Resources)</a>    <ul>
-      <li><a href="#the-architecture" id="markdown-toc-the-architecture">The Architecture</a></li>
-    </ul>
-  </li>
-  <li><a href="#key-pmr-components" id="markdown-toc-key-pmr-components">Key pmr Components</a>    <ul>
-      <li><a href="#1-memory_resource-base-interface" id="markdown-toc-1-memory_resource-base-interface">1. <code class="language-plaintext highlighter-rouge">memory_resource</code> (Base Interface)</a></li>
-      <li><a href="#2-monotonic_buffer_resource" id="markdown-toc-2-monotonic_buffer_resource">2. <code class="language-plaintext highlighter-rouge">monotonic_buffer_resource</code></a></li>
-      <li><a href="#3-pool_resource--synchronized_pool_resource" id="markdown-toc-3-pool_resource--synchronized_pool_resource">3. <code class="language-plaintext highlighter-rouge">pool_resource</code> &amp; <code class="language-plaintext highlighter-rouge">synchronized_pool_resource</code></a></li>
-      <li><a href="#4-custom-allocators" id="markdown-toc-4-custom-allocators">4. Custom Allocators</a></li>
-    </ul>
-  </li>
-  <li><a href="#performance-cost-of-stdpmr-vs-std-containers--trade-offs" id="markdown-toc-performance-cost-of-stdpmr-vs-std-containers--trade-offs">Performance Cost of std::pmr vs std Containers &amp; Trade-offs</a>    <ul>
-      <li><a href="#my-test-setup" id="markdown-toc-my-test-setup">My Test Setup</a></li>
-      <li><a href="#benchmark-1-vector-operations" id="markdown-toc-benchmark-1-vector-operations">Benchmark 1: Vector Operations</a></li>
-      <li><a href="#benchmark-2-string-operations" id="markdown-toc-benchmark-2-string-operations">Benchmark 2: String Operations</a></li>
-      <li><a href="#benchmark-3-map-operations" id="markdown-toc-benchmark-3-map-operations">Benchmark 3: Map Operations</a></li>
-      <li><a href="#why-the-huge-variance-in-stdvector" id="markdown-toc-why-the-huge-variance-in-stdvector">Why the Huge Variance in std::vector?</a></li>
-      <li><a href="#the-memory-management-trade-off" id="markdown-toc-the-memory-management-trade-off">The Memory Management Trade-off</a></li>
-      <li><a href="#the-trade-offs" id="markdown-toc-the-trade-offs">The Trade-offs</a></li>
-      <li><a href="#real-world-impact-example" id="markdown-toc-real-world-impact-example">Real-World Impact Example</a></li>
-      <li><a href="#how-to-reproduce-these-results" id="markdown-toc-how-to-reproduce-these-results">How to Reproduce These Results</a></li>
-    </ul>
-  </li>
-  <li><a href="#best-practices--recommendations" id="markdown-toc-best-practices--recommendations">Best Practices &amp; Recommendations</a>    <ul>
-      <li><a href="#1-choose-the-right-memory-resource" id="markdown-toc-1-choose-the-right-memory-resource">1. Choose the Right Memory Resource</a></li>
-      <li><a href="#2-stack-buffer-sizing-strategy" id="markdown-toc-2-stack-buffer-sizing-strategy">2. Stack Buffer Sizing Strategy</a></li>
-      <li><a href="#3-error-handling" id="markdown-toc-3-error-handling">3. Error Handling</a></li>
-      <li><a href="#4-combining-resources" id="markdown-toc-4-combining-resources">4. Combining Resources</a></li>
-      <li><a href="#5-move-from-std-to-pmr-gradually" id="markdown-toc-5-move-from-std-to-pmr-gradually">5. Move from std to pmr Gradually</a></li>
-      <li><a href="#6-testing-strategy" id="markdown-toc-6-testing-strategy">6. Testing Strategy</a></li>
-    </ul>
-  </li>
-  <li><a href="#surprising-findings-from-real-benchmarks" id="markdown-toc-surprising-findings-from-real-benchmarks">Surprising Findings from Real Benchmarks</a>    <ul>
-      <li><a href="#what-i-expected-vs-what-i-found" id="markdown-toc-what-i-expected-vs-what-i-found">What I Expected vs. What I Found</a></li>
-      <li><a href="#the-real-trade-off" id="markdown-toc-the-real-trade-off">The Real Trade-off</a></li>
-      <li><a href="#benchmark-highlights" id="markdown-toc-benchmark-highlights">Benchmark Highlights</a></li>
-    </ul>
-  </li>
-  <li><a href="#conclusions" id="markdown-toc-conclusions">Conclusions</a>    <ul>
-      <li><a href="#key-takeaways" id="markdown-toc-key-takeaways">Key Takeaways</a></li>
-      <li><a href="#when-to-use-pmr" id="markdown-toc-when-to-use-pmr">When to Use PMR</a></li>
-      <li><a href="#the-mental-model-shift" id="markdown-toc-the-mental-model-shift">The Mental Model Shift</a></li>
-      <li><a href="#quick-decision-matrix" id="markdown-toc-quick-decision-matrix">Quick Decision Matrix</a></li>
-    </ul>
-  </li>
-  <li><a href="#references" id="markdown-toc-references">References</a></li>
 </ul>
 
-<ul class="large-only">
-  <li>TOC</li>
-</ul>
+<h1 id="stdpmr-in-embedded-c---predictable-memory-without-the-heap">std::pmr in Embedded C++ - Predictable Memory Without the Heap</h1>
 
-<h2 id="why-memory-management-matters-in-embedded-systems">Why Memory Management Matters in Embedded Systems</h2>
+<h2 id="what-is-the-stdpmr-introduced-in-c17">What is the std::pmr introduced in C++17</h2>
 
-<p>Embedded systems operate under constraints that desktop applications rarely face:</p>
+<p><strong>std::pmr</strong> (Polymorphic Memory Resources) is a major feature introduced in <strong>C++17</strong> that makes custom memory allocation much more convenient and flexible, especially when working with STL containers.</p>
 
-<ul>
-  <li>Limited RAM - Often measured in kilobytes, not gigabytes</li>
-  <li>Deterministic behavior - Real-time deadlines must be met</li>
-  <li>No virtual memory - Physical RAM is all you get</li>
-  <li>Fragmentation concerns - Memory leaks and fragmentation can’t be “fixed” by rebooting</li>
-  <li>Power constraints - Every allocation costs energy</li>
-</ul>
+<h3 id="core-idea">Core Idea</h3>
 
-<p>The problem: <code class="language-plaintext highlighter-rouge">new</code> and <code class="language-plaintext highlighter-rouge">delete</code> aren’t just slow—they’re unpredictable. A single allocation might succeed in 10µs or fail after 1ms of heap searching.</p>
+<p>Traditional C++ allocators are <strong>templated</strong> (e.g., std::vector&lt;T, MyAllocator<T>&gt;). This means the allocator type becomes part of the container type, leading to code bloat and compatibility issues between different allocator types.</T></p>
 
-<p>Traditional dynamic memory allocation using <code class="language-plaintext highlighter-rouge">malloc</code>/<code class="language-plaintext highlighter-rouge">free</code> or <code class="language-plaintext highlighter-rouge">new</code>/<code class="language-plaintext highlighter-rouge">delete</code> introduces:</p>
+<p>std::pmr solves this by introducing <strong>type-erased</strong>, <strong>polymorphic</strong> memory resources. The allocator behavior is determined at runtime via a virtual interface instead of at compile time.</p>
 
-<pre><code class="language-mermaid">graph TD
-    A[Dynamic Allocation Request] --&gt; B{Heap Search}
-    B --&gt;|Best Fit| C[Search entire free list]
-    B --&gt;|First Fit| D[Search until fit found]
-    C --&gt; E[Non-deterministic timing]
-    D --&gt; E
-    E --&gt; F[Fragmentation over time]
-    F --&gt; G[Memory exhaustion]
-    G --&gt; H[System failure]
-    
-    style E fill:#ff6b6b,stroke:#c92a2a,color:#fff
-    style F fill:#ffe066,stroke:#f08c00
-    style H fill:#ff6b6b,stroke:#c92a2a,color:#fff
-</code></pre>
-
-<p><strong>Real-world impact:</strong></p>
-<ul>
-  <li>Spacecraft software often <strong>bans dynamic allocation entirely</strong></li>
-  <li>Automotive safety systems use <strong>static allocation only</strong></li>
-  <li>Industrial controllers pre-allocate <strong>all memory at startup</strong></li>
-</ul>
-
-<h2 id="traditional-approaches">Traditional Approaches</h2>
-
-<p>Embedded developers have historically used several strategies to avoid heap allocation:</p>
-
-<h3 id="1-static-allocation">1. Static Allocation</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Everything allocated at compile time</span>
-<span class="k">struct</span> <span class="nc">SensorBuffer</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">MAX_SAMPLES</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">samples</span><span class="p">[</span><span class="n">MAX_SAMPLES</span><span class="p">];</span>
-    <span class="kt">size_t</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="n">SensorBuffer</span> <span class="n">buffer</span><span class="p">;</span>  <span class="c1">// No runtime allocation</span>
-</code></pre></div></div>
-
-<p><strong>Pros</strong>: Predictable, fast, no fragmentation<br />
-<strong>Cons</strong>: Wastes memory, inflexible, compile-time sizing</p>
-
-<h3 id="2-fixed-size-pools">2. Fixed-Size Pools</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Pre-allocated pool of Message objects</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">&gt;</span>
-<span class="k">class</span> <span class="nc">ObjectPool</span> <span class="p">{</span>
-    <span class="k">alignas</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="kt">char</span> <span class="n">storage</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">)];</span>
-    <span class="kt">bool</span> <span class="n">used</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">T</span><span class="o">*</span> <span class="nf">allocate</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-                <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                <span class="k">return</span> <span class="k">new</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">storage</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">T</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nb">nullptr</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="kt">void</span> <span class="nf">deallocate</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Mark slot as free</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p><strong>Pros</strong>: Bounded allocation time, no fragmentation<br />
-<strong>Cons</strong>: Fixed capacity, manual management, type-specific</p>
-
-<h3 id="3-arenaregion-allocators">3. Arena/Region Allocators</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Arena</span> <span class="p">{</span>
-    <span class="kt">char</span><span class="o">*</span> <span class="n">buffer</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">size</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    
-<span class="nl">public:</span>
-    <span class="kt">void</span><span class="o">*</span> <span class="n">allocate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">offset</span> <span class="o">+</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">size</span><span class="p">)</span> <span class="k">return</span> <span class="nb">nullptr</span><span class="p">;</span>
-        <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">buffer</span> <span class="o">+</span> <span class="n">offset</span><span class="p">;</span>
-        <span class="n">offset</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">ptr</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="kt">void</span> <span class="nf">reset</span><span class="p">()</span> <span class="p">{</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// Bulk deallocation</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p><strong>Pros</strong>: Fast allocation, bulk deallocation<br />
-<strong>Cons</strong>: No individual deallocation, manual lifecycle</p>
-
-<h2 id="standard-containers-of-c-but-why-embedded-developers-are-skeptical-of-stl">Standard Containers of C++, But Why Embedded Developers Are Skeptical of STL</h2>
-
-<p>The C++ Standard Library provides powerful containers like <code class="language-plaintext highlighter-rouge">vector</code>, <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">unordered_map</code>, etc. Yet embedded developers often avoid them:</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Desktop developer's natural approach</span>
-<span class="kt">void</span> <span class="nf">process_data</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SensorReading</span><span class="o">&gt;</span> <span class="n">readings</span><span class="p">;</span>  <span class="c1">// Uses heap</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">Device</span><span class="o">&gt;</span> <span class="n">devices</span><span class="p">;</span>        <span class="c1">// Uses heap</span>
-    
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sensor_count</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">readings</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">read_sensor</span><span class="p">());</span>  <span class="c1">// Hidden allocations</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="the-problems">The Problems</h3>
-
-<p>Problems:</p>
-<ol>
-  <li>Non-deterministic allocation: <code class="language-plaintext highlighter-rouge">vector::push_back</code> might allocate or might not</li>
-  <li>Exceptions: Many embedded projects compile with <code class="language-plaintext highlighter-rouge">-fno-exceptions</code></li>
-  <li>Code bloat: Templates can increase binary size significantly</li>
-  <li>Hidden costs: Iterator operations might be expensive</li>
-  <li>Lack of control: Can’t specify where memory comes from</li>
-</ol>
-
-<h2 id="dynamic-memory-management-the-hidden-costs">Dynamic Memory Management: The Hidden Costs</h2>
-
-<p>Let’s quantify what “hidden costs” actually means:</p>
-
-<p>Allocation overhead on ARM Cortex-M4 (168 MHz):</p>
+<h3 id="main-components">Main Components</h3>
 
 <table>
   <thead>
     <tr>
-      <th>Operation</th>
-      <th>Best Case</th>
-      <th>Worst Case</th>
-      <th>Variance</th>
+      <th>Component</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">malloc(32)</code></td>
-      <td>150 cycles (~0.9µs)</td>
-      <td>15,000 cycles (~89µs)</td>
-      <td>100x</td>
+      <td><strong>std::pmr::memory_resource</strong></td>
+      <td>Abstract base class (the core of the system). Defines allocate(), deallocate(), and is_equal().</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">free()</code></td>
-      <td>80 cycles (~0.5µs)</td>
-      <td>8,000 cycles (~48µs)</td>
-      <td>100x</td>
+      <td>**std::pmr::polymorphic_allocator<T>**</T></td>
+      <td>A standard allocator that forwards requests to a memory_resource*. This is what containers actually use.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">vector::push_back</code> (no resize)</td>
-      <td>20 cycles</td>
-      <td>20 cycles</td>
-      <td>1x</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">vector::push_back</code> (resize)</td>
-      <td>200 cycles</td>
-      <td>20,000 cycles</td>
-      <td>100x</td>
+      <td><strong>Predefined resources</strong></td>
+      <td>Ready-to-use memory resources provided by the standard library.</td>
     </tr>
   </tbody>
 </table>
 
-<p>The variance is what matters. A 100x timing difference is unacceptable when you have a 1ms deadline.</p>
+<h3 id="important-predefined-memory-resources">Important Predefined Memory Resources</h3>
 
-<h3 id="fragmentation">Fragmentation</h3>
-
-<pre><code class="language-mermaid">sequenceDiagram
-    participant App
-    participant Heap
-    
-    Note over Heap: Initial: [4KB free block]
-    
-    App-&gt;&gt;Heap: alloc 1KB
-    Note over Heap: [1KB used][3KB free]
-    
-    App-&gt;&gt;Heap: alloc 1KB
-    Note over Heap: [1KB][1KB][2KB free]
-    
-    App-&gt;&gt;Heap: free first block
-    Note over Heap: [1KB free][1KB][2KB free]
-    
-    App-&gt;&gt;Heap: alloc 2KB
-    Note over Heap: Can't fit! Only 1KB contiguous
-    
-    Note over Heap: Total free: 3KB&lt;br/&gt;Max contiguous: 2KB&lt;br/&gt;Fragmentation: 33%
-</code></pre>
-
-<p><strong>Real-world impact:</strong></p>
 <ul>
-  <li>System with 128KB RAM might only have 64KB usable after fragmentation</li>
-  <li>Medical device recalled due to memory exhaustion after 72 hours of operation</li>
-  <li>Industrial controller required daily reboots to “clear memory”</li>
+  <li><strong>std::pmr::new_delete_resource()</strong> — Default resource (uses ::operator new/delete).</li>
+  <li><strong>std::pmr::null_memory_resource()</strong> — Throws std::bad_alloc on any allocation (useful for testing).</li>
+  <li><strong>std::pmr::monotonic_buffer_resource</strong> — Very fast bump allocator. Allocations just move a pointer forward. Great for temporary arenas.</li>
+  <li><strong>std::pmr::synchronized_pool_resource</strong> — Thread-safe pool allocator (good for many small allocations).</li>
+  <li><strong>std::pmr::unsynchronized_pool_resource</strong> — Faster version when thread safety isn’t needed.</li>
+  <li><strong>std::pmr::tracked_memory_resource</strong> (since C++20) — Helps with debugging memory usage.</li>
 </ul>
 
-<h3 id="call-stack-example">Call Stack Example</h3>
+<h3 id="pmr-enabled-containers">pmr-enabled Containers</h3>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">;</span>
-<span class="n">data</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>  <span class="c1">// One allocation</span>
+<p>C++17 provides std::pmr versions of most standard containers in the std::pmr namespace:</p>
 
-<span class="c1">// Stack trace during reserve():</span>
-<span class="c1">// vector::reserve()</span>
-<span class="c1">//   └─ allocator::allocate()</span>
-<span class="c1">//      └─ operator new()</span>
-<span class="c1">//         └─ malloc()</span>
-<span class="c1">//            └─ heap_search()     ← Non-deterministic</span>
-<span class="c1">//               └─ find_free_block()</span>
-<span class="c1">//                  └─ coalesce_blocks()</span>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>      <span class="n">v</span><span class="p">(</span><span class="o">&amp;</span><span class="n">resource</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span>           <span class="nf">s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">resource</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span> <span class="n">m</span><span class="p">(</span><span class="o">&amp;</span><span class="n">resource</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">resource</span><span class="p">);</span>
+
 </code></pre></div></div>
 
-<h2 id="understanding-stdpmr-polymorphic-memory-resources">Understanding std::pmr (Polymorphic Memory Resources)</h2>
+<p>These all use <code class="language-plaintext highlighter-rouge">std::pmr::polymorphic_allocator</code> by default.</p>
 
-<p>C++17 introduced Polymorphic Memory Resources to solve exactly this problem. The key insight:</p>
+<h2 id="stdpmr-is-about-control--predictibility">std::pmr is about Control &amp; Predictibility</h2>
 
-<p>Separate the what (container logic) from the where (memory source)</p>
+<p>If you build embedded software long enough, you eventually hit the same trade-off:
+you want the convenience of <code class="language-plaintext highlighter-rouge">std::vector</code>, <code class="language-plaintext highlighter-rouge">std::string</code>, and <code class="language-plaintext highlighter-rouge">std::map</code>, but you
+do not want unpredictable heap behavior in the middle of a timing-critical path.</p>
 
-<h3 id="the-architecture">The Architecture</h3>
+<p>That is the space <code class="language-plaintext highlighter-rouge">std::pmr</code> fills.</p>
 
-<pre><code class="language-mermaid">graph TD
-    A[pmr::vector Container] --&gt; B[memory_resource interface]
-    B --&gt; C[monotonic_buffer_resource]
-    B --&gt; D[pool_resource]
-    B --&gt; E[synchronized_pool_resource]
-    B --&gt; F[Custom allocator]
-    
-    C --&gt; G[Stack buffer]
-    C --&gt; H[Arena]
-    D --&gt; I[Fixed pools]
-    F --&gt; J[DMA memory]
-    F --&gt; K[Shared memory]
-    
-    style A fill:#74c0fc,stroke:#1971c2
-    style B fill:#ffe066,stroke:#f08c00
-    style C fill:#51cf66,stroke:#2f9e44
-    style D fill:#51cf66,stroke:#2f9e44
-    style E fill:#51cf66,stroke:#2f9e44
-    style F fill:#51cf66,stroke:#2f9e44
+<p>PMR does not replace the standard library. It gives you a way to keep standard
+containers while taking ownership of where their memory comes from. That matters
+when the question is not “can this code run?” but “can this code run within a
+bounded budget, every time?”</p>
+
+<pre><code class="language-mermaid">flowchart LR
+    A[Embedded workload] --&gt; B{Need dynamic containers?}
+    B --&gt;|No| C[Static storage]
+    B --&gt;|Yes| D{Need predictable memory?
+}
+    D --&gt;|Yes| E[std::pmr + bounded resource]
+    D --&gt;|No| F[std::allocator or custom allocator]
 </code></pre>
 
-<p><strong>Key idea:</strong> The container doesn’t know or care <em>where</em> memory comes from—it just calls the <code class="language-plaintext highlighter-rouge">memory_resource</code> interface.</p>
+<p>The practical message is simple:</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Traditional: tied to global heap</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
-
-<span class="c1">// PMR: you control the memory source</span>
-<span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">pool</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">{</span><span class="o">&amp;</span><span class="n">pool</span><span class="p">};</span>  <span class="c1">// Uses our buffer, not heap!</span>
-</code></pre></div></div>
-
-<h2 id="key-pmr-components">Key pmr Components</h2>
-
-<h3 id="1-memory_resource-base-interface">1. <code class="language-plaintext highlighter-rouge">memory_resource</code> (Base Interface)</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">memory_resource</span> <span class="p">{</span>
-<span class="nl">public:</span>
-    <span class="k">virtual</span> <span class="kt">void</span><span class="o">*</span> <span class="n">allocate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bytes</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">alignment</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">deallocate</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">bytes</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">alignment</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">is_equal</span><span class="p">(</span><span class="k">const</span> <span class="n">memory_resource</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p><strong>Your guarantee:</strong> All pmr containers use <em>only</em> these three functions.</p>
-
-<h3 id="2-monotonic_buffer_resource">2. <code class="language-plaintext highlighter-rouge">monotonic_buffer_resource</code></h3>
-
-<p><strong>Best for:</strong> Bulk allocation with single reset</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Allocate from stack buffer</span>
-<span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">8192</span><span class="p">];</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">mbr</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">messages</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span> <span class="n">temp</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-    
-    <span class="n">process_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">);</span>
-    
-<span class="p">}</span>  <span class="c1">// No individual deallocations!</span>
-
-<span class="n">mbr</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>  <span class="c1">// Bulk reset - O(1)</span>
-</code></pre></div></div>
-
-<pre><code class="language-mermaid">sequenceDiagram
-    participant Container
-    participant MBR as monotonic_buffer
-    participant Buffer as Stack Buffer
-    
-    Container-&gt;&gt;MBR: allocate(64 bytes)
-    MBR-&gt;&gt;Buffer: bump pointer by 64
-    Note over Buffer: [64 used][remaining free]
-    
-    Container-&gt;&gt;MBR: allocate(128 bytes)
-    MBR-&gt;&gt;Buffer: bump pointer by 128
-    Note over Buffer: [192 used][remaining free]
-    
-    Container-&gt;&gt;MBR: deallocate(first block)
-    Note over MBR: No-op! Can't reuse yet
-    
-    Note over Container: Scope ends
-    Container-&gt;&gt;MBR: release()
-    MBR-&gt;&gt;Buffer: Reset pointer to start
-    Note over Buffer: [All free again]
-</code></pre>
-
-<p><strong>Performance:</strong></p>
 <ul>
-  <li>Allocation: <strong>O(1)</strong> - just increment a pointer</li>
-  <li>Deallocation: <strong>O(1)</strong> - no-op</li>
-  <li>Reset: <strong>O(1)</strong> - bulk cleanup</li>
+  <li>Use static storage when the shape of the problem is fixed.</li>
+  <li>Use PMR when the shape is dynamic, but the memory budget is still bounded.</li>
+  <li>Use a custom allocator when the allocator type is known at compile time and you
+want the lowest overhead.</li>
 </ul>
 
-<p><strong>Trade-off:</strong> Individual deallocations are ignored until <code class="language-plaintext highlighter-rouge">release()</code></p>
+<h2 id="quick-embedded-background-for-non-embedded-readers">Quick embedded background (for non-embedded readers)</h2>
 
-<h3 id="3-pool_resource--synchronized_pool_resource">3. <code class="language-plaintext highlighter-rouge">pool_resource</code> &amp; <code class="language-plaintext highlighter-rouge">synchronized_pool_resource</code></h3>
+<p>If you come from backend or desktop development, the core embedded difference is
+that timing and memory behavior are product requirements, not implementation
+details.</p>
 
-<p><strong>Best for:</strong> Frequent allocation/deallocation of similar sizes</p>
+<p>In many embedded systems:</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">unsynchronized_pool_resource</span> <span class="n">pool</span><span class="p">;</span>
-
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Packet</span><span class="o">&gt;</span> <span class="n">packets</span><span class="p">{</span><span class="o">&amp;</span><span class="n">pool</span><span class="p">};</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">Device</span><span class="o">&gt;</span> <span class="n">devices</span><span class="p">{</span><span class="o">&amp;</span><span class="n">pool</span><span class="p">};</span>
-    
-    <span class="c1">// Efficient allocation from pools</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">packets</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Packet</span><span class="p">{});</span>  <span class="c1">// From pool</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Memory returned to pools, ready for reuse</span>
-</code></pre></div></div>
-
-<p><strong>How it works:</strong></p>
-
-<pre><code class="language-mermaid">graph TD
-    A[pool_resource] --&gt; B[Pool: 16-byte blocks]
-    A --&gt; C[Pool: 32-byte blocks]
-    A --&gt; D[Pool: 64-byte blocks]
-    A --&gt; E[Pool: 128-byte blocks]
-    A --&gt; F[Overflow to upstream]
-    
-    B --&gt; B1[Free list]
-    C --&gt; C1[Free list]
-    D --&gt; D1[Free list]
-    E --&gt; E1[Free list]
-    
-    style A fill:#ffe066,stroke:#f08c00
-    style B fill:#51cf66,stroke:#2f9e44
-    style C fill:#51cf66,stroke:#2f9e44
-    style D fill:#51cf66,stroke:#2f9e44
-    style E fill:#51cf66,stroke:#2f9e44
-    style F fill:#ff6b6b,stroke:#c92a2a,color:#fff
-</code></pre>
-
-<p><strong>Performance:</strong></p>
 <ul>
-  <li>Allocation: <strong>O(1)</strong> - pop from free list</li>
-  <li>Deallocation: <strong>O(1)</strong> - push to free list</li>
-  <li>No fragmentation within pools</li>
+  <li>RAM is small and fixed for the life of the process.</li>
+  <li>There is no virtual memory safety net.</li>
+  <li>A long-tail latency spike can violate a control-loop deadline.</li>
+  <li>Memory fragmentation can cause failures long after startup.</li>
 </ul>
 
-<p><strong>Trade-off:</strong> More memory overhead for pool metadata</p>
+<p>That is why teams often distinguish:</p>
 
-<h3 id="4-custom-allocators">4. Custom Allocators</h3>
-
-<p>You can implement your own <code class="language-plaintext highlighter-rouge">memory_resource</code> for specialized needs:</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DMAMemoryResource</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">memory_resource</span> <span class="p">{</span>
-    <span class="kt">void</span><span class="o">*</span> <span class="n">dma_region</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    
-<span class="nl">protected:</span>
-    <span class="kt">void</span><span class="o">*</span> <span class="n">do_allocate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bytes</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">align</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-        <span class="c1">// Allocate from DMA-capable memory region</span>
-        <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">align_pointer</span><span class="p">(</span><span class="n">dma_region</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">align</span><span class="p">);</span>
-        <span class="n">offset</span> <span class="o">+=</span> <span class="n">bytes</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">ptr</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="kt">void</span> <span class="n">do_deallocate</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-        <span class="c1">// No-op for DMA buffers</span>
-    <span class="p">}</span>
-    
-    <span class="kt">bool</span> <span class="n">do_is_equal</span><span class="p">(</span><span class="k">const</span> <span class="n">memory_resource</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// Now use with any pmr container</span>
-<span class="n">DMAMemoryResource</span> <span class="n">dma_mem</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span> <span class="n">dma_buffer</span><span class="p">{</span><span class="o">&amp;</span><span class="n">dma_mem</span><span class="p">};</span>
-</code></pre></div></div>
-
-<p><strong>Common custom allocators:</strong></p>
 <ul>
-  <li>DMA-capable memory regions</li>
-  <li>Cache-aligned allocations</li>
-  <li>Shared memory segments</li>
-  <li>Non-volatile RAM</li>
-  <li>Custom memory protection schemes</li>
+  <li>Mean performance: useful for throughput.</li>
+  <li>Tail latency (p95/p99) and jitter: critical for deadline reliability.</li>
 </ul>
 
-<h2 id="performance-cost-of-stdpmr-vs-std-containers--trade-offs">Performance Cost of std::pmr vs std Containers &amp; Trade-offs</h2>
+<p>This post focuses on that second category: reducing unpredictable behavior when
+containers allocate memory in timing-sensitive code.</p>
 
-<p>Let’s measure real performance on actual hardware.</p>
+<h2 id="why-embedded-engineers-care">Why embedded engineers care</h2>
 
-<h3 id="my-test-setup">My Test Setup</h3>
+<p>On desktop systems, allocation latency is usually background noise. In embedded
+systems, it is often part of the product requirement.</p>
 
-<p>I built a <a href="https://github.com/saptarshi-max/pmr-benchmark">benchmark suite</a> to measure these claims objectively:</p>
+<p>Typical constraints look like this:</p>
 
-<p>Hardware: [Snapdragon X Plus (12‑core Oryon CPU), Adreno GPU, 16GB LPDDR5x RAM]<br />
-<strong>Compiler:</strong> GCC 12.2, <code class="language-plaintext highlighter-rouge">-O3 -std=c++17</code><br />
-<strong>Methodology:</strong> 100 iterations per test, measuring mean/variance/percentiles</p>
+<ul>
+  <li>No heap at all in safety-critical paths.</li>
+  <li>Strict latency budgets for control loops, protocol handlers, and sensor fusion.</li>
+  <li>Small RAM footprints where fragmentation matters.</li>
+  <li>A preference for failure you can detect early rather than failure that appears
+later under load.</li>
+</ul>
 
-<p><strong>Reproducible</strong>: All code and scripts are <a href="https://github.com/saptarshi-max/pmr-benchmark">on GitHub</a>. You can run these benchmarks yourself.</p>
+<p>PMR is useful because it lets you make memory behavior explicit. Instead of
+sprinkling allocation policy across types and APIs, you pass a resource into the
+place that needs it.</p>
 
-<h3 id="benchmark-1-vector-operations">Benchmark 1: Vector Operations</h3>
+<h2 id="what-pmr-actually-changes">What PMR actually changes</h2>
 
-<p><strong>Test:</strong> 1000 push_back operations of sensor data (80 bytes each)</p>
+<p><strong>With ordinary containers, the allocator is usually baked into the type.</strong></p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Test structure - typical embedded data</span>
-<span class="k">struct</span> <span class="nc">SensorData</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">temperature</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">pressure</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">timestamp</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">label</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-<span class="p">};</span>
+<p><strong>With PMR containers, the resource is supplied at runtime.</strong></p>
 
-<span class="c1">// What we're measuring</span>
-<span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
-
-<span class="c1">// Standard vector (heap allocations)</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SensorData</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">read_sensor</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// PMR vector (stack buffer)</span>
-<span class="p">{</span>
-    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">SensorData</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">];</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">mbr</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SensorData</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">read_sensor</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>Results from my machine:</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th><code class="language-plaintext highlighter-rouge">std::vector</code></th>
-      <th><code class="language-plaintext highlighter-rouge">pmr::vector</code> (monotonic)</th>
-      <th><code class="language-plaintext highlighter-rouge">pmr::vector</code> (pool)</th>
-      <th>Comparison</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Mean time</strong></td>
-      <td>16.90 µs</td>
-      <td>57.44 µs</td>
-      <td>68.86 µs</td>
-      <td><strong>pmr 3.4-4.1x slower</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Worst case</strong></td>
-      <td>33.60 µs</td>
-      <td>264.20 µs</td>
-      <td>91.70 µs</td>
-      <td><strong>pmr worse P99</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Variance (CV)</strong></td>
-      <td>10.23%</td>
-      <td>43.18%</td>
-      <td>5.62%</td>
-      <td><strong>pool most consistent</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Best case</strong></td>
-      <td>16.40 µs</td>
-      <td>51.00 µs</td>
-      <td>64.40 µs</td>
-      <td><strong>std fastest</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Heap allocations</strong></td>
-      <td>Many</td>
-      <td>0</td>
-      <td>0</td>
-      <td><strong>pmr: no heap</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<pre><code class="language-mermaid">graph LR
-    A[std::vector&lt;br/&gt;16.9µs ±10%&lt;br/&gt;Fast but variable] --&gt;|Switch to PMR| B[pmr::vector pool&lt;br/&gt;68.9µs ±5.6%&lt;br/&gt;Slower but consistent]
-    
-    style A fill:#74c0fc,stroke:#1971c2
-    style B fill:#51cf66,stroke:#2f9e44
-</code></pre>
-
-<p>PMR is slower for simple operations like vector push_back, but offers better consistency. The pool allocator has the best determinism (5.62% CV) making it ideal for real-time scenarios where predictability matters more than raw speed.</p>
-
-<p><img src="/cover_images/posts/pmr_plots/vector_push_back_comparison.webp" alt="Vector Push Back Performance Comparison" />
-<em>Figure 1: Mean execution time comparison - std::vector is 3-4x faster than PMR variants</em></p>
-
-<p><img src="/cover_images/posts/pmr_plots/vector_push_back_percentiles.webp" alt="Vector Push Back Percentile Distribution" />
-<em>Figure 2: P95/P99 latency distribution - pmr_pool shows the most consistent behavior</em></p>
-
-<p>P95 means 95% of operations complete faster than this value, P99 means 99%. The narrower the gap between P95 and P99, the more predictable the performance—pmr_pool has the tightest spread, meaning fewer outliers and more reliable worst-case timing for real-time systems.</p>
-
-<h3 id="benchmark-2-string-operations">Benchmark 2: String Operations</h3>
-
-<p><strong>Test:</strong> Build 100 strings from sensor labels</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 100 strings like "Temperature_Sensor_42"</span>
-<span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">};</span>
-
-<span class="c1">// Standard strings</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">names</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">label</span> <span class="o">:</span> <span class="n">labels</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">names</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// PMR strings</span>
-<span class="p">{</span>
-    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">8192</span><span class="p">];</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">mbr</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">names</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">label</span> <span class="o">:</span> <span class="n">labels</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">names</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mbr</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>Results:</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Operation</th>
-      <th><code class="language-plaintext highlighter-rouge">std::string</code></th>
-      <th><code class="language-plaintext highlighter-rouge">pmr::string</code></th>
-      <th>Comparison</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>String concat</strong> (mean)</td>
-      <td>307.77 µs</td>
-      <td>360.17 µs</td>
-      <td><strong>pmr 17% slower</strong></td>
-    </tr>
-    <tr>
-      <td><strong>String concat</strong> (CV)</td>
-      <td>29.52%</td>
-      <td>9.40%</td>
-      <td><strong>pmr 3.1x more consistent</strong></td>
-    </tr>
-    <tr>
-      <td><strong>SSO strings</strong> (mean)</td>
-      <td>120.57 µs</td>
-      <td>121.53 µs</td>
-      <td><strong>Nearly identical</strong></td>
-    </tr>
-    <tr>
-      <td><strong>SSO strings</strong> (CV)</td>
-      <td>46.58%</td>
-      <td>29.19%</td>
-      <td><strong>pmr 1.6x more consistent</strong></td>
-    </tr>
-    <tr>
-      <td>Heap allocations</td>
-      <td>Many</td>
-      <td>0</td>
-      <td><strong>pmr: no heap</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>For strings, PMR trades a small speed penalty for significantly better determinism. String concat CV drops from 29.52% to 9.40% - a 3x improvement in predictability.</p>
-
-<p><img src="/cover_images/posts/pmr_plots/string_concat_comparison.webp" alt="String Concatenation Performance" />
-<em>Figure 3: String concatenation - PMR is slightly slower but much more consistent</em></p>
-
-<p><img src="/cover_images/posts/pmr_plots/string_sso_comparison.webp" alt="String SSO Performance" />
-<em>Figure 4: Small String Optimization - PMR matches std performance with better determinism</em></p>
-
-<h3 id="benchmark-3-map-operations">Benchmark 3: Map Operations</h3>
-
-<p><strong>Test:</strong> Insert 500 device records into a map</p>
-
-<p><strong>Results:</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Operation</th>
-      <th><code class="language-plaintext highlighter-rouge">std::map</code></th>
-      <th><code class="language-plaintext highlighter-rouge">pmr::map</code></th>
-      <th>Comparison</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Int keys</strong> (mean)</td>
-      <td>206.57 µs</td>
-      <td>256.41 µs</td>
-      <td><strong>pmr 24% slower</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Int keys</strong> (CV)</td>
-      <td>18.43%</td>
-      <td>22.93%</td>
-      <td><strong>std more consistent</strong></td>
-    </tr>
-    <tr>
-      <td><strong>String keys</strong> (mean)</td>
-      <td>487.28 µs</td>
-      <td>578.90 µs</td>
-      <td><strong>pmr 19% slower</strong></td>
-    </tr>
-    <tr>
-      <td><strong>String keys</strong> (CV)</td>
-      <td>28.31%</td>
-      <td>25.22%</td>
-      <td><strong>pmr 11% more consistent</strong></td>
-    </tr>
-    <tr>
-      <td>Heap allocations</td>
-      <td>Per node</td>
-      <td>0</td>
-      <td><strong>pmr: no heap</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>For maps, PMR doesn’t show the determinism advantage we saw with strings. The pool allocator adds overhead without significant consistency gains for this workload.</p>
-
-<h3 id="why-the-huge-variance-in-stdvector">Why the Huge Variance in std::vector?</h3>
-
-<p>The standard allocator has unpredictable performance because it does complex memory management:</p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-    participant Vec as std::vector
-    participant Heap as malloc/free
-    
-    Note over Vec: push_back #1
-    Vec-&gt;&gt;Heap: malloc(16 bytes)
-    Heap-&gt;&gt;Heap: Search free list
-    Heap-&gt;&gt;Heap: Check if split needed
-    Heap--&gt;&gt;Vec: Fast path (0.8µs)
-    
-    Note over Vec: push_back #512
-    Vec-&gt;&gt;Heap: Need more space!
-    Heap-&gt;&gt;Heap: Search free list
-    Heap-&gt;&gt;Heap: No suitable block
-    Heap-&gt;&gt;Heap: Coalesce adjacent blocks
-    Note right of Heap: Combine fragmented&lt;br/&gt;free blocks into&lt;br/&gt;larger blocks
-    Heap-&gt;&gt;Heap: Still not enough?
-    Heap-&gt;&gt;Heap: Request from OS (sbrk/mmap)
-    Heap--&gt;&gt;Vec: Slow path (45µs)
-    
-    Note over Heap: 56x variance!
-</code></pre>
-
-<p><strong>What’s “coalescing”?</strong> When memory is freed, adjacent free blocks are merged together:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before dealloc:  [Used A][Used B][Used C]
-After free B:    [Used A][Free B][Used C]  ← Fragmented
-After free C:    [Used A][Free B+C merged]  ← Coalesced!
-</code></pre></div></div>
-
-<p>This is <strong>expensive</strong> - the allocator must scan neighbors, update metadata, and maintain sorted free lists.</p>
-
-<p><strong>PMR eliminates this complexity:</strong></p>
-
-<pre><code class="language-mermaid">sequenceDiagram
-    participant Vec as pmr::vector
-    participant MBR as monotonic_buffer
-    participant Stack as Stack Buffer
-    
-    Note over Vec: push_back #1
-    Vec-&gt;&gt;MBR: allocate(16)
-    MBR-&gt;&gt;Stack: offset += 16
-    Note right of Stack: Just bump pointer!&lt;br/&gt;No search,&lt;br/&gt;no coalesce,&lt;br/&gt;no metadata
-    Stack--&gt;&gt;Vec: 0.5µs
-    
-    Note over Vec: push_back #512
-    Vec-&gt;&gt;MBR: allocate(16)
-    MBR-&gt;&gt;Stack: offset += 16
-    Stack--&gt;&gt;Vec: 0.5µs
-    
-    Note over Vec: deallocate(ptr)
-    Vec-&gt;&gt;MBR: deallocate()
-    MBR-&gt;&gt;MBR: No-op!
-    Note right of MBR: Doesn't track&lt;br/&gt;individual frees.&lt;br/&gt;Bulk reset later.
-    
-    Note over Stack: Consistent every time!
-</code></pre>
-
-<h3 id="the-memory-management-trade-off">The Memory Management Trade-off</h3>
-
-<p>So in brief …
-The 3 allocator options and their core pros (+)/cons (-).</p>
-
-<pre><code class="language-mermaid">flowchart TB
-    A[Memory Management Options]
-    A --&gt; B[std::allocator&lt;br/&gt;+ reuses frees&lt;br/&gt;- search &amp; coalesce&lt;br/&gt;- fragmentation]
-    A --&gt; C[pmr::monotonic_buffer&lt;br/&gt;+ O1 alloc, zero frag&lt;br/&gt;- reset to reclaim]
-    A --&gt; D[pmr::pool_resource&lt;br/&gt;+ O1 alloc/free in bins&lt;br/&gt;- bins do not merge]
-</code></pre>
-
-<p>And how does the 3 allocators handle 
-“Determinism &amp; Fragmentation”</p>
-<pre><code class="language-mermaid">flowchart TB
-    E[Determinism &amp; Fragmentation]
-    E --&gt; B2[std::allocator:&lt;br/&gt;low determinism,&lt;br/&gt;can fragment]
-    E --&gt; C2[pmr::monotonic:&lt;br/&gt;high determinism,&lt;br/&gt;no fragmentation]
-    E --&gt; D2[pmr::pool:&lt;br/&gt;high determinism,&lt;br/&gt;limited to bins]
-</code></pre>
-
-<p><strong>Why this matters for embedded systems:</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Operation</th>
-      <th>std::allocator</th>
-      <th>pmr::monotonic</th>
-      <th>pmr::pool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Allocate</strong></td>
-      <td>O(n) search + coalesce</td>
-      <td>O(1) pointer bump</td>
-      <td>O(1) pop from bin</td>
-    </tr>
-    <tr>
-      <td><strong>Deallocate</strong></td>
-      <td>O(1) but triggers coalesce</td>
-      <td>No-op</td>
-      <td>O(1) push to bin</td>
-    </tr>
-    <tr>
-      <td><strong>Reuse freed memory</strong></td>
-      <td>✅ Yes</td>
-      <td>❌ No (until reset)</td>
-      <td>✅ Within same bin</td>
-    </tr>
-    <tr>
-      <td><strong>Fragmentation</strong></td>
-      <td>❌ Yes - requires coalesce</td>
-      <td>✅ None</td>
-      <td>⚠️ Limited to bins</td>
-    </tr>
-    <tr>
-      <td><strong>Determinism</strong></td>
-      <td>❌ Poor</td>
-      <td>✅ Excellent</td>
-      <td>✅ Very good</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Example: Why coalescing matters</strong></p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scenario: Allocate 1KB, 2KB, 1KB, then free middle</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>  <span class="c1">// [1KB used]</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">2048</span><span class="p">);</span>  <span class="c1">// [1KB used][2KB used]</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">c</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>  <span class="c1">// [1KB used][2KB used][1KB used]</span>
-
-<span class="n">free</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>                 <span class="c1">// [1KB used][2KB free][1KB used]</span>
-
-<span class="c1">// Now request 3KB - should fit in total free space (2KB + gaps)</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">d</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>  <span class="c1">// ❌ Fails! Not enough contiguous space</span>
-                         <span class="c1">//    (unless allocator coalesces with neighbors)</span>
-
-<span class="c1">// With coalescing (expensive):</span>
-<span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="n">free</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>        <span class="c1">// Allocator scans and merges:</span>
-                         <span class="c1">// [4KB free] ← Now can fit 3KB</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">d</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">3072</span><span class="p">);</span>  <span class="c1">// ✅ Works, but took time to coalesce</span>
-</code></pre></div></div>
-
-<p><strong>PMR approach:</strong></p>
+<p>That means the code that owns the workload can decide whether memory comes from a
+stack buffer, an arena, a pool, or a custom resource tuned for the device.</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">8192</span><span class="p">];</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">mbr</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-
-<span class="c1">// Allocate whatever you need</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="n">mbr</span><span class="p">.</span><span class="n">allocate</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="n">mbr</span><span class="p">.</span><span class="n">allocate</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">c</span> <span class="o">=</span> <span class="n">mbr</span><span class="p">.</span><span class="n">allocate</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-
-<span class="c1">// Deallocate - no-op!</span>
-<span class="n">mbr</span><span class="p">.</span><span class="n">deallocate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>  <span class="c1">// Does nothing</span>
-<span class="n">mbr</span><span class="p">.</span><span class="n">deallocate</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>  <span class="c1">// Does nothing</span>
-
-<span class="c1">// Memory isn't reused...</span>
-<span class="kt">void</span><span class="o">*</span> <span class="n">d</span> <span class="o">=</span> <span class="n">mbr</span><span class="p">.</span><span class="n">allocate</span><span class="p">(</span><span class="mi">3072</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>  <span class="c1">// Uses NEW space after 'c'</span>
-
-<span class="c1">// But you get it all back at once:</span>
-<span class="n">mbr</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>  <span class="c1">// Instant - resets pointer to start</span>
-<span class="c1">// Now all 8192 bytes available again</span>
-
-<span class="c1">// Or let destructor handle it</span>
-<span class="p">}</span>  <span class="c1">// mbr destroyed - automatic cleanup</span>
-</code></pre></div></div>
-
-<p>PMR trades flexibility (can’t reuse freed memory immediately) for speed and determinism (no complex bookkeeping). Good for short-lived, bulk operations.</p>
-
-<h3 id="the-trade-offs">The Trade-offs</h3>
-
-<pre><code class="language-mermaid">flowchart TD
-    A[Choose Memory Resource] --&gt; B{Usage Pattern?}
-    
-    B --&gt;|Short-lived,&lt;br/&gt;bulk operations| C[monotonic_buffer]
-    B --&gt;|Frequent alloc/dealloc,&lt;br/&gt;mixed sizes| D[pool_resource]
-    B --&gt;|Rare allocations| E[new_delete_resource]
-    
-    C --&gt; C1[Fastest&lt;br/&gt;Zero fragmentation&lt;br/&gt;No individual dealloc]
-    D --&gt; D1[Efficient reuse&lt;br/&gt;Good for varied sizes&lt;br/&gt;Setup complexity]
-    E --&gt; E1[Familiar&lt;br/&gt;Non-deterministic&lt;br/&gt;Fragmentation]
-    
-    style C1 fill:#51cf66,stroke:#2f9e44
-    style D1 fill:#74c0fc,stroke:#1971c2
-    style E1 fill:#ffe066,stroke:#f08c00
-</code></pre>
-
-<p><strong>Summary table:</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Aspect</th>
-      <th><code class="language-plaintext highlighter-rouge">std::vector</code></th>
-      <th><code class="language-plaintext highlighter-rouge">pmr::vector</code> (monotonic)</th>
-      <th><code class="language-plaintext highlighter-rouge">pmr::vector</code> (pool)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Raw speed</strong></td>
-      <td>⭐⭐⭐⭐⭐ (16.9µs)</td>
-      <td>⭐⭐ (57.4µs)</td>
-      <td>⭐⭐ (68.9µs)</td>
-    </tr>
-    <tr>
-      <td><strong>Determinism</strong></td>
-      <td>⭐⭐⭐ (CV 10.2%)</td>
-      <td>⭐⭐ (CV 43.2%)</td>
-      <td>⭐⭐⭐⭐⭐ (CV 5.6%)</td>
-    </tr>
-    <tr>
-      <td><strong>Memory efficiency</strong></td>
-      <td>⚠️ Heap overhead</td>
-      <td>✅ No heap</td>
-      <td>✅ No heap</td>
-    </tr>
-    <tr>
-      <td><strong>Flexibility</strong></td>
-      <td>✅ Full</td>
-      <td>⚠️ No individual free</td>
-      <td>✅ Can free</td>
-    </tr>
-    <tr>
-      <td><strong>Setup complexity</strong></td>
-      <td>✅ Zero</td>
-      <td>⚠️ Buffer sizing</td>
-      <td>⚠️ Pool tuning</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Verdict</strong>: For simple vector operations, std::vector is faster. PMR pool offers the best determinism at the cost of 4x slower speed. Choose PMR when you need predictable timing over raw performance.</p>
-
-<h3 id="real-world-impact-example">Real-World Impact Example</h3>
-
-<p>Imagine a sensor system that processes 1000 readings every 10ms:</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// With std::vector - fast but variable</span>
-<span class="kt">void</span> <span class="nf">process_readings</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Reading</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">read_sensor</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="n">analyze</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">// Mean: 16.90µs, but CV=10.23%</span>
-<span class="c1">// Worst case can spike 2x (33.60µs)</span>
-<span class="c1">// For hard real-time: Variance is the problem ❌</span>
-</code></pre></div></div>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// With pmr::pool - slower but predictable</span>
-<span class="kt">void</span> <span class="nf">process_readings</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">unsynchronized_pool_resource</span> <span class="n">pool</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Reading</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">{</span><span class="o">&amp;</span><span class="n">pool</span><span class="p">};</span>
-    
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">read_sensor</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="n">analyze</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">// Mean: 68.86µs, but CV=5.62% </span>
-<span class="c1">// Worst case bounded (91.70µs)</span>
-<span class="c1">// For hard real-time: Predictability wins ✅</span>
-</code></pre></div></div>
-
-<p>PMR is slower (4x in this case), but offers 2x better determinism. For real-time systems, you sacrifice speed for predictability. Choose based on your constraints.</p>
-
-<h3 id="how-to-reproduce-these-results">How to Reproduce These Results</h3>
-
-<p>All benchmarks are <a href="https://github.com/saptarshi-max/pmr-benchmark">on GitHub</a>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/saptarshi-max/pmr-benchmark
-<span class="nb">cd </span>pmr-benchmark
-<span class="nb">mkdir </span>build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build
-cmake .. <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release
-make <span class="nt">-j</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span>
-./benchmark_vector  <span class="c"># See results</span>
-</code></pre></div></div>
-
-<p>The repository includes:</p>
-<ul>
-  <li>Complete source code</li>
-  <li>Automated benchmark scripts</li>
-  <li>Report generation (markdown + graphs)</li>
-  <li>Methodology documentation</li>
-</ul>
-
-<p>Your results may vary based on CPU/compiler, but the <strong>relative improvements</strong> should be similar.</p>
-
-<h2 id="best-practices--recommendations">Best Practices &amp; Recommendations</h2>
-
-<h3 id="1-choose-the-right-memory-resource">1. Choose the Right Memory Resource</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// For short-lived, bulk operations (request handling)</span>
-<span class="kt">void</span> <span class="nf">handle_request</span><span class="p">(</span><span class="k">const</span> <span class="n">Request</span><span class="o">&amp;</span> <span class="n">req</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">mbr</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-    
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&gt;</span> <span class="n">responses</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span> <span class="n">temp</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-    
-    <span class="n">process</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">responses</span><span class="p">,</span> <span class="n">temp</span><span class="p">);</span>
-    
-<span class="p">}</span>  <span class="c1">// Automatic cleanup, no fragmentation</span>
-
-<span class="c1">// For long-lived, dynamic containers (device registry)</span>
-<span class="k">class</span> <span class="nc">DeviceManager</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">unsynchronized_pool_resource</span> <span class="n">pool_</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">DeviceId</span><span class="p">,</span> <span class="n">Device</span><span class="o">&gt;</span> <span class="n">devices_</span><span class="p">{</span><span class="o">&amp;</span><span class="n">pool_</span><span class="p">};</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="nf">add_device</span><span class="p">(</span><span class="n">DeviceId</span> <span class="n">id</span><span class="p">,</span> <span class="n">Device</span> <span class="n">dev</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">devices_</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">dev</span><span class="p">));</span>  <span class="c1">// Efficient pooling</span>
-    <span class="p">}</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">arena</span><span class="p">{</span>
+    <span class="n">buffer</span><span class="p">,</span>
+    <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">null_memory_resource</span><span class="p">()</span>
 <span class="p">};</span>
 
-<span class="c1">// For extremely constrained systems (safety-critical)</span>
-<span class="k">alignas</span><span class="p">(</span><span class="n">Device</span><span class="p">)</span> <span class="k">static</span> <span class="kt">char</span> <span class="n">device_storage</span><span class="p">[</span><span class="n">MAX_DEVICES</span><span class="p">][</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Device</span><span class="p">)];</span>
-<span class="c1">// Use indices instead of containers</span>
-</code></pre></div></div>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SensorReading</span><span class="o">&gt;</span> <span class="n">readings</span><span class="p">{</span><span class="o">&amp;</span><span class="n">arena</span><span class="p">};</span>
+<span class="n">readings</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">64</span><span class="p">);</span>
 
-<h3 id="2-stack-buffer-sizing-strategy">2. Stack Buffer Sizing Strategy</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Measure actual usage first</span>
-<span class="kt">void</span> <span class="nf">tune_buffer_size</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">memory_resource</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">peak</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kt">size_t</span> <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        
-        <span class="kt">void</span><span class="o">*</span> <span class="n">do_allocate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-            <span class="n">current</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
-            <span class="n">peak</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">peak</span><span class="p">,</span> <span class="n">current</span><span class="p">);</span>
-            <span class="k">return</span> <span class="o">::</span><span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-        <span class="p">}</span>
-        
-        <span class="kt">void</span> <span class="n">do_deallocate</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-            <span class="n">current</span> <span class="o">-=</span> <span class="n">n</span><span class="p">;</span>
-            <span class="o">::</span><span class="k">operator</span> <span class="k">delete</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-        <span class="p">}</span>
-        
-        <span class="kt">bool</span> <span class="n">do_is_equal</span><span class="p">(</span><span class="k">const</span> <span class="n">memory_resource</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="k">this</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">o</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="n">tracker</span><span class="p">;</span>
-    
-    <span class="c1">// Run your typical workload</span>
-    <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">{</span><span class="o">&amp;</span><span class="n">tracker</span><span class="p">};</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">{</span><span class="o">&amp;</span><span class="n">tracker</span><span class="p">};</span>
-        <span class="c1">// ... typical operations ...</span>
-    <span class="p">}</span>
-    
-    <span class="n">printf</span><span class="p">(</span><span class="s">"Peak memory: %zu bytes</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">tracker</span><span class="p">.</span><span class="n">peak</span><span class="p">);</span>
-    <span class="c1">// Now allocate buffer at peak + 20% margin</span>
+<span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">sample</span> <span class="o">:</span> <span class="n">samples</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">readings</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sample</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><strong>Rules of thumb:</strong></p>
-<ul>
-  <li><strong>Monotonic buffer</strong>: Workload peak + 20-30% margin</li>
-  <li><strong>Pool resource</strong>: Expected concurrent allocations × avg size × 1.5</li>
-  <li><strong>Always</strong> add overflow handling to upstream allocator</li>
-</ul>
-
-<h3 id="3-error-handling">3. Error Handling</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// PMR allocators can return nullptr!</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">{</span><span class="o">&amp;</span><span class="n">limited_resource</span><span class="p">};</span>
-
-<span class="k">try</span> <span class="p">{</span>
-    <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">bad_alloc</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Buffer exhausted</span>
-    <span class="n">log_error</span><span class="p">(</span><span class="s">"Memory exhausted"</span><span class="p">);</span>
-    <span class="c1">// Graceful degradation</span>
-<span class="p">}</span>
-
-<span class="c1">// Or check capacity proactively</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Handle before allocation fails</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="4-combining-resources">4. Combining Resources</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Hierarchy: fast path → slow path → error</span>
-<span class="kt">char</span> <span class="n">fast_buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">fast</span><span class="p">{</span><span class="n">fast_buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fast_buffer</span><span class="p">)};</span>
-
-<span class="kt">char</span> <span class="n">slow_buffer</span><span class="p">[</span><span class="mi">16384</span><span class="p">];</span>
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">slow</span><span class="p">{</span><span class="n">slow_buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">slow_buffer</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">fast</span><span class="p">};</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Packet</span><span class="o">&gt;</span> <span class="n">packets</span><span class="p">{</span><span class="o">&amp;</span><span class="n">slow</span><span class="p">};</span>
-<span class="c1">// Uses fast buffer first, overflows to slow, then fails</span>
-</code></pre></div></div>
-
-<h3 id="5-move-from-std-to-pmr-gradually">5. Move from std to pmr Gradually</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Phase 1: Identify hot paths with profiling</span>
-<span class="c1">// Phase 2: Replace one container at a time</span>
-<span class="c1">// Phase 3: Measure improvement</span>
-
-<span class="c1">// Before</span>
-<span class="kt">void</span> <span class="nf">process_messages</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;&amp;</span> <span class="n">messages</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="n">msg</span> <span class="o">:</span> <span class="n">messages</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>  <span class="c1">// Hidden allocation</span>
-        <span class="n">handle</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// After (step 1: function-local)</span>
-<span class="kt">void</span> <span class="nf">process_messages</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;&amp;</span> <span class="n">messages</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">mbr</span><span class="p">{</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)};</span>
-    
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="n">msg</span> <span class="o">:</span> <span class="n">messages</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span> <span class="n">payload</span><span class="p">{</span><span class="o">&amp;</span><span class="n">mbr</span><span class="p">};</span>
-        <span class="n">decode</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>  <span class="c1">// Reuse buffer</span>
-        <span class="n">handle</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// After (step 2: propagate PMR through API)</span>
-<span class="kt">void</span> <span class="nf">process_messages</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;&amp;</span> <span class="n">messages</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Caller controls memory resource</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="6-testing-strategy">6. Testing Strategy</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create memory pressure in tests</span>
-<span class="k">class</span> <span class="nc">LimitedResource</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">memory_resource</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">limit_</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">used_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    
-<span class="nl">protected:</span>
-    <span class="kt">void</span><span class="o">*</span> <span class="n">do_allocate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">a</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">used_</span> <span class="o">+</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">limit_</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">bad_alloc</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="n">used_</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">upstream_</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-
-<span class="n">TEST</span><span class="p">(</span><span class="n">SensorProcessor</span><span class="p">,</span> <span class="n">HandlesMemoryExhaustion</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">LimitedResource</span> <span class="n">limited</span><span class="p">{</span><span class="mi">1024</span><span class="p">};</span>  <span class="c1">// Only 1KB available</span>
-    
-    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span> <span class="n">samples</span><span class="p">{</span><span class="o">&amp;</span><span class="n">limited</span><span class="p">};</span>
-    
-    <span class="c1">// Verify graceful degradation</span>
-    <span class="n">EXPECT_NO_CRASH</span><span class="p">(</span><span class="n">fill_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="mi">10000</span><span class="p">));</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="surprising-findings-from-real-benchmarks">Surprising Findings from Real Benchmarks</h2>
-
-<p>After running comprehensive benchmarks, the results were different from expectations:</p>
-
-<h3 id="what-i-expected-vs-what-i-found">What I Expected vs. What I Found</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Expectation</th>
-      <th>Reality</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>PMR would be faster</td>
-      <td><strong>PMR is 3-4x slower for simple operations</strong></td>
-    </tr>
-    <tr>
-      <td>PMR would reduce variance significantly</td>
-      <td><strong>Mixed results</strong>: Great for strings (3x better), worse for vectors</td>
-    </tr>
-    <tr>
-      <td>Pool allocator would be fastest</td>
-      <td><strong>std::allocator is fastest</strong> for basic operations</td>
-    </tr>
-    <tr>
-      <td>PMR always wins on determinism</td>
-      <td><strong>Not always</strong>: Map operations showed minimal improvement</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="the-real-trade-off">The Real Trade-off</h3>
-
-<p><strong>PMR is NOT a performance win in all cases.</strong> The actual benefit is:</p>
-
-<ul>
-  <li><strong>When you need</strong>: Predictable timing, no heap usage, bounded worst-case</li>
-  <li><strong>What you sacrifice</strong>: 3-4x slower execution for basic operations</li>
-  <li><strong>Best use case</strong>: Real-time systems where 68µs±5.6% beats 16µs±10%</li>
-</ul>
-
-<h3 id="benchmark-highlights">Benchmark Highlights</h3>
-
-<p><strong>Vector operations (1000 push_back):</strong></p>
-<ul>
-  <li>std: 16.90µs (fast, 10% variance)</li>
-  <li>pmr_pool: 68.86µs (slow, 5.6% variance) ← <strong>Best determinism</strong></li>
-  <li><strong>Winner</strong>: Depends on your constraint (speed vs. predictability)</li>
-</ul>
-
-<p><strong>String concatenation:</strong></p>
-<ul>
-  <li>std: 307.77µs (CV: 29.52%)</li>
-  <li>pmr: 360.17µs (CV: 9.40%) ← <strong>3x more consistent</strong></li>
-  <li><strong>Winner</strong>: PMR if you need determinism</li>
-</ul>
-
-<p><img src="/cover_images/posts/pmr_plots/string_concat_percentiles.webp" alt="String Concatenation Percentiles" />
-<em>Figure: String concatenation P95/P99 - PMR shows tighter distribution</em></p>
-
-<p><strong>Sensor data collection (realistic embedded workload):</strong></p>
-<ul>
-  <li>std: 2197.62µs (CV: 14.15%)</li>
-  <li>pmr: 2655.63µs (CV: 12.72%) ← <strong>Slight improvement</strong></li>
-  <li><strong>Winner</strong>: Depends on whether 20% speed loss is acceptable for 10% better determinism</li>
-</ul>
-
-<p><img src="/cover_images/posts/pmr_plots/sensor_collection_comparison.webp" alt="Sensor Collection Benchmark" />
-<em>Figure 8: Sensor data collection - PMR trades 20% speed for slightly better consistency</em></p>
-
-<p><strong>Message queue (mixed workload):</strong></p>
-<ul>
-  <li>std: 171.90µs (CV: 8.93%)</li>
-  <li>pmr: 272.57µs (CV: 28.10%) ← <strong>Worse!</strong></li>
-  <li><strong>Winner</strong>: std (better on both metrics)</li>
-</ul>
-
-<p><img src="/cover_images/posts/pmr_plots/message_queue_comparison.webp" alt="Message Queue Performance" />
-<em>Figure 7: Message queue benchmark - std::allocator wins on both speed AND consistency</em></p>
-
-<p>PMR isn’t universally better. It trades raw speed for predictability. Profile your specific workload before switching.</p>
-
-<h2 id="conclusions">Conclusions</h2>
-
-<h3 id="key-takeaways">Key Takeaways</h3>
-
-<p>✅ <strong>PMR offers predictability, not speed</strong>: Expect 3-4x slower but more consistent timing<br />
-✅ <strong>Use PMR for determinism</strong>: When low variance (68µs±5%) matters more than speed (16µs±10%) in real-time systems<br />
-✅ <strong>std::allocator is still fast</strong>: For non-critical paths, standard containers perform well<br />
-✅ <strong>Not a silver bullet</strong>: Profile first, PMR helps specific cases (strings, bounded allocations)</p>
-
-<h3 id="when-to-use-pmr">When to Use PMR</h3>
-
-<p><strong>✅ Use PMR when:</strong></p>
-<ul>
-  <li>Hard real-time systems where consistent timing matters more than average speed (predictability over performance)</li>
-  <li>Embedded systems where heap allocation must be avoided</li>
-  <li>Safety-critical software requiring deterministic behavior</li>
-  <li>Short-lived operations with known memory bounds</li>
-</ul>
-
-<p><strong>✅ Use std::allocator when:</strong></p>
-<ul>
-  <li>Raw performance is the priority (3-4x faster for basic ops)</li>
-  <li>Workload has low natural variance (like our message queue example)</li>
-  <li>Long-lived containers with unpredictable growth</li>
-  <li>Development speed matters more than optimization</li>
-</ul>
-
-<p><strong>⚠️ Benchmark first:</strong></p>
-<ul>
-  <li>Results vary by workload (vector vs. string vs. map)</li>
-  <li>Your hardware/compiler may show different ratios</li>
-  <li>Profile to see if determinism improvement justifies speed loss</li>
-</ul>
-
-<h3 id="the-mental-model-shift">The Mental Model Shift</h3>
-
-<pre><code class="language-mermaid">graph LR
-    A[Traditional:&lt;br/&gt;'Container owns memory'] --&gt; B[PMR:&lt;br/&gt;'Container borrows memory']
-    
-    B --&gt; C[You control:&lt;br/&gt;• Where&lt;br/&gt;• When&lt;br/&gt;• How much]
-    
-    C --&gt; D[Better:&lt;br/&gt;• Determinism&lt;br/&gt;• Performance&lt;br/&gt;• Control]
-    
-    style A fill:#ffe066,stroke:#f08c00
-    style B fill:#74c0fc,stroke:#1971c2
-    style D fill:#51cf66,stroke:#2f9e44
-</code></pre>
-
-<p>PMR isn’t about replacing <code class="language-plaintext highlighter-rouge">std</code> containers—it’s about giving you control when you need it. In embedded systems, that control often means the difference between “works most of the time” and “proven reliable.”</p>
-
-<h3 id="quick-decision-matrix">Quick Decision Matrix</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Your Situation</th>
-      <th>Recommendation</th>
-      <th>Rationale</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Need minimum latency variance</td>
-      <td><code class="language-plaintext highlighter-rouge">pmr::pool_resource</code></td>
-      <td>CV as low as 5.6%</td>
-    </tr>
-    <tr>
-      <td>Need maximum raw speed</td>
-      <td><code class="language-plaintext highlighter-rouge">std::allocator</code></td>
-      <td>3-4x faster for vectors</td>
-    </tr>
-    <tr>
-      <td>String-heavy workload</td>
-      <td><code class="language-plaintext highlighter-rouge">pmr::string</code></td>
-      <td>3x better determinism</td>
-    </tr>
-    <tr>
-      <td>Mixed container operations</td>
-      <td>Profile first</td>
-      <td>Results vary (std won our message queue test)</td>
-    </tr>
-    <tr>
-      <td>Embedded, hard real-time</td>
-      <td><code class="language-plaintext highlighter-rouge">pmr::monotonic_buffer</code></td>
-      <td>Zero heap, bounded timing</td>
-    </tr>
-    <tr>
-      <td>General-purpose application</td>
-      <td>Stick with <code class="language-plaintext highlighter-rouge">std::</code></td>
-      <td>Faster and simpler</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<h2 id="references">References</h2>
+<p>Two details matter here:</p>
 
 <ol>
-  <li><a href="https://en.cppreference.com/w/cpp/memory/memory_resource">C++17 Standard: Memory Resources</a></li>
-  <li><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0220r1.html">P0220R1: Adopt Library Fundamentals V1 TS Components for C++17</a></li>
-  <li><a href="https://www.youtube.com/watch?v=v3dz-AKOVL8">Pablo Halpern: “Allocators@C++Now 2017”</a></li>
-  <li><a href="https://www.stroustrup.com/tour2.html">Bjarne Stroustrup: “A Tour of C++” (2nd Edition), Section 13.6</a></li>
-  <li><a href="https://misra.org.uk/">MISRA C++:2023 Guidelines</a> - Rule 18-4-1: Dynamic heap memory allocation shall not be used</li>
-  <li><a href="http://www.stroustrup.com/JSF-AV-rules.pdf">JSF AV C++ Coding Standards</a> - AV Rule 206: Dynamic memory allocation shall not be used</li>
-  <li><a href="https://embeddedartistry.com/fieldatlas/">Embedded Artistry: “Practical Guide to Bare Metal C++”</a></li>
-  <li><a href="https://developer.arm.com/documentation/ddi0489/latest/">ARM Cortex-M7 Technical Reference Manual</a> - Memory system performance characteristics</li>
-  <li>A. Mahmutbegović, C++ in Embedded Systems: A practical transition from C to modern C++, Packt Publishing, 2024.</li>
+  <li><code class="language-plaintext highlighter-rouge">reserve()</code> is still important when you already know the likely size.</li>
+  <li><code class="language-plaintext highlighter-rouge">std::pmr::null_memory_resource()</code> is a good guardrail when you want overflow
+to fail loudly instead of quietly falling back to the heap.</li>
 </ol>
+
+<h2 id="where-pmr-fits-best">Where PMR fits best</h2>
+
+<p>PMR is strongest when the workload is local, bounded, and repeatable.</p>
+
+<h3 id="1-request-scoped-processing">1. Request-scoped processing</h3>
+
+<p>Parsing a packet, formatting a response, or building a temporary AST are all good
+examples.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">handle_packet</span><span class="p">(</span><span class="k">const</span> <span class="n">Packet</span><span class="o">&amp;</span> <span class="n">packet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">scratch</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">arena</span><span class="p">{</span>
+        <span class="n">scratch</span><span class="p">,</span>
+        <span class="k">sizeof</span><span class="p">(</span><span class="n">scratch</span><span class="p">),</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">null_memory_resource</span><span class="p">()</span>
+    <span class="p">};</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">string</span> <span class="n">payload</span><span class="p">{</span><span class="o">&amp;</span><span class="n">arena</span><span class="p">};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Field</span><span class="o">&gt;</span> <span class="n">fields</span><span class="p">{</span><span class="o">&amp;</span><span class="n">arena</span><span class="p">};</span>
+
+    <span class="n">parse</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">fields</span><span class="p">);</span>
+    <span class="n">process</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">fields</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The lifetime matches the scope. You get predictable cleanup and no per-object free
+logic.</p>
+
+<h3 id="2-bounded-buffers-in-real-time-code">2. Bounded buffers in real-time code</h3>
+
+<p>When a task has a known upper bound, PMR lets you express that bound directly in
+code.</p>
+
+<p>That is much more useful than “hope the heap behaves today.”</p>
+
+<h3 id="3-systems-that-need-runtime-allocator-choice">3. Systems that need runtime allocator choice</h3>
+
+<p>If the same code path sometimes uses a DMA buffer, sometimes shared memory, and
+sometimes an arena in RAM, PMR gives you one interface for all of it.</p>
+
+<p>That is especially handy in embedded frameworks where memory policy belongs to the
+platform layer, not each individual container type.</p>
+
+<h2 id="what-pmr-does-not-solve">What PMR does not solve</h2>
+
+<p>PMR is not a universal upgrade.</p>
+
+<p>It is not the right answer if:</p>
+
+<ul>
+  <li>You can fully size the data structure at compile time.</li>
+  <li>You need the absolute lowest overhead and the allocator is known ahead of time.</li>
+  <li>You need frequent individual frees across a long-lived structure.</li>
+  <li>You want a general-purpose container replacement that improves every workload.</li>
+</ul>
+
+<p>If the allocator is known at compile time, a custom allocator template is often a
+better fit than PMR.</p>
+
+<p>If the data structure is fixed-size, a static buffer or <code class="language-plaintext highlighter-rouge">boost::static_vector</code>
+style approach can be simpler and faster.</p>
+
+<p>If the workload is long-lived and fragmented, a pool resource or a purpose-built
+allocator may be better than a monotonic arena.</p>
+
+<h2 id="the-embedded-mental-model">The embedded mental model</h2>
+
+<p>The biggest benefit of PMR is not raw speed. It is that memory policy becomes a
+first-class design decision.</p>
+
+<p>That gives you three things embedded teams care about:</p>
+
+<ul>
+  <li>Predictable failure mode when memory is exhausted.</li>
+  <li>Cleaner separation between algorithm and memory source.</li>
+  <li>Easier tuning per subsystem without rewriting container-heavy code.</li>
+</ul>
+
+<pre><code class="language-mermaid">flowchart TB
+    A[Subsystem] --&gt; B[Container logic]
+    A --&gt; C[Memory policy]
+    C --&gt; D[Stack buffer]
+    C --&gt; E[Arena]
+    C --&gt; F[Pool]
+    C --&gt; G[DMA / shared memory]
+
+    style A fill:#74c0fc,stroke:#1971c2
+    style C fill:#ffe066,stroke:#f08c00
+</code></pre>
+
+<p>That separation is the real value proposition. PMR makes it possible to say:</p>
+
+<ul>
+  <li>this path may use memory, but only from here,</li>
+  <li>this path must never hit the general heap,</li>
+  <li>this path can fail early if the budget is wrong.</li>
+</ul>
+
+<h2 id="a-practical-buffer-sizing-strategy">A practical buffer sizing strategy</h2>
+
+<p>The most common mistake with PMR is not PMR itself. It is undersizing the buffer.</p>
+
+<p>For monotonic resources, the buffer needs room for the working set plus growth.
+If you let a container grow and the arena is too small, the upstream resource will
+be used unless you deliberately block that fallback.</p>
+
+<p>That means the safe workflow is:</p>
+
+<ol>
+  <li>Measure the peak memory use of the workload.</li>
+  <li>Add headroom for growth and allocator metadata.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">null_memory_resource()</code> in tests to catch bad sizing early.</li>
+  <li>Only allow fallback if the product really wants it.</li>
+</ol>
+
+<p>Rule of thumb:</p>
+
+<ul>
+  <li>Monotonic buffers: peak workload usage + margin.</li>
+  <li>Pool resources: expected concurrent allocations and size classes.</li>
+  <li>Safety-critical code: fail fast on exhaustion, then handle it explicitly.</li>
+</ul>
+
+<h2 id="how-to-think-about-performance">How to think about performance</h2>
+
+<p>If you benchmark PMR incorrectly, you can make it look bad even when the design
+is sound.</p>
+
+<p>The common traps are:</p>
+
+<ul>
+  <li>benchmark code that accidentally falls back to the heap,</li>
+  <li>omitted <code class="language-plaintext highlighter-rouge">reserve()</code> in a workload that already knows the size,</li>
+  <li>debug builds or unoptimized binaries,</li>
+  <li>comparing the wrong thing, such as “PMR” versus “std” instead of allocator
+policy versus allocator policy.</li>
+</ul>
+
+<p>The useful conclusion is not “PMR is always faster” or “PMR is always slower.”
+It is this:</p>
+
+<ul>
+  <li>PMR makes memory behavior explicit.</li>
+  <li>Explicit memory behavior is valuable in embedded systems.</li>
+  <li>Whether that is worth the overhead depends on the workload.</li>
+</ul>
+
+<h2 id="the-failure-mode-that-matters-most">The failure mode that matters most</h2>
+
+<p>In embedded software, the worst outcome is often not a crash. It is a silent
+fallback to a slower or less predictable path that still appears to work.</p>
+
+<p>With PMR, that can happen if a monotonic resource runs out of space and is allowed
+to fall back to an upstream allocator. Your code may still succeed, but now you
+are timing the wrong thing.</p>
+
+<p>That is why the fail-fast pattern matters:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">8192</span><span class="p">];</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">monotonic_buffer_resource</span> <span class="n">arena</span><span class="p">{</span>
+  <span class="n">buffer</span><span class="p">,</span>
+  <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">pmr</span><span class="o">::</span><span class="n">null_memory_resource</span><span class="p">()</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>If the buffer is too small, the failure happens where you can see it, instead of
+quietly changing the timing model.</p>
+
+<h2 id="a-stricter-option-remove-the-heap-from-the-path-entirely">A stricter option: remove the heap from the path entirely</h2>
+
+<p>Some embedded teams go further and treat heap usage as a design error in critical
+paths.</p>
+
+<p>That can mean:</p>
+
+<ul>
+  <li>banning <code class="language-plaintext highlighter-rouge">new</code>/<code class="language-plaintext highlighter-rouge">delete</code> in selected modules,</li>
+  <li>reviewing allocator usage at the API boundary,</li>
+  <li>and forcing all dynamic storage through an approved resource or static policy.</li>
+</ul>
+
+<p>PMR fits well into that style because it makes memory sourcing explicit. You can
+route requests to a bounded arena, a pool, or a device-specific resource instead of
+letting each container decide implicitly.</p>
+
+<p>The important point is not that PMR eliminates the heap forever. It is that PMR
+lets you decide where heap-like behavior is allowed.</p>
+
+<h2 id="pmr-versus-other-embedded-options">PMR versus other embedded options</h2>
+
+<p>PMR is only one answer. In many codebases the real choice is between three
+approaches:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Approach</th>
+      <th>Strength</th>
+      <th>Trade-off</th>
+      <th>Best fit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">std::vector</code> / <code class="language-plaintext highlighter-rouge">std::string</code></td>
+      <td>Familiar, fast, minimal ceremony</td>
+      <td>Memory policy is implicit</td>
+      <td>General-purpose code</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">std::pmr</code> containers</td>
+      <td>Runtime-selected bounded resources</td>
+      <td>Slight extra abstraction and tuning</td>
+      <td>Embedded subsystems with known memory budgets</td>
+    </tr>
+    <tr>
+      <td>Fixed-capacity containers / ETL-style containers</td>
+      <td>Fully bounded, no heap dependency</td>
+      <td>Less flexibility, fixed maximum size</td>
+      <td>Hard real-time and very constrained systems</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you already know the maximum size at compile time, a fixed-capacity container
+can be the cleanest answer. If you need some flexibility but still want to control
+where memory comes from, PMR is the middle ground.</p>
+
+<h2 id="a-simple-decision-tree">A simple decision tree</h2>
+
+<pre><code class="language-mermaid">flowchart TD
+  A[Need container-like storage?] --&gt; B{Is the size fixed at compile time?}
+  B --&gt;|Yes| C[Use static or fixed-capacity containers]
+  B --&gt;|No| D{Need runtime control over memory source?}
+  D --&gt;|No| E[Use std containers or a custom allocator]
+  D --&gt;|Yes| F{Need bounded / fail-fast allocation?}
+  F --&gt;|Yes| G[Use std::pmr with null upstream or bounded arena]
+  F --&gt;|No| H[Use PMR with an appropriate upstream resource]
+</code></pre>
+
+<p>This is the simplest way to think about the design space:</p>
+
+<ul>
+  <li>fixed size: static wins,</li>
+  <li>known allocator type: custom allocator wins,</li>
+  <li>runtime-selected bounded memory: PMR wins.</li>
+</ul>
+
+<h2 id="why-i-used-a-custom-benchmark-harness-instead-of-google-benchmark">Why I used a custom benchmark harness instead of Google Benchmark</h2>
+
+<p>While Google Benchmark is excellent for measuring average throughput, embedded and real-time systems often prioritize tail latency (p95/p99), jitter, and predictable failure modes—metrics that aren’t its primary focus.
+For this analysis, I needed a harness that:</p>
+
+<p>Explicitly tracks tail behavior (p95/p99 latency, variance across runs).
+Simulates memory exhaustion (e.g., using null_memory_resource() to test bounded buffers).
+Generates plots for visualizing trade-offs between speed, consistency, and memory policy.
+This approach aligns with the needs of embedded engineers, where worst-case behavior matters more than average performance.</p>
+
+<h2 id="the-benchmark-plots-and-what-they-indicate">The Benchmark plots and what they indicate</h2>
+
+<p><img src="/cover_images/posts/pmr_plots-2/speedup_summary.png" alt="Overall speedup summary" />
+<em>What this indicates: PMR is workload-dependent. In some paths it improves both speed and jitter, in others it mainly improves predictability, and in some it can lose on both metrics.</em></p>
+
+<h3 id="vector-workload">Vector workload</h3>
+
+<p><img src="/cover_images/posts/pmr_plots-2/vector_push_back_comparison.png" alt="Vector push_back comparison" />
+<em>What this indicates: with correctly sized PMR resources, monotonic PMR can be very competitive and often faster for this bounded push-heavy pattern.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/vector_push_back_percentiles.png" alt="Vector push_back percentiles" />
+<em>What this indicates: percentile spread shows tail behavior. The tighter PMR spread here reflects fewer outlier spikes when memory is pre-bounded.</em></p>
+
+<h3 id="string-workload">String workload</h3>
+
+<p><img src="/cover_images/posts/pmr_plots-2/string_concat_comparison.png" alt="String concatenation comparison" />
+<em>What this indicates: string-heavy code can benefit from PMR by reducing allocation churn in repeated temporary construction.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/string_concat_percentiles.png" alt="String concatenation percentiles" />
+<em>What this indicates: PMR often improves p95 and p99 consistency for concat paths, which matters more than mean in deadline-driven systems.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/string_sso_comparison.png" alt="String SSO comparison" />
+<em>What this indicates: for short-string dominated paths, PMR and std can be close in mean time, so jitter and memory-policy needs become the deciding factor.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/string_sso_percentiles.png" alt="String SSO percentiles" />
+<em>What this indicates: even when averages are similar, percentile tails reveal which allocator path is more stable under repeated short-lived string churn.</em></p>
+
+<h3 id="map-workload">Map workload</h3>
+
+<p><img src="/cover_images/posts/pmr_plots-2/map_int_key_comparison.png" alt="Map int-key comparison" />
+<em>What this indicates: PMR can help ordered-map int-key inserts, but gains depend on node allocation pattern and resource choice.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/map_int_key_percentiles.png" alt="Map int-key percentiles" />
+<em>What this indicates: map tail latency can diverge from average behavior, so p95/p99 should drive allocator decisions for registry-like structures.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/map_string_key_comparison.png" alt="Map string-key comparison" />
+<em>What this indicates: string-key maps are mixed; allocator policy and string storage behavior dominate results, so measure this path specifically in your firmware.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/map_string_key_percentiles.png" alt="Map string-key percentiles" />
+<em>What this indicates: string-heavy node allocations can amplify outliers, and percentile plots show whether PMR is helping or hurting worst-case latency.</em></p>
+
+<h3 id="mixed-realistic-workload">Mixed realistic workload</h3>
+
+<p><img src="/cover_images/posts/pmr_plots-2/sensor_collection_comparison.png" alt="Sensor collection comparison" />
+<em>What this indicates: in realistic container mixes, PMR can reduce both runtime and jitter when working sets are bounded and reused per task/scope.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/sensor_collection_percentiles.png" alt="Sensor collection percentiles" />
+<em>What this indicates: this view highlights deadline risk directly. Smaller p95 to p99 gaps mean fewer long-tail surprises in data-collection loops.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/message_queue_comparison.png" alt="Message queue comparison" />
+<em>What this indicates: this is the profile to watch for embedded messaging paths. PMR can lower long-tail latency by avoiding general heap behavior during bursts.</em></p>
+
+<p><img src="/cover_images/posts/pmr_plots-2/message_queue_percentiles.png" alt="Message queue percentiles" />
+<em>What this indicates: queue workloads are often bursty; the percentile chart confirms whether PMR is tightening tail latency where it matters operationally.</em></p>
+
+<h2 id="when-i-would-recommend-stdpmr">When I would recommend STD::PMR</h2>
+
+<p>Use PMR when you need one or more of the following:</p>
+
+<ul>
+  <li>A bounded, non-fragmenting allocation model for a subsystem.</li>
+  <li>Runtime selection of memory source.</li>
+  <li>Cleaner APIs for request-scoped or task-scoped work.</li>
+  <li>Standard containers without taking a dependency on the global heap.</li>
+  <li>Easier testing of memory exhaustion and fallback paths.</li>
+</ul>
+
+<h2 id="when-i-would-not">When I would not</h2>
+
+<p>Do not reach for PMR just because it sounds modern.</p>
+
+<p>If your use case is fixed-size, a static container or custom structure is often
+more direct.</p>
+
+<p>If the allocator is part of the type and never changes, a custom allocator is
+usually cheaper.</p>
+
+<p>If you need a high-throughput general-purpose container, the default STL path may
+still be the best choice.</p>
+
+<h2 id="bottom-line">Bottom line</h2>
+
+<p>PMR is not a performance gimmick.</p>
+
+<p>It is a way to bring memory policy under control in code that still wants the
+expressiveness of standard containers.</p>
+
+<p>For embedded engineers, that matters because the hard part is often not writing
+the algorithm. It is making sure the algorithm runs within a fixed memory and
+latency envelope every single time.</p>
+
+<p>If you already know the exact allocator at compile time, use a custom allocator.
+If the data is fixed-size, use static storage.
+If you need runtime control over bounded memory, PMR is the middle ground worth
+considering.</p>
+
+<h2 id="references-and-code">References and code</h2>
+
+<p>The benchmark code and plots that informed this post are in the companion repo:
+<a href="https://github.com/saptarshi-max/pmr-benchmark">pmr-benchmark</a></p>
 
   
 </article>
@@ -2081,7 +1265,7 @@ make <span class="nt">-j</span><span class="si">$(</span><span class="nb">nproc<
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/industry/2025-12-20-automobile-cybersecurity/" class="flip-title"><span>From Regulation to Implementation- Understanding Vehicle Cybersecurity legal Compliance & How Vehicle Cybersecurity Actually Gets Done</span></a>  <time class="faded fine" datetime="2025-12-20T00:00:00+00:00">20 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/pydev/2025-12-16-pytests-good-practice/" class="flip-title"><span>Pytest for Embedded Developers- Reliable, Maintainable Test Design</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2026-02-16-portable-C/" class="flip-title"><span>Portable and Secure C- A Practical Guide to MISRA C & CERT C</span></a>  <time class="faded fine" datetime="2026-02-16T00:00:00+00:00">16 Feb 2026</time></li>      </ul></aside>
 
   
 
