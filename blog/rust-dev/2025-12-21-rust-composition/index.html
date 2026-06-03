@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/rust-safety.webp" />
 <meta property="twitter:title" content="7 C++ Inheritance pain-points Rust Fixes Forever" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-31T11:17:56+00:00","datePublished":"2025-12-21T00:00:00+00:00","description":"Seven ways C++ inheritance can create issues, and how Rust’s composition model fixes them all. From diamond problems to fragile base classes, see why composition wins in the long run.","headline":"7 C++ Inheritance pain-points Rust Fixes Forever","image":"/cover_images/posts/rust-safety.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/rust-dev/2025-12-21-rust-composition/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/rust-dev/2025-12-21-rust-composition/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-03T09:06:27+00:00","datePublished":"2025-12-21T00:00:00+00:00","description":"Seven ways C++ inheritance can create issues, and how Rust’s composition model fixes them all. From diamond problems to fragile base classes, see why composition wins in the long run.","headline":"7 C++ Inheritance pain-points Rust Fixes Forever","image":"/cover_images/posts/rust-safety.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/rust-dev/2025-12-21-rust-composition/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/rust-dev/2025-12-21-rust-composition/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-06-02T21:11:46+00:00',
+    INDEX_KEY: 'index--2026-06-03T09:06:55+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -337,7 +337,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>Your sensor class inherits from both <code class="language-plaintext highlighter-rouge">I2CInterface</code> and <code class="language-plaintext highlighter-rouge">SPIInterface</code>. Both inherit from <code class="language-plaintext highlighter-rouge">Device</code>. You’ve got two copies of the base class, and C++ has no idea which <code class="language-plaintext highlighter-rouge">init()</code> method to call, that’s the infamous diamond problem and it’s just the first of seven inheritance pain-points that plague C++ codebases everywhere.</p>
 
-<p>Inheritance in C++ comes with real trade-offs that can become more painful as codebases grow, especially when architecture decisions weren’t considered upfront. Whether you’re building web services, desktop applications, game engines, or embedded systems, certain patterns keep causing similar technical issues. Rust takes a different approach—</p>
+<p>Inheritance in C++ comes with real trade-offs that can become more painful as codebases grow, especially when architecture decisions weren’t considered upfront. Whether you’re building web services, desktop applications, game engines, or embedded systems, certain patterns keep causing similar technical issues. Rust takes a different approach:</p>
 
 <ul>
   <li>favoring composition through structs</li>
@@ -391,7 +391,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>This can kill a distributed caching system. The initialization sequence fails silently. Where the network is configured but storage doesn’t. The cache returns stale data for weeks before anyone notices it’s only using memory.</p>
 
-<p>In STM32 firmware, this same pattern appears when devices use multiple bus interfaces. A sensor with both I2C and SPI interfaces inheriting from <code class="language-plaintext highlighter-rouge">I2CDevice</code> and <code class="language-plaintext highlighter-rouge">SPIDevice</code> creates the exact same ambiguity—except now your hardware isn’t initializing correctly.</p>
+<p>In STM32 firmware, this same pattern appears when devices use multiple bus interfaces. A sensor with both I2C and SPI interfaces inheriting from <code class="language-plaintext highlighter-rouge">I2CDevice</code> and <code class="language-plaintext highlighter-rouge">SPIDevice</code> creates the exact same ambiguity, except now your hardware isn’t initializing correctly.</p>
 
 <h3 id="the-rust-fix">The Rust Fix</h3>
 
@@ -400,13 +400,13 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <blockquote>
   <p><strong>What are Traits? (For C++ Developers)</strong></p>
 
-  <p>If you’re coming from C++, think of traits as <strong>pure abstract classes with no data members</strong>—like interfaces in Java or C#. A trait declares method signatures that types must implement, but it never carries state.</p>
+  <p>If you’re coming from C++, think of traits as <strong>pure abstract classes with no data members</strong> like interfaces in Java or C#. A trait declares method signatures that types must implement, but it never carries state.</p>
 
   <p>Key differences from C++ abstract classes:</p>
   <ul>
     <li><strong>No state inheritance:</strong> Traits only define behavior, never fields. No hidden base class data.</li>
     <li><strong>No vtable by default:</strong> Trait methods use static dispatch (monomorphization) unless you explicitly opt into dynamic dispatch with <code class="language-plaintext highlighter-rouge">dyn Trait</code>.</li>
-    <li><strong>Multiple traits, no diamond:</strong> A struct can implement many traits without ambiguity—there’s no shared ancestor to conflict.</li>
+    <li><strong>Multiple traits, no diamond:</strong> A struct can implement many traits without ambiguity there’s no shared ancestor to conflict.</li>
     <li><strong>Implement anywhere:</strong> You can implement a trait for a type you didn’t write (with some restrictions), enabling extension without inheritance.</li>
   </ul>
 
@@ -419,7 +419,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <span class="p">}</span>
 </code></pre></div>  </div>
 
-  <p>Traits separate what a type can do from what data a type holds—a much cleaner approach than inheritance.</p>
+  <p>Traits separate what a type can do from what data a type holds which is a much cleaner approach than inheritance.</p>
 </blockquote>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clean, unambiguous composition</span>
@@ -462,9 +462,9 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="the-c-pain-points-1">The C++ pain-points</h3>
 
-<p><strong>What this really means:</strong> In inheritance hierarchies, child classes depend on the implementation details of their parent classes. When you modify the base class—even seemingly innocent changes like adding a field or changing initialization order—you can silently break every derived class in ways that won’t show up until runtime. This creates a ripple effect where one “simple” change cascades through dozens of classes.</p>
+<p><strong>What this really means:</strong> In inheritance hierarchies, child classes depend on the implementation details of their parent classes. When you modify the base class, even seemingly innocent changes like adding a field or changing initialization order ,you can silently break every derived class in ways that won’t show up until runtime. This creates a ripple effect where one “simple” change cascades through dozens of classes.</p>
 
-<p>Change one line in a parent class, break dozens of child classes. This happens in game engines, GUI frameworks, business logic layers—anywhere inheritance is used.</p>
+<p>Change one line in a parent class, break dozens of child classes. This happens in game engines, GUI frameworks, business logic layers pretty much anywhere inheritance is used.</p>
 
 <pre><code class="language-mermaid">graph TD
     A[Connection&lt;br/&gt;Base Class] --&gt; B[HTTPConnection]
@@ -539,9 +539,9 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="the-c-pain-points-2">The C++ pain-points</h3>
 
-<p><strong>What this really means:</strong> Virtual functions enable polymorphism by deferring the decision of “which function to call” until runtime. But this flexibility comes at a cost: every virtual function call requires looking up the correct function in a hidden table (vtable), then jumping to that address. In performance-critical code—game loops processing thousands of entities, data pipelines handling millions of records, or firmware running on constrained hardware—these extra memory accesses and unpredictable jumps accumulate into measurable overhead.</p>
+<p><strong>What this really means:</strong> Virtual functions enable polymorphism by deferring the decision of “which function to call” until runtime. But this flexibility comes at a cost: every virtual function call requires looking up the correct function in a hidden table (vtable), then jumping to that address. In performance-critical code, game loops processing thousands of entities, data pipelines handling millions of records, or firmware running on constrained hardware. These extra memory accesses and unpredictable jumps accumulate into measurable overhead.</p>
 
-<p>Virtual function calls use vtable lookups—an extra memory access and indirect jump on every call. This matters in game loops, data processing pipelines, and high-frequency trading systems.</p>
+<p>Virtual function calls use vtable lookups, an extra memory access and indirect jump on every call. This matters in game loops, data processing pipelines, and high-frequency trading systems.</p>
 
 <p>When you use virtual functions in C++, the compiler creates a hidden table of function pointers (the vtable) for each class. Every object with virtual functions stores a hidden pointer to its class’s vtable. When you call <code class="language-plaintext highlighter-rouge">entity-&gt;update()</code>, the CPU must:</p>
 <ol>
@@ -572,7 +572,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="the-rust-fix-2">The Rust Fix</h3>
 
-<p>Static dispatch through generics. The compiler generates specialized code for each type—zero runtime cost.</p>
+<p>Static dispatch through generics. The compiler generates specialized code for each type at zero runtime cost.</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="n">Entity</span> <span class="p">{</span>
     <span class="k">fn</span> <span class="nf">update</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">f32</span><span class="p">);</span>
@@ -586,7 +586,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Rust uses static dispatch by default through monomorphization. When you write <code class="language-plaintext highlighter-rouge">game_loop::&lt;Player&gt;(players, dt)</code>, the compiler creates a specialized version of the function specifically for <code class="language-plaintext highlighter-rouge">Player</code>. The call to <code class="language-plaintext highlighter-rouge">entity.update(dt)</code> becomes a direct function call—no vtable, no pointer chasing, no indirection.</p>
+<p>Rust uses static dispatch by default through monomorphization. When you write <code class="language-plaintext highlighter-rouge">game_loop::&lt;Player&gt;(players, dt)</code>, the compiler creates a specialized version of the function specifically for <code class="language-plaintext highlighter-rouge">Player</code>. The call to <code class="language-plaintext highlighter-rouge">entity.update(dt)</code> becomes a direct function call - no vtable, no pointer chasing, no indirection.</p>
 
 <pre><code class="language-mermaid">graph LR
     A[entity.update&lt;br/&gt;call] --&gt; B[Direct function&lt;br/&gt;call - inlined]
@@ -599,7 +599,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>Static dispatch: The compiler knows exactly which function to call. Often gets inlined completely.</p>
 
-<p>Need runtime polymorphism? Rust has <code class="language-plaintext highlighter-rouge">dyn Trait</code> for that—but you opt-in explicitly:</p>
+<p>Need runtime polymorphism? Rust has <code class="language-plaintext highlighter-rouge">dyn Trait</code> for that, but you opt-in explicitly:</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Explicit dynamic dispatch when you need it</span>
 <span class="k">fn</span> <span class="nf">update_mixed</span><span class="p">(</span><span class="n">entities</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="p">[</span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span> <span class="n">Entity</span><span class="o">&gt;</span><span class="p">],</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">f32</span><span class="p">)</span> <span class="p">{</span>
@@ -607,7 +607,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Rust defaults to static dispatch (zero cost). Need runtime polymorphism? Use <code class="language-plaintext highlighter-rouge">dyn Trait</code> explicitly. But for most code—games, services, firmware—you get performance for free.</p>
+<p>Rust defaults to static dispatch (zero cost). Need runtime polymorphism? just use the <code class="language-plaintext highlighter-rouge">dyn Trait</code> explicitly. But for most code like game services or firmware (real-time systems) you get performance for free.</p>
 
 <hr />
 
@@ -615,7 +615,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="the-c-pain-points-3">The C++ pain-points</h3>
 
-<p><strong>What this really means:</strong> When you use base class pointers to reference derived objects, the pointer itself doesn’t know or care about the lifetime of the actual object. If the object gets destroyed (goes out of scope, gets deleted, or the stack unwinds), but the pointer still exists, you now have a “dangling pointer”—a memory address that points to garbage. Dereferencing it is undefined behavior: sometimes crashes, sometimes corrupted data, sometimes “works” (the most dangerous case). This is especially insidious because the bug might only appear under specific timing conditions or memory states.</p>
+<p><strong>What this really means:</strong> When you use base class pointers to reference derived objects, the pointer itself doesn’t know or care about the lifetime of the actual object. If the object gets destroyed (goes out of scope, gets deleted, or the stack unwinds), but the pointer still exists, you now have a “dangling pointer” - a memory address that points to garbage. Dereferencing it is undefined behavior: sometimes crashes, sometimes corrupted data, sometimes “works” (the most dangerous case). This is especially insidious because the bug might only appear under specific timing conditions or memory states.</p>
 
 <p>Base class pointers can outlive the derived objects they point to. If not properly managed (or freed after use) can leave behind Dangling pointer, and eventually make the software buggy</p>
 
@@ -647,7 +647,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p><strong>Real-world impact:</strong> A web framework returned stack-allocated request handlers. The pointer got reused. The HTTP router read random stack garbage and routed requests to the wrong endpoints which leds to silent data leaks between user sessions.</p>
 
-<p><strong>Embedded angle:</strong> A pressure sensor driver returned a stack-allocated object. The pointer got reused for interrupt context data. The HVAC controller read random stack values and interpreted them as “pressure critical”—triggering emergency shutdowns on a manufacturing line.</p>
+<p><strong>Embedded angle:</strong> A pressure sensor driver returned a stack-allocated object. The pointer got reused for interrupt context data. The HVAC controller read random stack values and interpreted them as “pressure critical” triggering emergency shutdowns on a manufacturing line.</p>
 
 <h3 id="the-rust-fix-3">The Rust Fix</h3>
 
@@ -680,7 +680,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="the-c-pain-points-4">The C++ pain-points</h3>
 
-<p><strong>What this really means:</strong> When you pass a derived class object by value to a function expecting a base class, C++ performs an implicit conversion. But here’s the problem: the base class variable is smaller than the derived object. So the compiler “slices off” all the derived class’s additional data members to make it fit. No warning. No error. Your authentication tokens, calibration coefficients, or user IDs simply vanish. The code compiles and runs—it just silently loses data.</p>
+<p><strong>What this really means:</strong> When you pass a derived class object by value to a function expecting a base class, C++ performs an implicit conversion. But here’s the problem: the base class variable is smaller than the derived object. So the compiler “slices off” all the derived class’s additional data members to make it fit. No warning. No error. Your authentication tokens, calibration coefficients, or user IDs simply vanish. The code compiles and runs, it just silently loses data.</p>
 
 <p>Assign a derived object to a base class variable, and the compiler silently discards the derived data. This bug is invisible until production, affecting logging systems, serialization, and data pipelines.</p>
 
@@ -777,7 +777,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="the-c-pain-points-5">The C++ pain-points</h3>
 
-<p><strong>What this really means:</strong> In C++, base class constructors always execute before derived class constructors—you can’t control this order. This creates a chicken-and-egg problem: what if the base class needs configuration that the derived class loads? What if initialization can fail, but constructors can’t return errors elegantly (without exceptions)? What if initialization steps have interdependencies that don’t align with the rigid base-first order? You end up with initialization flags, global state, multi-phase initialization patterns, and error handling gymnastics—all because the language forces a specific execution order.</p>
+<p><strong>What this really means:</strong> In C++, base class constructors always execute before derived class constructors, you can’t control this order. This creates a chicken-and-egg problem: what if the base class needs configuration that the derived class loads? What if initialization can fail, but constructors can’t return errors elegantly (without exceptions)? What if initialization steps have interdependencies that don’t align with the rigid base-first order? You end up with initialization flags, global state, multi-phase initialization patterns, and error handling gymnastics, all because the language forces a specific execution order.</p>
 
 <p>Complex initialization sequences fail in subtle ways. Base constructors run first, creating rigid ordering requirements and error handling pain-points. This affects frameworks, database connections, and resource managers.</p>
 
@@ -819,9 +819,9 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <span class="p">};</span>
 </code></pre></div></div>
 
-<p><strong>Real-world impact:</strong> A database ORM initialized connections before loading configuration. But the configuration specified connection parameters. Classic chicken-and-egg. The workaround involved global state and init flags—technical debt that lasted years.</p>
+<p><strong>Real-world impact:</strong> A database ORM initialized connections before loading configuration. But the configuration specified connection parameters. Classic chicken-and-egg. The workaround involved global state and init flags, which leaves behind technical debt that last for years.</p>
 
-<p><strong>Embedded angle:</strong> A smart thermostat’s base class initialized I2C before derived classes loaded configuration. But the configuration was stored on an I2C EEPROM. The fix required global state and multiple initialization phases—brittle code that failed under edge cases.</p>
+<p><strong>Embedded angle:</strong> A smart thermostat’s base class initialized I2C before derived classes loaded configuration. But the configuration was stored on an I2C EEPROM. The fix required global state and multiple initialization phases , these brittle code  fail under edge cases.</p>
 
 <h3 id="the-rust-fix-5">The Rust Fix</h3>
 
@@ -969,7 +969,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Traits let you add behavior without touching existing code. Enums give you exhaustive pattern matching—the compiler ensures you handle every variant. No rigid hierarchies, just flexible composition.</p>
+<p>Traits let you add behavior without touching existing code. Enums give you exhaustive pattern matching ,the compiler ensures you handle every variant. No rigid hierarchies, just flexible composition.</p>
 
 <pre><code class="language-mermaid">graph LR
     A[Component Trait] -.-&gt;|implements| B[RenderComponent]
@@ -991,7 +991,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h2 id="the-rust-replacement-strategy">The Rust Replacement Strategy</h2>
 
-<p>Rust doesn’t patch inheritance—it replaces it with three better tools:</p>
+<p>Rust doesn’t patch inheritance, it replaces it with three better tools:</p>
 
 <ol>
   <li><strong>Structs for “has-a” relationships</strong> (composition instead of inheritance)</li>
@@ -1025,9 +1025,9 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <ol>
   <li><strong>Identify inheritance hierarchies</strong> in your codebase</li>
-  <li><strong>Convert “is-a” to “has-a”</strong> — replace inheritance with composition</li>
-  <li><strong>Extract interfaces as traits</strong> — behavior without state inheritance</li>
-  <li><strong>Use enums for variants</strong> — replace hierarchies with algebraic types</li>
+  <li><strong>Convert “is-a” to “has-a”</strong> - replace inheritance with composition</li>
+  <li><strong>Extract interfaces as traits</strong> - behavior without state inheritance</li>
+  <li><strong>Use enums for variants</strong> - replace hierarchies with algebraic types</li>
 </ol>
 
 <h3 id="example-1-web-service-refactor">Example 1: Web Service Refactor</h3>
@@ -1108,7 +1108,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <p>Inheritance has its place, but over time, composition-based architectures prove more maintainable. Here’s how Rust’s approach pays dividends:</p>
 
 <ul>
-  <li>Diamond problems? Traits can’t inherit state—no ambiguity.</li>
+  <li>Diamond problems? Traits can’t inherit state hence, no ambiguity.</li>
   <li>Fragile base classes? Composition makes changes explicit and localized.</li>
   <li>Virtual dispatch overhead? Static dispatch gives you zero-cost abstractions.</li>
   <li>Dangling pointers? The borrow checker catches them at compile time.</li>
@@ -1119,7 +1119,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>Whether you’re building web backends, desktop apps, game engines, or embedded firmware, favoring composition over inheritance leads to code that’s easier to extend, test, and refactor.</p>
 
-<p>These patterns scale better as codebases grow. What starts as a simple inheritance tree often becomes a maintenance burden—adding features requires modifying base classes, which risks breaking derived types. Composition avoids this cascade effect.</p>
+<p>These patterns scale better as codebases grow. What starts as a simple inheritance tree often becomes a maintenance burden, adding features requires modifying base classes, which risks breaking derived types. Composition avoids this cascade effect.</p>
 
   
 </article>
@@ -1529,7 +1529,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>          <li class="h4">  <a href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/productivity/2026-02-18-ui/" class="flip-title"><span>The Embedded Engineer's Second Brain: PARA and CODE Systems</span></a>  <time class="faded fine" datetime="2026-02-18T00:00:00+00:00">18 Feb 2026</time></li>      </ul></aside>
 
   
 
