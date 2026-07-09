@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-06-23T12:04:18+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-06-01T19:09:50+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-09T21:12:14+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-06-01T19:09:50+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<h2 id="link-to-the-github-repo">Link to the Github Repo</h2>
 
 <div class="note">
   <ul>
@@ -1980,7 +1980,7 @@ Uses ubuntu:22.04 image. Runs</p>
       <p><a href="https://www.opal-rt.com/blog/building-a-regression-testing-pipeline-for-hil-in-electrification-teams/">Building a regression testing pipeline for HIL in electrification teams</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[A experimental setup on how to build stack using "Woodpecker CI, Cosmopolitan, and Google Pigweed" for small firmware teams to automate build-test-flash pipelines for their embedded systems]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/cpp-portable-pipeline.png" /><media:content medium="image" url="/cover_images/posts/cpp-portable-pipeline.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Embedded Engineer’s Second Brain: PARA and CODE Systems</title><link href="/blog/productivity/2026-02-18-ui/" rel="alternate" type="text/html" title="The Embedded Engineer’s Second Brain: PARA and CODE Systems" /><published>2026-02-18T00:00:00+00:00</published><updated>2026-04-24T07:01:58+00:00</updated><id>/blog/productivity/ui</id><content type="html" xml:base="/blog/productivity/2026-02-18-ui/"><![CDATA[<ul id="markdown-toc">
+</div>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[A experimental setup on how to build stack using "Woodpecker CI, Cosmopolitan, and Google Pigweed" for small firmware teams to automate build-test-flash pipelines for their embedded systems]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/cpp-portable-pipeline.png" /><media:content medium="image" url="/cover_images/posts/cpp-portable-pipeline.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Embedded Engineer’s Second Brain: PARA and CODE Systems</title><link href="/blog/productivity/2026-02-18-ui/" rel="alternate" type="text/html" title="The Embedded Engineer’s Second Brain: PARA and CODE Systems" /><published>2026-02-18T00:00:00+00:00</published><updated>2026-07-08T16:49:18+00:00</updated><id>/blog/productivity/ui</id><content type="html" xml:base="/blog/productivity/2026-02-18-ui/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#the-embedded-engineers-second-brain" id="markdown-toc-the-embedded-engineers-second-brain">The Embedded Engineer’s Second Brain</a>    <ul>
       <li><a href="#1-the-problem-information-overload" id="markdown-toc-1-the-problem-information-overload">1. The Problem: Information Overload</a></li>
       <li><a href="#2-why-it-happens" id="markdown-toc-2-why-it-happens">2. Why It Happens</a></li>
@@ -2032,58 +2032,9 @@ Uses ubuntu:22.04 image. Runs</p>
         </ul>
       </li>
       <li><a href="#note-templates-fill-in-structures-for-your-evernote" id="markdown-toc-note-templates-fill-in-structures-for-your-evernote">Note Templates: Fill-In Structures for Your Evernote</a>        <ul>
-          <li><a href="#template-1--datasheet--reference-manual-summary" id="markdown-toc-template-1--datasheet--reference-manual-summary">Template 1 — Datasheet &amp; Reference Manual Summary</a>            <ul>
-              <li><a href="#what-does-this-device-do-in-one-sentence" id="markdown-toc-what-does-this-device-do-in-one-sentence">What does this device do in one sentence?</a></li>
-              <li><a href="#what-are-the-critical-electrical-limits-i-must-not-violate" id="markdown-toc-what-are-the-critical-electrical-limits-i-must-not-violate">What are the critical electrical limits I must not violate?</a></li>
-              <li><a href="#what-timing-constraints-affect-my-firmware" id="markdown-toc-what-timing-constraints-affect-my-firmware">What timing constraints affect my firmware?</a></li>
-              <li><a href="#what-are-the-non-obvious-gotchas-or-errata-i-found" id="markdown-toc-what-are-the-non-obvious-gotchas-or-errata-i-found">What are the non-obvious gotchas or errata I found?</a></li>
-              <li><a href="#which-application-circuit-or-reference-schematic-applies-to-my-design" id="markdown-toc-which-application-circuit-or-reference-schematic-applies-to-my-design">Which application circuit or reference schematic applies to my design?</a></li>
-              <li><a href="#which-driver-registers-or-init-sequence-matter-most-for-my-use-case" id="markdown-toc-which-driver-registers-or-init-sequence-matter-most-for-my-use-case">Which driver registers or init sequence matter most for my use case?</a></li>
-            </ul>
-          </li>
-          <li><a href="#template-2--client-requirements-capture" id="markdown-toc-template-2--client-requirements-capture">Template 2 — Client Requirements Capture</a>            <ul>
-              <li><a href="#system-overview" id="markdown-toc-system-overview">System Overview</a>                <ul>
-                  <li><a href="#what-problem-does-this-device-solve-for-the-end-user" id="markdown-toc-what-problem-does-this-device-solve-for-the-end-user">What problem does this device solve for the end user?</a></li>
-                  <li><a href="#who-are-the-users-and-what-is-their-technical-level" id="markdown-toc-who-are-the-users-and-what-is-their-technical-level">Who are the users and what is their technical level?</a></li>
-                </ul>
-              </li>
-              <li><a href="#functional-requirements" id="markdown-toc-functional-requirements">Functional Requirements</a>                <ul>
-                  <li><a href="#what-must-the-system-measure-control-or-communicate" id="markdown-toc-what-must-the-system-measure-control-or-communicate">What must the system measure, control, or communicate?</a></li>
-                  <li><a href="#what-interfaces-must-it-expose" id="markdown-toc-what-interfaces-must-it-expose">What interfaces must it expose?</a></li>
-                </ul>
-              </li>
-              <li><a href="#performance--power-constraints" id="markdown-toc-performance--power-constraints">Performance &amp; Power Constraints</a>                <ul>
-                  <li><a href="#what-are-the-battery-life-and-power-targets" id="markdown-toc-what-are-the-battery-life-and-power-targets">What are the battery life and power targets?</a></li>
-                  <li><a href="#what-are-the-real-time-constraints" id="markdown-toc-what-are-the-real-time-constraints">What are the real-time constraints?</a></li>
-                </ul>
-              </li>
-              <li><a href="#environmental--reliability-constraints" id="markdown-toc-environmental--reliability-constraints">Environmental &amp; Reliability Constraints</a>                <ul>
-                  <li><a href="#what-are-the-operating-and-storage-temperature-ranges" id="markdown-toc-what-are-the-operating-and-storage-temperature-ranges">What are the operating and storage temperature ranges?</a></li>
-                  <li><a href="#what-are-the-ingress-protection-drop-or-vibration-requirements" id="markdown-toc-what-are-the-ingress-protection-drop-or-vibration-requirements">What are the ingress protection, drop, or vibration requirements?</a></li>
-                </ul>
-              </li>
-              <li><a href="#regulatory--safety" id="markdown-toc-regulatory--safety">Regulatory &amp; Safety</a>                <ul>
-                  <li><a href="#what-regulatory-certifications-are-required" id="markdown-toc-what-regulatory-certifications-are-required">What regulatory certifications are required?</a></li>
-                  <li><a href="#what-are-the-edge-cases-or-failure-modes-the-client-has-already-considered" id="markdown-toc-what-are-the-edge-cases-or-failure-modes-the-client-has-already-considered">What are the edge cases or failure modes the client has already considered?</a></li>
-                </ul>
-              </li>
-              <li><a href="#surprises-and-non-obvious-constraints" id="markdown-toc-surprises-and-non-obvious-constraints">Surprises and Non-Obvious Constraints</a>                <ul>
-                  <li><a href="#what-requirements-surprised-you-or-seem-under-specified" id="markdown-toc-what-requirements-surprised-you-or-seem-under-specified">What requirements surprised you or seem under-specified?</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="#template-3--design-decision-record" id="markdown-toc-template-3--design-decision-record">Template 3 — Design Decision Record</a>            <ul>
-              <li><a href="#what-decision-needed-to-be-made" id="markdown-toc-what-decision-needed-to-be-made">What decision needed to be made?</a></li>
-              <li><a href="#what-were-the-options-considered" id="markdown-toc-what-were-the-options-considered">What were the options considered?</a></li>
-              <li><a href="#what-constraints-or-requirements-drove-the-decision" id="markdown-toc-what-constraints-or-requirements-drove-the-decision">What constraints or requirements drove the decision?</a></li>
-              <li><a href="#what-was-decided-and-why" id="markdown-toc-what-was-decided-and-why">What was decided, and why?</a></li>
-              <li><a href="#what-are-the-implementation-consequences" id="markdown-toc-what-are-the-implementation-consequences">What are the implementation consequences?</a></li>
-              <li><a href="#what-was-explicitly-rejected-and-why" id="markdown-toc-what-was-explicitly-rejected-and-why">What was explicitly rejected and why?</a></li>
-              <li><a href="#what-could-invalidate-this-decision-later" id="markdown-toc-what-could-invalidate-this-decision-later">What could invalidate this decision later?</a></li>
-              <li><a href="#which-notes-does-this-decision-draw-on" id="markdown-toc-which-notes-does-this-decision-draw-on">Which notes does this decision draw on?</a></li>
-            </ul>
-          </li>
+          <li><a href="#template-1--datasheet--reference-manual-summary" id="markdown-toc-template-1--datasheet--reference-manual-summary">Template 1 — Datasheet &amp; Reference Manual Summary</a></li>
+          <li><a href="#template-2--client-requirements-capture" id="markdown-toc-template-2--client-requirements-capture">Template 2 — Client Requirements Capture</a></li>
+          <li><a href="#template-3--design-decision-record" id="markdown-toc-template-3--design-decision-record">Template 3 — Design Decision Record</a></li>
         </ul>
       </li>
       <li><a href="#common-questions" id="markdown-toc-common-questions">Common Questions</a></li>
@@ -2761,51 +2712,47 @@ Many engineers jump straight to component shopping without clarifying requiremen
 
 <hr />
 
-<h4 id="what-does-this-device-do-in-one-sentence">What does this device do in one sentence?</h4>
-
-<p><em>Write it in your own words, not the marketing summary.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-are-the-critical-electrical-limits-i-must-not-violate">What are the critical electrical limits I must not violate?</h4>
-
-<p><em>e.g. VDDIO max 3.6 V; SDA/SCL max clock 400 kHz in Fast-mode; Tamb max 85°C. Bold these in your answer.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-timing-constraints-affect-my-firmware">What timing constraints affect my firmware?</h4>
-
-<p><em>e.g. AFE4404: 100 µs worst-case wakeup from DPD; I2S BCLK must be stable before CODEC RESET deasserted.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-are-the-non-obvious-gotchas-or-errata-i-found">What are the non-obvious gotchas or errata I found?</h4>
-
-<p><em>e.g. I2C SDA held low after Stop mode exit. PLL lock time not mentioned in brief but 300 µs in RM. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if relevant.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="which-application-circuit-or-reference-schematic-applies-to-my-design">Which application circuit or reference schematic applies to my design?</h4>
-
-<p><em>Note figure number and page. Sketch or photograph key parts. Link to the eval board schematic if it exists.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="which-driver-registers-or-init-sequence-matter-most-for-my-use-case">Which driver registers or init sequence matter most for my use case?</h4>
-
-<p><em>e.g. AFE4404 CONTROL0 register bit 3 = DPD enable; must write <code class="language-plaintext highlighter-rouge">0x000000</code> to TIAGAIN before first sample.</em></p>
-
-<p> </p>
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Guidance</th>
+      <th>Your Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What does this device do in one sentence?</td>
+      <td><em>Write it in your own words, not the marketing summary.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What are the critical electrical limits I must not violate?</td>
+      <td><em>e.g. VDDIO max 3.6 V; SDA/SCL max clock 400 kHz in Fast-mode; Tamb max 85°C. Bold these in your answer.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What timing constraints affect my firmware?</td>
+      <td><em>e.g. AFE4404: 100 µs worst-case wakeup from DPD; I2S BCLK must be stable before CODEC RESET deasserted.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What are the non-obvious gotchas or errata I found?</td>
+      <td><em>e.g. I2C SDA held low after Stop mode exit. PLL lock time not mentioned in brief but 300 µs in RM. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if relevant.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Which application circuit or reference schematic applies to my design?</td>
+      <td><em>Note figure number and page. Sketch or photograph key parts. Link to the eval board schematic if it exists.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Which driver registers or init sequence matter most for my use case?</td>
+      <td><em>e.g. AFE4404 CONTROL0 register bit 3 = DPD enable; must write <code class="language-plaintext highlighter-rouge">0x000000</code> to TIAGAIN before first sample.</em></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
@@ -2853,103 +2800,84 @@ Many engineers jump straight to component shopping without clarifying requiremen
 
 <hr />
 
-<h4 id="system-overview">System Overview</h4>
-
-<h5 id="what-problem-does-this-device-solve-for-the-end-user">What problem does this device solve for the end user?</h5>
-
-<p><em>Not what it does technically — what job does the user hire it for? e.g. “Allows a nurse to monitor patient SpO2 continuously without disturbing sleep.”</em></p>
-
-<p> </p>
-
-<hr />
-
-<h5 id="who-are-the-users-and-what-is-their-technical-level">Who are the users and what is their technical level?</h5>
-
-<p><em>e.g. Clinical staff — non-technical. Device must operate correctly with no configuration. Firmware updates handled by IT department only.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="functional-requirements">Functional Requirements</h4>
-
-<h5 id="what-must-the-system-measure-control-or-communicate">What must the system measure, control, or communicate?</h5>
-
-<p><em>List each function with its minimum acceptable performance. e.g. Measure HR ±2 BPM; BLE range minimum 5 m in open air; data logged at 25 Hz.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h5 id="what-interfaces-must-it-expose">What interfaces must it expose?</h5>
-
-<p><em>e.g. USB-C for charging only (no data). BLE 5.0 for data streaming. No physical buttons — gesture or proximity sensor for wake.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="performance--power-constraints">Performance &amp; Power Constraints</h4>
-
-<h5 id="what-are-the-battery-life-and-power-targets">What are the battery life and power targets?</h5>
-
-<p><em>State the battery capacity and required operating duration. e.g. 180 mAh LiPo, 72 h continuous. Derive the average current budget and note it here.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h5 id="what-are-the-real-time-constraints">What are the real-time constraints?</h5>
-
-<p><em>e.g. HR algorithm requires 25 Hz minimum sample rate. BLE notify latency &lt; 1 s. Alarm must trigger within 500 ms of threshold crossing.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="environmental--reliability-constraints">Environmental &amp; Reliability Constraints</h4>
-
-<h5 id="what-are-the-operating-and-storage-temperature-ranges">What are the operating and storage temperature ranges?</h5>
-
-<p><em>e.g. Operating: 0–50°C. Storage: −20 to 60°C. Note if medical / industrial / automotive standard applies.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h5 id="what-are-the-ingress-protection-drop-or-vibration-requirements">What are the ingress protection, drop, or vibration requirements?</h5>
-
-<p><em>e.g. IP54 splash resistant. 1 m drop onto concrete (IEC 60068-2-31). No formal vibration spec but must survive normal handling.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="regulatory--safety">Regulatory &amp; Safety</h4>
-
-<h5 id="what-regulatory-certifications-are-required">What regulatory certifications are required?</h5>
-
-<p><em>e.g. CE marking. FCC Part 15 (BLE). IEC 60601-1 (medical electrical). ISO 13485 QMS. Note whether certification is the client’s responsibility or yours.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h5 id="what-are-the-edge-cases-or-failure-modes-the-client-has-already-considered">What are the edge cases or failure modes the client has already considered?</h5>
-
-<p><em>e.g. Device must not alarm falsely &gt; 1×/day. Must survive sensor disconnect without firmware crash. Low battery warning at 15% SoC.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="surprises-and-non-obvious-constraints">Surprises and Non-Obvious Constraints</h4>
-
-<h5 id="what-requirements-surprised-you-or-seem-under-specified">What requirements surprised you or seem under-specified?</h5>
-
-<p><em>This is the most important field. Note constraints that are easy to miss: implicit safety assumptions, missing tolerances, conflicting specs. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if needed.</em></p>
-
-<p> </p>
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Question</th>
+      <th>Guidance</th>
+      <th>Your Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>System Overview</td>
+      <td>What problem does this device solve for the end user?</td>
+      <td><em>Not what it does technically — what job does the user hire it for? e.g. “Allows a nurse to monitor patient SpO2 continuously without disturbing sleep.”</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>System Overview</td>
+      <td>Who are the users and what is their technical level?</td>
+      <td><em>e.g. Clinical staff — non-technical. Device must operate correctly with no configuration. Firmware updates handled by IT department only.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Functional Requirements</td>
+      <td>What must the system measure, control, or communicate?</td>
+      <td><em>List each function with its minimum acceptable performance. e.g. Measure HR ±2 BPM; BLE range minimum 5 m in open air; data logged at 25 Hz.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Functional Requirements</td>
+      <td>What interfaces must it expose?</td>
+      <td><em>e.g. USB-C for charging only (no data). BLE 5.0 for data streaming. No physical buttons — gesture or proximity sensor for wake.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Performance &amp; Power Constraints</td>
+      <td>What are the battery life and power targets?</td>
+      <td><em>State the battery capacity and required operating duration. e.g. 180 mAh LiPo, 72 h continuous. Derive the average current budget and note it here.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Performance &amp; Power Constraints</td>
+      <td>What are the real-time constraints?</td>
+      <td><em>e.g. HR algorithm requires 25 Hz minimum sample rate. BLE notify latency &lt; 1 s. Alarm must trigger within 500 ms of threshold crossing.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Environmental &amp; Reliability Constraints</td>
+      <td>What are the operating and storage temperature ranges?</td>
+      <td><em>e.g. Operating: 0–50°C. Storage: −20 to 60°C. Note if medical / industrial / automotive standard applies.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Environmental &amp; Reliability Constraints</td>
+      <td>What are the ingress protection, drop, or vibration requirements?</td>
+      <td><em>e.g. IP54 splash resistant. 1 m drop onto concrete (IEC 60068-2-31). No formal vibration spec but must survive normal handling.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Regulatory &amp; Safety</td>
+      <td>What regulatory certifications are required?</td>
+      <td><em>e.g. CE marking. FCC Part 15 (BLE). IEC 60601-1 (medical electrical). ISO 13485 QMS. Note whether certification is the client’s responsibility or yours.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Regulatory &amp; Safety</td>
+      <td>What are the edge cases or failure modes the client has already considered?</td>
+      <td><em>e.g. Device must not alarm falsely &gt; 1×/day. Must survive sensor disconnect without firmware crash. Low battery warning at 15% SoC.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Surprises and Non-Obvious Constraints</td>
+      <td>What requirements surprised you or seem under-specified?</td>
+      <td><em>This is the most important field. Note constraints that are easy to miss: implicit safety assumptions, missing tolerances, conflicting specs. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if needed.</em></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
@@ -3003,67 +2931,57 @@ Many engineers jump straight to component shopping without clarifying requiremen
 
 <hr />
 
-<h4 id="what-decision-needed-to-be-made">What decision needed to be made?</h4>
-
-<p><em>State it as a question. e.g. Should the AFE4404 run in continuous-sample mode or LPTIM-triggered DPD mode?</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-were-the-options-considered">What were the options considered?</h4>
-
-<p><em>List each option briefly. e.g. (A) Continuous mode — constant 12.5 mA LED avg. (B) Triggered DPD mode — LED off between pulses, MCU in Stop 2.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-constraints-or-requirements-drove-the-decision">What constraints or requirements drove the decision?</h4>
-
-<p><em>Reference your requirements note. e.g. 2.1 mA average system budget makes option A immediately non-viable. 25 Hz minimum PRF is satisfied by LPTIM at 25 Hz trigger.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-was-decided-and-why">What was decided, and why?</h4>
-
-<p><em>State the chosen option and the explicit reasoning. Bold the key technical justification.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-are-the-implementation-consequences">What are the implementation consequences?</h4>
-
-<p><em>e.g. Must add I2C bus recovery (9-clock pulse) after every Stop 2 exit. LPTIM must be initialised before Stop 2 entry. AFE CONTROL0 bit 3 must be set in init sequence.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-was-explicitly-rejected-and-why">What was explicitly rejected and why?</h4>
-
-<p><em>Documenting rejected options prevents the same debate recurring. e.g. Continuous mode rejected: 12.5 mA LED draw alone exceeds total 2.1 mA budget by 6×.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="what-could-invalidate-this-decision-later">What could invalidate this decision later?</h4>
-
-<p><em>e.g. If client increases BLE advertising rate to 100 ms, wakeup frequency may make Stop 2 overhead negligible — revisit triggered vs continuous tradeoff.</em></p>
-
-<p> </p>
-
-<hr />
-
-<h4 id="which-notes-does-this-decision-draw-on">Which notes does this decision draw on?</h4>
-
-<p><em>Link or reference the source notes: datasheet note, forum edge-case note, requirements note. This is the connective tissue that makes retrieval produce insight.</em></p>
-
-<p> </p>
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Guidance</th>
+      <th>Your Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What decision needed to be made?</td>
+      <td><em>State it as a question. e.g. Should the AFE4404 run in continuous-sample mode or LPTIM-triggered DPD mode?</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What were the options considered?</td>
+      <td><em>List each option briefly. e.g. (A) Continuous mode — constant 12.5 mA LED avg. (B) Triggered DPD mode — LED off between pulses, MCU in Stop 2.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What constraints or requirements drove the decision?</td>
+      <td><em>Reference your requirements note. e.g. 2.1 mA average system budget makes option A immediately non-viable. 25 Hz minimum PRF is satisfied by LPTIM at 25 Hz trigger.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What was decided, and why?</td>
+      <td><em>State the chosen option and the explicit reasoning. Bold the key technical justification.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What are the implementation consequences?</td>
+      <td><em>e.g. Must add I2C bus recovery (9-clock pulse) after every Stop 2 exit. LPTIM must be initialised before Stop 2 entry. AFE CONTROL0 bit 3 must be set in init sequence.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What was explicitly rejected and why?</td>
+      <td><em>Documenting rejected options prevents the same debate recurring. e.g. Continuous mode rejected: 12.5 mA LED draw alone exceeds total 2.1 mA budget by 6×.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>What could invalidate this decision later?</td>
+      <td><em>e.g. If client increases BLE advertising rate to 100 ms, wakeup frequency may make Stop 2 overhead negligible — revisit triggered vs continuous tradeoff.</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Which notes does this decision draw on?</td>
+      <td><em>Link or reference the source notes: datasheet note, forum edge-case note, requirements note. This is the connective tissue that makes retrieval produce insight.</em></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
@@ -3092,7 +3010,7 @@ You don’t. Only distill notes you return to more than once. Layer 2 bolding ta
 
 <hr />
 
-<p><em>Look, it is not about having perfect notes. It is about having notes you can actually find and use under pressure. Everything else is just noise.</em></p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="productivity" /><category term="notetaking" /><category term="evernote" /><category term="para" /><category term="code" /><category term="second-brain" /><category term="firmware" /><summary type="html"><![CDATA[More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte's the CODE and PARA methods.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/notes.webp" /><media:content medium="image" url="/cover_images/posts/notes.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C</title><link href="/blog/industry/2026-02-16-portable-C/" rel="alternate" type="text/html" title="Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C" /><published>2026-02-16T00:00:00+00:00</published><updated>2026-05-29T17:09:12+00:00</updated><id>/blog/industry/portable-C</id><content type="html" xml:base="/blog/industry/2026-02-16-portable-C/"><![CDATA[<ul id="markdown-toc">
+<p><em>Its immortant to remember, Its is not about having perfect notes. It is about having notes you can actually find and use under pressure. Everything else is just noise.</em></p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="productivity" /><category term="notetaking" /><summary type="html"><![CDATA[More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte's the CODE and PARA methods.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/notes.webp" /><media:content medium="image" url="/cover_images/posts/notes.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C</title><link href="/blog/industry/2026-02-16-portable-C/" rel="alternate" type="text/html" title="Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C" /><published>2026-02-16T00:00:00+00:00</published><updated>2026-05-29T17:09:12+00:00</updated><id>/blog/industry/portable-C</id><content type="html" xml:base="/blog/industry/2026-02-16-portable-C/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#why-portability-matters-and-why-its-harder-than-you-think" id="markdown-toc-why-portability-matters-and-why-its-harder-than-you-think">Why portability matters, and why it’s harder than you think</a></li>
   <li><a href="#the-great-myth-of-embedded-c-vs-c" id="markdown-toc-the-great-myth-of-embedded-c-vs-c">The great myth of “Embedded C vs C”</a>    <ul>
       <li><a href="#the-misconception" id="markdown-toc-the-misconception"><strong>The misconception</strong></a></li>
