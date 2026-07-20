@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/build-system.webp" />
 <meta property="twitter:title" content="Build Systems in Embedded Development: From Make to Pigweed" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-12T10:43:51+00:00","datePublished":"2025-12-16T00:00:00+00:00","description":"Why does your code compile on your machine but fail on your teammate’s? Explore Make, CMake, and Pigweed—the tools that turn scattered C++ files into working firmware. Learn which one you actually need and why that answer might surprise you.","headline":"Build Systems in Embedded Development: From Make to Pigweed","image":"/cover_images/posts/build-system.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2025-12-16-pigweed-build-tools/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2025-12-16-pigweed-build-tools/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-20T21:00:35+00:00","datePublished":"2025-12-16T00:00:00+00:00","description":"Why does your code compile on your machine but fail on your teammate’s? Explore Make, CMake, and Pigweed—the tools that turn scattered C++ files into working firmware. Learn which one you actually need and why that answer might surprise you.","headline":"Build Systems in Embedded Development: From Make to Pigweed","image":"/cover_images/posts/build-system.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2025-12-16-pigweed-build-tools/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2025-12-16-pigweed-build-tools/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-20T13:21:10+00:00',
+    INDEX_KEY: 'index--2026-07-20T21:01:09+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -120,7 +120,7 @@
 
 <link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
 <link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CRoboto+Slab:400,700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
 
 
 
@@ -289,16 +289,51 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <p>Let’s talk about the tools that either make or break your embedded development workflow: <strong>Make, CMake, and Pigweed</strong>. By the end, you’ll know which one you actually need—and why that answer might surprise you.</p>
 
-<h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-  <li><a href="#the-build-system-evolution">The Build System Evolution</a></li>
-  <li><a href="#make-the-grandfather">Make: The Grandfather</a></li>
-  <li><a href="#cmake-the-modernizer">CMake: The Modernizer</a></li>
-  <li><a href="#pigweed-the-game-changer">Pigweed: The Game Changer</a></li>
-  <li><a href="#which-one-should-you-use">Which One Should You Use?</a></li>
+<ul id="markdown-toc">
+  <li><a href="#the-build-system-evolution" id="markdown-toc-the-build-system-evolution">The Build System Evolution</a>    <ul>
+      <li><a href="#the-journey" id="markdown-toc-the-journey">The Journey</a></li>
+    </ul>
+  </li>
+  <li><a href="#make-the-grandfather" id="markdown-toc-make-the-grandfather">Make: The Grandfather</a>    <ul>
+      <li><a href="#what-is-make" id="markdown-toc-what-is-make">What Is Make?</a></li>
+      <li><a href="#the-good" id="markdown-toc-the-good">The Good</a></li>
+      <li><a href="#the-problem" id="markdown-toc-the-problem">The Problem</a></li>
+    </ul>
+  </li>
+  <li><a href="#cmake-the-modernizer" id="markdown-toc-cmake-the-modernizer">CMake: The Modernizer</a>    <ul>
+      <li><a href="#why-cmake-exists" id="markdown-toc-why-cmake-exists">Why CMake Exists</a></li>
+      <li><a href="#what-cmake-actually-does" id="markdown-toc-what-cmake-actually-does">What CMake Actually Does</a></li>
+      <li><a href="#real-world-example-multi-target-embedded-project" id="markdown-toc-real-world-example-multi-target-embedded-project">Real-World Example: Multi-Target Embedded Project</a></li>
+      <li><a href="#the-cmake-advantage" id="markdown-toc-the-cmake-advantage">The CMake Advantage</a></li>
+      <li><a href="#when-cmake-falls-short" id="markdown-toc-when-cmake-falls-short">When CMake Falls Short</a></li>
+    </ul>
+  </li>
+  <li><a href="#pigweed-the-game-changer" id="markdown-toc-pigweed-the-game-changer">Pigweed: The Game Changer</a>    <ul>
+      <li><a href="#what-pigweed-provides" id="markdown-toc-what-pigweed-provides">What Pigweed Provides</a></li>
+      <li><a href="#the-core-problem-pigweed-solves" id="markdown-toc-the-core-problem-pigweed-solves">The Core Problem Pigweed Solves</a></li>
+      <li><a href="#architecture-not-just-libraries" id="markdown-toc-architecture-not-just-libraries">Architecture: Not Just Libraries</a>        <ul>
+          <li><a href="#1-build-system-bazel" id="markdown-toc-1-build-system-bazel">1. <strong>Build System: Bazel</strong></a></li>
+          <li><a href="#2-rpc-talk-to-your-hardware-like-its-a-web-service" id="markdown-toc-2-rpc-talk-to-your-hardware-like-its-a-web-service">2. <strong>RPC: Talk to Your Hardware Like It’s a Web Service</strong></a></li>
+          <li><a href="#3-hardware-modules" id="markdown-toc-3-hardware-modules">3. <strong>Hardware Modules</strong></a></li>
+          <li><a href="#4-embedded-friendly-standard-library" id="markdown-toc-4-embedded-friendly-standard-library">4. <strong>Embedded-Friendly Standard Library</strong></a></li>
+          <li><a href="#5-complete-development-environment" id="markdown-toc-5-complete-development-environment">5. <strong>Complete Development Environment</strong></a></li>
+        </ul>
+      </li>
+      <li><a href="#real-world-workflow-air-quality-sensor" id="markdown-toc-real-world-workflow-air-quality-sensor">Real-World Workflow: Air Quality Sensor</a></li>
+      <li><a href="#the-tradeoffs" id="markdown-toc-the-tradeoffs">The Tradeoffs</a></li>
+    </ul>
+  </li>
+  <li><a href="#which-one-should-you-use" id="markdown-toc-which-one-should-you-use">Which One Should You Use?</a>    <ul>
+      <li><a href="#use-make-if" id="markdown-toc-use-make-if">Use Make If:</a></li>
+      <li><a href="#use-cmake-if" id="markdown-toc-use-cmake-if">Use CMake If:</a></li>
+      <li><a href="#use-pigweed-if" id="markdown-toc-use-pigweed-if">Use Pigweed If:</a></li>
+      <li><a href="#the-hybrid-approach" id="markdown-toc-the-hybrid-approach">The Hybrid Approach</a></li>
+    </ul>
+  </li>
+  <li><a href="#comparison-table" id="markdown-toc-comparison-table">Comparison Table</a></li>
+  <li><a href="#final-thoughts" id="markdown-toc-final-thoughts">Final Thoughts</a></li>
+  <li><a href="#resources" id="markdown-toc-resources">Resources</a></li>
 </ul>
-
-<hr />
 
 <h2 id="the-build-system-evolution">The Build System Evolution</h2>
 
@@ -1539,7 +1574,7 @@ bazel run //apps/sense:simulator_sense
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/rust-dev/2025-12-17-raii-cpp-rust/" class="flip-title"><span>RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector</span></a>  <time class="faded fine" datetime="2025-12-17T00:00:00+00:00">17 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>          <li class="h4">  <a href="/blog/random-bits/2025-12-11-indian-fermented-drinks/" class="flip-title"><span>Lesser Known Fermented Drinks From Rural India</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2026-02-16-portable-C/" class="flip-title"><span>Portable and Secure C- A Practical Guide to MISRA C & CERT C</span></a>  <time class="faded fine" datetime="2026-02-16T00:00:00+00:00">16 Feb 2026</time></li>      </ul></aside>
 
   
 

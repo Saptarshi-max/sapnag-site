@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/cpp-portable-pipeline.png" />
 <meta property="twitter:title" content="An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-02T14:10:40+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"A experimental setup on how to build stack using “Woodpecker CI, Cosmopolitan, and Google Pigweed” for small firmware teams to automate build-test-flash pipelines for their embedded systems","headline":"An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI","image":"/cover_images/posts/cpp-portable-pipeline.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-20T21:00:35+00:00","datePublished":"2026-02-28T00:00:00+00:00","description":"A experimental setup on how to build stack using “Woodpecker CI, Cosmopolitan, and Google Pigweed” for small firmware teams to automate build-test-flash pipelines for their embedded systems","headline":"An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI","image":"/cover_images/posts/cpp-portable-pipeline.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-20T13:21:10+00:00',
+    INDEX_KEY: 'index--2026-07-20T21:01:09+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -120,7 +120,7 @@
 
 <link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
 <link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CRoboto+Slab:400,700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
 
 
 
@@ -283,7 +283,41 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   </header>
 
   
-    <p>In good DevOps practice, automation across building, testing, and releasing software plays a prominent role. CI (continuous integration) acts as a safety net: it takes raw materials (code), assembles them (builds), and quality-checks them (tests). If CI fails, the second half of the acronym (CD: continuous delivery/deployment) becomes too risky and can lead to serious production issues. There are several DevOps tools providing complete CI/CD services, but things get tricky while developing and testing embedded software.</p>
+    <ul id="markdown-toc">
+  <li><a href="#the-problem-nobody-is-talking-about" id="markdown-toc-the-problem-nobody-is-talking-about">The Problem Nobody Is Talking About</a></li>
+  <li><a href="#what-hil-testing-is-and-why-its-a-bit-broken-" id="markdown-toc-what-hil-testing-is-and-why-its-a-bit-broken-">What HIL Testing Is, and Why It’s a bit Broken ?</a></li>
+  <li><a href="#three-tools-one-insight" id="markdown-toc-three-tools-one-insight">Three Tools, One Insight</a></li>
+  <li><a href="#what-this-stack-actually-gets-you-and-what-it-doesnt" id="markdown-toc-what-this-stack-actually-gets-you-and-what-it-doesnt">What This Stack Actually Gets You (and What It Doesn’t)</a></li>
+  <li><a href="#getting-started" id="markdown-toc-getting-started">Getting Started</a></li>
+  <li><a href="#the-testing-pyramid-this-stack-enables" id="markdown-toc-the-testing-pyramid-this-stack-enables">The Testing Pyramid This Stack Enables</a></li>
+  <li><a href="#level-1-unit-tests" id="markdown-toc-level-1-unit-tests">Level 1 (Unit Tests):</a></li>
+  <li><a href="#level-2-host-simulation" id="markdown-toc-level-2-host-simulation">Level 2 (Host Simulation):</a></li>
+  <li><a href="#level-3-on-device-tests" id="markdown-toc-level-3-on-device-tests">Level 3 (On-Device Tests):</a></li>
+  <li><a href="#level-4-scheduled-on-target-regression" id="markdown-toc-level-4-scheduled-on-target-regression">Level 4 (Scheduled On-Target Regression):</a></li>
+  <li><a href="#pillar-one-pigweed--write-once-test-everywhere" id="markdown-toc-pillar-one-pigweed--write-once-test-everywhere">Pillar One: Pigweed — Write Once, Test Everywhere</a>    <ul>
+      <li><a href="#the-facade-pattern-in-practice" id="markdown-toc-the-facade-pattern-in-practice">The Facade Pattern in Practice</a></li>
+      <li><a href="#pw_unit_test-one-test-binary-two-targets" id="markdown-toc-pw_unit_test-one-test-binary-two-targets">pw_unit_test: One Test Binary, Two Targets</a></li>
+      <li><a href="#pw_watch-and-pw_target_runner-automated-on-device-ci" id="markdown-toc-pw_watch-and-pw_target_runner-automated-on-device-ci">pw_watch and pw_target_runner: Automated On-Device CI</a></li>
+    </ul>
+  </li>
+  <li><a href="#pillar-two-cosmopolitan--the-toolchain-portability-problem" id="markdown-toc-pillar-two-cosmopolitan--the-toolchain-portability-problem">Pillar Two: Cosmopolitan — The Toolchain Portability Problem</a>    <ul>
+      <li><a href="#what-this-means-for-an-embedded-pipeline" id="markdown-toc-what-this-means-for-an-embedded-pipeline">What This Means for an Embedded Pipeline</a></li>
+    </ul>
+  </li>
+  <li><a href="#pillar-three-woodpecker-ci--self-hosted-hardware-attached-free" id="markdown-toc-pillar-three-woodpecker-ci--self-hosted-hardware-attached-free">Pillar Three: Woodpecker CI — Self-Hosted, Hardware-Attached, Free</a>    <ul>
+      <li><a href="#the-agent-model-for-hardware" id="markdown-toc-the-agent-model-for-hardware">The Agent Model for Hardware</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a>    <ul>
+      <li><a href="#why-not-github-actions-with-self-hosted-runners" id="markdown-toc-why-not-github-actions-with-self-hosted-runners">Why Not GitHub Actions with Self-Hosted Runners?</a></li>
+    </ul>
+  </li>
+  <li><a href="#where-host-tests-meet-hardware" id="markdown-toc-where-host-tests-meet-hardware">Where Host Tests Meet Hardware</a></li>
+  <li><a href="#resources" id="markdown-toc-resources">Resources</a></li>
+  <li><a href="#sources" id="markdown-toc-sources">Sources</a></li>
+</ul>
+
+<p>In good DevOps practice, automation across building, testing, and releasing software plays a prominent role. CI (continuous integration) acts as a safety net: it takes raw materials (code), assembles them (builds), and quality-checks them (tests). If CI fails, the second half of the acronym (CD: continuous delivery/deployment) becomes too risky and can lead to serious production issues. There are several DevOps tools providing complete CI/CD services, but things get tricky while developing and testing embedded software.</p>
 
 <h2 id="the-problem-nobody-is-talking-about">The Problem Nobody Is Talking About</h2>
 
@@ -1171,7 +1205,7 @@ Uses ubuntu:22.04 image. Runs</p>
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/productivity/2026-02-18-ui/" class="flip-title"><span>The Embedded Engineer's Second Brain: PARA and CODE Systems</span></a>  <time class="faded fine" datetime="2026-02-18T00:00:00+00:00">18 Feb 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-21-rust-composition/" class="flip-title"><span>7 C++ Inheritance pain-points Rust Fixes Forever</span></a>  <time class="faded fine" datetime="2025-12-21T00:00:00+00:00">21 Dec 2025</time></li>      </ul></aside>
 
   
 

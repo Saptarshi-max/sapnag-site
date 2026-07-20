@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/c-algo.webp" />
 <meta property="twitter:title" content="Binary Search Tree in C" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-02-26T08:48:48+00:00","datePublished":"2026-02-01T00:00:00+00:00","description":"A complete guide to Solve the Binary Search Trees(BST) Problems in C &amp; popular LeetCode BST problems","headline":"Binary Search Tree in C","image":"/cover_images/posts/c-algo.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2026-02-01-c-bst/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2026-02-01-c-bst/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-20T21:00:35+00:00","datePublished":"2026-02-01T00:00:00+00:00","description":"A complete guide to Solve the Binary Search Trees(BST) Problems in C &amp; popular LeetCode BST problems","headline":"Binary Search Tree in C","image":"/cover_images/posts/c-algo.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2026-02-01-c-bst/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2026-02-01-c-bst/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-20T13:21:10+00:00',
+    INDEX_KEY: 'index--2026-07-20T21:01:09+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -120,7 +120,7 @@
 
 <link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
 <link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CRoboto+Slab:400,700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
 
 
 
@@ -285,19 +285,79 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   
     <p>A guide to BST operations in C with LeetCode problem mappings</p>
 
-<h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-  <li><a href="#1-what-is-a-binary-search-tree">1. What is a Binary Search Tree?</a></li>
-  <li><a href="#2-node-structure">2. Node Structure</a></li>
-  <li><a href="#3-core-bst-operations">3. Core BST Operations</a></li>
-  <li><a href="#4-tree-traversals">4. Tree Traversals</a></li>
-  <li><a href="#5-bst-properties--utilities">5. BST Properties &amp; Utilities</a></li>
-  <li><a href="#6-leetcode-practice-problems">6. LeetCode Practice Problems</a></li>
-  <li><a href="#7-full-working-code">7. Full Working Code</a></li>
-  <li><a href="#8-reference">8. Reference</a></li>
+<ul id="markdown-toc">
+  <li><a href="#1-what-is-a-binary-search-tree" id="markdown-toc-1-what-is-a-binary-search-tree">1. What is a Binary Search Tree?</a>    <ul>
+      <li><a href="#bst-property" id="markdown-toc-bst-property">BST Property</a></li>
+      <li><a href="#time-complexity" id="markdown-toc-time-complexity">Time Complexity</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-node-structure" id="markdown-toc-2-node-structure">2. Node Structure</a>    <ul>
+      <li><a href="#memory-layout" id="markdown-toc-memory-layout">Memory Layout</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-core-bst-operations" id="markdown-toc-3-core-bst-operations">3. Core BST Operations</a>    <ul>
+      <li><a href="#insertion" id="markdown-toc-insertion">Insertion</a>        <ul>
+          <li><a href="#insertion-flow" id="markdown-toc-insertion-flow">Insertion Flow</a></li>
+        </ul>
+      </li>
+      <li><a href="#leetcode-problems-using-insertion" id="markdown-toc-leetcode-problems-using-insertion">LeetCode Problems Using Insertion</a></li>
+      <li><a href="#search" id="markdown-toc-search">Search</a>        <ul>
+          <li><a href="#search-flow" id="markdown-toc-search-flow">Search Flow</a></li>
+        </ul>
+      </li>
+      <li><a href="#leetcode-problems-using-search" id="markdown-toc-leetcode-problems-using-search">LeetCode Problems Using Search</a></li>
+      <li><a href="#find-min--max" id="markdown-toc-find-min--max">Find Min / Max</a></li>
+      <li><a href="#deletion" id="markdown-toc-deletion">Deletion</a>        <ul>
+          <li><a href="#deletion-decision-flow" id="markdown-toc-deletion-decision-flow">Deletion Decision Flow</a></li>
+        </ul>
+      </li>
+      <li><a href="#leetcode-problems-using-deletion" id="markdown-toc-leetcode-problems-using-deletion">LeetCode Problems Using Deletion</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-tree-traversals" id="markdown-toc-4-tree-traversals">4. Tree Traversals</a>    <ul>
+      <li><a href="#traversal-overview" id="markdown-toc-traversal-overview">Traversal Overview</a></li>
+      <li><a href="#traversal-order-comparison" id="markdown-toc-traversal-order-comparison">Traversal Order Comparison</a></li>
+      <li><a href="#inorder-left--root--right" id="markdown-toc-inorder-left--root--right">Inorder (Left → Root → Right)</a></li>
+      <li><a href="#preorder-root--left--right" id="markdown-toc-preorder-root--left--right">Preorder (Root → Left → Right)</a></li>
+      <li><a href="#postorder-left--right--root" id="markdown-toc-postorder-left--right--root">Postorder (Left → Right → Root)</a></li>
+      <li><a href="#level-order-bfs" id="markdown-toc-level-order-bfs">Level Order (BFS)</a>        <ul>
+          <li><a href="#bfs-process" id="markdown-toc-bfs-process">BFS Process</a></li>
+        </ul>
+      </li>
+      <li><a href="#leetcode-problems-using-traversals" id="markdown-toc-leetcode-problems-using-traversals">LeetCode Problems Using Traversals</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-bst-properties--utilities" id="markdown-toc-5-bst-properties--utilities">5. BST Properties &amp; Utilities</a>    <ul>
+      <li><a href="#height-of-tree" id="markdown-toc-height-of-tree">Height of Tree</a></li>
+      <li><a href="#count-nodes" id="markdown-toc-count-nodes">Count Nodes</a></li>
+      <li><a href="#validate-bst" id="markdown-toc-validate-bst">Validate BST</a>        <ul>
+          <li><a href="#validation-strategy" id="markdown-toc-validation-strategy">Validation Strategy</a></li>
+        </ul>
+      </li>
+      <li><a href="#lowest-common-ancestor" id="markdown-toc-lowest-common-ancestor">Lowest Common Ancestor</a>        <ul>
+          <li><a href="#lca-decision-flow" id="markdown-toc-lca-decision-flow">LCA Decision Flow</a></li>
+        </ul>
+      </li>
+      <li><a href="#kth-smallest-element" id="markdown-toc-kth-smallest-element">Kth Smallest Element</a></li>
+      <li><a href="#leetcode-problems-using-bst-properties" id="markdown-toc-leetcode-problems-using-bst-properties">LeetCode Problems Using BST Properties</a></li>
+    </ul>
+  </li>
+  <li><a href="#6-leetcode-practice-problems" id="markdown-toc-6-leetcode-practice-problems">6. LeetCode Practice Problems</a>    <ul>
+      <li><a href="#problem-1-convert-sorted-array-to-bst" id="markdown-toc-problem-1-convert-sorted-array-to-bst">Problem 1: Convert Sorted Array to BST</a></li>
+      <li><a href="#problem-2-invert-binary-tree" id="markdown-toc-problem-2-invert-binary-tree">Problem 2: Invert Binary Tree</a></li>
+      <li><a href="#problem-3-two-sum-iv-bst" id="markdown-toc-problem-3-two-sum-iv-bst">Problem 3: Two Sum IV (BST)</a></li>
+      <li><a href="#problem-4-trim-a-bst" id="markdown-toc-problem-4-trim-a-bst">Problem 4: Trim a BST</a></li>
+      <li><a href="#problem-5-minimum-absolute-difference" id="markdown-toc-problem-5-minimum-absolute-difference">Problem 5: Minimum Absolute Difference</a></li>
+      <li><a href="#complete-leetcode-reference-table" id="markdown-toc-complete-leetcode-reference-table">Complete LeetCode Reference Table</a></li>
+    </ul>
+  </li>
+  <li><a href="#7-full-working-code" id="markdown-toc-7-full-working-code">7. Full Working Code</a></li>
+  <li><a href="#8-reference" id="markdown-toc-8-reference">8. Reference</a>    <ul>
+      <li><a href="#operations-quick-reference" id="markdown-toc-operations-quick-reference">Operations Quick Reference</a></li>
+    </ul>
+  </li>
+  <li><a href="#final-tips" id="markdown-toc-final-tips">Final Tips</a></li>
 </ul>
-
-<hr />
 
 <h2 id="1-what-is-a-binary-search-tree">1. What is a Binary Search Tree?</h2>
 
@@ -2215,7 +2275,7 @@ Min value: 20
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-14-borrow-checker/" class="flip-title"><span>Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)</span></a>  <time class="faded fine" datetime="2025-12-14T00:00:00+00:00">14 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/industry/2025-12-20-automobile-cybersecurity/" class="flip-title"><span>From Regulation to Implementation- Understanding Vehicle Cybersecurity legal Compliance & How Vehicle Cybersecurity Actually Gets Done</span></a>  <time class="faded fine" datetime="2025-12-20T00:00:00+00:00">20 Dec 2025</time></li>      </ul></aside>
 
   
 

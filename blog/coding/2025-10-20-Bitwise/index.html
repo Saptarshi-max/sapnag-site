@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/Bitwise1.webp" />
 <meta property="twitter:title" content="Bitwise Operations in C/C++" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-25T15:47:07+00:00","datePublished":"2025-10-20T00:00:00+00:00","description":"A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming.","headline":"Bitwise Operations in C/C++","image":"/cover_images/posts/Bitwise1.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2025-10-20-Bitwise/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2025-10-20-Bitwise/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-20T21:00:35+00:00","datePublished":"2025-10-20T00:00:00+00:00","description":"A comprehensive guide to bitwise operations in C and C++, covering operators, practical applications, and common patterns for efficient programming.","headline":"Bitwise Operations in C/C++","image":"/cover_images/posts/Bitwise1.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/coding/2025-10-20-Bitwise/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/coding/2025-10-20-Bitwise/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-20T13:21:10+00:00',
+    INDEX_KEY: 'index--2026-07-20T21:01:09+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -120,7 +120,7 @@
 
 <link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
 <link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CRoboto+Slab:400,700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
 
 
 
@@ -283,18 +283,61 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   </header>
 
   
-    <h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-  <li><a href="#1-why-bits-matter">1. Why Bits Matter</a></li>
-  <li><a href="#2-the-six-bitwise-operators">2. The Six Bitwise Operators</a></li>
-  <li><a href="#3-practical-applications">3. Practical Applications</a></li>
-  <li><a href="#4-embedded-systems-applications">4. Embedded Systems Applications</a></li>
-  <li><a href="#5-common-patterns">5. Common Patterns</a></li>
-  <li><a href="#6-practice-problems">6. Practice Problems</a></li>
-  <li><a href="#7-best-practices">7. Best Practices</a></li>
+    <ul id="markdown-toc">
+  <li><a href="#1-why-bits-matter" id="markdown-toc-1-why-bits-matter">1. Why Bits Matter</a></li>
+  <li><a href="#all-the-core-bitwise-operations-you-need-to-know-" id="markdown-toc-all-the-core-bitwise-operations-you-need-to-know-">All the Core Bitwise Operations you need to know …</a></li>
+  <li><a href="#2-the-six-bitwise-operators" id="markdown-toc-2-the-six-bitwise-operators">2. The Six Bitwise Operators</a>    <ul>
+      <li><a href="#21-and-operator-" id="markdown-toc-21-and-operator-">2.1 AND Operator (&amp;)</a></li>
+      <li><a href="#22-or-operator-" id="markdown-toc-22-or-operator-">2.2 OR Operator (|)</a></li>
+      <li><a href="#23-xor-operator-" id="markdown-toc-23-xor-operator-">2.3 XOR Operator (^)</a></li>
+      <li><a href="#24-not-operator-" id="markdown-toc-24-not-operator-">2.4 NOT Operator (~)</a></li>
+      <li><a href="#25-left-shift-" id="markdown-toc-25-left-shift-">2.5 Left Shift («)</a></li>
+      <li><a href="#26-right-shift-" id="markdown-toc-26-right-shift-">2.6 Right Shift (»)</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-common-techniques" id="markdown-toc-3-common-techniques">3. Common Techniques</a>    <ul>
+      <li><a href="#technique-1-check-if-number-is-even-or-odd" id="markdown-toc-technique-1-check-if-number-is-even-or-odd">Technique 1: Check if Number is Even or Odd</a></li>
+      <li><a href="#technique-2-multiplydivide-by-powers-of-2" id="markdown-toc-technique-2-multiplydivide-by-powers-of-2">Technique 2: Multiply/Divide by Powers of 2</a></li>
+      <li><a href="#technique-3-swap-without-temp-variable" id="markdown-toc-technique-3-swap-without-temp-variable">Technique 3: Swap Without Temp Variable</a></li>
+      <li><a href="#technique-4-check-if-power-of-2" id="markdown-toc-technique-4-check-if-power-of-2">Technique 4: Check if Power of 2</a></li>
+      <li><a href="#technique-5-count-set-bits-brian-kernighans-algorithm" id="markdown-toc-technique-5-count-set-bits-brian-kernighans-algorithm">Technique 5: Count Set Bits (Brian Kernighan’s Algorithm)</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-embedded-systems-applications" id="markdown-toc-4-embedded-systems-applications">4. Embedded Systems Applications</a>    <ul>
+      <li><a href="#example-1-led-control" id="markdown-toc-example-1-led-control">Example 1: LED Control</a></li>
+      <li><a href="#example-2-reading-sensor-status" id="markdown-toc-example-2-reading-sensor-status">Example 2: Reading Sensor Status</a></li>
+      <li><a href="#example-3-configuration-flags" id="markdown-toc-example-3-configuration-flags">Example 3: Configuration Flags</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-common-patterns" id="markdown-toc-5-common-patterns">5. Common Patterns</a>    <ul>
+      <li><a href="#pattern-1-set-clear-toggle-bit" id="markdown-toc-pattern-1-set-clear-toggle-bit">Pattern 1: Set, Clear, Toggle Bit</a></li>
+      <li><a href="#pattern-2-extract-bit-field" id="markdown-toc-pattern-2-extract-bit-field">Pattern 2: Extract Bit Field</a></li>
+      <li><a href="#pattern-3-set-multiple-bits-at-once" id="markdown-toc-pattern-3-set-multiple-bits-at-once">Pattern 3: Set Multiple Bits at Once</a></li>
+    </ul>
+  </li>
+  <li><a href="#6-practice-problems" id="markdown-toc-6-practice-problems">6. Practice Problems</a>    <ul>
+      <li><a href="#problem-1-find-the-only-non-duplicate" id="markdown-toc-problem-1-find-the-only-non-duplicate">Problem 1: Find the Only Non-Duplicate</a></li>
+      <li><a href="#problem-2-reverse-bits" id="markdown-toc-problem-2-reverse-bits">Problem 2: Reverse Bits</a></li>
+      <li><a href="#problem-3-count-bits-to-flip" id="markdown-toc-problem-3-count-bits-to-flip">Problem 3: Count Bits to Flip</a></li>
+      <li><a href="#problem-4-power-set-using-bits" id="markdown-toc-problem-4-power-set-using-bits">Problem 4: Power Set Using Bits</a></li>
+      <li><a href="#problem-5-find-two-non-repeating-elements" id="markdown-toc-problem-5-find-two-non-repeating-elements">Problem 5: Find Two Non-Repeating Elements</a></li>
+      <li><a href="#problem-6-missing-number-from-1-to-n" id="markdown-toc-problem-6-missing-number-from-1-to-n">Problem 6: Missing Number from 1 to N</a></li>
+      <li><a href="#problem-7-check-opposite-signs" id="markdown-toc-problem-7-check-opposite-signs">Problem 7: Check Opposite Signs</a></li>
+      <li><a href="#problem-8-swap-odd-and-even-bits" id="markdown-toc-problem-8-swap-odd-and-even-bits">Problem 8: Swap Odd and Even Bits</a></li>
+      <li><a href="#problem-9-check-duplicate-characters-bitmask" id="markdown-toc-problem-9-check-duplicate-characters-bitmask">Problem 9: Check Duplicate Characters (Bitmask)</a></li>
+      <li><a href="#problem-10-case-conversion-using-bits" id="markdown-toc-problem-10-case-conversion-using-bits">Problem 10: Case Conversion Using Bits</a></li>
+      <li><a href="#problem-11-rotate-bits" id="markdown-toc-problem-11-rotate-bits">Problem 11: Rotate Bits</a></li>
+      <li><a href="#problem-12-maximum-and-value-of-pair" id="markdown-toc-problem-12-maximum-and-value-of-pair">Problem 12: Maximum AND Value of Pair</a></li>
+    </ul>
+  </li>
+  <li><a href="#7-pro-tips" id="markdown-toc-7-pro-tips">7. Pro Tips</a>    <ul>
+      <li><a href="#-dos" id="markdown-toc--dos">✅ DO’s</a></li>
+      <li><a href="#-donts" id="markdown-toc--donts">❌ DON’Ts</a></li>
+      <li><a href="#quick-reference-card" id="markdown-toc-quick-reference-card">Quick Reference Card</a></li>
+    </ul>
+  </li>
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
 </ul>
-
-<hr />
 
 <h2 id="1-why-bits-matter">1. Why Bits Matter</h2>
 
@@ -2003,7 +2046,7 @@ AND= 1100 = 12
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/rust-dev/2025-12-17-raii-cpp-rust/" class="flip-title"><span>RAII in C++ vs Rust- How Each Language Manages Resources Without the Garbage collector</span></a>  <time class="faded fine" datetime="2025-12-17T00:00:00+00:00">17 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>      </ul></aside>
 
   
 

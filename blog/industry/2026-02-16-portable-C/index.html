@@ -32,7 +32,7 @@
 <meta property="twitter:image" content="/cover_images/posts/portable-c.png" />
 <meta property="twitter:title" content="Portable and Secure C- A Practical Guide to MISRA C &amp; CERT C" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-05-29T17:09:12+00:00","datePublished":"2026-02-16T00:00:00+00:00","description":"The C language has powered satellites, pacemakers, and aircraft flight computers for five decades. That longevity is not accidental, and neither is the discipline required to keep it safe.","headline":"Portable and Secure C- A Practical Guide to MISRA C &amp; CERT C","image":"/cover_images/posts/portable-c.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/industry/2026-02-16-portable-C/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/industry/2026-02-16-portable-C/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-20T21:00:35+00:00","datePublished":"2026-02-16T00:00:00+00:00","description":"The C language has powered satellites, pacemakers, and aircraft flight computers for five decades. That longevity is not accidental, and neither is the discipline required to keep it safe.","headline":"Portable and Secure C- A Practical Guide to MISRA C &amp; CERT C","image":"/cover_images/posts/portable-c.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/industry/2026-02-16-portable-C/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/industry/2026-02-16-portable-C/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-20T13:21:10+00:00',
+    INDEX_KEY: 'index--2026-07-20T21:01:09+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -120,7 +120,7 @@
 
 <link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
 <link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CRoboto+Slab:400,700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
 
 
 
@@ -340,17 +340,23 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   <p><em>“Portability is not a feature you bolt on at the end. It’s a constraint you design to from the start, or you pay for it with bugs that only manifest in the field.”</em></p>
 </blockquote>
 
-<p>The cost of getting this wrong is measured in recalls, patch cycles, and in safety-critical domains, human lives. The 1996 Ariane 5 Flight 501 disaster, caused by a 64-bit floating-point value being converted to a 16-bit integer without range checking, destroyed a 500-million-dollar rocket 37 seconds after launch. The code had been correct for Ariane 4. It was <em>portable</em> only by accident.</p>
+<div class="warning">
 
-<p>Portability matters because C is the language of constrained targets, and constrained targets are everywhere: automotive ECUs, industrial PLCs, medical implants, avionics, SCADA systems. The code you write today will outlive the compiler you used to build it. The board it runs on today may be replaced by something with a different word size tomorrow. Designing for portability isn’t an academic exercise. It’s professional hygiene.</p>
+  <p>Portability matters because C is the language of constrained targets, and constrained targets are everywhere: automotive ECUs, industrial PLCs, medical implants, avionics, SCADA systems. The code you write today will outlive the compiler you used to build it. The board it runs on today may be replaced by something with a different word size tomorrow. Designing for portability isn’t an academic exercise. It’s professional hygiene.</p>
+
+</div>
 
 <hr />
 
 <h2 id="the-great-myth-of-embedded-c-vs-c">The great myth of “Embedded C vs C”</h2>
 
-<p>There is a persistent belief in firmware circles that “Embedded C” is a separate dialect: a hardened, stripped-down version of the language with special rules for registers, memory-mapped I/O, and interrupt handlers. Developers treat it as an excuse. <em>“Of course I’m using implementation-defined behaviour — this is embedded code.”</em></p>
+<p>There is a persistent belief in firmware circles that “Embedded C” is a separate dialect: a hardened, stripped-down version of the language with special rules for registers, memory-mapped I/O, and interrupt handlers.</p>
 
-<p>This is fiction. There is no Embedded C standard separate from C89, C99, C11, or C23. There are only C implementations targeting constrained environments, and all of them are still governed by ISO/IEC 9899.</p>
+<p>This is fiction. There is no Embedded C standard separate from C89, C99, C11, or C23.</p>
+
+<blockquote>
+  <p>There are only C implementations targeting constrained environments, and all of them are still governed by ISO/IEC 9899.</p>
+</blockquote>
 
 <div class="note">
 
@@ -400,7 +406,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="cert--carnegie-mellon-sei">CERT / Carnegie Mellon SEI</h3>
 
-<p>The CERT Coordination Center at Carnegie Mellon’s Software Engineering Institute took a different approach. Their CERT C Coding Standard (now in its third edition, aligned to C11) emerged from secure software research and is publicly available. CERT’s perspective is fundamentally security-first: the rules exist to eliminate classes of vulnerability — buffer overflows, integer wrapping exploits, race conditions — rather than to satisfy automotive functional safety requirements.</p>
+<p>Rather than to satisfy automotive functional safety requirements,the CERT Coordination Center at Carnegie Mellon’s Software Engineering Institute took a different approach. Their CERT C Coding Standard (now in its third edition, aligned to C11) emerged from secure software research and is publicly available. CERT’s perspective is fundamentally security-first: the rules exist to eliminate classes of vulnerability like buffer overflows, integer wrapping exploits, race conditions.</p>
 
 <h3 id="iec-autosar-do-178c">IEC, AUTOSAR, DO-178C</h3>
 
@@ -574,13 +580,19 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <h3 id="ariane-5-flight-501-1996">Ariane 5, Flight 501 (1996)</h3>
 
-<p>The inertial reference system reused from Ariane 4 attempted to convert a 64-bit floating-point velocity value to a 16-bit signed integer. The value was outside the representable range. The conversion triggered a hardware exception. The backup SRI failed identically. The rocket self-destructed 37 seconds after launch.</p>
+<p>The inertial reference system reused from Ariane 4 attempted to convert a 64-bit floating-point velocity value to a 16-bit signed integer.</p>
+
+<p>The value was outside the representable range. The conversion triggered a hardware exception. The backup SRI failed identically. The rocket self-destructed 37 seconds after launch.</p>
 
 <p><img src="/cover_images/posts/ARIANE-5.png" alt="" /></p>
 
 <p>Source - <a href="https://www.youtube.com/watch?v=wGeZEUjUKvc">https://www.youtube.com/watch?v=wGeZEUjUKvc</a></p>
 
-<p><strong>Root cause:</strong> Undefined behaviour on integer conversion. MISRA Rule 10.3 — a value must be within the range of the target type — would have flagged this at static analysis time. Cost: approximately $370M USD.</p>
+<p><strong>Root cause:</strong> Undefined behaviour on integer conversion.</p>
+<ul>
+  <li>MISRA Rule 10.3 :- a value must be within the range of the target type, would have flagged this at static analysis time.</li>
+  <li>Damage Cost: approximately $370M USD.</li>
+</ul>
 
 <p>&lt;/div&gt;</p>
 
@@ -592,7 +604,11 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 <div class="danger">
   <p>Source and Read Further - <a href="https://pvs-studio.com/en/blog/posts/0438/">Killer Bug. Therac-25: Quick-and-Dirty</a></p>
 
-  <p><strong>Root cause:</strong> Shared mutable state accessed without synchronisation. CERT CON32-C (prevent data races when accessing bit-fields from multiple threads) directly addresses this class of vulnerability. No software coding standard was in use.</p>
+  <p><strong>Root cause:</strong> 
+Shared mutable state accessed without synchronisation.</p>
+  <ul>
+    <li>CERT CON32-C (prevent data races when accessing bit-fields from multiple threads) directly addresses this class of vulnerability. No software coding standard was in use.</li>
+  </ul>
 
 </div>
 
@@ -1131,7 +1147,7 @@ So if you run the program again :</li>
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/rust-dev/2025-12-21-rust-composition/" class="flip-title"><span>7 C++ Inheritance pain-points Rust Fixes Forever</span></a>  <time class="faded fine" datetime="2025-12-21T00:00:00+00:00">21 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2025-12-16-pigweed-build-tools/" class="flip-title"><span>Build Systems in Embedded Development: From Make to Pigweed</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>      </ul></aside>
 
   
 
