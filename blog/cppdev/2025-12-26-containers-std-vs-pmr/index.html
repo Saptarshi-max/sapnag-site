@@ -27,14 +27,14 @@
 <meta name="description" content="A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead." />
 <meta property="og:description" content="A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead." />
 <meta property="og:site_name" content="Saptarshi Nag" />
-<meta property="og:image" content="/cover_images/std-pmr.png" />
+<meta property="og:image" content="/cover_images/std-pmr.webp" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-12-26T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/cover_images/std-pmr.png" />
+<meta property="twitter:image" content="/cover_images/std-pmr.webp" />
 <meta property="twitter:title" content="std::pmr in Embedded C++ - Predictable Memory Without the Heap" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-02T21:10:52+00:00","datePublished":"2025-12-26T00:00:00+00:00","description":"A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead.","headline":"std::pmr in Embedded C++ - Predictable Memory Without the Heap","image":"/cover_images/std-pmr.png","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-22T14:18:12+00:00","datePublished":"2025-12-26T00:00:00+00:00","description":"A practical embedded-first guide to std::pmr: what it solves, where it fits, how to size buffers safely, and when to prefer a custom allocator or plain static storage instead.","headline":"std::pmr in Embedded C++ - Predictable Memory Without the Heap","image":"/cover_images/std-pmr.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/cppdev/2025-12-26-containers-std-vs-pmr/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -106,7 +106,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-20T21:01:09+00:00',
+    INDEX_KEY: 'index--2026-07-22T14:18:59+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -253,7 +253,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 <img
   
-    src="/cover_images/std-pmr.png"
+    src="/cover_images/std-pmr.webp"
     
     
   
@@ -758,57 +758,57 @@ This approach aligns with the needs of embedded engineers, where worst-case beha
 
 <h2 id="the-benchmark-plots-and-what-they-indicate">The Benchmark plots and what they indicate</h2>
 
-<p><img src="/cover_images/posts/pmr_plots-2/speedup_summary.png" alt="Overall speedup summary" />
+<p><img src="/cover_images/posts/pmr_plots-2/speedup_summary.webp" alt="Overall speedup summary" />
 <em>What this indicates: PMR is workload-dependent. In some paths it improves both speed and jitter, in others it mainly improves predictability, and in some it can lose on both metrics.</em></p>
 
 <h3 id="vector-workload">Vector workload</h3>
 
-<p><img src="/cover_images/posts/pmr_plots-2/vector_push_back_comparison.png" alt="Vector push_back comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/vector_push_back_comparison.webp" alt="Vector push_back comparison" />
 <em>What this indicates: with correctly sized PMR resources, monotonic PMR can be very competitive and often faster for this bounded push-heavy pattern.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/vector_push_back_percentiles.png" alt="Vector push_back percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/vector_push_back_percentiles.webp" alt="Vector push_back percentiles" />
 <em>What this indicates: percentile spread shows tail behavior. The tighter PMR spread here reflects fewer outlier spikes when memory is pre-bounded.</em></p>
 
 <h3 id="string-workload">String workload</h3>
 
-<p><img src="/cover_images/posts/pmr_plots-2/string_concat_comparison.png" alt="String concatenation comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/string_concat_comparison.webp" alt="String concatenation comparison" />
 <em>What this indicates: string-heavy code can benefit from PMR by reducing allocation churn in repeated temporary construction.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/string_concat_percentiles.png" alt="String concatenation percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/string_concat_percentiles.webp" alt="String concatenation percentiles" />
 <em>What this indicates: PMR often improves p95 and p99 consistency for concat paths, which matters more than mean in deadline-driven systems.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/string_sso_comparison.png" alt="String SSO comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/string_sso_comparison.webp" alt="String SSO comparison" />
 <em>What this indicates: for short-string dominated paths, PMR and std can be close in mean time, so jitter and memory-policy needs become the deciding factor.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/string_sso_percentiles.png" alt="String SSO percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/string_sso_percentiles.webp" alt="String SSO percentiles" />
 <em>What this indicates: even when averages are similar, percentile tails reveal which allocator path is more stable under repeated short-lived string churn.</em></p>
 
 <h3 id="map-workload">Map workload</h3>
 
-<p><img src="/cover_images/posts/pmr_plots-2/map_int_key_comparison.png" alt="Map int-key comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/map_int_key_comparison.webp" alt="Map int-key comparison" />
 <em>What this indicates: PMR can help ordered-map int-key inserts, but gains depend on node allocation pattern and resource choice.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/map_int_key_percentiles.png" alt="Map int-key percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/map_int_key_percentiles.webp" alt="Map int-key percentiles" />
 <em>What this indicates: map tail latency can diverge from average behavior, so p95/p99 should drive allocator decisions for registry-like structures.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/map_string_key_comparison.png" alt="Map string-key comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/map_string_key_comparison.webp" alt="Map string-key comparison" />
 <em>What this indicates: string-key maps are mixed; allocator policy and string storage behavior dominate results, so measure this path specifically in your firmware.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/map_string_key_percentiles.png" alt="Map string-key percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/map_string_key_percentiles.webp" alt="Map string-key percentiles" />
 <em>What this indicates: string-heavy node allocations can amplify outliers, and percentile plots show whether PMR is helping or hurting worst-case latency.</em></p>
 
 <h3 id="mixed-realistic-workload">Mixed realistic workload</h3>
 
-<p><img src="/cover_images/posts/pmr_plots-2/sensor_collection_comparison.png" alt="Sensor collection comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/sensor_collection_comparison.webp" alt="Sensor collection comparison" />
 <em>What this indicates: in realistic container mixes, PMR can reduce both runtime and jitter when working sets are bounded and reused per task/scope.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/sensor_collection_percentiles.png" alt="Sensor collection percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/sensor_collection_percentiles.webp" alt="Sensor collection percentiles" />
 <em>What this indicates: this view highlights deadline risk directly. Smaller p95 to p99 gaps mean fewer long-tail surprises in data-collection loops.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/message_queue_comparison.png" alt="Message queue comparison" />
+<p><img src="/cover_images/posts/pmr_plots-2/message_queue_comparison.webp" alt="Message queue comparison" />
 <em>What this indicates: this is the profile to watch for embedded messaging paths. PMR can lower long-tail latency by avoiding general heap behavior during bursts.</em></p>
 
-<p><img src="/cover_images/posts/pmr_plots-2/message_queue_percentiles.png" alt="Message queue percentiles" />
+<p><img src="/cover_images/posts/pmr_plots-2/message_queue_percentiles.webp" alt="Message queue percentiles" />
 <em>What this indicates: queue workloads are often bursty; the percentile chart confirms whether PMR is tightening tail latency where it matters operationally.</em></p>
 
 <h2 id="when-i-would-recommend-stdpmr">When I would recommend STD::PMR</h2>
@@ -1257,7 +1257,7 @@ considering.</p>
     
 
 
-  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/IMG_0313.jpeg"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Getting Started with MetricMQ on ESP32"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title">Getting Started with MetricMQ on ESP32</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.    </p>      <a class="fill-card no-hover" href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ on ESP32</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-04-17-di-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/Di.png"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility    </p>      <a class="fill-card no-hover" href="/blog/es/2026-04-17-di-embedded/" tabindex="-1"><span class="sr-only">Continue reading Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??</span></a></article>              </div>      </div></aside>
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/grafana_metricmq.webp"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Getting Started with MetricMQ"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" class="flip-title">Getting Started with MetricMQ</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.    </p>      <a class="fill-card no-hover" href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/IMG_0313.webp"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Getting Started with MetricMQ on ESP32"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title">Getting Started with MetricMQ on ESP32</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.    </p>      <a class="fill-card no-hover" href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ on ESP32</span></a></article>              </div>      </div></aside>
 
   
 
@@ -1265,7 +1265,7 @@ considering.</p>
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-12-16-cpp-string/" class="flip-title"><span>C++ String Operations</span></a>  <time class="faded fine" datetime="2025-12-16T00:00:00+00:00">16 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" class="flip-title"><span>Getting Started with MetricMQ</span></a>  <time class="faded fine" datetime="2026-07-01T00:00:00+00:00">01 Jul 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" class="flip-title"><span>Getting Started with MetricMQ on ESP32</span></a>  <time class="faded fine" datetime="2026-05-15T00:00:00+00:00">15 May 2026</time></li>          <li class="h4">  <a href="/blog/coding/2026-02-01-c-bst/" class="flip-title"><span>Binary Search Tree in C</span></a>  <time class="faded fine" datetime="2026-02-01T00:00:00+00:00">01 Feb 2026</time></li>      </ul></aside>
 
   
 
@@ -1344,7 +1344,7 @@ considering.</p>
   <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
        style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
   <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
-       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.png)"></div>
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.webp)"></div>
 
 
     <div class="sidebar-sticky">
@@ -1374,7 +1374,7 @@ considering.</p>
     <li >
         <a
         id="_drawer--opened"
-        href="/blog/"        
+        href="/posts/"        
         class="sidebar-nav-item "
         
     >

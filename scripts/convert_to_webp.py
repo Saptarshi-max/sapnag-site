@@ -98,12 +98,26 @@ def update_references(converted: dict[str, str]):
     
     converted: dict mapping old relative path (with original ext) -> new relative path (with .webp)
     """
+    # Augment converted map with any existing .webp files in the repository
+    full_converted = dict(converted)
+    for root, dirs, files in os.walk(REPO_ROOT):
+        root_path = Path(root)
+        if should_skip(root_path):
+            continue
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        for f in files:
+            fp = root_path / f
+            if fp.suffix.lower() == '.webp':
+                new_rel = str(fp.relative_to(REPO_ROOT))
+                for old_ext in ('.png', '.jpg', '.jpeg'):
+                    old_rel = str(fp.with_suffix(old_ext).relative_to(REPO_ROOT))
+                    if old_rel not in full_converted:
+                        full_converted[old_rel] = new_rel
+
     ref_files = find_ref_files()
     
-    # Build a regex pattern that matches any of the old filenames
-    # We need to handle both forward and backslash paths, and with/without leading /
-    # Sort by length descending to match longer paths first
-    old_paths = sorted(converted.keys(), key=len, reverse=True)
+    # Build list of old path variations (plain, forward-slashed, URL-encoded)
+    old_paths = sorted(full_converted.keys(), key=len, reverse=True)
     
     if not old_paths:
         return 0
@@ -119,17 +133,29 @@ def update_references(converted: dict[str, str]):
         original_content = content
         
         for old_rel in old_paths:
-            new_rel = converted[old_rel]
-            # Replace with forward slashes (web paths)
+            new_rel = full_converted[old_rel]
             old_web = old_rel.replace('\\', '/')
             new_web = new_rel.replace('\\', '/')
+            
+            # Replace plain path
             if old_web in content:
                 content = content.replace(old_web, new_web)
+            
+            # Replace URL-encoded path (%20 for spaces)
+            old_web_encoded = old_web.replace(' ', '%20')
+            new_web_encoded = new_web.replace(' ', '%20')
+            if old_web_encoded in content:
+                content = content.replace(old_web_encoded, new_web_encoded)
+
+            # Replace basename-only reference (e.g. image name in frontmatter)
+            old_base = Path(old_rel).name
+            new_base = Path(new_rel).name
+            if old_base in content:
+                content = content.replace(old_base, new_base)
         
         if content != original_content:
             try:
                 ref_file.write_text(content, encoding='utf-8')
-                count = sum(1 for old_rel in old_paths if converted[old_rel].replace('\\', '/') in content)
                 total_replacements += 1
                 print(f"  Updated references in: {ref_file.relative_to(REPO_ROOT)}")
             except Exception as e:
