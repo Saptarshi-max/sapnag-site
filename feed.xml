@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-22T14:18:59+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ</title><link href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" rel="alternate" type="text/html" title="Getting Started with MetricMQ" /><published>2026-07-01T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/metricmq-getting-started-no-hardware</id><content type="html" xml:base="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/"><![CDATA[]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/grafana_metricmq.webp" /><media:content medium="image" url="/cover_images/posts/grafana_metricmq.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<ul id="markdown-toc">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-07-22T19:58:06+00:00</updated><id>/feed.xml</id><title type="html">Saptarshi Nag</title><subtitle>Embedded System Engineer</subtitle><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><entry><title type="html">Getting Started with MetricMQ</title><link href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" rel="alternate" type="text/html" title="Getting Started with MetricMQ" /><published>2026-07-01T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/metricmq-getting-started-no-hardware</id><content type="html" xml:base="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/"><![CDATA[]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/grafana_metricmq.webp" /><media:content medium="image" url="/cover_images/posts/grafana_metricmq.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Getting Started with MetricMQ on ESP32</title><link href="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/" rel="alternate" type="text/html" title="Getting Started with MetricMQ on ESP32" /><published>2026-05-15T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/metricmq-getting-started-1-esp32</id><content type="html" xml:base="/blog/es/2026-05-15-metricmq-getting-started-1-esp32/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#link-to-the-github-repo" id="markdown-toc-link-to-the-github-repo">Link to the Github Repo</a></li>
   <li><a href="#features" id="markdown-toc-features">Features</a></li>
   <li><a href="#the-demos-presented-in-this-post" id="markdown-toc-the-demos-presented-in-this-post">The Demos presented in this Post</a></li>
@@ -1231,350 +1231,301 @@ Offset 16+  : topic bytes, then payload bytes
 
 <p>The <strong>Running Tests</strong> section on the main page lists every test binary and whether it needs a live broker. Start with <code class="language-plaintext highlighter-rouge">signed_publish_test</code> — it needs no broker and confirms your Ed25519 setup is correct. Then <code class="language-plaintext highlighter-rouge">exactly_once_test</code> with the broker running to confirm ACK tracking and replay. The <code class="language-plaintext highlighter-rouge">persistence_test</code> is the most useful for Demo 2 validation.</p>
 
-<hr />]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/IMG_0313.webp" /><media:content medium="image" url="/cover_images/posts/IMG_0313.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??</title><link href="/blog/es/2026-04-17-di-embedded/" rel="alternate" type="text/html" title="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??" /><published>2026-04-17T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/di-embedded</id><content type="html" xml:base="/blog/es/2026-04-17-di-embedded/"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#the-embedded-maintenance-trap" id="markdown-toc-the-embedded-maintenance-trap">The Embedded Maintenance Trap</a></li>
-  <li><a href="#the-anti-patterns-in-detail" id="markdown-toc-the-anti-patterns-in-detail">The Anti-Patterns in Detail</a>    <ul>
-      <li><a href="#direct-hardware-access-buried-in-application-logic" id="markdown-toc-direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</a></li>
-      <li><a href="#hidden-dependencies-and-magic-globals" id="markdown-toc-hidden-dependencies-and-magic-globals">Hidden Dependencies and Magic Globals</a></li>
-      <li><a href="#dependency-inversion---what-it-actually-means" id="markdown-toc-dependency-inversion---what-it-actually-means">Dependency Inversion - What It Actually Means</a></li>
-      <li><a href="#dependency-injection---the-missing-piece" id="markdown-toc-dependency-injection---the-missing-piece">Dependency Injection - The Missing Piece</a></li>
-      <li><a href="#the-full-pattern---dip--di-together" id="markdown-toc-the-full-pattern---dip--di-together">The Full Pattern - DIP + DI Together</a></li>
-      <li><a href="#testing-without-hardware" id="markdown-toc-testing-without-hardware">Testing Without Hardware</a></li>
-      <li><a href="#performance-concerns---addressed-honestly" id="markdown-toc-performance-concerns---addressed-honestly">Performance Concerns - Addressed Honestly</a></li>
-      <li><a href="#di-and-dip-in-c" id="markdown-toc-di-and-dip-in-c">DI and DIP in C++</a></li>
-      <li><a href="#embedded-linux-and-yocto-context" id="markdown-toc-embedded-linux-and-yocto-context">Embedded Linux and Yocto Context</a></li>
-      <li><a href="#when-not-to-use-this" id="markdown-toc-when-not-to-use-this">When Not To Use This</a></li>
-      <li><a href="#migrating-an-existing-codebase" id="markdown-toc-migrating-an-existing-codebase">Migrating an Existing Codebase</a></li>
-      <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+<hr />]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[MetricMQ is a 328 KB C++20 message broker built from scratch and still under development. It features a custom binary wire protocol, Ed25519 message signing enforced at the wire level, exactly-once delivery using sequence IDs with LMDB persistence, Prometheus metrics on every message path, and a native ESP32 Arduino client. This page shows the broker running four demos, each highlighting a different capability with live Prometheus metrics you can watch in real time.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/IMG_0313.webp" /><media:content medium="image" url="/cover_images/posts/IMG_0313.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It</title><link href="/blog/es/2026-04-17-di-embedded/" rel="alternate" type="text/html" title="Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It" /><published>2026-04-17T00:00:00+00:00</published><updated>2026-07-22T18:50:50+00:00</updated><id>/blog/es/di-embedded</id><content type="html" xml:base="/blog/es/2026-04-17-di-embedded/"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#the-board-revision-nightmare" id="markdown-toc-the-board-revision-nightmare">The Board Revision Nightmare</a></li>
+  <li><a href="#the-anti-pattern-hardware-leaking-into-logic" id="markdown-toc-the-anti-pattern-hardware-leaking-into-logic">The Anti-Pattern: Hardware Leaking into Logic</a>    <ul>
+      <li><a href="#why-this-breaks-down" id="markdown-toc-why-this-breaks-down">Why this breaks down:</a></li>
     </ul>
   </li>
+  <li><a href="#the-fix-part-1-dependency-inversion-dip" id="markdown-toc-the-fix-part-1-dependency-inversion-dip">The Fix Part 1: Dependency Inversion (DIP)</a>    <ul>
+      <li><a href="#in-c-interface-via-struct-of-function-pointers" id="markdown-toc-in-c-interface-via-struct-of-function-pointers">In C: Interface via <code class="language-plaintext highlighter-rouge">struct</code> of function pointers</a></li>
+      <li><a href="#in-c-abstract-interface-class" id="markdown-toc-in-c-abstract-interface-class">In C++: Abstract Interface Class</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-fix-part-2-dependency-injection-di" id="markdown-toc-the-fix-part-2-dependency-injection-di">The Fix Part 2: Dependency Injection (DI)</a>    <ul>
+      <li><a href="#application-logic-c" id="markdown-toc-application-logic-c">Application Logic (C)</a></li>
+    </ul>
+  </li>
+  <li><a href="#interactive-hands-on-unit-testing-on-pc-zero-hardware-needed" id="markdown-toc-interactive-hands-on-unit-testing-on-pc-zero-hardware-needed">Interactive Hands-On: Unit Testing on PC (Zero Hardware Needed)</a>    <ul>
+      <li><a href="#what-you-just-unlocked" id="markdown-toc-what-you-just-unlocked">What you just unlocked:</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-performance-myth-how-bad-is-the-overhead" id="markdown-toc-the-performance-myth-how-bad-is-the-overhead">The Performance Myth: How Bad Is the Overhead?</a>    <ul>
+      <li><a href="#1-function-pointer--vtable-call-cost" id="markdown-toc-1-function-pointer--vtable-call-cost">1. Function Pointer / Vtable Call Cost</a></li>
+      <li><a href="#2-what-if-you-need-zero-overhead-eg-10-mhz-bit-bang-or-fast-isr" id="markdown-toc-2-what-if-you-need-zero-overhead-eg-10-mhz-bit-bang-or-fast-isr">2. What if you need Zero Overhead (e.g. 10 MHz Bit-Bang or Fast ISR)?</a>        <ul>
+          <li><a href="#option-a-c-templates-static-polymorphism--crtp" id="markdown-toc-option-a-c-templates-static-polymorphism--crtp">Option A: C++ Templates (Static Polymorphism / CRTP)</a></li>
+          <li><a href="#option-b-c-link-time-binding" id="markdown-toc-option-b-c-link-time-binding">Option B: C Link-Time Binding</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#when-not-to-use-dependency-injection" id="markdown-toc-when-not-to-use-dependency-injection">When NOT to Use Dependency Injection</a></li>
+  <li><a href="#incremental-adoption-how-to-start-on-legacy-code" id="markdown-toc-incremental-adoption-how-to-start-on-legacy-code">Incremental Adoption: How to Start on Legacy Code</a></li>
 </ul>
 
-<h1 id="the-embedded-maintenance-trap">The Embedded Maintenance Trap</h1>
+<h1 id="the-board-revision-nightmare">The Board Revision Nightmare</h1>
 
-<p>Embedded products are supposed to live long lives with little or no maintenance (often 10 to 20 years). But with time, Hardware revisions happen. MCUs get discontinued. Pin assignments shift. New team members arrive. And through all of it, the codebase has to hold together.</p>
+<p>Picture this scenario: You’re building a thermal management controller for an industrial gateway. You pick an STM32, hook up an I2C temperature sensor to <code class="language-plaintext highlighter-rouge">I2C1</code> (<code class="language-plaintext highlighter-rouge">GPIOB6/7</code>), write the driver using your vendor’s HAL, and verify it on the bench. It works great.</p>
 
-<p>The typical trajectory looks like this:</p>
+<p>Six months later:</p>
+<ol>
+  <li><strong>The component shortage hits</strong>: Your MCU is lead-timed out for 40 weeks, so management swaps to an ESP32 or RP2040.</li>
+  <li><strong>The PCB layout changes</strong>: The hardware engineer moves the sensor from <code class="language-plaintext highlighter-rouge">I2C1</code> to <code class="language-plaintext highlighter-rouge">I2C2</code> on a different pin bank.</li>
+  <li><strong>The testing request arrives</strong>: The QA team asks for automated unit tests that verify fan triggers at 85°C — without someone manually heating the board with a heat gun.</li>
+</ol>
+
+<p>If your temperature checking logic calls <code class="language-plaintext highlighter-rouge">HAL_I2C_Master_Transmit(&amp;hi2c1, ...)</code> directly, you’re stuck:</p>
 <ul>
-  <li>a prototype gets written, with direct register writes and HAL calls sprinkled throughout the application logic.</li>
-  <li>Run all tests on Simulator &amp; Hardware (Prototype board)</li>
-  <li>It works. It ships. Three years later, the board changes, and a demand to update the product with latest market needs and technology. Or a new MCU in the market with extreme low power, but high performance at much lower cost. Customers will love the upgrade.</li>
-  <li>Looking back at the legacy code, and you find that <em>motor logic, display timing, and sensor reads</em> are all entangled with pin numbers and peripheral names that no longer exist.</li>
+  <li>You have to rewrite application logic for every new board or MCU.</li>
+  <li>You can’t test safety-critical alarms without physical hardware.</li>
+  <li>You can’t simulate I2C bus errors (NACKs, timeouts) on your PC.</li>
 </ul>
 
-<p>Some examples of why your existing code is in a mess:</p>
-<ul>
-  <li>Application logic directly calls GPIO, I2C, SPI with hardcoded pin numbers</li>
-  <li>Global driver singletons accessed from anywhere in the codebase</li>
-  <li><code class="language-plaintext highlighter-rouge">#ifdef</code> chains multiplying across files to handle hardware variants</li>
-  <li>Unit testing is impossible without the actual target hardware</li>
-  <li>Bugs only surface late - on hardware, in the field</li>
-</ul>
+<p>This is <strong>tight coupling</strong>. The problem isn’t the hardware — it’s that business logic knows <em>too much</em> about register addresses and vendor HAL handles.</p>
 
+<hr />
+
+<h1 id="the-anti-pattern-hardware-leaking-into-logic">The Anti-Pattern: Hardware Leaking into Logic</h1>
+
+<p>Here is how embedded code typically gets written under pressure:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// thermal_control.c — BAD: Application logic hardcoded to STM32 HAL &amp; I2C1</span>
+<span class="cp">#include</span> <span class="cpf">"stm32f4xx_hal.h"</span><span class="cp">
+#include</span> <span class="cpf">"main.h"</span><span class="cp">
+</span>
+<span class="k">extern</span> <span class="n">I2C_HandleTypeDef</span> <span class="n">hi2c1</span><span class="p">;</span>
+<span class="cp">#define TMP102_I2C_ADDR (0x48 &lt;&lt; 1)
+</span>
+<span class="kt">void</span> <span class="nf">check_system_temperature</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">reg</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span> <span class="c1">// Temperature register</span>
+    <span class="kt">uint8_t</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+    <span class="c1">// Application logic is calling low-level STM32 HAL directly!</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">HAL_I2C_Master_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hi2c1</span><span class="p">,</span> <span class="n">TMP102_I2C_ADDR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">reg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">HAL_I2C_Master_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hi2c1</span><span class="p">,</span> <span class="n">TMP102_I2C_ADDR</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int16_t</span> <span class="n">raw</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">);</span>
+            <span class="kt">float</span> <span class="n">temp_c</span> <span class="o">=</span> <span class="n">raw</span> <span class="o">*</span> <span class="mi">0</span><span class="p">.</span><span class="mo">0625</span><span class="n">f</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">temp_c</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Direct GPIO call to trigger cooling fan</span>
+                <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">FAN_GPIO_Port</span><span class="p">,</span> <span class="n">FAN_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="why-this-breaks-down">Why this breaks down:</h3>
+<ol>
+  <li><strong>Zero Portability</strong>: Porting to an ESP32 or RP2040 requires touching <code class="language-plaintext highlighter-rouge">thermal_control.c</code> because STM32 HAL headers are baked into it.</li>
+  <li><strong>Zero Host Testability</strong>: You cannot compile this on your Linux/macOS/Windows PC because <code class="language-plaintext highlighter-rouge">stm32f4xx_hal.h</code> doesn’t exist on x86.</li>
+  <li><strong>Zero Fault Injection</strong>: How do you test what happens when the sensor fails to respond? You have to physically desolder the chip or short the bus lines.</li>
+</ol>
+
+<hr />
+
+<h1 id="the-fix-part-1-dependency-inversion-dip">The Fix Part 1: Dependency Inversion (DIP)</h1>
+
+<p>The <strong>Dependency Inversion Principle</strong> states:</p>
 <blockquote>
-  <p>Most embedded problems are not hardware problems, they’re <strong>design problems</strong>. The hardware is just where they become visible.</p>
+  <p>High-level business logic (e.g. <em>turning on a fan above 80°C</em>) should not depend on low-level details (e.g. <em>STM32 I2C1 registers</em>). Both should depend on an <strong>abstraction</strong>.</p>
 </blockquote>
 
-<h1 id="the-anti-patterns-in-detail">The Anti-Patterns in Detail</h1>
+<p>Let’s separate <em>what</em> the application needs from <em>how</em> the hardware delivers it.</p>
 
-<h3 id="direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</h3>
+<h3 id="in-c-interface-via-struct-of-function-pointers">In C: Interface via <code class="language-plaintext highlighter-rouge">struct</code> of function pointers</h3>
 
-<p>The most common offender: application code that “knows” things it shouldn’t (Direct coupling), like:</p>
-<ul>
-  <li>GPIO pin numbers</li>
-  <li>peripheral base addresses</li>
-  <li>HAL function names</li>
-</ul>
-
-<p>all of it leaking up into business logic.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Application logic shouldn't know about GPIOA pin 5</span>
-<span class="kt">void</span> <span class="nf">motor_start</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">GPIO_SetPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>  <span class="c1">// What is pin 5? Why GPIOA?</span>
-    <span class="n">TIM2</span><span class="o">-&gt;</span><span class="n">CR1</span> <span class="o">|=</span> <span class="n">TIM_CR1_CEN</span><span class="p">;</span> <span class="c1">// And what's TIM2 doing here?</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Change the board, change the timer, or port to a different MCU family, and you’re rewriting this logic from scratch. Worse, you can’t test <code class="language-plaintext highlighter-rouge">motor_start()</code> without the hardware in front of you.</p>
-
-<h3 id="hidden-dependencies-and-magic-globals">Hidden Dependencies and Magic Globals</h3>
-
-<p>Singleton HALs and global driver instances are a related problem. Why? because the Functions that silently access hardware through global state are impossible to reason about in isolation. You can never be sure what a function does without tracing its entire dependency chain through globals, which goes against good software testing principles</p>
-
-<h2 id="dependency-inversion---what-it-actually-means">Dependency Inversion - What It Actually Means</h2>
-
-<p>The Dependency Inversion Principle (DIP) is the “D” in SOLID, but you don’t need to care about the acronym. The idea is simple and practical:</p>
-
-<div class="think">
-
-  <p>High-level logic should not depend on low-level hardware details. Both should depend on an <strong>abstraction</strong>. Hence, Your application logic should not know which pin an LED is connected to.</p>
-
-</div>
-
-<p>In embedded terms: your</p>
-<ul>
-  <li>state machine</li>
-  <li>your control loop</li>
-  <li>your protocol handler 
-these are <em>high-level</em>. 
-While :</li>
-  <li>The GPIO writes</li>
-  <li>I2C transactions</li>
-  <li>timer configurations
-these are <em>low-level details</em>.</li>
-</ul>
-
-<p>DIP says they shouldn’t be directly coupled.</p>
-
-<p>Abstractions in C and C++ can take different forms. In C, a struct of function pointers acts as an interface. In C++, abstract base classes serve the same purpose. The implementation or the actual hardware access code lives behind that interface, invisible to the application.</p>
-
-<p><strong>Violates DIP</strong></p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">led_on</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span>
-    <span class="n">LED_PORT</span><span class="p">,</span>
-    <span class="n">LED_PIN</span><span class="p">,</span>
-    <span class="n">GPIO_PIN_SET</span>
-  <span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>DIP Applied</strong></p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">on</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-  <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-<span class="p">}</span> <span class="n">led_t</span><span class="p">;</span>
-
-<span class="c1">// App only sees led_t</span>
-</code></pre></div></div>
-
-<p>The application code depends on <code class="language-plaintext highlighter-rouge">led_t</code>. It has no idea whether the LED is on GPIOA, GPIOB, active-high, or active-low. That’s someone else’s problem - and that’s the point.</p>
-
-<h2 id="dependency-injection---the-missing-piece">Dependency Injection - The Missing Piece</h2>
-
-<p>Dependency Inversion tells you <em>what</em> your code should depend on (abstractions, not concretions). Dependency Injection (DI) tells you <em>how</em> those abstractions actually reach your code.</p>
-
-<div class="important">
-
-  <p>Don’t let your module create or find its own dependencies. Have them passed in from the outside. Someone else gives your code what it needs.</p>
-
-</div>
-
-<p>If you’ve ever passed a driver struct into an initialization function, or written a BSP that hands hardware handles, to application modules - you’ve already done dependency injection. You just didn’t call it that.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Module receives its dependency - doesn't create it</span>
-<span class="kt">void</span> <span class="nf">app_init</span><span class="p">(</span><span class="n">led_t</span> <span class="o">*</span><span class="n">status_led</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">status_led</span><span class="o">-&gt;</span><span class="n">on</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// main.c or BSP wires it together</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">led_t</span> <span class="n">hw_led</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="n">hw_led_on</span><span class="p">,</span> <span class="p">.</span><span class="n">off</span> <span class="o">=</span> <span class="n">hw_led_off</span> <span class="p">};</span>
-    <span class="n">app_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hw_led</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The application module has no idea it’s talking to a real LED. It just calls the function pointer. Who sets that up? <code class="language-plaintext highlighter-rouge">main()</code>, the BSP, or a system init layer - wherever is appropriate. That’s the injection point.</p>
-
-<h2 id="the-full-pattern---dip--di-together">The Full Pattern - DIP + DI Together</h2>
-
-<p>DIP defines the abstraction while, DI wires the implementation to it. Used together, they fully decouple your hardware from your application logic. Here’s the complete pattern for an LED:</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// led.h - the abstraction</span>
-<span class="c1">// This is the interface. Application code only includes this.</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// temp_sensor.h — The Abstraction (No HAL headers here!)</span>
+<span class="cp">#pragma once
+#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span>
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">on</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">toggle</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-<span class="p">}</span> <span class="n">led_t</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">read_temp_c</span><span class="p">)(</span><span class="kt">float</span> <span class="o">*</span><span class="n">temp_out</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">;</span> <span class="c1">// Context (e.g. bus handle, I2C address)</span>
+<span class="p">}</span> <span class="n">temp_sensor_t</span><span class="p">;</span>
 </code></pre></div></div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hw_led.c - the hardware implementation</span>
-<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
-</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_on</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>     <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>    <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_toggle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">);</span> <span class="p">}</span>
+<h3 id="in-c-abstract-interface-class">In C++: Abstract Interface Class</h3>
 
-<span class="n">led_t</span> <span class="n">hw_led</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">on</span>     <span class="o">=</span> <span class="n">hw_led_on</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">off</span>    <span class="o">=</span> <span class="n">hw_led_off</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="n">hw_led_toggle</span>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ITemperatureSensor.hpp — C++ Abstraction</span>
+<span class="cp">#pragma once
+</span>
+<span class="k">class</span> <span class="nc">ITemperatureSensor</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">ITemperatureSensor</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">read_temp_c</span><span class="p">(</span><span class="kt">float</span><span class="o">&amp;</span> <span class="n">temp_out</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// heartbeat.c - pure application logic</span>
-<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
+<p>Notice what is missing: No <code class="language-plaintext highlighter-rouge">#include "stm32f4xx_hal.h"</code>, no pin numbers, no register offsets. <code class="language-plaintext highlighter-rouge">temp_sensor_t</code> is pure C contract.</p>
+
+<hr />
+
+<h1 id="the-fix-part-2-dependency-injection-di">The Fix Part 2: Dependency Injection (DI)</h1>
+
+<p>Dependency Inversion gave us the contract. <strong>Dependency Injection</strong> is simply passing that contract into your application module from the outside, rather than letting the module fetch its own globals.</p>
+
+<h3 id="application-logic-c">Application Logic (C)</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// thermal_monitor.c — Pure application logic</span>
+<span class="cp">#include</span> <span class="cpf">"temp_sensor.h"</span><span class="cp">
+#include</span> <span class="cpf">"fan_control.h"</span><span class="cp">
 </span>
-<span class="kt">void</span> <span class="nf">heartbeat_task</span><span class="p">(</span><span class="n">led_t</span> <span class="o">*</span><span class="n">led</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">led</span><span class="o">-&gt;</span><span class="n">toggle</span><span class="p">();</span>
-    <span class="c1">// No hardware knowledge. No pin numbers. No HAL includes.</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">temp_sensor_t</span> <span class="n">sensor</span><span class="p">;</span>
+    <span class="n">fan_control_t</span> <span class="n">fan</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">warning_threshold_c</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">thermal_monitor_t</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">thermal_monitor_init</span><span class="p">(</span><span class="n">thermal_monitor_t</span> <span class="o">*</span><span class="n">mon</span><span class="p">,</span> <span class="n">temp_sensor_t</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">fan_control_t</span> <span class="n">fan</span><span class="p">,</span> <span class="kt">float</span> <span class="n">threshold</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">mon</span><span class="o">-&gt;</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">;</span>
+    <span class="n">mon</span><span class="o">-&gt;</span><span class="n">fan</span> <span class="o">=</span> <span class="n">fan</span><span class="p">;</span>
+    <span class="n">mon</span><span class="o">-&gt;</span><span class="n">warning_threshold_c</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">thermal_monitor_process</span><span class="p">(</span><span class="n">thermal_monitor_t</span> <span class="o">*</span><span class="n">mon</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">current_temp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mon</span><span class="o">-&gt;</span><span class="n">sensor</span><span class="p">.</span><span class="n">read_temp_c</span><span class="p">(</span><span class="o">&amp;</span><span class="n">current_temp</span><span class="p">,</span> <span class="n">mon</span><span class="o">-&gt;</span><span class="n">sensor</span><span class="p">.</span><span class="n">user_data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">current_temp</span> <span class="o">&gt;=</span> <span class="n">mon</span><span class="o">-&gt;</span><span class="n">warning_threshold_c</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">mon</span><span class="o">-&gt;</span><span class="n">fan</span><span class="p">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// Max cooling</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">mon</span><span class="o">-&gt;</span><span class="n">fan</span><span class="p">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">heartbeat_task</code> is now completely portable. It’ll compile and run on any platform - STM32, RP2040, ESP32, or a Linux host - as long as you provide a valid <code class="language-plaintext highlighter-rouge">led_t</code>.</p>
+<p>Now <code class="language-plaintext highlighter-rouge">thermal_monitor_process()</code> doesn’t know or care if the temperature comes from an I2C chip, an analog NTC thermistor, or a fake test driver.</p>
 
-<h2 id="testing-without-hardware">Testing Without Hardware</h2>
+<hr />
 
-<p>This is where the design pays for itself immediately. Once your application logic depends only on abstractions, you can provide a <em>fake</em> implementation that runs on your development machine.</p>
+<h1 id="interactive-hands-on-unit-testing-on-pc-zero-hardware-needed">Interactive Hands-On: Unit Testing on PC (Zero Hardware Needed)</h1>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fake_led.c - for host-side testing</span>
-<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
-#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+<p>Because our application logic depends only on <code class="language-plaintext highlighter-rouge">temp_sensor_t</code>, we can write a <strong>fake driver</strong> that runs on Linux, macOS, or Windows in a standard GCC/Clang test binary.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// test_thermal_monitor.c — Runs on your development PC!</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">"temp_sensor.h"</span><span class="cp">
+#include</span> <span class="cpf">"thermal_monitor.h"</span><span class="cp">
 </span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">// Fake sensor state for testing</span>
+<span class="k">static</span> <span class="kt">float</span> <span class="n">simulated_temp</span> <span class="o">=</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">simulated_fan_speed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_on</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>  <span class="p">{</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] ON</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>  <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] OFF</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_toggle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">led_state</span> <span class="o">^=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">led_state</span> <span class="o">?</span> <span class="s">"ON"</span> <span class="o">:</span> <span class="s">"OFF"</span><span class="p">);</span>
+<span class="k">static</span> <span class="n">bool</span> <span class="nf">fake_read_temp</span><span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="n">temp_out</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">user_data</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">temp_out</span> <span class="o">=</span> <span class="n">simulated_temp</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Simulate successful read</span>
 <span class="p">}</span>
 
-<span class="n">led_t</span> <span class="n">fake_led</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">on</span>     <span class="o">=</span> <span class="n">fake_led_on</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">off</span>    <span class="o">=</span> <span class="n">fake_led_off</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="n">fake_led_toggle</span>
-<span class="p">};</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_set_fan_speed</span><span class="p">(</span><span class="kt">int</span> <span class="n">speed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">simulated_fan_speed</span> <span class="o">=</span> <span class="n">speed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Running Host Unit Test: Thermal Monitor...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">temp_sensor_t</span> <span class="n">fake_sensor</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">read_temp_c</span> <span class="o">=</span> <span class="n">fake_read_temp</span><span class="p">,</span> <span class="p">.</span><span class="n">user_data</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">};</span>
+    <span class="n">fan_control_t</span> <span class="n">fake_fan</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">set_speed</span> <span class="o">=</span> <span class="n">fake_set_fan_speed</span> <span class="p">};</span>
+    
+    <span class="n">thermal_monitor_t</span> <span class="n">monitor</span><span class="p">;</span>
+    <span class="n">thermal_monitor_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">monitor</span><span class="p">,</span> <span class="n">fake_sensor</span><span class="p">,</span> <span class="n">fake_fan</span><span class="p">,</span> <span class="mi">80</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">);</span>
+
+    <span class="c1">// Test 1: Normal temperature (25°C) -&gt; Fan should stay OFF</span>
+    <span class="n">simulated_temp</span> <span class="o">=</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">thermal_monitor_process</span><span class="p">(</span><span class="o">&amp;</span><span class="n">monitor</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">simulated_fan_speed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"✓ Normal temperature test passed</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// Test 2: Over-temperature condition (85°C) -&gt; Fan should turn ON (100%)</span>
+    <span class="n">simulated_temp</span> <span class="o">=</span> <span class="mi">85</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">thermal_monitor_process</span><span class="p">(</span><span class="o">&amp;</span><span class="n">monitor</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">simulated_fan_speed</span> <span class="o">==</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"✓ Over-temperature alarm test passed</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">All host unit tests passed in 0.002 seconds!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>Now run your application logic - state machines, control algorithms, protocol handlers on your laptop. No MCU. No debugger. No JTAG. Fast feedback loops. CI-friendly tests. Bugs caught before the board even arrives.</p>
-
-<p><strong>What This Unlocks</strong></p>
-
+<h3 id="what-you-just-unlocked">What you just unlocked:</h3>
 <ul>
-  <li>Run unit tests with a standard C compiler on the host</li>
-  <li>Integrate into GitHub Actions, GitLab CI, or any pipeline</li>
-  <li>Test corner cases without triggering real hardware behavior</li>
-  <li>Multiple developers can work without needing physical boards</li>
-  <li>Faster iteration - compile and test in seconds, not minutes</li>
+  <li>You ran an embedded safety check on your PC in <strong>2 milliseconds</strong>.</li>
+  <li>You can plug this test into <strong>GitHub Actions</strong> or <strong>Woodpecker CI</strong>.</li>
+  <li>You don’t need a single MCU, debugger, or heat gun on your desk to verify your alarm logic.</li>
 </ul>
 
-<h2 id="performance-concerns---addressed-honestly">Performance Concerns - Addressed Honestly</h2>
+<hr />
 
-<p>The first pushback from embedded engineers is always performance. Like:</p>
+<h1 id="the-performance-myth-how-bad-is-the-overhead">The Performance Myth: How Bad Is the Overhead?</h1>
+
+<p>The first reaction from firmware developers is usually:</p>
+<blockquote>
+  <p><em>“Function pointers add overhead! Virtual functions waste clock cycles!”</em></p>
+</blockquote>
+
+<p>Let’s look at the numbers on actual microcontrollers.</p>
+
+<h3 id="1-function-pointer--vtable-call-cost">1. Function Pointer / Vtable Call Cost</h3>
+<p>On an ARM Cortex-M4 running at 168 MHz:</p>
 <ul>
-  <li>“Function pointers have overhead.”</li>
-  <li>“Virtual functions are slow.”</li>
+  <li>An indirect call via function pointer takes <strong>1 to 3 clock cycles</strong> (~6 to 18 nanoseconds).</li>
+  <li>If your sensor loop runs at 10 Hz or 100 Hz, that indirect branch consumes less than <strong>0.00001%</strong> of your CPU budget.</li>
 </ul>
 
-<p>Legimate concern actually, let’s look at this honestly.</p>
+<h3 id="2-what-if-you-need-zero-overhead-eg-10-mhz-bit-bang-or-fast-isr">2. What if you need Zero Overhead (e.g. 10 MHz Bit-Bang or Fast ISR)?</h3>
+<p>For paths where every single cycle counts, you don’t have to sacrifice clean code. You can use <strong>Compile-Time / Static Dependency Injection</strong>:</p>
 
-<p>A function pointer call is a single indirect branch - on most Cortex-M cores, that’s 1-3 clock cycles. For a heartbeat LED or a sensor poll running at 100 Hz, this is unmeasurable noise. For a context where every cycle matters (bit-banged SPI at 10 MHz, tight DSP loops, ISRs), you wouldn’t be using abstractions at all - you’d be writing the implementation directly.</p>
-
-<p>For everything else, there are zero-cost options. Static structs placed in flash with <code class="language-plaintext highlighter-rouge">const</code> are read directly. Link-time binding lets the linker resolve the implementation at build time. Compile-time DI using C++ templates or preprocessor configuration can achieve the same separation with no runtime cost.</p>
-
-<div class="bug">
-
-  <p>Measure before you optimize. In my personal experience with embedded work, the performance bottleneck is almost never the abstraction layer - it’s the algorithm, the protocol, or the peripheral.</p>
-
-</div>
-
-<h2 id="di-and-dip-in-c">DI and DIP in C++</h2>
-
-<p>In C++, the same pattern uses abstract base classes.</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++ - constructor injection</span>
-<span class="c1">// Abstraction</span>
-<span class="k">class</span> <span class="nc">ILed</span> <span class="p">{</span>
+<h4 id="option-a-c-templates-static-polymorphism--crtp">Option A: C++ Templates (Static Polymorphism / CRTP)</h4>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TempSensor</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">FanController</span><span class="p">&gt;</span>
+<span class="k">class</span> <span class="nc">ThermalMonitor</span> <span class="p">{</span>
+    <span class="n">TempSensor</span><span class="o">&amp;</span> <span class="n">sensor_</span><span class="p">;</span>
+    <span class="n">FanController</span><span class="o">&amp;</span> <span class="n">fan_</span><span class="p">;</span>
 <span class="nl">public:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">on</span><span class="p">()</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">off</span><span class="p">()</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">toggle</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="o">~</span><span class="n">ILed</span><span class="p">()</span>       <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">ThermalMonitor</span><span class="p">(</span><span class="n">TempSensor</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">FanController</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">sensor_</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">fan_</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">{}</span>
+    
+    <span class="kt">void</span> <span class="nf">process</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sensor_</span><span class="p">.</span><span class="n">read_temp_c</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">80.0f</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">fan_</span><span class="p">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">};</span>
-
-<span class="c1">// Hardware implementation</span>
-<span class="k">class</span> <span class="nc">GpioLed</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ILed</span> <span class="p">{</span>
-<span class="nl">public:</span>
-    <span class="kt">void</span> <span class="n">on</span><span class="p">()</span>     <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="p">}</span>
-    <span class="kt">void</span> <span class="nf">off</span><span class="p">()</span>    <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="p">}</span>
-    <span class="kt">void</span> <span class="nf">toggle</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// Application receives dependency via constructor</span>
-<span class="k">class</span> <span class="nc">HeartbeatTask</span> <span class="p">{</span>
-    <span class="n">ILed</span><span class="o">&amp;</span> <span class="n">led_</span><span class="p">;</span>
-<span class="nl">public:</span>
-    <span class="k">explicit</span> <span class="n">HeartbeatTask</span><span class="p">(</span><span class="n">ILed</span><span class="o">&amp;</span> <span class="n">led</span><span class="p">)</span> <span class="o">:</span> <span class="n">led_</span><span class="p">(</span><span class="n">led</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span> <span class="n">led_</span><span class="p">.</span><span class="n">toggle</span><span class="p">();</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// main.cpp</span>
-<span class="n">GpioLed</span> <span class="n">hw_led</span><span class="p">;</span>
-<span class="n">HeartbeatTask</span> <span class="nf">task</span><span class="p">(</span><span class="n">hw_led</span><span class="p">);</span> <span class="c1">// injection - no heap needed</span>
 </code></pre></div></div>
+<p><em>Result</em>: The compiler inlines <code class="language-plaintext highlighter-rouge">sensor_.read_temp_c()</code> directly into the assembly call. <strong>0 cycles overhead, 0 vtables, full testability.</strong></p>
 
-<p>This pattern is safe for embedded:</p>
+<h4 id="option-b-c-link-time-binding">Option B: C Link-Time Binding</h4>
+<p>In C, keep the header interface clean and provide two different <code class="language-plaintext highlighter-rouge">.c</code> files during compilation:</p>
 <ul>
-  <li>no heap allocation</li>
-  <li>no RTTI</li>
-  <li>no exceptions.</li>
-  <li>The vtable overhead is typically a single pointer indirection</li>
+  <li><code class="language-plaintext highlighter-rouge">bsp_stm32_sensor.c</code> (compiled into the target firmware)</li>
+  <li><code class="language-plaintext highlighter-rouge">fake_host_sensor.c</code> (compiled into your PC test binary)</li>
 </ul>
 
-<h2 id="embedded-linux-and-yocto-context">Embedded Linux and Yocto Context</h2>
+<hr />
 
-<p>On Embedded Linux - whether built with Yocto, Buildroot, or a custom distro - the same principles apply at the userspace level. Drivers are accessed through device files, sysfs, or character devices. Applications that hardcode these paths and access patterns become fragile across BSP changes.</p>
+<h1 id="when-not-to-use-dependency-injection">When NOT to Use Dependency Injection</h1>
 
-<p>DI in userspace means your application receives a hardware interface (a file descriptor wrapper, a driver abstraction struct, a class hierarchy for a sensor) rather than constructing it directly. The BSP layer or board configuration code does the wiring. Swapping hardware variants becomes a matter of changing what gets injected at startup - not rewriting the application.</p>
+<p>Design patterns are tools, not commandments. Avoid DI abstractions when:</p>
+<ol>
+  <li><strong>Ultra-Constrained MCUs</strong>: Sub-4KB Flash targets (ATtiny, PIC16) where saving 40 bytes of function pointer pointers is critical.</li>
+  <li><strong>High-Frequency ISRs</strong>: Interrupt routines firing at 500 kHz where an extra indirect branch breaks timing constraints.</li>
+  <li><strong>One-Off Validation Scripts</strong>: A quick 20-line test script written to verify a hardware pin on an oscilloscope before throwing it away.</li>
+</ol>
 
-<p>This also makes your application layers testable in a Linux host environment without requiring the target board, using mock file descriptors, pipe-based fakes, or simple simulation stubs.</p>
+<hr />
 
-<h2 id="when-not-to-use-this">When Not To Use This</h2>
+<h1 id="incremental-adoption-how-to-start-on-legacy-code">Incremental Adoption: How to Start on Legacy Code</h1>
 
-<p>Design principles are tools, not religion. There are legitimate cases where DI and DIP add unnecessary complexity:</p>
+<p>You don’t need to rewrite your entire 100,000-line codebase overnight. Pick one module boundary and follow these steps:</p>
 
-<ul>
-  <li>Bootloaders and startup code with extreme size constraints</li>
-  <li>ISRs where every instruction is accounted for and no indirection is acceptable</li>
-  <li>Quick throwaway prototypes that will be completely rewritten</li>
-  <li>Extremely resource-constrained MCUs (sub-8KB flash) where even a vtable pointer is a budget item</li>
-</ul>
+<ol>
+  <li><strong>Find a Seam</strong>: Choose a single peripheral or sensor (e.g., an EEPROM or temperature sensor).</li>
+  <li><strong>Create a Clean Header</strong>: Move direct HAL calls out of your application files and behind a simple C <code class="language-plaintext highlighter-rouge">struct</code> interface or C++ class.</li>
+  <li><strong>Write a Host Fake</strong>: Create a 20-line fake implementation in C/C++ and write a PC host test for that module.</li>
+  <li><strong>Wire it in <code class="language-plaintext highlighter-rouge">main()</code></strong>: Pass the real hardware handle in <code class="language-plaintext highlighter-rouge">main.c</code> on the MCU, and pass the fake handle in your PC test runner.</li>
+</ol>
 
-<div class="think">
-
-  <p>If your code cannot tolerate a function pointer call, that limitation should be measurable and visible in the timing budget or ISR deadline. Otherwise, the maintenance and testability costs of tight coupling almost always outweigh the runtime overhead of abstraction</p>
-
-</div>
-
-<h2 id="migrating-an-existing-codebase">Migrating an Existing Codebase</h2>
-
-<p>You don’t need a big-bang rewrite of your legacy code. The path forward is incremental, and it starts at module boundaries:</p>
-
-<ul>
-  <li><strong>Identify a natural seam</strong> - a driver, a peripheral abstraction, a communication module</li>
-  <li><strong>Wrap the existing HAL</strong> - create a thin struct or class that exposes only what the application needs</li>
-  <li><strong>Replace direct calls</strong> - update the module to receive the abstraction instead of calling HAL directly</li>
-  <li><strong>Add a fake</strong> - write a simple host-side implementation and run a first test</li>
-  <li><strong>Repeat at the next boundary</strong> - work outward, module by module</li>
-</ul>
-
-<p>Each step is independently valuable. Even wrapping just one driver creates a seam you can test through. You don’t need to refactor the entire codebase to see the benefit.</p>
-
-<div class="note">
-
-  <p>“High‑quality embedded software is not defined by low‑level register manipulation; it is defined by a clean, well‑structured software architecture.”</p>
-
-</div>
-
-<h2 id="summary">Summary</h2>
-
-<ul>
-  <li><strong>DIP</strong> separates <em>what</em> your application does from <em>how</em> the hardware implements it</li>
-  <li><strong>DI</strong> delivers those implementations cleanly, from the outside, without hidden globals</li>
-  <li>Together they make your code portable across board revisions and testable without hardware</li>
-  <li>Works in bare-metal C, C++, and Embedded Linux - no frameworks required</li>
-  <li>The overhead is negligible in almost every real-world embedded context</li>
-  <li>Migration is incremental - start at one module boundary and work outward</li>
-</ul>
-
-<div class="important">
-
-  <p>The goal is software that survives hardware changes, supports a growing team, can be tested in CI, and doesn’t collapse under its own weight after three board revisions. That’s worth a struct of function pointers.</p>
-
-</div>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[Most embedded bugs aren't hardware problems. They're design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension & scalibility]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/Di.webp" /><media:content medium="image" url="/cover_images/posts/Di.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI</title><link href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" rel="alternate" type="text/html" title="An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/pigweed-cosmopolitan-woodpeaker</id><content type="html" xml:base="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/"><![CDATA[<ul id="markdown-toc">
+<p>Doing this for just one driver gives you immediate unit testing capability on your development laptop and shields your core logic from future hardware board revisions.</p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[Why direct register writes and HAL calls inside your application logic make firmware impossible to unit test on PC. Here is how to use Dependency Inversion and Injection in C and C++ using real I2C sensor hardware.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/Di.webp" /><media:content medium="image" url="/cover_images/posts/Di.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI</title><link href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" rel="alternate" type="text/html" title="An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/es/pigweed-cosmopolitan-woodpeaker</id><content type="html" xml:base="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#the-problem-nobody-is-talking-about" id="markdown-toc-the-problem-nobody-is-talking-about">The Problem Nobody Is Talking About</a></li>
   <li><a href="#what-hil-testing-is-and-why-its-a-bit-broken-" id="markdown-toc-what-hil-testing-is-and-why-its-a-bit-broken-">What HIL Testing Is, and Why It’s a bit Broken ?</a></li>
   <li><a href="#three-tools-one-insight" id="markdown-toc-three-tools-one-insight">Three Tools, One Insight</a></li>
@@ -2086,160 +2037,127 @@ Uses ubuntu:22.04 image. Runs</p>
       <p><a href="https://www.opal-rt.com/blog/building-a-regression-testing-pipeline-for-hil-in-electrification-teams/">Building a regression testing pipeline for HIL in electrification teams</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
-</div>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[A experimental setup on how to build stack using "Woodpecker CI, Cosmopolitan, and Google Pigweed" for small firmware teams to automate build-test-flash pipelines for their embedded systems]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/cpp-portable-pipeline.webp" /><media:content medium="image" url="/cover_images/posts/cpp-portable-pipeline.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Embedded Engineer’s Second Brain: PARA and CODE Systems</title><link href="/blog/productivity/2026-02-18-ui/" rel="alternate" type="text/html" title="The Embedded Engineer’s Second Brain: PARA and CODE Systems" /><published>2026-02-18T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/productivity/ui</id><content type="html" xml:base="/blog/productivity/2026-02-18-ui/"><![CDATA[<ul id="markdown-toc">
+</div>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="es" /><category term="c++" /><summary type="html"><![CDATA[A experimental setup on how to build stack using "Woodpecker CI, Cosmopolitan, and Google Pigweed" for small firmware teams to automate build-test-flash pipelines for their embedded systems]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/cpp-portable-pipeline.webp" /><media:content medium="image" url="/cover_images/posts/cpp-portable-pipeline.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Embedded Engineer’s Second Brain: PARA and CODE Systems</title><link href="/blog/productivity/2026-02-18-ui/" rel="alternate" type="text/html" title="The Embedded Engineer’s Second Brain: PARA and CODE Systems" /><published>2026-02-18T00:00:00+00:00</published><updated>2026-07-22T19:57:16+00:00</updated><id>/blog/productivity/ui</id><content type="html" xml:base="/blog/productivity/2026-02-18-ui/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#the-embedded-engineers-second-brain" id="markdown-toc-the-embedded-engineers-second-brain">The Embedded Engineer’s Second Brain</a>    <ul>
-      <li><a href="#1-the-problem-information-overload" id="markdown-toc-1-the-problem-information-overload">1. The Problem: Information Overload</a></li>
-      <li><a href="#2-why-it-happens" id="markdown-toc-2-why-it-happens">2. Why It Happens</a></li>
-      <li><a href="#3-collecting-is-easy--retrieval-is-where-things-break-down" id="markdown-toc-3-collecting-is-easy--retrieval-is-where-things-break-down">3. Collecting is Easy — Retrieval is Where Things Break Down</a></li>
-      <li><a href="#4-seeing-the-bigger-picture-connecting-dots" id="markdown-toc-4-seeing-the-bigger-picture-connecting-dots">4. Seeing the Bigger Picture: Connecting Dots</a></li>
-      <li><a href="#5-too-many-apps-too-many-approaches" id="markdown-toc-5-too-many-apps-too-many-approaches">5. Too Many Apps, Too Many Approaches</a></li>
-      <li><a href="#6-sticking-with-the-basics-code-and-para" id="markdown-toc-6-sticking-with-the-basics-code-and-para">6. Sticking with the Basics: CODE and PARA</a>        <ul>
-          <li><a href="#the-code-method--lifecycle-of-every-note" id="markdown-toc-the-code-method--lifecycle-of-every-note">The CODE Method — lifecycle of every note</a></li>
-          <li><a href="#the-para-structure--where-notes-live" id="markdown-toc-the-para-structure--where-notes-live">The PARA Structure — where notes live</a></li>
+      <li><a href="#1-quick-primer-what-makes-hardware-notes-different" id="markdown-toc-1-quick-primer-what-makes-hardware-notes-different">1. Quick Primer: What Makes Hardware Notes Different?</a>        <ul>
+          <li><a href="#the-information-overload-problem" id="markdown-toc-the-information-overload-problem">The Information Overload Problem</a></li>
         </ul>
       </li>
-      <li><a href="#7-how-code-fits-into-everything-else" id="markdown-toc-7-how-code-fits-into-everything-else">7. How CODE Fits Into Everything Else</a>        <ul>
-          <li><a href="#integrating-with-your-task-system" id="markdown-toc-integrating-with-your-task-system">Integrating with your task system</a></li>
-          <li><a href="#weekly-review-integration" id="markdown-toc-weekly-review-integration">Weekly review integration</a></li>
-          <li><a href="#automating-the-system" id="markdown-toc-automating-the-system">Automating the system</a></li>
+      <li><a href="#2-why-we-hoard-information" id="markdown-toc-2-why-we-hoard-information">2. Why We Hoard Information</a></li>
+      <li><a href="#3-the-filing-cabinet-trap-organizing-by-topic-vs-action" id="markdown-toc-3-the-filing-cabinet-trap-organizing-by-topic-vs-action">3. The “Filing Cabinet” Trap: Organizing by Topic vs. Action</a></li>
+      <li><a href="#4-the-code-method-your-information-pipeline" id="markdown-toc-4-the-code-method-your-information-pipeline">4. The CODE Method: Your Information Pipeline</a></li>
+      <li><a href="#5-the-para-system-4-simple-buckets-for-everything" id="markdown-toc-5-the-para-system-4-simple-buckets-for-everything">5. The PARA System: 4 Simple Buckets for Everything</a>        <ul>
+          <li><a href="#the-4-para-folders" id="markdown-toc-the-4-para-folders">The 4 PARA Folders</a></li>
+          <li><a href="#simple-tagging-for-quick-searches" id="markdown-toc-simple-tagging-for-quick-searches">Simple Tagging for Quick Searches</a></li>
         </ul>
       </li>
-      <li><a href="#8-binding-it-all-together-tell-your-story" id="markdown-toc-8-binding-it-all-together-tell-your-story">8. Binding It All Together: Tell Your Story</a></li>
-      <li><a href="#case-example-organising-engineering-notes-with-code-and-para" id="markdown-toc-case-example-organising-engineering-notes-with-code-and-para">Case Example: Organising Engineering Notes with CODE and PARA</a>        <ul>
-          <li><a href="#problem-statement" id="markdown-toc-problem-statement">Problem Statement</a></li>
-          <li><a href="#c--capture-use-the-curators-perspective" id="markdown-toc-c--capture-use-the-curators-perspective">C — Capture: Use the Curator’s Perspective</a></li>
-          <li><a href="#o--organise-para-in-embedded-practice" id="markdown-toc-o--organise-para-in-embedded-practice">O — Organise: PARA in Embedded Practice</a>            <ul>
-              <li><a href="#tagging-cross-cutting-themes-para-folders-cannot-handle" id="markdown-toc-tagging-cross-cutting-themes-para-folders-cannot-handle">Tagging: Cross-Cutting Themes PARA Folders Cannot Handle</a></li>
-              <li><a href="#retrieval-planning-matrix" id="markdown-toc-retrieval-planning-matrix">Retrieval Planning Matrix</a></li>
-            </ul>
-          </li>
-          <li><a href="#d--distill-progressive-summarization" id="markdown-toc-d--distill-progressive-summarization">D — Distill: Progressive Summarization</a></li>
-          <li><a href="#e--express-intermediate-packets" id="markdown-toc-e--express-intermediate-packets">E — Express: Intermediate Packets</a></li>
+      <li><a href="#6-progressive-summarization-highlighting-what-matters" id="markdown-toc-6-progressive-summarization-highlighting-what-matters">6. Progressive Summarization: Highlighting What Matters</a></li>
+      <li><a href="#7-expressing-work-intermediate-packets-ips" id="markdown-toc-7-expressing-work-intermediate-packets-ips">7. Expressing Work: Intermediate Packets (IPs)</a></li>
+      <li><a href="#8-real-world-case-study-one-device-four-notes" id="markdown-toc-8-real-world-case-study-one-device-four-notes">8. Real-World Case Study: One Device, Four Notes</a>        <ul>
+          <li><a href="#note-1--datasheet-excerpt-power-down-modes" id="markdown-toc-note-1--datasheet-excerpt-power-down-modes">Note 1 — Datasheet Excerpt: Power-Down Modes</a></li>
+          <li><a href="#note-2--datasheet-excerpt-led-current--timing" id="markdown-toc-note-2--datasheet-excerpt-led-current--timing">Note 2 — Datasheet Excerpt: LED Current &amp; Timing</a></li>
+          <li><a href="#note-3--application-note-ambient-light-calibration" id="markdown-toc-note-3--application-note-ambient-light-calibration">Note 3 — Application Note: Ambient Light Calibration</a></li>
+          <li><a href="#note-4--client-requirements" id="markdown-toc-note-4--client-requirements">Note 4 — Client Requirements</a></li>
+          <li><a href="#the-synthesis-turning-4-notes-into-a-clear-decision" id="markdown-toc-the-synthesis-turning-4-notes-into-a-clear-decision">The Synthesis: Turning 4 Notes Into a Clear Decision</a></li>
         </ul>
       </li>
-      <li><a href="#design-decisions-making-choices-justifiable" id="markdown-toc-design-decisions-making-choices-justifiable">Design Decisions: Making Choices Justifiable</a>        <ul>
-          <li><a href="#core-questions-before-opening-any-datasheet" id="markdown-toc-core-questions-before-opening-any-datasheet">Core Questions Before Opening Any Datasheet</a></li>
-          <li><a href="#navigating-documentation-with-code" id="markdown-toc-navigating-documentation-with-code">Navigating Documentation with CODE</a></li>
-          <li><a href="#1-design-pattern-justification-notes" id="markdown-toc-1-design-pattern-justification-notes">1. Design Pattern Justification Notes</a></li>
-          <li><a href="#2-risk-and-security-analysis-note" id="markdown-toc-2-risk-and-security-analysis-note">2. Risk and Security Analysis Note</a></li>
+      <li><a href="#9-ready-to-use-note-templates" id="markdown-toc-9-ready-to-use-note-templates">9. Ready-to-Use Note Templates</a>        <ul>
+          <li><a href="#template-1--datasheet-summary-single-device" id="markdown-toc-template-1--datasheet-summary-single-device">Template 1 — Datasheet Summary (Single Device)</a></li>
+          <li><a href="#template-2--client-requirements-summary" id="markdown-toc-template-2--client-requirements-summary">Template 2 — Client Requirements Summary</a></li>
+          <li><a href="#template-3--design-decision-note" id="markdown-toc-template-3--design-decision-note">Template 3 — Design Decision Note</a></li>
         </ul>
       </li>
-      <li><a href="#retrieval--bigger-picture-a-worked-example" id="markdown-toc-retrieval--bigger-picture-a-worked-example">Retrieval → Bigger Picture: A Worked Example</a>        <ul>
-          <li><a href="#note-1--datasheet-snippet-afe4404-texas-instruments" id="markdown-toc-note-1--datasheet-snippet-afe4404-texas-instruments">Note 1 — Datasheet snippet: AFE4404 (Texas Instruments)</a></li>
-          <li><a href="#note-2--reference-manual-snippet-stm32l476-stmicroelectronics" id="markdown-toc-note-2--reference-manual-snippet-stm32l476-stmicroelectronics">Note 2 — Reference manual snippet: STM32L476 (STMicroelectronics)</a></li>
-          <li><a href="#note-3--forum-edge-case-i2c-hang-after-stop-2-wakeup" id="markdown-toc-note-3--forum-edge-case-i2c-hang-after-stop-2-wakeup">Note 3 — Forum edge case: I2C hang after Stop 2 wakeup</a></li>
-          <li><a href="#note-4--client-requirements-capture" id="markdown-toc-note-4--client-requirements-capture">Note 4 — Client requirements capture</a></li>
-          <li><a href="#the-insight-that-retrieval-produces" id="markdown-toc-the-insight-that-retrieval-produces">The insight that retrieval produces</a></li>
-        </ul>
-      </li>
-      <li><a href="#using-notes-for-presentations-and-communication" id="markdown-toc-using-notes-for-presentations-and-communication">Using Notes for Presentations and Communication</a>        <ul>
-          <li><a href="#for-technical-presentations" id="markdown-toc-for-technical-presentations">For technical presentations</a></li>
-          <li><a href="#for-team-communication" id="markdown-toc-for-team-communication">For team communication</a></li>
-        </ul>
-      </li>
-      <li><a href="#note-templates-fill-in-structures-for-your-evernote" id="markdown-toc-note-templates-fill-in-structures-for-your-evernote">Note Templates: Fill-In Structures for Your Evernote</a>        <ul>
-          <li><a href="#template-1--datasheet--reference-manual-summary" id="markdown-toc-template-1--datasheet--reference-manual-summary">Template 1 — Datasheet &amp; Reference Manual Summary</a></li>
-          <li><a href="#template-2--client-requirements-capture" id="markdown-toc-template-2--client-requirements-capture">Template 2 — Client Requirements Capture</a></li>
-          <li><a href="#template-3--design-decision-record" id="markdown-toc-template-3--design-decision-record">Template 3 — Design Decision Record</a></li>
-        </ul>
-      </li>
-      <li><a href="#common-questions" id="markdown-toc-common-questions">Common Questions</a></li>
+      <li><a href="#10-summary-faq" id="markdown-toc-10-summary-faq">10. Summary FAQ</a></li>
     </ul>
   </li>
 </ul>
 
 <h1 id="the-embedded-engineers-second-brain">The Embedded Engineer’s Second Brain</h1>
 
-<p><em>How I stopped drowning in datasheets and started actually using my notes</em></p>
+<p><em>How to stop drowning in 500-page datasheets and start turning technical notes into shipping hardware</em></p>
 
 <hr />
 
-<h2 id="1-the-problem-information-overload">1. The Problem: Information Overload</h2>
+<h2 id="1-quick-primer-what-makes-hardware-notes-different">1. Quick Primer: What Makes Hardware Notes Different?</h2>
 
-<p>When was the last time you felt overwhelmed by your own notes, bookmarks, or saved articles?</p>
+<p>If you are new to embedded systems or hardware engineering, welcome! Embedded engineering is the art of programming tiny computers (microcontrollers) that interact with the physical world through sensors and chips.</p>
+
+<p>Before diving into note-taking methods, here is a quick plain-English guide to the terms used in this guide:</p>
+
+<div class="tip">
+  <p><strong>Beginner’s Cheat Sheet:</strong></p>
+  <ul>
+    <li><strong>Microcontroller (MCU):</strong> The primary “mini-computer brain” of a device (like an STM32 or ESP32).</li>
+    <li><strong>Analog Front-End (AFE) / Sensor:</strong> A specialized chip that reads physical signals (like heart rate, temperature, or motion) and turns them into digital data.</li>
+    <li><strong>Datasheet:</strong> A 500-page “owner’s manual” provided by chip manufacturers, packed with electrical diagrams, pin layouts, and timing charts.</li>
+    <li><strong>Errata:</strong> A manufacturer’s official list of known hardware bugs and design quirks.</li>
+    <li><strong>Registers:</strong> Tiny digital switches inside a microchip that control its settings.</li>
+  </ul>
+</div>
+
+<h3 id="the-information-overload-problem">The Information Overload Problem</h3>
+
+<p>When was the last time you felt overwhelmed by dozens of saved PDFs, open tabs, bookmarks, or code snippets?</p>
 
 <p><img src="/cover_images/posts/lot-papers.webp" alt="" /></p>
 
 <div class="think">
-  <p>The average person now consumes roughly <strong>34 gigabytes of information daily</strong> (as per 2008 study by the University of California, San Diego (UCSD) titled “How Much Information? - <a href="https://www.kdnuggets.com/2009/12/pub-how-much-information-us-consumes.html">Source</a>). For embedded engineers this is compounded by a relentless stream of new vendor specifications, silicon errata, GitHub updates, and evolving standards. Instead of empowering you, this deluge creates <em>Information Exhaustion</em> — a chronic anxiety that you are about to forget a critical technical detail, it gets worst when delivery deadline is close.</p>
-
+  <p>The average person consumes roughly <strong>34 gigabytes of information daily</strong>. For developers and hardware engineers, this flood includes vendor manuals, bug reports, toolchain updates, and forum threads. This creates <em>Information Exhaustion</em>—a constant worry that you will forget a critical detail right when project deadlines arrive.</p>
 </div>
 
-<p>In embedded development the problem has a particular shape. You are managing two very different categories of knowledge simultaneously:</p>
+<p>Hardware engineers manage two distinct types of information:</p>
 
-<ul>
-  <li><strong>Volatile market knowledge:</strong> datasheets, hardware errata, GitHub issues, SDK changelogs, community forum workarounds — knowledge that shifts with every silicon revision and project requirement.</li>
-  <li><strong>Fundamental engineering knowledge:</strong> software design principles, debugging heuristics, right questions to ask clients before kick-off, architectural patterns — knowledge that compounds over a career.</li>
-</ul>
+<ol>
+  <li><strong>Volatile Reference Material:</strong> Datasheets, chip bug lists, pinout changes, and forum workarounds—information that changes with every new chip revision.</li>
+  <li><strong>Core Engineering Knowledge:</strong> Software design patterns, debugging techniques, and hardware testing procedures—knowledge that builds up over your entire career.</li>
+</ol>
 
-<p>Without a deliberate system, both categories pile into the same undifferentiated heap. This is the Information Paradox: <strong>more notes = less clarity</strong>.</p>
+<p>Without a structured system, both types get mixed into a messy digital pile. This is the <strong>Information Paradox</strong>: <em>more saved notes equal less clarity when you actually need to build something</em>.</p>
 
 <hr />
 
-<h2 id="2-why-it-happens">2. Why It Happens</h2>
+<h2 id="2-why-we-hoard-information">2. Why We Hoard Information</h2>
 
-<p>Information overload occurs because we act as <em>information hoarders</em> — saving content we do not have time to apply, driven by a scarcity mindset and FOMO. <strong>Saving a 500-page datasheet <em>feels</em> productive. But that comfort comes at a cost.</strong></p>
+<p>Information overload happens when we become <em>digital hoarders</em>—saving files we don’t have time to read out of a fear of missing out (FOMO). <strong>Saving a 500-page datasheet feels like progress, but it is often just an illusion.</strong></p>
 
 <p><img src="/cover_images/general/yoda.webp" alt="" /></p>
 
 <ul>
-  <li><strong>The illusion of control:</strong> 200 saved datasheets feels like having options. It is really procrastination disguised as preparation.</li>
-  <li><strong>The emotional attachment:</strong> Some notes represent late-night debugging sessions and hard-won breakthroughs. Letting go feels like erasing part of your engineering history.</li>
-  <li><strong>The anxiety of letting go:</strong> What if you delete that forum thread and need it tomorrow? What if you miss the one errata that bricks a production run? This fear keeps you hoarding digital clutter.</li>
-  <li><strong>The scarcity mindset:</strong> In practice, most insights are rediscoverable. What matters is curating what serves your <em>current</em> project, <strong>not stockpiling for every possible future.</strong></li>
+  <li><strong>The Illusion of Preparation:</strong> Saving 50 PDF manuals feels like having everything under control. In reality, it is procrastination disguised as research.</li>
+  <li><strong>Fear of Losing Information:</strong> <em>What if I delete this forum link and need it next year?</em> This fear causes us to hoard hundreds of bookmarks we never look at again.</li>
+  <li><strong>The Rediscovery Myth:</strong> Raw facts (like chip pin numbers) are easy to look up online anytime. What is truly valuable is your own summary of how those facts apply to your <em>current</em> project.</li>
 </ul>
 
 <hr />
 
-<h2 id="3-collecting-is-easy--retrieval-is-where-things-break-down">3. Collecting is Easy — Retrieval is Where Things Break Down</h2>
+<h2 id="3-the-filing-cabinet-trap-organizing-by-topic-vs-action">3. The “Filing Cabinet” Trap: Organizing by Topic vs. Action</h2>
 
-<p>We confuse saving with understanding. Ask yourself honestly: how many of your saved articles, datasheets, and bookmarks do you actually use?</p>
+<p>We often confuse saving information with understanding it. Ask yourself: how many saved bookmarks or PDFs do you actually open a second time?</p>
 
 <p><img src="/cover_images/posts/lib-retrive.webp" alt="" /></p>
 
-<p>When you organise notes by broad academic subjects — a folder called <em>Embedded Systems</em> or <em>Microcontrollers</em> — finding information becomes a herculean endeavour as your note count grows. Without <strong>discoverability</strong>, your notes become an <em>idea graveyard</em> where the specific fix for an I2C clock-stretching bug is buried under a wall of generic technical content.</p>
+<p>When you organize notes by broad topics—such as creating a folder named <em>Microcontrollers</em> or <em>Programming</em>—finding specific answers becomes impossible as your notes grow. Notes end up in an <em>idea graveyard</em>, buried under generic tutorials.</p>
 
-<p>The fundamental mistake is organising by <strong>where information came from</strong> rather than <strong>where it is going</strong>. A note filed under “STMicroelectronics” sits in the same place whether you need it today or in three years. That is a filing cabinet, not a thinking tool.</p>
+<p>The fundamental mistake is organizing notes by <strong>where they came from</strong> instead of <strong>where you will use them</strong>.</p>
 
 <div class="important">
-  <p>The right question is not “What is this about?” -&gt; it is <strong>“Which active project will this serve?”</strong></p>
+  <p><strong>The Golden Rule of Second Brain Notetaking:</strong><br />
+Don’t ask <em>“What topic is this about?”</em> — ask <strong>“Which active project will this help me complete?”</strong></p>
 </div>
 
 <hr />
 
-<h2 id="4-seeing-the-bigger-picture-connecting-dots">4. Seeing the Bigger Picture: Connecting Dots</h2>
+<h2 id="4-the-code-method-your-information-pipeline">4. The CODE Method: Your Information Pipeline</h2>
 
-<p>Real original ideas are formed when you treat notes as <strong>knowledge building blocks</strong> — discrete units of information that can be combined and reassembled like LEGOs. By keeping diverse technical and conceptual material in one structured system, you begin to surface associations between seemingly unrelated ideas.</p>
+<p>In his book <em>Building a Second Brain</em>, Tiago Forte explains that our brains are built for coming up with ideas, not storing raw data.</p>
 
-<p>For an embedded engineer this is where the leverage lives. A software design pattern from a high-level enterprise library can be adapted for a resource-constrained bare-metal driver. A debugging heuristic from one vendor’s silicon can transfer directly to a competitor’s. A risk analysis technique from safety-critical automotive firmware can sharpen the design of an IoT consumer device.</p>
-
-<p>This kind of cross-domain thinking only emerges when your Second Brain is organised for <strong>action and association</strong>, not for storage.</p>
-
-<hr />
-
-<h2 id="5-too-many-apps-too-many-approaches">5. Too Many Apps, Too Many Approaches</h2>
-
-<p>The digital landscape offers no shortage of tools: Obsidian, Notion, OneNote, Evernote, Roam, Logseq, Bear. It is easy to get caught in the trap of <strong>tool perfectionism</strong> — endlessly searching for the perfect app instead of building a reliable system.</p>
-
-<p>The truth is that <strong>the tool matters far less than the method</strong>. Your Second Brain needs a single, consistent neural centre - a digital workspace that is multimedia, informal, and action-oriented. Pick one and commit. Evernote maps cleanly onto the PARA system and its search is fast enough to make retrieval genuinely painless. Obsidian works if you prefer linking. OneNote works if you live in Microsoft 365. The system below is software-agnostic, run it in <em>whatever</em> app you will actually open every day.</p>
-
-<hr />
-
-<h2 id="6-sticking-with-the-basics-code-and-para">6. Sticking with the Basics: CODE and PARA</h2>
-
-<p>These methods were developed &amp; demonstrated by author Tiago Forte in his book “Building a second brain”</p>
-
-<p><img src="/cover_images/posts/notes.webp" alt="" /></p>
-
-<p>Two complementary systems to do the heavy lifting with resourse organisation &amp; retrival . Both shift your focus from where information came from to where it is going.</p>
-
-<h3 id="the-code-method--lifecycle-of-every-note">The CODE Method — lifecycle of every note</h3>
+<p>The <strong>CODE method</strong> provides a simple 4-step pipeline to process information:</p>
 
 <pre><code class="language-mermaid">flowchart LR
-    C["C — CAPTURE\n───────────\nWeb clipper for forums\nDatasheet sections only\nGitHub errata &amp; fixes\nClient spec snippets"]
-    O["O — ORGANISE\n───────────\nFile by project first\nThen Area or Resource\nTag cross-cutting themes\nArchive on close"]
-    D["D — DISTILL\n───────────\nBold critical constraints\nHighlight design rationale\n3-bullet summary (rare)\nRemove the noise"]
-    E["E — EXPRESS\n───────────\nReuse driver stubs\nShip checklists as IPs\nWrite decision records\nAssemble, don't create"]
+    C["1. CAPTURE\n───────────\nSave only what matters\nSnippet over whole PDF\nKey bug workarounds\nClient specs"]
+    O["2. ORGANIZE\n───────────\nFile by active project\nUse simple tags\nKeep focus on action\nArchive when done"]
+    D["3. DISTILL\n───────────\nSummarize in stages\nBold key numbers\nHighlight 'why'\nWrite 3-bullet summary"]
+    E["4. EXPRESS\n───────────\nCreate reusable blocks\nDriver stubs &amp; checklists\nDesign decision notes\nBuild faster next time"]
 
     C --&gt; O --&gt; D --&gt; E
 </code></pre>
@@ -2247,876 +2165,435 @@ Uses ubuntu:22.04 image. Runs</p>
 <table>
   <thead>
     <tr>
-      <th>Stage</th>
-      <th>What it means</th>
-      <th>In embedded practice</th>
+      <th>CODE Step</th>
+      <th>What It Means</th>
+      <th>Simple Example</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Capture</strong></td>
-      <td>Save only what resonates</td>
-      <td>Clip forum workarounds, Theory of Operation sections, race condition fixes — not entire 500-page manuals</td>
+      <td><strong>1. Capture</strong></td>
+      <td>Save only what is useful right now</td>
+      <td>Clip a 2-page register diagram or bug fix, not the whole 500-page manual.</td>
     </tr>
     <tr>
-      <td><strong>Organise</strong></td>
-      <td>File by actionability (PARA)</td>
-      <td>Ask: which active project does this serve? File there first. Resources only if no current home</td>
+      <td><strong>2. Organize</strong></td>
+      <td>File notes by active project first</td>
+      <td>Store notes in your current project folder (<code class="language-plaintext highlighter-rouge">[P] Smart Watch</code>), not a generic reference bin.</td>
     </tr>
     <tr>
-      <td><strong>Distill</strong></td>
-      <td>Extract the essence progressively</td>
-      <td>Bold critical constraints; highlight design rationale; write a 3-bullet summary for foundational notes</td>
+      <td><strong>3. Distill</strong></td>
+      <td>Highlight key details progressively</td>
+      <td>Bold critical numbers (like <strong>3.3 V max voltage</strong> or <strong>100 µs wakeup time</strong>) so you spot them in 2 seconds.</td>
     </tr>
     <tr>
-      <td><strong>Express</strong></td>
-      <td>Turn notes into output</td>
-      <td>Reuse driver stubs, checklists, architecture sketches — assemble before creating from scratch</td>
+      <td><strong>4. Express</strong></td>
+      <td>Turn notes into real output</td>
+      <td>Reuse note snippets to write code, design schematics, or send status reports to clients.</td>
     </tr>
   </tbody>
 </table>
 
 <hr />
 
-<h3 id="the-para-structure--where-notes-live">The PARA Structure — where notes live</h3>
+<h2 id="5-the-para-system-4-simple-buckets-for-everything">5. The PARA System: 4 Simple Buckets for Everything</h2>
+
+<p><strong>PARA</strong> is a top-down organizational system that sorts information into four clear buckets based on urgency:</p>
 
 <pre><code class="language-mermaid">flowchart LR
     note(["New note captured"])
 
-    note --&gt; q1{"Active project\ndeadline?"}
-    q1 -- "Yes" --&gt; P["[P] Projects\n─────────\n[P] STM32H750B Bring-up\n[P] Debug I2C Clock-Stretch\n[P] OV7670 AI Inference"]
-    q1 -- "No" --&gt; q2{"Ongoing\nresponsibility?"}
-    q2 -- "Yes" --&gt; A["[A] Areas\n─────────\n[A] Firmware Coding Standards\n[A] HW Testing Procedures\n[A] Client Req. Management"]
-    q2 -- "No" --&gt; q3{"Reference with\nno current project?"}
-    q3 -- "Yes" --&gt; R["[R] Resources\n─────────\n[R] Vendor: STMicro\n[R] RTOS Design Patterns\n[R] BLE Protocol Stack"]
-    q3 -- "No" --&gt; X["[X] Archive\n─────────\n[X] HeartRate Monitor v1\n[X] ESP32-CAM Streamer\n[X] Client A — Closed 2024"]
+    note --&gt; q1{"Is this for an active\nproject with a deadline?"}
+    q1 -- "Yes" --&gt; P["[P] Projects\n─────────\n[P] Smart Watch Bring-up\n[P] Debug Temperature Sensor\n[P] Battery Life Test"]
+    q1 -- "No" --&gt; q2{"Is this an ongoing\nresponsibility?"}
+    q2 -- "Yes" --&gt; A["[A] Areas\n─────────\n[A] Code Style Guide\n[A] Hardware Testing Setup\n[A] Client Communications"]
+    q2 -- "No" --&gt; q3{"Is this general reference\nfor future interest?"}
+    q3 -- "Yes" --&gt; R["[R] Resources\n─────────\n[R] Sensor Datasheets\n[R] Bluetooth Design Patterns\n[R] C++ Reference"]
+    q3 -- "No" --&gt; X["[X] Archives\n─────────\n[X] Completed Projects\n[X] Old 2024 Client Files"]
 
-    P -. "project closes" .-&gt; X
+    P -. "project completes" .-&gt; X
 </code></pre>
 
-<div class="warning">
-  <p>When a note is captured during an active project, it goes into the <code class="language-plaintext highlighter-rouge">[P]</code> Project notebook <strong>directly</strong> — not Resources. Resources are only for material with no current home.</p>
-</div>
-
-<hr />
-
-<h2 id="7-how-code-fits-into-everything-else">7. How CODE Fits Into Everything Else</h2>
-
-<p>CODE works with whatever system you are already using. It adds a <strong>knowledge layer</strong> on top of your existing task workflow.</p>
-
-<h3 id="integrating-with-your-task-system">Integrating with your task system</h3>
-
-<p>Your task system handles <em>what you do</em>. CODE handles <em>what you know</em>. They work better together:</p>
-
-<ul>
-  <li><strong>Quick tasks:</strong> use distilled notes for 2-minute reference lookups — no re-reading required.</li>
-  <li><strong>Scheduled work:</strong> block time to express ideas from organised notes into drivers, docs, or specs.</li>
-  <li><strong>Backlog research:</strong> keep captured notes in Archives for future projects — searchable, not cluttering.</li>
-</ul>
-
-<h3 id="weekly-review-integration">Weekly review integration</h3>
-
-<p>I do a weekly reset. Adding CODE to it takes about 15 minutes:</p>
+<h3 id="the-4-para-folders">The 4 PARA Folders</h3>
 
 <ol>
-  <li><strong>Review captured items</strong> — decide what resonates vs. what to archive immediately.</li>
-  <li><strong>Reorganise notes</strong> — move completed projects to <code class="language-plaintext highlighter-rouge">[X] Archive</code>, promote Resource notes to active <code class="language-plaintext highlighter-rouge">[P]</code> notebooks if a project has started.</li>
-  <li><strong>Distill backlog</strong> — take any notes tagged <code class="language-plaintext highlighter-rouge">.ToDistill</code> and apply Layer 2 bolding.</li>
-  <li><strong>Plan expression</strong> — schedule time to create from your knowledge base: a blog post, a driver PR, a client update.</li>
+  <li><strong>[P] Projects:</strong> Work with a current goal and a deadline (e.g., <code class="language-plaintext highlighter-rouge">[P] Smart Watch Bring-up</code>).</li>
+  <li><strong>[A] Areas:</strong> Ongoing responsibilities without a fixed end date (e.g., <code class="language-plaintext highlighter-rouge">[A] Code Style Guide</code>, <code class="language-plaintext highlighter-rouge">[A] Testing Procedures</code>).</li>
+  <li><strong>[R] Resources:</strong> General topics or reference materials for future learning (e.g., <code class="language-plaintext highlighter-rouge">[R] Bluetooth Patterns</code>, <code class="language-plaintext highlighter-rouge">[R] Vendor Manuals</code>).</li>
+  <li><strong>[X] Archives:</strong> Completed projects or inactive notes kept out of sight to stay organized (e.g., <code class="language-plaintext highlighter-rouge">[X] Completed 2024 Projects</code>).</li>
 </ol>
 
-<h3 id="automating-the-system">Automating the system</h3>
-
-<p>Once the structure is stable, you can reduce friction significantly:</p>
-
-<ul>
-  <li><strong>Note templates:</strong> reuse distilled structures for repeated note types (datasheet summaries, client kickoff notes, post-mortems). The three templates at the end of this post are your starting point.</li>
-  <li><strong>Tag shortcuts:</strong> create saved searches in Evernote for your most common tag combos — <code class="language-plaintext highlighter-rouge">tag:.EdgeCase tag:.Vendor_ST</code> becomes a one-click lookup.</li>
-  <li><strong>Quick capture:</strong> use Evernote’s mobile clipper or a dedicated capture app so saving has zero friction. The curation happens later, not at capture time.</li>
-</ul>
-
-<hr />
-
-<h2 id="8-binding-it-all-together-tell-your-story">8. Binding It All Together: Tell Your Story</h2>
-
-<p>Ultimately, personal knowledge management exists to support <strong>action</strong>. Your Second Brain should function not as a warehouse but as a factory — turning raw information into tangible engineering output: a finished PCB design, a robust firmware driver, a client-ready requirements justification document.</p>
-
-<p>The test of whether your system is working: when you start a new project, how long does it take to find a reusable driver stub, a past edge-case note, or a client requirements template? If the answer is more than two minutes, the system needs refining.</p>
-
-<hr />
-
-<h2 id="case-example-organising-engineering-notes-with-code-and-para">Case Example: Organising Engineering Notes with CODE and PARA</h2>
-
-<h3 id="problem-statement">Problem Statement</h3>
-
-<p>Embedded systems development demands mastery of two parallel knowledge tracks: volatile market knowledge (datasheets, errata, GitHub issues) and fundamental engineering knowledge (design principles, debugging methods, client communication). Without a deliberate system, both collapse into an undifferentiated pile and the retrieval problem described above takes hold.</p>
-
-<hr />
-
-<h3 id="c--capture-use-the-curators-perspective">C — Capture: Use the Curator’s Perspective</h3>
-
-<p>Do not save entire 500-page datasheets. Apply the <strong>Curator’s Perspective</strong>: save only what is surprising, counterintuitive, or directly relevant to a current goal.</p>
-
-<ul>
-  <li><strong>Datasheets and reference manuals:</strong> save only the “Theory of Operation” and “Application Information” sections. These contain the API-like logic for driver development. Link to the full PDF — do not paste it.</li>
-  <li><strong>GitHub issues and forum threads:</strong> clip workarounds only — undocumented errata, race condition fixes, timing gotchas. Generic “how to init UART” tutorials add noise.</li>
-  <li><strong>Newsletters and articles:</strong> use a read-later app, highlight 2–3 insights that resonate, export only those highlights.</li>
-  <li><strong>Client requirement documents:</strong> extract the constraints that are surprising or non-obvious — the standard stuff goes in the template, the edge constraints get their own note.</li>
-</ul>
-
-<div class="tip">
-  <p><strong>Research like a detective, not a librarian.</strong><br />
-Don’t read datasheets cover-to-cover. Scan for the 3–5 specs that directly impact your current requirements. Ask: “Does this help me decide yes/no on this component?” If not, skip it. Set a 30-minute timer per component research session.</p>
-</div>
-
-<hr />
-
-<h3 id="o--organise-para-in-embedded-practice">O — Organise: PARA in Embedded Practice</h3>
-
-<p>File by actionability. The most important rule: when a note is captured during an active project, it goes into that Project notebook directly — not into a Resources folder.</p>
-
-<h4 id="tagging-cross-cutting-themes-para-folders-cannot-handle">Tagging: Cross-Cutting Themes PARA Folders Cannot Handle</h4>
-
-<p>The same silicon may appear in three different projects over two years. Tags let you surface all of it instantly regardless of which project folder it lives in.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Tag category</th>
-      <th>Example tags</th>
-      <th>When to apply</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Vendor</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">.Vendor_ST</code> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code> <code class="language-plaintext highlighter-rouge">.Vendor_Nordic</code> <code class="language-plaintext highlighter-rouge">.Vendor_Espressif</code></td>
-      <td>Any note touching that vendor’s silicon, SDK, or toolchain — regardless of which project folder it lives in</td>
-    </tr>
-    <tr>
-      <td><strong>Requirement type</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">.Req_Hardware</code> <code class="language-plaintext highlighter-rouge">.Req_Software</code> <code class="language-plaintext highlighter-rouge">.Req_Safety</code> <code class="language-plaintext highlighter-rouge">.Req_Security</code></td>
-      <td>Notes that document a specific requirement — lets you surface all impact when a client changes a spec</td>
-    </tr>
-    <tr>
-      <td><strong>Edge cases</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">.EdgeCase</code> <code class="language-plaintext highlighter-rouge">.CornerCase</code></td>
-      <td>Undocumented errata, broken hardware behaviour, inexplicable user commands — your institutional testing memory</td>
-    </tr>
-    <tr>
-      <td><strong>Work state</strong></td>
-      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> <code class="language-plaintext highlighter-rouge">.ToDistill</code> <code class="language-plaintext highlighter-rouge">.PostMortem</code></td>
-      <td>Tracks whether a note is a reusable asset, needs processing, or documents a past failure</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="retrieval-planning-matrix">Retrieval Planning Matrix</h4>
-
-<p>Before starting a new project, spend 10 minutes planning how you will <em>find</em> information later — not just how you will store it. Poor tag planning creates <strong>organisation debt</strong>: you will spend more time searching than researching.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>When I need to…</th>
-      <th>Search tags</th>
-      <th>Folder location</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Debug a peripheral issue</td>
-      <td><code class="language-plaintext highlighter-rouge">tag:.EdgeCase tag:.Vendor_XX</code></td>
-      <td><code class="language-plaintext highlighter-rouge">[P] Current Project</code> or <code class="language-plaintext highlighter-rouge">[X] Archive</code></td>
-    </tr>
-    <tr>
-      <td>Find a past driver implementation</td>
-      <td><code class="language-plaintext highlighter-rouge">tag:.IntermediatePacket tag:.Vendor_XX</code></td>
-      <td><code class="language-plaintext highlighter-rouge">[R] Vendor: XX</code></td>
-    </tr>
-    <tr>
-      <td>Review all open requirements</td>
-      <td><code class="language-plaintext highlighter-rouge">tag:.Req_Hardware tag:.Req_Software</code></td>
-      <td><code class="language-plaintext highlighter-rouge">[P] Current Project</code></td>
-    </tr>
-    <tr>
-      <td>Look up a protocol gotcha</td>
-      <td><code class="language-plaintext highlighter-rouge">tag:.EdgeCase tag:i2c</code> (or spi, uart…)</td>
-      <td>Any stack — search cuts across all</td>
-    </tr>
-    <tr>
-      <td>Start a similar future project</td>
-      <td><code class="language-plaintext highlighter-rouge">tag:.PostMortem tag:.IntermediatePacket</code></td>
-      <td><code class="language-plaintext highlighter-rouge">[X] Archive</code></td>
-    </tr>
-  </tbody>
-</table>
-
 <div class="warning">
-  <p><strong>Organisation Debt</strong><br />
-Poor folder/tag planning means you will spend more time searching than engineering. Fix your structure before you start a project, not during crunch time at 2am.</p>
+  <p><strong>Rule of Thumb:</strong> If a note is for something you are working on <em>right now</em>, put it directly into your <code class="language-plaintext highlighter-rouge">[P]</code> Project folder!</p>
 </div>
+
+<h3 id="simple-tagging-for-quick-searches">Simple Tagging for Quick Searches</h3>
+
+<p>Use short tags so you can find related notes across different project folders:</p>
+<ul>
+  <li><strong>By Vendor:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code>, <code class="language-plaintext highlighter-rouge">.Vendor_ST</code>, <code class="language-plaintext highlighter-rouge">.Vendor_Espressif</code></li>
+  <li><strong>By Type:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code>, <code class="language-plaintext highlighter-rouge">.Req_Software</code></li>
+  <li><strong>By Watch-out:</strong> <code class="language-plaintext highlighter-rouge">.EdgeCase</code> (for known chip bugs or quirks)</li>
+  <li><strong>By Status:</strong> <code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> (for reusable code snippets)</li>
+</ul>
 
 <hr />
 
-<h3 id="d--distill-progressive-summarization">D — Distill: Progressive Summarization</h3>
+<h2 id="6-progressive-summarization-highlighting-what-matters">6. Progressive Summarization: Highlighting What Matters</h2>
 
-<p>Apply layers incrementally — only distill notes you actually return to. The goal is rapid retrieval during a high-pressure debugging session.</p>
+<p>Don’t waste time summarizing every note from start to finish. Distill notes <strong>only when you reopen them to do work</strong>.</p>
+
+<p>Progressive Summarization uses 4 easy levels:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Level 1: Raw captured snippet (Diagram clip, forum fix, specification table)
+ └── Level 2: Bold key numbers (Voltage limits, timing, power consumption)
+      └── Level 3: Highlight design rationale ("Why" a design choice was made)
+           └── Level 4: 3-bullet summary written in your own words at the top
+</code></pre></div></div>
 
 <ul>
-  <li><strong>Layer 1 — Raw excerpt:</strong> the captured note as-is. Register map, timing diagram, forum post. No editing.</li>
-  <li><strong>Layer 2 — Bold critical constraints:</strong> bold specific numbers your future self will need fast: max SPI clock, PSRAM alignment requirement, reset vector address, required pull-up value.</li>
-  <li><strong>Layer 3 — Highlight design rationale:</strong> highlight the bolded points that explain <em>why</em> a design choice was made. The “why” is what gets lost over time.</li>
-  <li><strong>Layer 4 — Executive summary (rare):</strong> for foundational principles only. Three bullets at the top so context is visible before reading a single line of detail.</li>
+  <li><strong>Level 1 — Raw Snippet:</strong> The text or table as clipped.</li>
+  <li><strong>Level 2 — Bold Critical Specs:</strong> Bold values your future self needs to see instantly (e.g., <strong>max 3.3 V</strong>, <strong>wakeup latency 200 µs</strong>).</li>
+  <li><strong>Level 3 — Highlight Rationale:</strong> Highlight passages explaining <em>why</em> a decision was made.</li>
+  <li><strong>Level 4 — 3-Bullet Summary:</strong> Write a 3-sentence summary at the top of foundational notes so you get the context in 5 seconds.</li>
 </ul>
-
-<p><strong>Example distillation — MCU comparison table (Layer 3 output):</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Criteria</th>
-      <th>STM32L476</th>
-      <th>ESP32-S3</th>
-      <th>Decision factor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Stop 2 current</td>
-      <td><strong>120 nA</strong></td>
-      <td>5 µA</td>
-      <td>STM32 wins for battery life</td>
-    </tr>
-    <tr>
-      <td>BLE stack</td>
-      <td>External (SoftDevice)</td>
-      <td>Built-in</td>
-      <td>ESP32 simpler if BLE is core</td>
-    </tr>
-    <tr>
-      <td>ADC resolution</td>
-      <td>12-bit, 16 ch</td>
-      <td>12-bit, 20 ch</td>
-      <td>Tie</td>
-    </tr>
-    <tr>
-      <td>FreeRTOS support</td>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td>Tie</td>
-    </tr>
-    <tr>
-      <td>Wake latency</td>
-      <td><strong>5 µs (HSI16)</strong></td>
-      <td>~2 ms (full boot)</td>
-      <td>STM32 wins for real-time wakeup</td>
-    </tr>
-  </tbody>
-</table>
 
 <div class="note">
-  <p>Apply layers incrementally, not all at once. Only distill notes you actually return to. The goal is rapid retrieval for your future self — not perfect documentation for its own sake. <strong>Distillation = decision acceleration.</strong></p>
+  <p><strong>Why Distill?</strong><br />
+Distillation turns a 15-minute search through a messy PDF into a 5-second glance at bolded numbers.</p>
 </div>
 
 <hr />
 
-<h3 id="e--express-intermediate-packets">E — Express: Intermediate Packets</h3>
+<h2 id="7-expressing-work-intermediate-packets-ips">7. Expressing Work: Intermediate Packets (IPs)</h2>
 
-<p>Before writing any new code or documentation, spend 15 minutes searching your IP library first. The goal is to <em>assemble</em>, not to create from scratch.</p>
+<p>Instead of starting every new project from scratch, build a library of <strong>Intermediate Packets (IPs)</strong>—small, reusable chunks of work saved from past projects:</p>
 
 <table>
   <thead>
     <tr>
-      <th>IP type</th>
-      <th>Examples</th>
-      <th>Tag to find it</th>
+      <th>Reusable Asset (IP)</th>
+      <th>What It Is</th>
+      <th>How It Helps You</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><strong>Driver stubs</strong></td>
-      <td>I/O map header template, SPI/I2C init scaffold, DMA Tx boilerplate</td>
-      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> + <code class="language-plaintext highlighter-rouge">.Vendor_XX</code></td>
+      <td><strong>Code Templates</strong></td>
+      <td>Basic driver setup for I2C or SPI sensors</td>
+      <td>Start writing sensor code in 2 minutes instead of 2 hours.</td>
     </tr>
     <tr>
-      <td><strong>Process checklists</strong></td>
-      <td>Project kick-off checklist, HW bring-up sequence, code review checklist</td>
-      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> + <code class="language-plaintext highlighter-rouge">[A] HW Testing</code></td>
+      <td><strong>Testing Checklists</strong></td>
+      <td>Step-by-step hardware bring-up guide</td>
+      <td>Never forget a critical safety test during prototype checks.</td>
     </tr>
     <tr>
-      <td><strong>Architecture sketches</strong></td>
-      <td>FreeRTOS task layout, layering diagram, context diagram</td>
-      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code></td>
+      <td><strong>Architecture Diagrams</strong></td>
+      <td>Simple block diagrams showing how parts connect</td>
+      <td>Easily explain your design to teammates or clients.</td>
     </tr>
     <tr>
-      <td><strong>Post-mortems</strong></td>
-      <td>Bug symptom → root cause → fix → time lost</td>
-      <td><code class="language-plaintext highlighter-rouge">.EdgeCase</code> + <code class="language-plaintext highlighter-rouge">.PostMortem</code></td>
-    </tr>
-    <tr>
-      <td><strong>Logging abstraction</strong></td>
-      <td>Interface that swaps UART / RTT / semihosting without changing call sites</td>
-      <td><code class="language-plaintext highlighter-rouge">.IntermediatePacket</code></td>
+      <td><strong>Bug Post-Mortems</strong></td>
+      <td>Notes on past bugs and how you fixed them</td>
+      <td>Avoid making the exact same mistake twice.</td>
     </tr>
   </tbody>
 </table>
 
 <hr />
 
-<h2 id="design-decisions-making-choices-justifiable">Design Decisions: Making Choices Justifiable</h2>
+<h2 id="8-real-world-case-study-one-device-four-notes">8. Real-World Case Study: One Device, Four Notes</h2>
 
-<p>Your Second Brain should make design decisions justifiable — to yourself six months later, to teammates, and to non-technical stakeholders. Before opening any datasheet, answer these core questions first:</p>
+<p>To see how this works in practice, let’s look at a single real-world chip: the <strong>Texas Instruments AFE4404 Optical Heart-Rate Sensor</strong> (Datasheet ID: <code class="language-plaintext highlighter-rouge">SBAS689D</code>).</p>
 
-<div class="warning">
-  <p><strong>Don’t skip requirements capture.</strong><br />
-Many engineers jump straight to component shopping without clarifying requirements. This leads to picking familiar parts instead of optimal ones. Spend 15 minutes answering the questions below — your future self will thank you during debugging.</p>
-</div>
+<p>Imagine you are designing a low-power wearable fitness wristband powered by a small 180 mAh rechargeable battery. You need to decide how to configure the sensor so the battery lasts <strong>at least 72 hours</strong>.</p>
 
-<h3 id="core-questions-before-opening-any-datasheet">Core Questions Before Opening Any Datasheet</h3>
-
-<pre><code class="language-mermaid">flowchart TD
-    A["Core Questions\n──────────\nWhat must it do?\nFor whom? How many units?"] --&gt; B["Requirements Capture\n──────────\nFunctional: measure, control, communicate\nPerformance: speed, accuracy, power\nInterface: how does it connect?"]
-    B --&gt; C["Constraints Assessment\n──────────\nBudget &amp; timeline\nTeam experience level\nTask parallelism needs\nEnvironmental limits"]
-    C --&gt; D["Decision Categories\n──────────\nMCU selection\nCommunication protocol\nSensor / actuator choice\nPower management"]
-    D --&gt; E["Success Criteria\n──────────\nMust-haves (deal-breakers)\nNice-to-haves\nRisk factors"]
-</code></pre>
-
-<p>Answer these before comparing chips. Otherwise you will spend three days reading datasheets before realising none of them fit your actual requirements.</p>
+<p>Here are 4 short notes pulled from a Second Brain to make that decision:</p>
 
 <hr />
 
-<h3 id="navigating-documentation-with-code">Navigating Documentation with CODE</h3>
-
-<p>For each major decision (MCU, protocol, sensors, power), run one CODE cycle:</p>
-
-<pre><code class="language-mermaid">flowchart LR
-    subgraph Design["Hardware Design Flow"]
-        A[Requirements] --&gt; B[MCU Selection]
-        B --&gt; C[Protocols]
-        C --&gt; D[Sensors]
-        D --&gt; E[Power]
-        E --&gt; F[Prototype]
-    end
-
-    subgraph CODE_cycle["CODE at each step"]
-        G["Capture\nresearch"] --&gt; H["Organise\nby decision"]
-        H --&gt; I["Distill\ncompare options"]
-        I --&gt; J["Express\ndocument choice"]
-    end
-
-    B -.-&gt; G
-    C -.-&gt; G
-    D -.-&gt; G
-    E -.-&gt; G
-</code></pre>
-
-<p>The result: decisions in hours instead of days, with documented reasoning that is easy to adapt later.</p>
-
-<hr />
-
-<h3 id="1-design-pattern-justification-notes">1. Design Pattern Justification Notes</h3>
-
-<p>For each significant architectural choice, record not just what pattern was used but why it was chosen over the alternatives and what it protects you from in the future:</p>
-
+<h3 id="note-1--datasheet-excerpt-power-down-modes">Note 1 — Datasheet Excerpt: Power-Down Modes</h3>
 <ul>
-  <li><strong>Facade pattern:</strong> chosen to simplify complex library interfaces and hide hardware details from the application layer. Future-proofs against SDK version changes.</li>
-  <li><strong>Adapter pattern:</strong> chosen to let hardware change without rewriting upper-level software. Document the exact interface contract being stabilised and which concrete driver implements it today.</li>
-  <li><strong>MVP / MVC:</strong> chosen to segregate algorithms from hardware for independent host-side testing. Pair with FreeRTOS task boundaries: model in one task, display in another.</li>
-  <li><strong>Dependency Injection / DIP:</strong> chosen for testability — mock the HAL layer in unit tests without real hardware. Document which interfaces are injected and which are concrete.</li>
+  <li><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">TI AFE4404 Datasheet (SBAS689D), Section 7.5</code></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Folder:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: TI</code></td>
+          <td><strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
 </ul>
 
-<h3 id="2-risk-and-security-analysis-note">2. Risk and Security Analysis Note</h3>
-
-<p>One note per project: list specific threats you are defending against, the weakest link identified, and cost-of-mitigation versus cost-of-breach. This makes security spending justifiable to non-engineers and provides an audit trail if requirements change mid-project.</p>
-
-<hr />
-
-<h2 id="retrieval--bigger-picture-a-worked-example">Retrieval → Bigger Picture: A Worked Example</h2>
-
-<p>This is where the system pays off. You are mid-project — <em>designing a low-power wearable heart-rate monitor</em> with an STM32L476 MCU, an AFE4404 optical front-end, and a BLE link — and you need to decide whether to put the AFE in continuous-sample mode or triggered-sample mode. You open Evernote and pull four notes. Together they produce a decision you would not have reached by looking at any one note alone.</p>
-
-<hr />
-
-<h3 id="note-1--datasheet-snippet-afe4404-texas-instruments">Note 1 — Datasheet snippet: AFE4404 (Texas Instruments)</h3>
-
-<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">SBAS700B — AFE4404 Datasheet, Section 8.3 "Theory of Operation"</code><br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code><br />
-<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: TI</code></p>
-
 <div class="info">
-  <p><strong>Raw capture (Layer 1)</strong></p>
-
-  <p>AFE4404 Dynamic Power-Down mode: the device can power down all analog blocks between LED pulses. Wake-up time from DPD to first valid sample: <strong>50 µs typical, 100 µs worst-case (−40°C)</strong>. LED driver average current in continuous mode at 50 mA peak, 25% duty cycle: <strong>12.5 mA average — dominant power term</strong>. PRF (pulse repetition frequency) range: 10 Hz to 1000 Hz.</p>
-
-  <p><strong>Layer 2 bold:</strong> wake-up latency 100 µs worst-case; LED average current 12.5 mA at 25% duty; minimum PRF 10 Hz.</p>
+  <p><strong>Clipped Note (Level 2 Bolded):</strong><br />
+The AFE4404 includes a <strong>Dynamic Power-Down (DPD)</strong> mode that turns off internal analog blocks between sensor measurements. In DPD mode, receiver supply current drops to <strong>300 µA typical</strong> (compared to <strong>620 µA</strong> in continuous always-on mode).</p>
 </div>
 
 <hr />
 
-<h3 id="note-2--reference-manual-snippet-stm32l476-stmicroelectronics">Note 2 — Reference manual snippet: STM32L476 (STMicroelectronics)</h3>
-
-<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">RM0351 Rev 9, Section 5.3.7 "Low-Power Timer (LPTIM)"</code><br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_ST</code><br />
-<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: STMicro</code></p>
+<h3 id="note-2--datasheet-excerpt-led-current--timing">Note 2 — Datasheet Excerpt: LED Current &amp; Timing</h3>
+<ul>
+  <li><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">TI AFE4404 Datasheet (SBAS689D), Section 8.3.6.4 &amp; Table 9</code></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Folder:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: TI</code></td>
+          <td><strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <div class="info">
-  <p><strong>Raw capture (Layer 1)</strong></p>
-
-  <p>LPTIM can trigger an ADC conversion and wake the core from Stop 2 mode. Wakeup latency from Stop 2: <strong>approx. 5 µs with HSI16 as wakeup clock</strong>. Stop 2 current (all peripherals off, SRAM retained): <strong>120 nA typical at 25°C</strong>. LPTIM runs on LSE (32.768 kHz) — minimum timer resolution 30.5 µs.</p>
-
-  <p><strong>Layer 2 bold:</strong> Stop 2 = 120 nA; wakeup 5 µs; LPTIM resolution 30.5 µs — total wakeup chain fits inside AFE’s 100 µs worst-case window.</p>
+  <p><strong>Clipped Note (Level 2 Bolded):</strong><br />
+Programmable LED pulse current: 0 to 50 mA. Running LEDs at 50 mA peak with a 25% duty cycle draws <strong>12.5 mA average current</strong>. Reducing to a <strong>1% duty cycle (100 µs pulse duration at 25 Hz sample rate)</strong> drops average LED current to <strong>125 µA</strong>. The DPD wake-up setup margin $t_9$ requires <strong>$t_9 \ge 200\ \mu\text{s}$</strong> before the next measurement.</p>
 </div>
 
 <hr />
 
-<h3 id="note-3--forum-edge-case-i2c-hang-after-stop-2-wakeup">Note 3 — Forum edge case: I2C hang after Stop 2 wakeup</h3>
-
-<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">ST Community forum — "I2C lockup after STM32 Stop Mode wakeup" (Jan 2023)</code><br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_ST</code> <code class="language-plaintext highlighter-rouge">.EdgeCase</code><br />
-<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[P] HR Monitor Design</code></p>
+<h3 id="note-3--application-note-ambient-light-calibration">Note 3 — Application Note: Ambient Light Calibration</h3>
+<ul>
+  <li><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">TI AFE4404 Application Guide, Section 8.3.3</code></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Folder:</strong> <code class="language-plaintext highlighter-rouge">[P] Wristband Project</code></td>
+          <td><strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_TI</code>, <code class="language-plaintext highlighter-rouge">.EdgeCase</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <div class="bug">
-  <p><strong>Edge case (Layer 2 bolded)</strong></p>
-
-  <p>Multiple users report I2C bus lockup after exiting Stop mode if SCL is released while a byte transfer is in progress. The AFE4404 holds SDA low mid-byte. <strong>Workaround: issue a 9-clock pulse sequence on SCL before re-enabling the I2C peripheral after wakeup, or use bit-bang recovery.</strong> ST HAL does not handle this automatically as of HAL v1.11.</p>
-
-  <p><strong>Layer 2 bold:</strong> must add I2C bus recovery after every Stop 2 exit before issuing AFE config writes.</p>
+  <p><strong>Clipped Note (Level 2 Bolded):</strong><br />
+Sunlight and room lighting create DC optical noise. <strong>Workaround: Enable the internal Offset Cancellation DAC and use <code class="language-plaintext highlighter-rouge">PD_DISCONNECT</code> mode at startup to auto-calibrate ambient light levels before reading heart-rate data.</strong></p>
 </div>
 
 <hr />
 
-<h3 id="note-4--client-requirements-capture">Note 4 — Client requirements capture</h3>
-
-<p><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">Client kickoff call notes — Project [P] HR Monitor Design</code><br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code> <code class="language-plaintext highlighter-rouge">.Req_Software</code><br />
-<strong>Stack:</strong> <code class="language-plaintext highlighter-rouge">[P] HR Monitor Design</code></p>
+<h3 id="note-4--client-requirements">Note 4 — Client Requirements</h3>
+<ul>
+  <li><strong>Source:</strong> <code class="language-plaintext highlighter-rouge">Client Kickoff Meeting Notes</code></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Folder:</strong> <code class="language-plaintext highlighter-rouge">[P] Wristband Project</code></td>
+          <td><strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <div class="important">
-  <p><strong>Requirements (Layer 2 bolded)</strong></p>
-
-  <p>Battery life target: <strong>72 hours continuous monitoring</strong> on a 180 mAh LiPo. BLE advertising interval: 1 second. Heart-rate sample rate: <strong>minimum 25 Hz to meet PPG motion artifact rejection algorithm requirement</strong>. Display: none (data streamed over BLE only). Maximum average system current budget: <strong>~2.1 mA (180 mAh ÷ 72 h × 0.85 derating)</strong>.</p>
+  <p><strong>Clipped Note (Level 2 Bolded):</strong><br />
+Target battery life: <strong>72 hours continuous use</strong> on a 180 mAh LiPo battery. Heart-rate sampling rate: <strong>25 Hz minimum</strong>. Maximum allowable average system current budget: <strong>~2.1 mA</strong> (calculated as $180\text{ mAh} \div 72\text{ h} \times 0.85\text{ safety margin}$).</p>
 </div>
 
 <hr />
 
-<h3 id="the-insight-that-retrieval-produces">The insight that retrieval produces</h3>
+<h3 id="the-synthesis-turning-4-notes-into-a-clear-decision">The Synthesis: Turning 4 Notes Into a Clear Decision</h3>
 
 <div class="success">
-  <p><strong>What four notes together produce that none of them states alone</strong></p>
-
-  <p>Triggered-sample mode is not just preferable — it is the <strong>only option that fits the power budget</strong>. At 25 Hz PRF, continuous mode draws 12.5 mA from the LED driver alone against a 2.1 mA system budget. Triggered mode using LPTIM + Stop 2 keeps the MCU at 120 nA between samples. The AFE’s 100 µs wakeup window is comfortably cleared by the STM32’s 5 µs Stop 2 exit.</p>
-
-  <p>The edge-case note flags a <strong>non-obvious implementation requirement</strong>: I2C bus recovery must be added after every wakeup — something the AFE datasheet and the MCU reference manual each in isolation give no reason to expect.</p>
-</div>
-
-<p>The <strong>datasheet note</strong> gave you the power numbers. The <strong>reference manual note</strong> gave you the wakeup timing. The <strong>edge-case note</strong> gave you the implementation trap. The <strong>requirements note</strong> gave you the constraint that made the decision obvious. Stored separately they are raw material. Retrieved together they produce original engineering judgement.</p>
-
-<hr />
-
-<h2 id="using-notes-for-presentations-and-communication">Using Notes for Presentations and Communication</h2>
-
-<p>Your Second Brain is not just a personal tool — it is also the source material for everything you communicate outward. This is the Express stage applied at a team and client level.</p>
-
-<h3 id="for-technical-presentations">For technical presentations</h3>
-
-<ul>
-  <li><strong>Gather across notes:</strong> use tag searches to collect related information from multiple projects and stacks.</li>
-  <li><strong>Build the narrative:</strong> connect technical details with practical implications — the “why we chose this” story lives in your Design Decision Records.</li>
-  <li><strong>Add visuals:</strong> reference diagrams and pinouts already captured in your notes rather than recreating them.</li>
-</ul>
-
-<p><strong>Example: presenting a motor control solution assembled from notes</strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Slide</th>
-      <th>What you pull</th>
-      <th>Source note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Problem statement</td>
-      <td>“Customer needs precise speed control”</td>
-      <td><code class="language-plaintext highlighter-rouge">[P] Motor Control — Client B</code> kickoff notes</td>
-    </tr>
-    <tr>
-      <td>Technical approach</td>
-      <td>“TIM2 + PWM output, PID algorithm”</td>
-      <td>STM32 timer distillation note + PID IP</td>
-    </tr>
-    <tr>
-      <td>Implementation details</td>
-      <td>“TIM2 ch1–3 for 3-phase PWM; watch for timer overflow at high speeds”</td>
-      <td>Datasheet note + <code class="language-plaintext highlighter-rouge">.EdgeCase</code> tag</td>
-    </tr>
-    <tr>
-      <td>Results &amp; gotchas</td>
-      <td>“±1% accuracy achieved; filter encoder noise; calibrate PID gains”</td>
-      <td>Post-mortem note from previous motor project</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="for-team-communication">For team communication</h3>
-
-<ul>
-  <li><strong>Code reviews:</strong> reference specific datasheet sections or past implementations directly from notes rather than rewriting context from scratch.</li>
-  <li><strong>Design discussions:</strong> share your distilled notes instead of full manuals — a 5-bullet summary of a 200-page reference manual is more useful in a meeting.</li>
-  <li><strong>Client documentation:</strong> turn distilled notes into API docs, setup guides, or design rationale documents. The structure is already there.</li>
-</ul>
-
-<div class="tip">
-  <p>Keep a “Communication” sub-section in each project notebook where you maintain plain-language summaries for different audiences: one for managers (what it does, what it costs), one for junior devs (how to use it), one for clients (what they asked for and what you built).</p>
-</div>
-
-<hr />
-
-<h2 id="note-templates-fill-in-structures-for-your-evernote">Note Templates: Fill-In Structures for Your Evernote</h2>
-
-<p>Copy each template into a new note at the start of a project or when you encounter new hardware. The questions are the headings — fill in the answers as you learn them, not all at once.</p>
-
-<hr />
-
-<h3 id="template-1--datasheet--reference-manual-summary">Template 1 — Datasheet &amp; Reference Manual Summary</h3>
-
-<p><strong>Where to file:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: XX</code> initially; move to <code class="language-plaintext highlighter-rouge">[P] Project Name</code> when it becomes active.<br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_XX</code> <code class="language-plaintext highlighter-rouge">.ToDistill</code></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Part number</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Manufacturer</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Document reference (title + rev)</td>
-      <td>e.g. <code class="language-plaintext highlighter-rouge">RM0351 Rev 9</code> / <code class="language-plaintext highlighter-rouge">SBAS700B</code></td>
-    </tr>
-    <tr>
-      <td>Relevant section(s) captured</td>
-      <td>e.g. Sec 8.3 Theory of Operation, Sec 9.2 Application Circuit</td>
-    </tr>
-    <tr>
-      <td>Link to full datasheet / PDF</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <thead>
-    <tr>
-      <th>Question</th>
-      <th>Guidance</th>
-      <th>Your Answer</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>What does this device do in one sentence?</td>
-      <td><em>Write it in your own words, not the marketing summary.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>What are the critical electrical limits I must not violate?</td>
-      <td><em>e.g. VDDIO max 3.6 V; SDA/SCL max clock 400 kHz in Fast-mode; Tamb max 85°C. Bold these in your answer.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>What timing constraints affect my firmware?</td>
-      <td><em>e.g. AFE4404: 100 µs worst-case wakeup from DPD; I2S BCLK must be stable before CODEC RESET deasserted.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>What are the non-obvious gotchas or errata I found?</td>
-      <td><em>e.g. I2C SDA held low after Stop mode exit. PLL lock time not mentioned in brief but 300 µs in RM. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if relevant.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Which application circuit or reference schematic applies to my design?</td>
-      <td><em>Note figure number and page. Sketch or photograph key parts. Link to the eval board schematic if it exists.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Which driver registers or init sequence matter most for my use case?</td>
-      <td><em>e.g. AFE4404 CONTROL0 register bit 3 = DPD enable; must write <code class="language-plaintext highlighter-rouge">0x000000</code> to TIAGAIN before first sample.</em></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<div class="tip">
-  <p>Once you have filled in these fields, go back and <strong>bold the 3–5 numbers</strong> that your future self will need in 2 seconds. That is Layer 2 done.</p>
-</div>
-
-<hr />
-
-<h3 id="template-2--client-requirements-capture">Template 2 — Client Requirements Capture</h3>
-
-<p><strong>Where to file:</strong> <code class="language-plaintext highlighter-rouge">[P] Project Name</code> immediately.<br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code> <code class="language-plaintext highlighter-rouge">.Req_Software</code> <code class="language-plaintext highlighter-rouge">.Req_Safety</code> <em>(apply whichever are relevant)</em></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Client / project name</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Date of requirements capture</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Who provided these requirements?</td>
-      <td>e.g. John Smith, CTO — verbal in kickoff call + email thread 2024-11-14</td>
-    </tr>
-    <tr>
-      <td>Document reference (if formal)</td>
-      <td>e.g. SRS v0.3, <code class="language-plaintext highlighter-rouge">ClientX_PRD_2024.pdf</code></td>
-    </tr>
-    <tr>
-      <td>Requirements status</td>
-      <td>e.g. Draft / Under review / Signed-off</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Question</th>
-      <th>Guidance</th>
-      <th>Your Answer</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>System Overview</td>
-      <td>What problem does this device solve for the end user?</td>
-      <td><em>Not what it does technically — what job does the user hire it for? e.g. “Allows a nurse to monitor patient SpO2 continuously without disturbing sleep.”</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>System Overview</td>
-      <td>Who are the users and what is their technical level?</td>
-      <td><em>e.g. Clinical staff — non-technical. Device must operate correctly with no configuration. Firmware updates handled by IT department only.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Functional Requirements</td>
-      <td>What must the system measure, control, or communicate?</td>
-      <td><em>List each function with its minimum acceptable performance. e.g. Measure HR ±2 BPM; BLE range minimum 5 m in open air; data logged at 25 Hz.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Functional Requirements</td>
-      <td>What interfaces must it expose?</td>
-      <td><em>e.g. USB-C for charging only (no data). BLE 5.0 for data streaming. No physical buttons — gesture or proximity sensor for wake.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Performance &amp; Power Constraints</td>
-      <td>What are the battery life and power targets?</td>
-      <td><em>State the battery capacity and required operating duration. e.g. 180 mAh LiPo, 72 h continuous. Derive the average current budget and note it here.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Performance &amp; Power Constraints</td>
-      <td>What are the real-time constraints?</td>
-      <td><em>e.g. HR algorithm requires 25 Hz minimum sample rate. BLE notify latency &lt; 1 s. Alarm must trigger within 500 ms of threshold crossing.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Environmental &amp; Reliability Constraints</td>
-      <td>What are the operating and storage temperature ranges?</td>
-      <td><em>e.g. Operating: 0–50°C. Storage: −20 to 60°C. Note if medical / industrial / automotive standard applies.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Environmental &amp; Reliability Constraints</td>
-      <td>What are the ingress protection, drop, or vibration requirements?</td>
-      <td><em>e.g. IP54 splash resistant. 1 m drop onto concrete (IEC 60068-2-31). No formal vibration spec but must survive normal handling.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Regulatory &amp; Safety</td>
-      <td>What regulatory certifications are required?</td>
-      <td><em>e.g. CE marking. FCC Part 15 (BLE). IEC 60601-1 (medical electrical). ISO 13485 QMS. Note whether certification is the client’s responsibility or yours.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Regulatory &amp; Safety</td>
-      <td>What are the edge cases or failure modes the client has already considered?</td>
-      <td><em>e.g. Device must not alarm falsely &gt; 1×/day. Must survive sensor disconnect without firmware crash. Low battery warning at 15% SoC.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Surprises and Non-Obvious Constraints</td>
-      <td>What requirements surprised you or seem under-specified?</td>
-      <td><em>This is the most important field. Note constraints that are easy to miss: implicit safety assumptions, missing tolerances, conflicting specs. Tag <code class="language-plaintext highlighter-rouge">.EdgeCase</code> if needed.</em></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<div class="think">
-  <p>Write a 3-bullet <strong>Layer 4 executive summary</strong> at the top of this note after your first design review. Something like:</p>
+  <p><strong>What Combining These 4 Notes Tells Us:</strong></p>
 
   <ol>
-    <li>72 h battery budget = 2.1 mA average — this is the single tightest constraint.</li>
-    <li>25 Hz minimum sample rate is a hard floor set by the algorithm, not a nice-to-have.</li>
-    <li>No physical UI — firmware must handle all error states silently and log them over BLE.</li>
+    <li><strong>Clear Power Strategy:</strong> Running the sensor in continuous mode with a 25% LED duty cycle draws 12.5 mA—which would drain the battery in under 15 hours! By configuring a <strong>1% duty cycle (100 µs pulse at 25 Hz)</strong> and enabling <strong>Dynamic Power-Down mode</strong>, average LED current drops to <strong>125 µA</strong> and receiver current drops below <strong>200 µA</strong>. Total sensor draw stays well under <strong>0.5 mA</strong>, comfortably fitting within our 2.1 mA system budget.</li>
+    <li><strong>Timing Fits Effortlessly:</strong> The 200 µs setup margin ($t_9$) needed for DPD mode easily fits inside the 40,000 µs (40 ms) window between 25 Hz heart-rate pulses.</li>
+    <li><strong>Actionable Checklist:</strong> Before taking measurements, our firmware must run the Offset Cancellation DAC calibration to remove ambient sunlight interference.</li>
   </ol>
 </div>
 
 <hr />
 
-<h3 id="template-3--design-decision-record">Template 3 — Design Decision Record</h3>
+<h2 id="9-ready-to-use-note-templates">9. Ready-to-Use Note Templates</h2>
 
-<p><strong>Where to file:</strong> <code class="language-plaintext highlighter-rouge">[P] Project Name</code>. Create one note per major decision.<br />
-<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code> or <code class="language-plaintext highlighter-rouge">.Req_Software</code> (whichever applies) + <code class="language-plaintext highlighter-rouge">.IntermediatePacket</code> once the decision is final and reusable.</p>
+<p>Copy these simple fill-in templates into your favorite note app (Obsidian, Notion, Evernote, Apple Notes, or OneNote):</p>
+
+<hr />
+
+<h3 id="template-1--datasheet-summary-single-device">Template 1 — Datasheet Summary (Single Device)</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">[R] Vendor: XX</code> (or <code class="language-plaintext highlighter-rouge">[P] Active Project</code>)<br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Vendor_XX</code></p>
 
 <table>
   <thead>
     <tr>
       <th>Field</th>
-      <th>Value</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Decision title</td>
-      <td>e.g. AFE sampling mode — triggered vs continuous</td>
+      <td><strong>Device Name &amp; Part Number</strong></td>
+      <td>e.g. TI AFE4404 Heart-Rate Sensor</td>
     </tr>
     <tr>
-      <td>Project</td>
+      <td><strong>Manufacturer</strong></td>
+      <td>e.g. Texas Instruments</td>
+    </tr>
+    <tr>
+      <td><strong>Link to Official PDF</strong></td>
       <td> </td>
-    </tr>
-    <tr>
-      <td>Date decided</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Decision made by</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Status</td>
-      <td>e.g. Proposed / Under review / Final / Superseded</td>
     </tr>
   </tbody>
 </table>
-
-<hr />
 
 <table>
   <thead>
     <tr>
       <th>Question</th>
-      <th>Guidance</th>
-      <th>Your Answer</th>
+      <th>Guidance / Your Notes</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>What decision needed to be made?</td>
-      <td><em>State it as a question. e.g. Should the AFE4404 run in continuous-sample mode or LPTIM-triggered DPD mode?</em></td>
-      <td> </td>
+      <td><strong>What does this chip do in 1 sentence?</strong></td>
+      <td><em>e.g., Measures optical heart rate and pulse oximetry signals.</em></td>
     </tr>
     <tr>
-      <td>What were the options considered?</td>
-      <td><em>List each option briefly. e.g. (A) Continuous mode — constant 12.5 mA LED avg. (B) Triggered DPD mode — LED off between pulses, MCU in Stop 2.</em></td>
-      <td> </td>
+      <td><strong>What are the key electrical limits?</strong></td>
+      <td><em>e.g., Supply voltage: 2.0 V to 3.6 V. Max LED current: 50 mA.</em></td>
     </tr>
     <tr>
-      <td>What constraints or requirements drove the decision?</td>
-      <td><em>Reference your requirements note. e.g. 2.1 mA average system budget makes option A immediately non-viable. 25 Hz minimum PRF is satisfied by LPTIM at 25 Hz trigger.</em></td>
-      <td> </td>
+      <td><strong>What timing limits matter?</strong></td>
+      <td><em>e.g., Requires 200 µs setup margin in DPD mode.</em></td>
     </tr>
     <tr>
-      <td>What was decided, and why?</td>
-      <td><em>State the chosen option and the explicit reasoning. Bold the key technical justification.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>What are the implementation consequences?</td>
-      <td><em>e.g. Must add I2C bus recovery (9-clock pulse) after every Stop 2 exit. LPTIM must be initialised before Stop 2 entry. AFE CONTROL0 bit 3 must be set in init sequence.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>What was explicitly rejected and why?</td>
-      <td><em>Documenting rejected options prevents the same debate recurring. e.g. Continuous mode rejected: 12.5 mA LED draw alone exceeds total 2.1 mA budget by 6×.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>What could invalidate this decision later?</td>
-      <td><em>e.g. If client increases BLE advertising rate to 100 ms, wakeup frequency may make Stop 2 overhead negligible — revisit triggered vs continuous tradeoff.</em></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Which notes does this decision draw on?</td>
-      <td><em>Link or reference the source notes: datasheet note, forum edge-case note, requirements note. This is the connective tissue that makes retrieval produce insight.</em></td>
-      <td> </td>
+      <td><strong>Any known bugs or quirks?</strong></td>
+      <td><em>e.g., Needs Offset Cancellation DAC calibration for ambient light.</em></td>
     </tr>
   </tbody>
 </table>
 
 <hr />
 
-<div class="success">
-  <p>A filled Design Decision Record is not just documentation — it is the <strong>Express</strong> stage of the CODE cycle. It turns the raw material in your four captured notes into an engineering judgement you can defend, share with teammates, and reuse on the next project that involves the same tradeoff.</p>
-</div>
+<h3 id="template-2--client-requirements-summary">Template 2 — Client Requirements Summary</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">[P] Active Project</code><br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.Req_Hardware</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Project Name</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Client / Stakeholder</strong></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Guidance / Your Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>What main job must this device do?</strong></td>
+      <td><em>e.g., Track wristband heart-rate during daily workouts.</em></td>
+    </tr>
+    <tr>
+      <td><strong>What is the battery &amp; power target?</strong></td>
+      <td><em>e.g., 180 mAh battery, 72-hour battery life = 2.1 mA max budget.</em></td>
+    </tr>
+    <tr>
+      <td><strong>What are the key performance specs?</strong></td>
+      <td><em>e.g., Minimum 25 Hz heart-rate sample rate.</em></td>
+    </tr>
+    <tr>
+      <td><strong>Are there physical or environment constraints?</strong></td>
+      <td><em>e.g., Splash-proof enclosure, operating range 0°C to 50°C.</em></td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
-<h2 id="common-questions">Common Questions</h2>
+<h3 id="template-3--design-decision-note">Template 3 — Design Decision Note</h3>
 
-<p><strong>“But I might need that datasheet someday!”</strong><br />
-Archive it. <code class="language-plaintext highlighter-rouge">[X] Archive</code> is fully searchable but does not clutter your active workspace. Nothing is lost, just out of the way.</p>
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">[P] Active Project</code><br />
+<strong>Tags:</strong> <code class="language-plaintext highlighter-rouge">.IntermediatePacket</code></p>
 
-<p><strong>“This seems like extra work on top of real engineering.”</strong><br />
-It takes less time than constantly searching through disorganised notes at 2am the night before a client review.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Decision Title</strong></td>
+      <td>e.g. AFE4404 Sampling Mode (Dynamic Power-Down vs. Continuous)</td>
+    </tr>
+    <tr>
+      <td><strong>Date &amp; Author</strong></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-<p><strong>“What if I organise something in the wrong folder?”</strong><br />
-Notes are digital — reorganise any time. The only wrong choice is no organisation at all.</p>
-
-<p><strong>“My brain doesn’t work in folders.”</strong><br />
-Use tags and search instead of hierarchy. The PARA structure is a starting point, not a cage. The tag system in this post works just as well in a flat note structure as in a folder hierarchy.</p>
-
-<p><strong>“I don’t have time to distill every note.”</strong><br />
-You don’t. Only distill notes you return to more than once. Layer 2 bolding takes 2 minutes and that is the only layer most notes ever need.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Guidance / Your Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>What choice needed to be made?</strong></td>
+      <td><em>Should we run the sensor continuously or use Dynamic Power-Down?</em></td>
+    </tr>
+    <tr>
+      <td><strong>What option was chosen and why?</strong></td>
+      <td><em>Chosen Dynamic Power-Down + 1% duty cycle. Cuts current from 12.5 mA to &lt;0.5 mA to hit battery target.</em></td>
+    </tr>
+    <tr>
+      <td><strong>What software changes are required?</strong></td>
+      <td><em>Enable DPD mode in register 23h and run startup DAC calibration.</em></td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
-<p><em>Its immortant to remember, Its is not about having perfect notes. It is about having notes you can actually find and use under pressure. Everything else is just noise.</em></p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="productivity" /><category term="notetaking" /><summary type="html"><![CDATA[More information is not equal to more clarity, Here I have assembled a simple guide to turning information overload into clarity using Tiago Forte's the CODE and PARA methods.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/notes.webp" /><media:content medium="image" url="/cover_images/posts/notes.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C</title><link href="/blog/industry/2026-02-16-portable-C/" rel="alternate" type="text/html" title="Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C" /><published>2026-02-16T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/industry/portable-C</id><content type="html" xml:base="/blog/industry/2026-02-16-portable-C/"><![CDATA[<ul id="markdown-toc">
+<h2 id="10-summary-faq">10. Summary FAQ</h2>
+
+<p><strong>“Do I need to be a senior engineer to use this system?”</strong><br />
+Not at all! In fact, starting early with PARA and CODE prevents bad notetaking habits and makes learning new hardware much faster.</p>
+
+<p><strong>“Do I need to distill every note I save?”</strong><br />
+No. Only distill notes that you reopen to do actual project work.</p>
+
+<p><strong>“What note-taking app should I use?”</strong><br />
+Any app works—Obsidian, Notion, Evernote, OneNote, or Apple Notes. The method matters far more than the software.</p>
+
+<hr />
+
+<p><em>Remember: The goal of a Second Brain is not to collect perfect notes. It is to build a reliable personal system that helps you find the right answers fast so you can build great projects with confidence.</em></p>]]></content><author><name>{&quot;picture&quot;=&gt;&quot;/assets/img/me3.jpg&quot;, &quot;social&quot;=&gt;{&quot;twitter&quot;=&gt;&quot;Saptarshi108&quot;, &quot;kaggle&quot;=&gt;&quot;https://www.kaggle.com/saptarshinag01&quot;}}</name></author><category term="blog" /><category term="productivity" /><category term="notetaking" /><summary type="html"><![CDATA[More information does not equal more clarity. Here is a beginner-friendly guide to turning information overload into clear engineering decisions using Tiago Forte's CODE and PARA systems.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/cover_images/posts/notes.webp" /><media:content medium="image" url="/cover_images/posts/notes.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C</title><link href="/blog/industry/2026-02-16-portable-C/" rel="alternate" type="text/html" title="Portable and Secure C- A Practical Guide to MISRA C &amp;amp; CERT C" /><published>2026-02-16T00:00:00+00:00</published><updated>2026-07-22T14:18:12+00:00</updated><id>/blog/industry/portable-C</id><content type="html" xml:base="/blog/industry/2026-02-16-portable-C/"><![CDATA[<ul id="markdown-toc">
   <li><a href="#why-portability-matters-and-why-its-harder-than-you-think" id="markdown-toc-why-portability-matters-and-why-its-harder-than-you-think">Why portability matters, and why it’s harder than you think</a></li>
   <li><a href="#the-great-myth-of-embedded-c-vs-c" id="markdown-toc-the-great-myth-of-embedded-c-vs-c">The great myth of “Embedded C vs C”</a>    <ul>
       <li><a href="#the-misconception" id="markdown-toc-the-misconception"><strong>The misconception</strong></a></li>

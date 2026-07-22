@@ -18,21 +18,21 @@
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ?? | Saptarshi Nag</title>
+<title>Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It | Saptarshi Nag</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??" />
+<meta property="og:title" content="Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility" />
-<meta property="og:description" content="Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility" />
+<meta name="description" content="Why direct register writes and HAL calls inside your application logic make firmware impossible to unit test on PC. Here is how to use Dependency Inversion and Injection in C and C++ using real I2C sensor hardware." />
+<meta property="og:description" content="Why direct register writes and HAL calls inside your application logic make firmware impossible to unit test on PC. Here is how to use Dependency Inversion and Injection in C and C++ using real I2C sensor hardware." />
 <meta property="og:site_name" content="Saptarshi Nag" />
 <meta property="og:image" content="/cover_images/posts/Di.webp" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-04-17T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="/cover_images/posts/Di.webp" />
-<meta property="twitter:title" content="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??" />
+<meta property="twitter:title" content="Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-22T14:18:12+00:00","datePublished":"2026-04-17T00:00:00+00:00","description":"Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility","headline":"Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??","image":"/cover_images/posts/Di.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-04-17-di-embedded/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-04-17-di-embedded/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-22T18:50:50+00:00","datePublished":"2026-04-17T00:00:00+00:00","description":"Why direct register writes and HAL calls inside your application logic make firmware impossible to unit test on PC. Here is how to use Dependency Inversion and Injection in C and C++ using real I2C sensor hardware.","headline":"Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It","image":"/cover_images/posts/Di.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-04-17-di-embedded/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-04-17-di-embedded/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -104,7 +104,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-07-22T14:18:59+00:00',
+    INDEX_KEY: 'index--2026-07-22T19:58:06+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -230,7 +230,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   <header>
     <h1 class="post-title flip-project-title">
       
-        Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??
+        Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It
       
     </h1>
 
@@ -255,7 +255,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
     
     
   
-  alt="Why Most Embedded Software Is Overcoupled - And How Dependency Injection Fixes It ??"
+  alt="Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It"
   
   
   width="864"
@@ -274,7 +274,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
   
     <p class="note-sm" >
-      Most embedded bugs aren’t hardware problems. They’re design problems , born from code that grew organically across board revisions, tightly knotted around pin numbers, register addresses, and brittle HAL calls scattered everywhere and with scalability things can get messy, adding to the technical debt. Its important we talk about how not to make your embedded software tightly coupled and leave room for extension &amp; scalibility
+      Why direct register writes and HAL calls inside your application logic make firmware impossible to unit test on PC. Here is how to use Dependency Inversion and Injection in C and C++ using real I2C sensor hardware.
 
     </p>
   
@@ -284,349 +284,300 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
   
     <ul id="markdown-toc">
-  <li><a href="#the-embedded-maintenance-trap" id="markdown-toc-the-embedded-maintenance-trap">The Embedded Maintenance Trap</a></li>
-  <li><a href="#the-anti-patterns-in-detail" id="markdown-toc-the-anti-patterns-in-detail">The Anti-Patterns in Detail</a>    <ul>
-      <li><a href="#direct-hardware-access-buried-in-application-logic" id="markdown-toc-direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</a></li>
-      <li><a href="#hidden-dependencies-and-magic-globals" id="markdown-toc-hidden-dependencies-and-magic-globals">Hidden Dependencies and Magic Globals</a></li>
-      <li><a href="#dependency-inversion---what-it-actually-means" id="markdown-toc-dependency-inversion---what-it-actually-means">Dependency Inversion - What It Actually Means</a></li>
-      <li><a href="#dependency-injection---the-missing-piece" id="markdown-toc-dependency-injection---the-missing-piece">Dependency Injection - The Missing Piece</a></li>
-      <li><a href="#the-full-pattern---dip--di-together" id="markdown-toc-the-full-pattern---dip--di-together">The Full Pattern - DIP + DI Together</a></li>
-      <li><a href="#testing-without-hardware" id="markdown-toc-testing-without-hardware">Testing Without Hardware</a></li>
-      <li><a href="#performance-concerns---addressed-honestly" id="markdown-toc-performance-concerns---addressed-honestly">Performance Concerns - Addressed Honestly</a></li>
-      <li><a href="#di-and-dip-in-c" id="markdown-toc-di-and-dip-in-c">DI and DIP in C++</a></li>
-      <li><a href="#embedded-linux-and-yocto-context" id="markdown-toc-embedded-linux-and-yocto-context">Embedded Linux and Yocto Context</a></li>
-      <li><a href="#when-not-to-use-this" id="markdown-toc-when-not-to-use-this">When Not To Use This</a></li>
-      <li><a href="#migrating-an-existing-codebase" id="markdown-toc-migrating-an-existing-codebase">Migrating an Existing Codebase</a></li>
-      <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+  <li><a href="#the-board-revision-nightmare" id="markdown-toc-the-board-revision-nightmare">The Board Revision Nightmare</a></li>
+  <li><a href="#the-anti-pattern-hardware-leaking-into-logic" id="markdown-toc-the-anti-pattern-hardware-leaking-into-logic">The Anti-Pattern: Hardware Leaking into Logic</a>    <ul>
+      <li><a href="#why-this-breaks-down" id="markdown-toc-why-this-breaks-down">Why this breaks down:</a></li>
     </ul>
   </li>
+  <li><a href="#the-fix-part-1-dependency-inversion-dip" id="markdown-toc-the-fix-part-1-dependency-inversion-dip">The Fix Part 1: Dependency Inversion (DIP)</a>    <ul>
+      <li><a href="#in-c-interface-via-struct-of-function-pointers" id="markdown-toc-in-c-interface-via-struct-of-function-pointers">In C: Interface via <code class="language-plaintext highlighter-rouge">struct</code> of function pointers</a></li>
+      <li><a href="#in-c-abstract-interface-class" id="markdown-toc-in-c-abstract-interface-class">In C++: Abstract Interface Class</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-fix-part-2-dependency-injection-di" id="markdown-toc-the-fix-part-2-dependency-injection-di">The Fix Part 2: Dependency Injection (DI)</a>    <ul>
+      <li><a href="#application-logic-c" id="markdown-toc-application-logic-c">Application Logic (C)</a></li>
+    </ul>
+  </li>
+  <li><a href="#interactive-hands-on-unit-testing-on-pc-zero-hardware-needed" id="markdown-toc-interactive-hands-on-unit-testing-on-pc-zero-hardware-needed">Interactive Hands-On: Unit Testing on PC (Zero Hardware Needed)</a>    <ul>
+      <li><a href="#what-you-just-unlocked" id="markdown-toc-what-you-just-unlocked">What you just unlocked:</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-performance-myth-how-bad-is-the-overhead" id="markdown-toc-the-performance-myth-how-bad-is-the-overhead">The Performance Myth: How Bad Is the Overhead?</a>    <ul>
+      <li><a href="#1-function-pointer--vtable-call-cost" id="markdown-toc-1-function-pointer--vtable-call-cost">1. Function Pointer / Vtable Call Cost</a></li>
+      <li><a href="#2-what-if-you-need-zero-overhead-eg-10-mhz-bit-bang-or-fast-isr" id="markdown-toc-2-what-if-you-need-zero-overhead-eg-10-mhz-bit-bang-or-fast-isr">2. What if you need Zero Overhead (e.g. 10 MHz Bit-Bang or Fast ISR)?</a>        <ul>
+          <li><a href="#option-a-c-templates-static-polymorphism--crtp" id="markdown-toc-option-a-c-templates-static-polymorphism--crtp">Option A: C++ Templates (Static Polymorphism / CRTP)</a></li>
+          <li><a href="#option-b-c-link-time-binding" id="markdown-toc-option-b-c-link-time-binding">Option B: C Link-Time Binding</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#when-not-to-use-dependency-injection" id="markdown-toc-when-not-to-use-dependency-injection">When NOT to Use Dependency Injection</a></li>
+  <li><a href="#incremental-adoption-how-to-start-on-legacy-code" id="markdown-toc-incremental-adoption-how-to-start-on-legacy-code">Incremental Adoption: How to Start on Legacy Code</a></li>
 </ul>
 
-<h1 id="the-embedded-maintenance-trap">The Embedded Maintenance Trap</h1>
+<h1 id="the-board-revision-nightmare">The Board Revision Nightmare</h1>
 
-<p>Embedded products are supposed to live long lives with little or no maintenance (often 10 to 20 years). But with time, Hardware revisions happen. MCUs get discontinued. Pin assignments shift. New team members arrive. And through all of it, the codebase has to hold together.</p>
+<p>Picture this scenario: You’re building a thermal management controller for an industrial gateway. You pick an STM32, hook up an I2C temperature sensor to <code class="language-plaintext highlighter-rouge">I2C1</code> (<code class="language-plaintext highlighter-rouge">GPIOB6/7</code>), write the driver using your vendor’s HAL, and verify it on the bench. It works great.</p>
 
-<p>The typical trajectory looks like this:</p>
+<p>Six months later:</p>
+<ol>
+  <li><strong>The component shortage hits</strong>: Your MCU is lead-timed out for 40 weeks, so management swaps to an ESP32 or RP2040.</li>
+  <li><strong>The PCB layout changes</strong>: The hardware engineer moves the sensor from <code class="language-plaintext highlighter-rouge">I2C1</code> to <code class="language-plaintext highlighter-rouge">I2C2</code> on a different pin bank.</li>
+  <li><strong>The testing request arrives</strong>: The QA team asks for automated unit tests that verify fan triggers at 85°C — without someone manually heating the board with a heat gun.</li>
+</ol>
+
+<p>If your temperature checking logic calls <code class="language-plaintext highlighter-rouge">HAL_I2C_Master_Transmit(&amp;hi2c1, ...)</code> directly, you’re stuck:</p>
 <ul>
-  <li>a prototype gets written, with direct register writes and HAL calls sprinkled throughout the application logic.</li>
-  <li>Run all tests on Simulator &amp; Hardware (Prototype board)</li>
-  <li>It works. It ships. Three years later, the board changes, and a demand to update the product with latest market needs and technology. Or a new MCU in the market with extreme low power, but high performance at much lower cost. Customers will love the upgrade.</li>
-  <li>Looking back at the legacy code, and you find that <em>motor logic, display timing, and sensor reads</em> are all entangled with pin numbers and peripheral names that no longer exist.</li>
+  <li>You have to rewrite application logic for every new board or MCU.</li>
+  <li>You can’t test safety-critical alarms without physical hardware.</li>
+  <li>You can’t simulate I2C bus errors (NACKs, timeouts) on your PC.</li>
 </ul>
 
-<p>Some examples of why your existing code is in a mess:</p>
-<ul>
-  <li>Application logic directly calls GPIO, I2C, SPI with hardcoded pin numbers</li>
-  <li>Global driver singletons accessed from anywhere in the codebase</li>
-  <li><code class="language-plaintext highlighter-rouge">#ifdef</code> chains multiplying across files to handle hardware variants</li>
-  <li>Unit testing is impossible without the actual target hardware</li>
-  <li>Bugs only surface late - on hardware, in the field</li>
-</ul>
+<p>This is <strong>tight coupling</strong>. The problem isn’t the hardware — it’s that business logic knows <em>too much</em> about register addresses and vendor HAL handles.</p>
 
+<hr />
+
+<h1 id="the-anti-pattern-hardware-leaking-into-logic">The Anti-Pattern: Hardware Leaking into Logic</h1>
+
+<p>Here is how embedded code typically gets written under pressure:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// thermal_control.c — BAD: Application logic hardcoded to STM32 HAL &amp; I2C1</span>
+<span class="cp">#include</span> <span class="cpf">"stm32f4xx_hal.h"</span><span class="cp">
+#include</span> <span class="cpf">"main.h"</span><span class="cp">
+</span>
+<span class="k">extern</span> <span class="n">I2C_HandleTypeDef</span> <span class="n">hi2c1</span><span class="p">;</span>
+<span class="cp">#define TMP102_I2C_ADDR (0x48 &lt;&lt; 1)
+</span>
+<span class="kt">void</span> <span class="nf">check_system_temperature</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">reg</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span> <span class="c1">// Temperature register</span>
+    <span class="kt">uint8_t</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+    <span class="c1">// Application logic is calling low-level STM32 HAL directly!</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">HAL_I2C_Master_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hi2c1</span><span class="p">,</span> <span class="n">TMP102_I2C_ADDR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">reg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">HAL_I2C_Master_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hi2c1</span><span class="p">,</span> <span class="n">TMP102_I2C_ADDR</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int16_t</span> <span class="n">raw</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">);</span>
+            <span class="kt">float</span> <span class="n">temp_c</span> <span class="o">=</span> <span class="n">raw</span> <span class="o">*</span> <span class="mi">0</span><span class="p">.</span><span class="mo">0625</span><span class="n">f</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">temp_c</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Direct GPIO call to trigger cooling fan</span>
+                <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">FAN_GPIO_Port</span><span class="p">,</span> <span class="n">FAN_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="why-this-breaks-down">Why this breaks down:</h3>
+<ol>
+  <li><strong>Zero Portability</strong>: Porting to an ESP32 or RP2040 requires touching <code class="language-plaintext highlighter-rouge">thermal_control.c</code> because STM32 HAL headers are baked into it.</li>
+  <li><strong>Zero Host Testability</strong>: You cannot compile this on your Linux/macOS/Windows PC because <code class="language-plaintext highlighter-rouge">stm32f4xx_hal.h</code> doesn’t exist on x86.</li>
+  <li><strong>Zero Fault Injection</strong>: How do you test what happens when the sensor fails to respond? You have to physically desolder the chip or short the bus lines.</li>
+</ol>
+
+<hr />
+
+<h1 id="the-fix-part-1-dependency-inversion-dip">The Fix Part 1: Dependency Inversion (DIP)</h1>
+
+<p>The <strong>Dependency Inversion Principle</strong> states:</p>
 <blockquote>
-  <p>Most embedded problems are not hardware problems, they’re <strong>design problems</strong>. The hardware is just where they become visible.</p>
+  <p>High-level business logic (e.g. <em>turning on a fan above 80°C</em>) should not depend on low-level details (e.g. <em>STM32 I2C1 registers</em>). Both should depend on an <strong>abstraction</strong>.</p>
 </blockquote>
 
-<h1 id="the-anti-patterns-in-detail">The Anti-Patterns in Detail</h1>
+<p>Let’s separate <em>what</em> the application needs from <em>how</em> the hardware delivers it.</p>
 
-<h3 id="direct-hardware-access-buried-in-application-logic">Direct Hardware Access Buried in Application Logic</h3>
+<h3 id="in-c-interface-via-struct-of-function-pointers">In C: Interface via <code class="language-plaintext highlighter-rouge">struct</code> of function pointers</h3>
 
-<p>The most common offender: application code that “knows” things it shouldn’t (Direct coupling), like:</p>
-<ul>
-  <li>GPIO pin numbers</li>
-  <li>peripheral base addresses</li>
-  <li>HAL function names</li>
-</ul>
-
-<p>all of it leaking up into business logic.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Application logic shouldn't know about GPIOA pin 5</span>
-<span class="kt">void</span> <span class="nf">motor_start</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">GPIO_SetPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>  <span class="c1">// What is pin 5? Why GPIOA?</span>
-    <span class="n">TIM2</span><span class="o">-&gt;</span><span class="n">CR1</span> <span class="o">|=</span> <span class="n">TIM_CR1_CEN</span><span class="p">;</span> <span class="c1">// And what's TIM2 doing here?</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Change the board, change the timer, or port to a different MCU family, and you’re rewriting this logic from scratch. Worse, you can’t test <code class="language-plaintext highlighter-rouge">motor_start()</code> without the hardware in front of you.</p>
-
-<h3 id="hidden-dependencies-and-magic-globals">Hidden Dependencies and Magic Globals</h3>
-
-<p>Singleton HALs and global driver instances are a related problem. Why? because the Functions that silently access hardware through global state are impossible to reason about in isolation. You can never be sure what a function does without tracing its entire dependency chain through globals, which goes against good software testing principles</p>
-
-<h2 id="dependency-inversion---what-it-actually-means">Dependency Inversion - What It Actually Means</h2>
-
-<p>The Dependency Inversion Principle (DIP) is the “D” in SOLID, but you don’t need to care about the acronym. The idea is simple and practical:</p>
-
-<div class="think">
-
-  <p>High-level logic should not depend on low-level hardware details. Both should depend on an <strong>abstraction</strong>. Hence, Your application logic should not know which pin an LED is connected to.</p>
-
-</div>
-
-<p>In embedded terms: your</p>
-<ul>
-  <li>state machine</li>
-  <li>your control loop</li>
-  <li>your protocol handler 
-these are <em>high-level</em>. 
-While :</li>
-  <li>The GPIO writes</li>
-  <li>I2C transactions</li>
-  <li>timer configurations
-these are <em>low-level details</em>.</li>
-</ul>
-
-<p>DIP says they shouldn’t be directly coupled.</p>
-
-<p>Abstractions in C and C++ can take different forms. In C, a struct of function pointers acts as an interface. In C++, abstract base classes serve the same purpose. The implementation or the actual hardware access code lives behind that interface, invisible to the application.</p>
-
-<p><strong>Violates DIP</strong></p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">led_on</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span>
-    <span class="n">LED_PORT</span><span class="p">,</span>
-    <span class="n">LED_PIN</span><span class="p">,</span>
-    <span class="n">GPIO_PIN_SET</span>
-  <span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>DIP Applied</strong></p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-  <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">on</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-  <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-<span class="p">}</span> <span class="n">led_t</span><span class="p">;</span>
-
-<span class="c1">// App only sees led_t</span>
-</code></pre></div></div>
-
-<p>The application code depends on <code class="language-plaintext highlighter-rouge">led_t</code>. It has no idea whether the LED is on GPIOA, GPIOB, active-high, or active-low. That’s someone else’s problem - and that’s the point.</p>
-
-<h2 id="dependency-injection---the-missing-piece">Dependency Injection - The Missing Piece</h2>
-
-<p>Dependency Inversion tells you <em>what</em> your code should depend on (abstractions, not concretions). Dependency Injection (DI) tells you <em>how</em> those abstractions actually reach your code.</p>
-
-<div class="important">
-
-  <p>Don’t let your module create or find its own dependencies. Have them passed in from the outside. Someone else gives your code what it needs.</p>
-
-</div>
-
-<p>If you’ve ever passed a driver struct into an initialization function, or written a BSP that hands hardware handles, to application modules - you’ve already done dependency injection. You just didn’t call it that.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Module receives its dependency - doesn't create it</span>
-<span class="kt">void</span> <span class="nf">app_init</span><span class="p">(</span><span class="n">led_t</span> <span class="o">*</span><span class="n">status_led</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">status_led</span><span class="o">-&gt;</span><span class="n">on</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// main.c or BSP wires it together</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">led_t</span> <span class="n">hw_led</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="n">hw_led_on</span><span class="p">,</span> <span class="p">.</span><span class="n">off</span> <span class="o">=</span> <span class="n">hw_led_off</span> <span class="p">};</span>
-    <span class="n">app_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hw_led</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The application module has no idea it’s talking to a real LED. It just calls the function pointer. Who sets that up? <code class="language-plaintext highlighter-rouge">main()</code>, the BSP, or a system init layer - wherever is appropriate. That’s the injection point.</p>
-
-<h2 id="the-full-pattern---dip--di-together">The Full Pattern - DIP + DI Together</h2>
-
-<p>DIP defines the abstraction while, DI wires the implementation to it. Used together, they fully decouple your hardware from your application logic. Here’s the complete pattern for an LED:</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// led.h - the abstraction</span>
-<span class="c1">// This is the interface. Application code only includes this.</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// temp_sensor.h — The Abstraction (No HAL headers here!)</span>
+<span class="cp">#pragma once
+#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span>
 <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">on</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">off</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">toggle</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
-<span class="p">}</span> <span class="n">led_t</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">read_temp_c</span><span class="p">)(</span><span class="kt">float</span> <span class="o">*</span><span class="n">temp_out</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">;</span> <span class="c1">// Context (e.g. bus handle, I2C address)</span>
+<span class="p">}</span> <span class="n">temp_sensor_t</span><span class="p">;</span>
 </code></pre></div></div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hw_led.c - the hardware implementation</span>
-<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
-</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_on</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>     <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>    <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hw_led_toggle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">);</span> <span class="p">}</span>
+<h3 id="in-c-abstract-interface-class">In C++: Abstract Interface Class</h3>
 
-<span class="n">led_t</span> <span class="n">hw_led</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">on</span>     <span class="o">=</span> <span class="n">hw_led_on</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">off</span>    <span class="o">=</span> <span class="n">hw_led_off</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="n">hw_led_toggle</span>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ITemperatureSensor.hpp — C++ Abstraction</span>
+<span class="cp">#pragma once
+</span>
+<span class="k">class</span> <span class="nc">ITemperatureSensor</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">ITemperatureSensor</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">read_temp_c</span><span class="p">(</span><span class="kt">float</span><span class="o">&amp;</span> <span class="n">temp_out</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// heartbeat.c - pure application logic</span>
-<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
+<p>Notice what is missing: No <code class="language-plaintext highlighter-rouge">#include "stm32f4xx_hal.h"</code>, no pin numbers, no register offsets. <code class="language-plaintext highlighter-rouge">temp_sensor_t</code> is pure C contract.</p>
+
+<hr />
+
+<h1 id="the-fix-part-2-dependency-injection-di">The Fix Part 2: Dependency Injection (DI)</h1>
+
+<p>Dependency Inversion gave us the contract. <strong>Dependency Injection</strong> is simply passing that contract into your application module from the outside, rather than letting the module fetch its own globals.</p>
+
+<h3 id="application-logic-c">Application Logic (C)</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// thermal_monitor.c — Pure application logic</span>
+<span class="cp">#include</span> <span class="cpf">"temp_sensor.h"</span><span class="cp">
+#include</span> <span class="cpf">"fan_control.h"</span><span class="cp">
 </span>
-<span class="kt">void</span> <span class="nf">heartbeat_task</span><span class="p">(</span><span class="n">led_t</span> <span class="o">*</span><span class="n">led</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">led</span><span class="o">-&gt;</span><span class="n">toggle</span><span class="p">();</span>
-    <span class="c1">// No hardware knowledge. No pin numbers. No HAL includes.</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">temp_sensor_t</span> <span class="n">sensor</span><span class="p">;</span>
+    <span class="n">fan_control_t</span> <span class="n">fan</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">warning_threshold_c</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">thermal_monitor_t</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">thermal_monitor_init</span><span class="p">(</span><span class="n">thermal_monitor_t</span> <span class="o">*</span><span class="n">mon</span><span class="p">,</span> <span class="n">temp_sensor_t</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">fan_control_t</span> <span class="n">fan</span><span class="p">,</span> <span class="kt">float</span> <span class="n">threshold</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">mon</span><span class="o">-&gt;</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">;</span>
+    <span class="n">mon</span><span class="o">-&gt;</span><span class="n">fan</span> <span class="o">=</span> <span class="n">fan</span><span class="p">;</span>
+    <span class="n">mon</span><span class="o">-&gt;</span><span class="n">warning_threshold_c</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">thermal_monitor_process</span><span class="p">(</span><span class="n">thermal_monitor_t</span> <span class="o">*</span><span class="n">mon</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">current_temp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mon</span><span class="o">-&gt;</span><span class="n">sensor</span><span class="p">.</span><span class="n">read_temp_c</span><span class="p">(</span><span class="o">&amp;</span><span class="n">current_temp</span><span class="p">,</span> <span class="n">mon</span><span class="o">-&gt;</span><span class="n">sensor</span><span class="p">.</span><span class="n">user_data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">current_temp</span> <span class="o">&gt;=</span> <span class="n">mon</span><span class="o">-&gt;</span><span class="n">warning_threshold_c</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">mon</span><span class="o">-&gt;</span><span class="n">fan</span><span class="p">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// Max cooling</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">mon</span><span class="o">-&gt;</span><span class="n">fan</span><span class="p">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">heartbeat_task</code> is now completely portable. It’ll compile and run on any platform - STM32, RP2040, ESP32, or a Linux host - as long as you provide a valid <code class="language-plaintext highlighter-rouge">led_t</code>.</p>
+<p>Now <code class="language-plaintext highlighter-rouge">thermal_monitor_process()</code> doesn’t know or care if the temperature comes from an I2C chip, an analog NTC thermistor, or a fake test driver.</p>
 
-<h2 id="testing-without-hardware">Testing Without Hardware</h2>
+<hr />
 
-<p>This is where the design pays for itself immediately. Once your application logic depends only on abstractions, you can provide a <em>fake</em> implementation that runs on your development machine.</p>
+<h1 id="interactive-hands-on-unit-testing-on-pc-zero-hardware-needed">Interactive Hands-On: Unit Testing on PC (Zero Hardware Needed)</h1>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// fake_led.c - for host-side testing</span>
-<span class="cp">#include</span> <span class="cpf">"led.h"</span><span class="cp">
-#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+<p>Because our application logic depends only on <code class="language-plaintext highlighter-rouge">temp_sensor_t</code>, we can write a <strong>fake driver</strong> that runs on Linux, macOS, or Windows in a standard GCC/Clang test binary.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// test_thermal_monitor.c — Runs on your development PC!</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">"temp_sensor.h"</span><span class="cp">
+#include</span> <span class="cpf">"thermal_monitor.h"</span><span class="cp">
 </span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">// Fake sensor state for testing</span>
+<span class="k">static</span> <span class="kt">float</span> <span class="n">simulated_temp</span> <span class="o">=</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">simulated_fan_speed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_on</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>  <span class="p">{</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] ON</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>  <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="n">led_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] OFF</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span> <span class="p">}</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_led_toggle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">led_state</span> <span class="o">^=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"[LED] %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">led_state</span> <span class="o">?</span> <span class="s">"ON"</span> <span class="o">:</span> <span class="s">"OFF"</span><span class="p">);</span>
+<span class="k">static</span> <span class="n">bool</span> <span class="nf">fake_read_temp</span><span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="n">temp_out</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">user_data</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">temp_out</span> <span class="o">=</span> <span class="n">simulated_temp</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Simulate successful read</span>
 <span class="p">}</span>
 
-<span class="n">led_t</span> <span class="n">fake_led</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">.</span><span class="n">on</span>     <span class="o">=</span> <span class="n">fake_led_on</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">off</span>    <span class="o">=</span> <span class="n">fake_led_off</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">toggle</span> <span class="o">=</span> <span class="n">fake_led_toggle</span>
-<span class="p">};</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">fake_set_fan_speed</span><span class="p">(</span><span class="kt">int</span> <span class="n">speed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">simulated_fan_speed</span> <span class="o">=</span> <span class="n">speed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Running Host Unit Test: Thermal Monitor...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">temp_sensor_t</span> <span class="n">fake_sensor</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">read_temp_c</span> <span class="o">=</span> <span class="n">fake_read_temp</span><span class="p">,</span> <span class="p">.</span><span class="n">user_data</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">};</span>
+    <span class="n">fan_control_t</span> <span class="n">fake_fan</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">set_speed</span> <span class="o">=</span> <span class="n">fake_set_fan_speed</span> <span class="p">};</span>
+    
+    <span class="n">thermal_monitor_t</span> <span class="n">monitor</span><span class="p">;</span>
+    <span class="n">thermal_monitor_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">monitor</span><span class="p">,</span> <span class="n">fake_sensor</span><span class="p">,</span> <span class="n">fake_fan</span><span class="p">,</span> <span class="mi">80</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">);</span>
+
+    <span class="c1">// Test 1: Normal temperature (25°C) -&gt; Fan should stay OFF</span>
+    <span class="n">simulated_temp</span> <span class="o">=</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">thermal_monitor_process</span><span class="p">(</span><span class="o">&amp;</span><span class="n">monitor</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">simulated_fan_speed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"✓ Normal temperature test passed</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// Test 2: Over-temperature condition (85°C) -&gt; Fan should turn ON (100%)</span>
+    <span class="n">simulated_temp</span> <span class="o">=</span> <span class="mi">85</span><span class="p">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">thermal_monitor_process</span><span class="p">(</span><span class="o">&amp;</span><span class="n">monitor</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">simulated_fan_speed</span> <span class="o">==</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"✓ Over-temperature alarm test passed</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">All host unit tests passed in 0.002 seconds!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>Now run your application logic - state machines, control algorithms, protocol handlers on your laptop. No MCU. No debugger. No JTAG. Fast feedback loops. CI-friendly tests. Bugs caught before the board even arrives.</p>
-
-<p><strong>What This Unlocks</strong></p>
-
+<h3 id="what-you-just-unlocked">What you just unlocked:</h3>
 <ul>
-  <li>Run unit tests with a standard C compiler on the host</li>
-  <li>Integrate into GitHub Actions, GitLab CI, or any pipeline</li>
-  <li>Test corner cases without triggering real hardware behavior</li>
-  <li>Multiple developers can work without needing physical boards</li>
-  <li>Faster iteration - compile and test in seconds, not minutes</li>
+  <li>You ran an embedded safety check on your PC in <strong>2 milliseconds</strong>.</li>
+  <li>You can plug this test into <strong>GitHub Actions</strong> or <strong>Woodpecker CI</strong>.</li>
+  <li>You don’t need a single MCU, debugger, or heat gun on your desk to verify your alarm logic.</li>
 </ul>
 
-<h2 id="performance-concerns---addressed-honestly">Performance Concerns - Addressed Honestly</h2>
+<hr />
 
-<p>The first pushback from embedded engineers is always performance. Like:</p>
+<h1 id="the-performance-myth-how-bad-is-the-overhead">The Performance Myth: How Bad Is the Overhead?</h1>
+
+<p>The first reaction from firmware developers is usually:</p>
+<blockquote>
+  <p><em>“Function pointers add overhead! Virtual functions waste clock cycles!”</em></p>
+</blockquote>
+
+<p>Let’s look at the numbers on actual microcontrollers.</p>
+
+<h3 id="1-function-pointer--vtable-call-cost">1. Function Pointer / Vtable Call Cost</h3>
+<p>On an ARM Cortex-M4 running at 168 MHz:</p>
 <ul>
-  <li>“Function pointers have overhead.”</li>
-  <li>“Virtual functions are slow.”</li>
+  <li>An indirect call via function pointer takes <strong>1 to 3 clock cycles</strong> (~6 to 18 nanoseconds).</li>
+  <li>If your sensor loop runs at 10 Hz or 100 Hz, that indirect branch consumes less than <strong>0.00001%</strong> of your CPU budget.</li>
 </ul>
 
-<p>Legimate concern actually, let’s look at this honestly.</p>
+<h3 id="2-what-if-you-need-zero-overhead-eg-10-mhz-bit-bang-or-fast-isr">2. What if you need Zero Overhead (e.g. 10 MHz Bit-Bang or Fast ISR)?</h3>
+<p>For paths where every single cycle counts, you don’t have to sacrifice clean code. You can use <strong>Compile-Time / Static Dependency Injection</strong>:</p>
 
-<p>A function pointer call is a single indirect branch - on most Cortex-M cores, that’s 1-3 clock cycles. For a heartbeat LED or a sensor poll running at 100 Hz, this is unmeasurable noise. For a context where every cycle matters (bit-banged SPI at 10 MHz, tight DSP loops, ISRs), you wouldn’t be using abstractions at all - you’d be writing the implementation directly.</p>
-
-<p>For everything else, there are zero-cost options. Static structs placed in flash with <code class="language-plaintext highlighter-rouge">const</code> are read directly. Link-time binding lets the linker resolve the implementation at build time. Compile-time DI using C++ templates or preprocessor configuration can achieve the same separation with no runtime cost.</p>
-
-<div class="bug">
-
-  <p>Measure before you optimize. In my personal experience with embedded work, the performance bottleneck is almost never the abstraction layer - it’s the algorithm, the protocol, or the peripheral.</p>
-
-</div>
-
-<h2 id="di-and-dip-in-c">DI and DIP in C++</h2>
-
-<p>In C++, the same pattern uses abstract base classes.</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// C++ - constructor injection</span>
-<span class="c1">// Abstraction</span>
-<span class="k">class</span> <span class="nc">ILed</span> <span class="p">{</span>
+<h4 id="option-a-c-templates-static-polymorphism--crtp">Option A: C++ Templates (Static Polymorphism / CRTP)</h4>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TempSensor</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">FanController</span><span class="p">&gt;</span>
+<span class="k">class</span> <span class="nc">ThermalMonitor</span> <span class="p">{</span>
+    <span class="n">TempSensor</span><span class="o">&amp;</span> <span class="n">sensor_</span><span class="p">;</span>
+    <span class="n">FanController</span><span class="o">&amp;</span> <span class="n">fan_</span><span class="p">;</span>
 <span class="nl">public:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">on</span><span class="p">()</span>     <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">off</span><span class="p">()</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">toggle</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="o">~</span><span class="n">ILed</span><span class="p">()</span>       <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">ThermalMonitor</span><span class="p">(</span><span class="n">TempSensor</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">FanController</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">sensor_</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">fan_</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">{}</span>
+    
+    <span class="kt">void</span> <span class="nf">process</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sensor_</span><span class="p">.</span><span class="n">read_temp_c</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">80.0f</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">fan_</span><span class="p">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">};</span>
-
-<span class="c1">// Hardware implementation</span>
-<span class="k">class</span> <span class="nc">GpioLed</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ILed</span> <span class="p">{</span>
-<span class="nl">public:</span>
-    <span class="kt">void</span> <span class="n">on</span><span class="p">()</span>     <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="p">}</span>
-    <span class="kt">void</span> <span class="nf">off</span><span class="p">()</span>    <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="p">}</span>
-    <span class="kt">void</span> <span class="nf">toggle</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_PORT</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// Application receives dependency via constructor</span>
-<span class="k">class</span> <span class="nc">HeartbeatTask</span> <span class="p">{</span>
-    <span class="n">ILed</span><span class="o">&amp;</span> <span class="n">led_</span><span class="p">;</span>
-<span class="nl">public:</span>
-    <span class="k">explicit</span> <span class="n">HeartbeatTask</span><span class="p">(</span><span class="n">ILed</span><span class="o">&amp;</span> <span class="n">led</span><span class="p">)</span> <span class="o">:</span> <span class="n">led_</span><span class="p">(</span><span class="n">led</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span> <span class="n">led_</span><span class="p">.</span><span class="n">toggle</span><span class="p">();</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// main.cpp</span>
-<span class="n">GpioLed</span> <span class="n">hw_led</span><span class="p">;</span>
-<span class="n">HeartbeatTask</span> <span class="nf">task</span><span class="p">(</span><span class="n">hw_led</span><span class="p">);</span> <span class="c1">// injection - no heap needed</span>
 </code></pre></div></div>
+<p><em>Result</em>: The compiler inlines <code class="language-plaintext highlighter-rouge">sensor_.read_temp_c()</code> directly into the assembly call. <strong>0 cycles overhead, 0 vtables, full testability.</strong></p>
 
-<p>This pattern is safe for embedded:</p>
+<h4 id="option-b-c-link-time-binding">Option B: C Link-Time Binding</h4>
+<p>In C, keep the header interface clean and provide two different <code class="language-plaintext highlighter-rouge">.c</code> files during compilation:</p>
 <ul>
-  <li>no heap allocation</li>
-  <li>no RTTI</li>
-  <li>no exceptions.</li>
-  <li>The vtable overhead is typically a single pointer indirection</li>
+  <li><code class="language-plaintext highlighter-rouge">bsp_stm32_sensor.c</code> (compiled into the target firmware)</li>
+  <li><code class="language-plaintext highlighter-rouge">fake_host_sensor.c</code> (compiled into your PC test binary)</li>
 </ul>
 
-<h2 id="embedded-linux-and-yocto-context">Embedded Linux and Yocto Context</h2>
+<hr />
 
-<p>On Embedded Linux - whether built with Yocto, Buildroot, or a custom distro - the same principles apply at the userspace level. Drivers are accessed through device files, sysfs, or character devices. Applications that hardcode these paths and access patterns become fragile across BSP changes.</p>
+<h1 id="when-not-to-use-dependency-injection">When NOT to Use Dependency Injection</h1>
 
-<p>DI in userspace means your application receives a hardware interface (a file descriptor wrapper, a driver abstraction struct, a class hierarchy for a sensor) rather than constructing it directly. The BSP layer or board configuration code does the wiring. Swapping hardware variants becomes a matter of changing what gets injected at startup - not rewriting the application.</p>
+<p>Design patterns are tools, not commandments. Avoid DI abstractions when:</p>
+<ol>
+  <li><strong>Ultra-Constrained MCUs</strong>: Sub-4KB Flash targets (ATtiny, PIC16) where saving 40 bytes of function pointer pointers is critical.</li>
+  <li><strong>High-Frequency ISRs</strong>: Interrupt routines firing at 500 kHz where an extra indirect branch breaks timing constraints.</li>
+  <li><strong>One-Off Validation Scripts</strong>: A quick 20-line test script written to verify a hardware pin on an oscilloscope before throwing it away.</li>
+</ol>
 
-<p>This also makes your application layers testable in a Linux host environment without requiring the target board, using mock file descriptors, pipe-based fakes, or simple simulation stubs.</p>
+<hr />
 
-<h2 id="when-not-to-use-this">When Not To Use This</h2>
+<h1 id="incremental-adoption-how-to-start-on-legacy-code">Incremental Adoption: How to Start on Legacy Code</h1>
 
-<p>Design principles are tools, not religion. There are legitimate cases where DI and DIP add unnecessary complexity:</p>
+<p>You don’t need to rewrite your entire 100,000-line codebase overnight. Pick one module boundary and follow these steps:</p>
 
-<ul>
-  <li>Bootloaders and startup code with extreme size constraints</li>
-  <li>ISRs where every instruction is accounted for and no indirection is acceptable</li>
-  <li>Quick throwaway prototypes that will be completely rewritten</li>
-  <li>Extremely resource-constrained MCUs (sub-8KB flash) where even a vtable pointer is a budget item</li>
-</ul>
+<ol>
+  <li><strong>Find a Seam</strong>: Choose a single peripheral or sensor (e.g., an EEPROM or temperature sensor).</li>
+  <li><strong>Create a Clean Header</strong>: Move direct HAL calls out of your application files and behind a simple C <code class="language-plaintext highlighter-rouge">struct</code> interface or C++ class.</li>
+  <li><strong>Write a Host Fake</strong>: Create a 20-line fake implementation in C/C++ and write a PC host test for that module.</li>
+  <li><strong>Wire it in <code class="language-plaintext highlighter-rouge">main()</code></strong>: Pass the real hardware handle in <code class="language-plaintext highlighter-rouge">main.c</code> on the MCU, and pass the fake handle in your PC test runner.</li>
+</ol>
 
-<div class="think">
-
-  <p>If your code cannot tolerate a function pointer call, that limitation should be measurable and visible in the timing budget or ISR deadline. Otherwise, the maintenance and testability costs of tight coupling almost always outweigh the runtime overhead of abstraction</p>
-
-</div>
-
-<h2 id="migrating-an-existing-codebase">Migrating an Existing Codebase</h2>
-
-<p>You don’t need a big-bang rewrite of your legacy code. The path forward is incremental, and it starts at module boundaries:</p>
-
-<ul>
-  <li><strong>Identify a natural seam</strong> - a driver, a peripheral abstraction, a communication module</li>
-  <li><strong>Wrap the existing HAL</strong> - create a thin struct or class that exposes only what the application needs</li>
-  <li><strong>Replace direct calls</strong> - update the module to receive the abstraction instead of calling HAL directly</li>
-  <li><strong>Add a fake</strong> - write a simple host-side implementation and run a first test</li>
-  <li><strong>Repeat at the next boundary</strong> - work outward, module by module</li>
-</ul>
-
-<p>Each step is independently valuable. Even wrapping just one driver creates a seam you can test through. You don’t need to refactor the entire codebase to see the benefit.</p>
-
-<div class="note">
-
-  <p>“High‑quality embedded software is not defined by low‑level register manipulation; it is defined by a clean, well‑structured software architecture.”</p>
-
-</div>
-
-<h2 id="summary">Summary</h2>
-
-<ul>
-  <li><strong>DIP</strong> separates <em>what</em> your application does from <em>how</em> the hardware implements it</li>
-  <li><strong>DI</strong> delivers those implementations cleanly, from the outside, without hidden globals</li>
-  <li>Together they make your code portable across board revisions and testable without hardware</li>
-  <li>Works in bare-metal C, C++, and Embedded Linux - no frameworks required</li>
-  <li>The overhead is negligible in almost every real-world embedded context</li>
-  <li>Migration is incremental - start at one module boundary and work outward</li>
-</ul>
-
-<div class="important">
-
-  <p>The goal is software that survives hardware changes, supports a growing team, can be tested in CI, and doesn’t collapse under its own weight after three board revisions. That’s worth a struct of function pointers.</p>
-
-</div>
+<p>Doing this for just one driver gives you immediate unit testing capability on your development laptop and shields your core logic from future hardware board revisions.</p>
 
   
 </article>
@@ -1036,7 +987,7 @@ these are <em>low-level details</em>.</li>
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/random-bits/2025-12-11-indian-fermented-drinks/" class="flip-title"><span>Lesser Known Fermented Drinks From Rural India</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/cppdev/2025-12-26-containers-std-vs-pmr/" class="flip-title"><span>std::pmr in Embedded C++ - Predictable Memory Without the Heap</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/industry/2025-12-11-web3internet/" class="flip-title"><span>The industry of Web3.0 and Decentrelised Internet</span></a>  <time class="faded fine" datetime="2025-12-11T00:00:00+00:00">11 Dec 2025</time></li>          <li class="h4">  <a href="/blog/eh/2025-12-26-pyvisa/" class="flip-title"><span>Automating Hardware Testing with Python</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/coding/2025-10-20-Bitwise/" class="flip-title"><span>Bitwise Operations in C/C++</span></a>  <time class="faded fine" datetime="2025-10-20T00:00:00+00:00">20 Oct 2025</time></li>      </ul></aside>
 
   
 
