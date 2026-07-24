@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+  <meta name="robots" content="noindex">
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>FLENS | Saptarshi Nag</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="FLENS" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX)." />
+<meta property="og:description" content="FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX)." />
+<meta property="og:site_name" content="Saptarshi Nag" />
+<meta property="og:image" content="/cover_images/posts/flens.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-07-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/cover_images/posts/flens.jpeg" />
+<meta property="twitter:title" content="FLENS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-24T19:54:30+00:00","datePublished":"2026-07-01T00:00:00+00:00","description":"FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX).","headline":"FLENS","image":"/cover_images/posts/flens.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2026-07-01-flens/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2026-07-01-flens/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Saptarshi Nag">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="Saptarshi Nag">
+
+
+  <meta name="theme-color" content="#ccc">
+
+
+<meta name="generator" content="Hydejack v9.1.4" />
+
+
+<link rel="alternate" href="/projects/2026-07-01-flens/" hreflang="en">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/favicon.ico">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="preload" href="/assets/js/search-worker-9.1.4.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<!-- ... -->
+
+<!-- For sidebar folder (non-render-blocking) -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+<script src="/assets/js/sidebar-folder.js" defer></script>
+
+
+<script>!function(r,c){"use strict";function a(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=c.createElement("script");n.src=e,t&&a(n,"load",t,{once:!0});t=c.scripts[0];return t.parentNode.insertBefore(n,t),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=c.createElement("script");function o(){r._loaded=!0,t&&a(n,"load",t,{once:!0});var e=c.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():a(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){a(c.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}}(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = true;
+  w._noDrawer = false;
+  w._noNavbar = true;
+  w._noToc = false;
+  w._noSearch = true;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-07-24T19:55:02+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.1.4.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:700%7CRoboto+Slab:400,700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+<!-- Font Awesome Icons (non-render-blocking) -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+
+</head>
+
+<body class="no-large-headings">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  !function(e,s){var d="light-mode",o="dark-mode",a=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(o=(e=a<=e._sunrise||a>=e._sunset?o:d)==o?d:o,s.body.classList.add(e),s.body.classList.remove(o))}(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-project"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+      
+        <span>/</span>
+        
+        
+        <a href="/projects/">projects</a>
+      
+      </li>
+    
+      <li>
+      
+        <span>/</span>
+        <span>2026-07-01-flens</span>
+      
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article
+  id="project"
+  class="page mb6"
+  role="article"
+  vocab="http://schema.org/" typeof="CreativeWork" resource="#project"
+  >
+  <header>
+    <h1 class="page-title" property="name">FLENS</h1>
+
+    <p class="post-date heading">
+      <span>
+        
+
+        
+          <a href="/projects/" class="flip-title" property="genre">Projects</a>
+        
+
+        
+          |
+          <time datetime="2026-07-01T00:00:00+00:00">2026</time>
+          
+        
+      </span>
+
+      <span class="ellipsis ml1" data-tippy-content="Links">
+        <span class="sr-only">| Links:</span>
+        <span class="icon-link" title="Links"></span>
+        
+          <a class="external" href="https://github.com/Saptarshi-max/FLens" property="sameAs">Github-Link</a>
+          
+        
+      </span>
+    </p>
+
+    
+    <div class="img-wrapper lead aspect-ratio sixteen-nine ">
+      
+        
+
+
+<img
+  
+    src="/cover_images/posts/flens.jpeg"
+    
+    sizes="(min-width:90em)48rem,(min-width:54em)42rem,(min-width:42em)38rem,100vw"
+  
+  alt="FLENS"
+  
+  property="image"
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+      
+    </div>
+
+    
+
+
+
+  
+    <p class="note-sm" property="description">
+      FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX).
+
+    </p>
+  
+
+
+    
+  </header>
+
+  <p>Flens can analyze embedded Linux firmware, identify software components, map known vulnerabilities, and generate actionable security reports.</p>
+
+<p>FLENS is a Python-based CLI firmware security analysis tool designed for embedded Linux systems such as routers, IoT gateways, industrial controllers, cameras, and edge devices.</p>
+
+<p>The project aims to bring firmware security closer to embedded software development by combining component discovery, vulnerability identification, risk assessment, and reporting into an extensible engineering workflow.</p>
+
+<hr />
+
+<h2 id="why-flens">Why FLENS?</h2>
+
+<p>Firmware often contains hundreds of third-party components:</p>
+
+<ul>
+  <li>OpenSSL</li>
+  <li>BusyBox</li>
+  <li>Dropbear</li>
+  <li>Curl</li>
+  <li>Nginx</li>
+  <li>Linux Kernel packages</li>
+</ul>
+
+<p>Many products ship with outdated or vulnerable versions of these components, creating hidden security risks.</p>
+
+<p>FLENS helps answer questions like:</p>
+
+<ul>
+  <li>What software exists inside this firmware?</li>
+  <li>Which versions are present?</li>
+  <li>Are any known vulnerabilities affecting them?</li>
+  <li>What is the overall risk profile?</li>
+  <li>How does one firmware release compare to another?</li>
+</ul>
+
+<h2 id="where-flens-fits">Where FLENS Fits</h2>
+
+<p>Existing firmware analysis tools are excellent at extracting and inspecting firmware images. However, embedded teams often need more than a one-time security scan.</p>
+
+<p>FLENS focuses on the engineering workflow:</p>
+
+<ul>
+  <li>Integrating firmware security checks into development pipelines</li>
+  <li>Tracking component risks across firmware releases</li>
+  <li>Generating actionable reports for developers and reviewers</li>
+  <li>Providing an extensible foundation for SBOM, vulnerability management, and CI/CD security gates</li>
+</ul>
+
+<p>Instead of treating firmware analysis as a manual security exercise, FLENS aims to make it part of the embedded software lifecycle.</p>
+
+<p>Example workflow:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yocto Build / Firmware Release
+│
+▼
+FLENS Analysis
+│
+▼
+Components + CVEs + Risk Score
+│
+▼
+Security Report / Release Decision
+
+</code></pre></div></div>
+
+<p>FLENS bridges the gap between <strong>firmware reverse engineering tools</strong> and <strong>everyday embedded software engineering workflows</strong>.</p>
+
+<hr />
+
+<h2 id="current-capabilities">Current Capabilities</h2>
+
+<h3 id="component-discovery">Component Discovery</h3>
+
+<p>Automatically identifies known software components inside an extracted firmware filesystem.</p>
+
+<p>Example:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OpenSSL 1.1.1d
+BusyBox 1.31.1
+Dropbear 2020.79
+</code></pre></div></div>
+
+<h3 id="vulnerability-mapping">Vulnerability Mapping</h3>
+
+<p>Correlates detected software versions against a vulnerability database.</p>
+
+<p>Example:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OpenSSL 1.1.1d
+
+→ CVE-2022-0778
+→ CVE-2021-3711
+</code></pre></div></div>
+
+<h3 id="risk-assessment">Risk Assessment</h3>
+
+<p>Calculates an overall firmware security score using configurable severity weighting.</p>
+
+<p>Example:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Risk Level: HIGH
+</code></pre></div></div>
+
+<h3 id="report-generation">Report Generation</h3>
+
+<p>Produces human-readable HTML reports suitable for audits, reviews, and release validation.</p>
+
+<p>Reports include:</p>
+
+<ul>
+  <li>Risk score breakdown</li>
+  <li>Vulnerability detection explanation</li>
+  <li>Transparency &amp; methodology references</li>
+  <li>Security disclaimer</li>
+</ul>
+
+<h3 id="sbom-generation">SBOM Generation</h3>
+
+<p>Generates machine-readable SBOMs in both CycloneDX JSON and SPDX JSON formats for each scan.</p>
+
+<h3 id="persistent-scan-history">Persistent Scan History</h3>
+
+<p>Stores scan artifacts in SQLite for report retrieval and auditability:</p>
+
+<ul>
+  <li>Components</li>
+  <li>Vulnerabilities</li>
+  <li>Risk score</li>
+  <li>SBOM payloads</li>
+  <li>Firmware metadata</li>
+</ul>
+
+<h3 id="firmware-metadata--elf-intelligence">Firmware Metadata + ELF Intelligence</h3>
+
+<p>Enhances detection with:</p>
+
+<ul>
+  <li>ELF architecture parsing</li>
+  <li>Binary string fingerprints for component identification fallback</li>
+  <li>Firmware kernel and vendor hints from extracted rootfs</li>
+</ul>
+
+<hr />
+
+<h2 id="example-scan">Example Scan</h2>
+
+<p>Input:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rootfs/
+├── bin/
+│   ├── busybox
+│   ├── openssl
+│   └── dropbear
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>──────────────────────────
+FLENS Security Report
+──────────────────────────
+
+Detected Components
+
+• BusyBox 1.31.1
+• OpenSSL 1.1.1d
+• Dropbear 2020.79
+
+Detected Vulnerabilities
+
+• CVE-2022-0778 (HIGH)
+• CVE-2021-3711 (HIGH)
+
+Overall Risk
+
+HIGH
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="architecture">Architecture</h2>
+
+<p>FLENS follows Clean Architecture principles to separate business logic from implementation details.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Root Filesystem
+        │
+        ▼
+Component Detection
+        │
+        ▼
+Version Resolution
+        │
+        ▼
+Vulnerability Mapping
+        │
+        ▼
+Risk Assessment
+        │
+        ▼
+HTML Report / API Response
+</code></pre></div></div>
+
+<p>Project Structure:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens/
+├── app/
+│   ├── domain/
+│   ├── application/
+│   ├── infrastructure/
+│   ├── presentation/
+│   └── config/
+├── tests/
+├── sample_data/
+├── docs/
+└── pyproject.toml
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Before running FLENS, make sure the following are in place:</p>
+
+<ul>
+  <li>Python 3.12+</li>
+  <li>The same virtual environment is used for install and runtime</li>
+  <li>Python dependencies installed with <code class="language-plaintext highlighter-rouge">pip install -e .[dev]</code></li>
+  <li>For firmware image analysis, native extraction tools installed in the same shell/environment:
+      * <code class="language-plaintext highlighter-rouge">binwalk</code>
+      * <code class="language-plaintext highlighter-rouge">squashfs-tools</code></li>
+</ul>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">flens</code> from a different Python environment than the one used for installation, you can get missing-module errors or incomplete analysis. For firmware reports, that can also lead to misleading output, so it is better to stop and fix the environment first.</p>
+
+<p>Recommended Windows workflow:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\.venv\Scripts\Activate.ps1</span><span class="w">
+</span><span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="o">.</span><span class="p">[</span><span class="n">dev</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<h3 id="choose-the-right-command">Choose the Right Command</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Input you have</th>
+      <th>Command to use</th>
+      <th>When Docker is useful</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>An extracted firmware directory, such as <code class="language-plaintext highlighter-rouge">squashfs-root/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">flens scan &lt;rootfs-path&gt;</code></td>
+      <td>Optional; Python dependencies are sufficient.</td>
+    </tr>
+    <tr>
+      <td>A firmware image, such as <code class="language-plaintext highlighter-rouge">.bin</code>, <code class="language-plaintext highlighter-rouge">.img</code>, or <code class="language-plaintext highlighter-rouge">.trx</code></td>
+      <td><code class="language-plaintext highlighter-rouge">flens firmware &lt;firmware-path&gt;</code></td>
+      <td>Recommended on Windows or when <code class="language-plaintext highlighter-rouge">binwalk</code> and <code class="language-plaintext highlighter-rouge">squashfs-tools</code> are not installed locally.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">flens scan</code> does not extract firmware. Passing a <code class="language-plaintext highlighter-rouge">.bin</code> file to it will not find components because it expects a directory of extracted files. Use <code class="language-plaintext highlighter-rouge">flens firmware</code> for the image first.</p>
+
+<p>Navigate the CLI with:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flens</span><span class="w"> </span><span class="nt">--help</span><span class="w">
+</span><span class="n">flens</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nt">--help</span><span class="w">
+</span><span class="n">flens</span><span class="w"> </span><span class="nx">firmware</span><span class="w"> </span><span class="nt">--help</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Install:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-e</span> .[dev]
+</code></pre></div></div>
+
+<p>Run a scan:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens scan sample_data/rootfs
+</code></pre></div></div>
+
+<p>Generate an HTML report:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens scan sample_data/rootfs <span class="se">\</span>
+    <span class="nt">--report-out</span> report.html
+</code></pre></div></div>
+
+<p>Generate SBOM exports (SPDX + CycloneDX):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens scan sample_data/rootfs <span class="se">\</span>
+        <span class="nt">--report-out</span> output/report.html <span class="se">\</span>
+        <span class="nt">--sbom-out</span> output
+</code></pre></div></div>
+
+<h2 id="example-reports">Example Reports</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rootfs fixture</th>
+      <th>OpenWrt firmware image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="docs/images/rootfs-fixture-report.png" alt="HTML report for the controlled rootfs fixture" width="450" /></td>
+      <td><img src="docs/images/openwrt-report.png" alt="HTML report for an extracted OpenWrt firmware image" width="450" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The rootfs fixture is deliberately small and deterministic: it contains placeholder binaries for BusyBox, Dropbear, and OpenSSL. It is useful for quick CLI and report tests.</p>
+
+<p>The OpenWrt example is produced by extracting a real <code class="language-plaintext highlighter-rouge">squashfs-sysupgrade.bin</code> firmware image. It demonstrates the complete extraction-to-report workflow. Current component versions and CVE matches come from FLENS’s bundled static test dataset, so treat the findings as pipeline examples rather than a production vulnerability assessment.</p>
+
+<p>Analyze a firmware image directly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens firmware sample_data/firmware/sample_router.bin <span class="nt">--report-out</span> firmware_report.html
+</code></pre></div></div>
+
+<p>Analyze firmware image and export SBOMs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens firmware sample_data/firmware/sample_router.bin <span class="se">\</span>
+        <span class="nt">--report-out</span> output/report.html <span class="se">\</span>
+        <span class="nt">--sbom-out</span> output
+</code></pre></div></div>
+
+<p>Generated files:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output/
+├── report.html
+├── report.spdx.json
+└── report.cyclonedx.json
+</code></pre></div></div>
+
+<p>Optional: set FLENS_REPOSITORY_URL to render clickable methodology links in HTML reports.</p>
+
+<p>Example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set </span><span class="nv">FLENS_REPOSITORY_URL</span><span class="o">=</span>https://github.com/example/flens
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="api">API</h2>
+
+<p>Run locally:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uvicorn app.presentation.api.main:api <span class="nt">--reload</span>
+</code></pre></div></div>
+
+<p>Open:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8000/docs
+</code></pre></div></div>
+
+<p>Available endpoints:</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET  /health
+POST /scan
+POST /firmware/upload
+GET  /reports/{report_id}
+</span></code></pre></div></div>
+
+<p>Example scan request:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+        </span><span class="nl">"rootfs_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_data/rootfs"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Example scan response (persisted):</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+        </span><span class="nl">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openssl"</span><span class="p">,</span><span class="w"> </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1.1d"</span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"vulnerabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"cve_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CVE-2022-0778"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HIGH"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Infinite loop in BN_mod_sqrt"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"risk_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HIGH"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"report_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="quality-standards">Quality Standards</h2>
+
+<p>FLENS includes:</p>
+
+<ul>
+  <li>Type hints</li>
+  <li>Dependency injection</li>
+  <li>Unit tests</li>
+  <li>Integration tests</li>
+  <li>Static analysis</li>
+  <li>HTML reporting</li>
+  <li>CI-ready structure</li>
+</ul>
+
+<p>Validation:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check <span class="nb">.</span>
+mypy <span class="nb">.</span>
+pytest <span class="nt">-v</span>
+pytest <span class="nt">--cov</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="roadmap">Roadmap</h2>
+
+<h3 id="phase-1---foundation-">Phase 1 - Foundation ✅</h3>
+
+<ul>
+  <li>Component detection</li>
+  <li>Version resolution</li>
+  <li>CVE matching</li>
+  <li>Risk scoring</li>
+  <li>CLI interface</li>
+  <li>HTML reporting</li>
+</ul>
+
+<h3 id="phase-2---firmware-extraction">Phase 2 - Firmware Extraction</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firmware.bin
+      │
+      ▼
+    Binwalk
+      ▼
+    rootfs
+</code></pre></div></div>
+
+<ul>
+  <li>Direct firmware analysis</li>
+  <li>Filesystem extraction</li>
+  <li>Metadata discovery</li>
+</ul>
+
+<h3 id="phase-3---sbom-generation">Phase 3 - SBOM Generation</h3>
+
+<ul>
+  <li>SPDX + CycloneDX generation</li>
+  <li>SQLite persistence for reports</li>
+  <li>ELF-assisted component identification</li>
+  <li>Firmware metadata extraction</li>
+  <li>Expanded API for upload and report retrieval</li>
+</ul>
+
+<h3 id="phase-4---secret-discovery">Phase 4 - Secret Discovery</h3>
+
+<p>Detect:</p>
+
+<ul>
+  <li>Private keys</li>
+  <li>API keys</li>
+  <li>Credentials</li>
+  <li>Certificates</li>
+</ul>
+
+<h3 id="phase-5---firmware-diffing">Phase 5 - Firmware Diffing</h3>
+
+<p>Compare releases:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Firmware A
+     vs
+Firmware B
+</code></pre></div></div>
+
+<p>Identify:</p>
+
+<ul>
+  <li>Added packages</li>
+  <li>Removed packages</li>
+  <li>New vulnerabilities</li>
+  <li>Fixed vulnerabilities</li>
+</ul>
+
+<h3 id="phase-6---security-platform">Phase 6 - Security Platform</h3>
+
+<ul>
+  <li>Scan history</li>
+  <li>Dashboard</li>
+  <li>Multi-user support</li>
+  <li>Automated analysis pipelines</li>
+</ul>
+
+<hr />
+
+<h2 id="technology-stack">Technology Stack</h2>
+
+<ul>
+  <li>Python 3.12+</li>
+  <li>FastAPI</li>
+  <li>Pydantic</li>
+  <li>Typer</li>
+  <li>Jinja2</li>
+  <li>Pytest</li>
+  <li>Ruff</li>
+  <li>MyPy</li>
+</ul>
+
+<hr />
+
+<h2 id="motivation">Motivation</h2>
+
+<p>FLENS is designed for engineers building embedded Linux products who need visibility into the security posture of their firmware before deployment.</p>
+
+<p>FLENS was created to explore the intersection of:</p>
+
+<ul>
+  <li>Embedded Linux</li>
+  <li>Firmware Analysis</li>
+  <li>Software Supply Chain Security</li>
+  <li>Vulnerability Management</li>
+  <li>Modern Python Architecture</li>
+</ul>
+
+<p>The long-term vision is to evolve FLENS into a comprehensive firmware security platform capable of analyzing, comparing, and monitoring embedded software releases at scale.</p>
+
+<hr />
+
+</article>
+
+
+  <clap-button class="mb6" ></clap-button>
+  
+  
+    <p class="message centered border-radius" >
+      
+    </p>
+  
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="/assets/img/gallery/profile.webp"
+    srcset="/assets/img/gallery/profile.webp 1x,/assets/img/gallery/profile.webp 2x"
+    
+  
+  alt="<Saptarshi> <Nag>"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>I’m a software engineer working primarily in embedded systems and firmware, with experience spanning resource-constrained devices, embedded Linux, and desktop applications. I hold an MSc in Embedded Systems from Kingston University, London, UK with management studies as my minor subject, this educational experience has shaped how I approach engineering decisions beyond just code.</p>
+
+<p>I use this space as a technical notebook and reflection log: to write about firmware, software design, testing strategies, systems thinking, and lessons learned from building software that runs close to hardware. Occasionally, I also share personal interests and side projects, including leisure work I pursue in my free time.</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb4" role="complementary">  <h2>Other Projects</h2>  <div class="columns">              <div class="column column-1-2">        <article  class="project-card"  vocab="http://schema.org/" typeof="CreativeWork" resource="/projects/2025-11-24-metricMQ/#project"  >  <meta property="name" content="MetricMQ"/>  <meta property="image" content="\cover_images\posts\MetricMQ.webp"/>  <a href="/projects/2025-11-24-metricMQ/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img ">              <img      src="\cover_images\posts\MetricMQ.webp"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="MetricMQ"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/projects/2025-11-24-metricMQ/" class="flip-title" property="mainEntityOfPage">MetricMQ</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.    </p>      <a class="fill-card no-hover" href="/projects/2025-11-24-metricMQ/" tabindex="-1"><span class="sr-only">Continue reading MetricMQ</span></a></article>      </div>                  <div class="column column-1-2">        <article  class="project-card"  vocab="http://schema.org/" typeof="CreativeWork" resource="/projects/2026-07-02-flens/#project"  >  <meta property="name" content="RCA"/>  <meta property="image" content="/cover_images/posts/flens.jpeg"/>  <a href="/projects/2026-07-02-flens/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img ">              <img      src="/cover_images/posts/flens.jpeg"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="RCA"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/projects/2026-07-02-flens/" class="flip-title" property="mainEntityOfPage">RCA</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      Lightweight message broker with pub/sub and queue patterns, binary protocol support, and LMDB persistence.    </p>      <a class="fill-card no-hover" href="/projects/2026-07-02-flens/" tabindex="-1"><span class="sr-only">Continue reading RCA</span></a></article>      </div>      </div></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+  
+  
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
+       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+  <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
+       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.webp)"></div>
+
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/circle-cropped-min.webp" class="avatar" alt="Saptarshi Nag" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">Saptarshi Nag</h2></a>
+    
+    
+      <p class="fine">
+        <br /> Electronics Enginner turned Embedded Systems Engineer specialised in Low-level systems design, Here to share insights on Software &amp; System design <br />
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="new-nav sr-only">Navigation:</span>
+<ul>
+  
+   
+
+    
+    <li >
+        <a
+        id="_drawer--opened"
+        href="/posts/"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/projects"        
+        class="sidebar-nav-item "
+        
+    >
+        My Projects
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/gallery"        
+        class="sidebar-nav-item "
+        
+    >
+        Gallery
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resume"        
+        class="sidebar-nav-item "
+        
+    >
+        My Resume
+    </a>
+    
+    </li>
+
+    
+    <li >
+        <a
+        
+        href="/resources"        
+        class="sidebar-nav-item "
+        
+    >
+        Blog Category
+    </a>
+    
+    </li>
+
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://twitter.com/Saptarshi108" title="Twitter" class="no-mark-external">
+      
+        <span class="icon-twitter"></span>
+      
+      <span class="sr-only">Twitter</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/saptarshi-max" title="GitHub" class="no-mark-external">
+      
+        <span class="icon-github"></span>
+      
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:saptarshi-nag@outlook.com" title="Email" class="no-mark-external">
+      
+        <span class="icon-mail"></span>
+      
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.youtube.com/channel/UCW4aG2WzciPKa8NvWMrAfzg" title="YouTube" class="no-mark-external">
+      
+        <span class="icon-youtube"></span>
+      
+      <span class="sr-only">YouTube</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.kaggle.com/saptarshinag01" title="Kaggle" class="no-mark-external">
+      
+        <span class="icon-kaggle-brands"></span>
+      
+      <span class="sr-only">Kaggle</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.hackster.io/saptarshinag01" title="Hackster" class="no-mark-external">
+      
+        <span class="icon-Hackster-Mark_BW"></span>
+      
+      <span class="sr-only">Hackster</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.slideshare.com/Saptarshi_nag" title="Slideshare" class="no-mark-external">
+      
+        <span class="icon-slideshare-brands"></span>
+      
+      <span class="sr-only">Slideshare</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://instagram.com/saptarshi_nag" title="Instagram" class="no-mark-external">
+      
+        <span class="icon-instagram"></span>
+      
+      <span class="sr-only">Instagram</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.behance.net/saptarshi_" title="Behance" class="no-mark-external">
+      
+        <span class="icon-behance"></span>
+      
+      <span class="sr-only">Behance</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.artstation.com/saptarshi-nag" title="ArtStation" class="no-mark-external">
+      
+        <span class="icon-artstation-brands"></span>
+      
+      <span class="sr-only">ArtStation</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://substack.com/@saptarsh<username>" title="Substack" class="no-mark-external">
+      
+        <span class="social-svg-icon" style="display:inline-block; width:1em; height:1em; vertical-align:-0.125em; line-height:1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path fill="currentColor" d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11L22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </span>
+      
+      <span class="sr-only">Substack</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://www.linkedin.com/in//saptarshi-nag01/" title="LinkedIn" class="no-mark-external">
+      
+        <span class="icon-linkedin2"></span>
+      
+      <span class="sr-only">LinkedIn</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>!function(){var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())}();
+</script>
+  <script src="/assets/js/hydejack-9.1.4.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.1.4.js" nomodule defer></script>
+  <!-- Mermaid.js for diagrams — only load on pages that use it -->
+
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js" defer crossorigin="anonymous"></script>
+<script src="/assets/js/mermaid-init.js" defer></script>
+
+<script src="/assets/js/highlight-xyz.js" defer></script>
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <clap-config>
+    <clap-text at="1">Keep going!</clap-text>
+    <clap-text at="2">Keep going ×2!</clap-text>
+    <clap-text at="3">Give me more!</clap-text>
+    <clap-text at="5">Thank you, thank you</clap-text>
+    <clap-text at="7">Far too kind!</clap-text>
+    <clap-text at="10">Never gonna give me up?</clap-text>
+    <clap-text at="14">Never gonna let me down?</clap-text>
+    <clap-text at="20">Turn around and desert me!</clap-text>
+    <clap-text at="30">You're an addict!</clap-text>
+    <clap-text at="40">Son of a clapper!</clap-text>
+    <clap-text at="50">No way</clap-text>
+    <clap-text at="60">Go back to work!</clap-text>
+    <clap-text at="70">This is getting out of <em>hand</em></clap-text>
+    <clap-text at="80">Unbelievable</clap-text>
+    <clap-text at="90">PREPOSTEROUS</clap-text>
+    <clap-text at="100">I N S A N I T Y</clap-text>
+    <clap-text at="185"><span style="font-family:monospace">FEED ME A STRAY CAT</span></clap-text>
+  </clap-config>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+</div>
+
+</body>
+</html>
