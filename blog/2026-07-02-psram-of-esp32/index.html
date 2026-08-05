@@ -18,21 +18,19 @@
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Getting Started with MetricMQ: Local Setup and Grafana Monitoring | Saptarshi Nag</title>
+<title>I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring | Saptarshi Nag</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Getting Started with MetricMQ: Local Setup and Grafana Monitoring" />
+<meta property="og:title" content="I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="MetricMQ is a 328 KB C++20 message broker featuring a 16-byte binary protocol, Ed25519 message signing, LMDB sequence persistence, native Prometheus metrics, and an ESP32 client. This guide covers running the broker, testing Python demos, and visualizing real-time metrics with Prometheus and Grafana." />
-<meta property="og:description" content="MetricMQ is a 328 KB C++20 message broker featuring a 16-byte binary protocol, Ed25519 message signing, LMDB sequence persistence, native Prometheus metrics, and an ESP32 client. This guide covers running the broker, testing Python demos, and visualizing real-time metrics with Prometheus and Grafana." />
+<meta name="description" content="A hands-on walkthrough of MetricMQ: what it does differently, how to run the Python demos line by line, and how to watch your messages flow in real time through Prometheus and Grafana." />
+<meta property="og:description" content="A hands-on walkthrough of MetricMQ: what it does differently, how to run the Python demos line by line, and how to watch your messages flow in real time through Prometheus and Grafana." />
 <meta property="og:site_name" content="Saptarshi Nag" />
-<meta property="og:image" content="/cover_images/posts/grafana_metricmq.webp" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-07-01T00:00:00+00:00" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/cover_images/posts/grafana_metricmq.webp" />
-<meta property="twitter:title" content="Getting Started with MetricMQ: Local Setup and Grafana Monitoring" />
+<meta property="article:published_time" content="2026-07-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-08-05T11:56:49+00:00","datePublished":"2026-07-01T00:00:00+00:00","description":"MetricMQ is a 328 KB C++20 message broker featuring a 16-byte binary protocol, Ed25519 message signing, LMDB sequence persistence, native Prometheus metrics, and an ESP32 client. This guide covers running the broker, testing Python demos, and visualizing real-time metrics with Prometheus and Grafana.","headline":"Getting Started with MetricMQ: Local Setup and Grafana Monitoring","image":"/cover_images/posts/grafana_metricmq.webp","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/es/2026-07-01-metricmq-getting-started-no-hardware/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/es/2026-07-01-metricmq-getting-started-no-hardware/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-08-05T11:56:49+00:00","datePublished":"2026-07-02T00:00:00+00:00","description":"A hands-on walkthrough of MetricMQ: what it does differently, how to run the Python demos line by line, and how to watch your messages flow in real time through Prometheus and Grafana.","headline":"I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/2026-07-02-psram-of-esp32/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/blog/2026-07-02-psram-of-esp32/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -59,7 +57,7 @@
 <meta name="generator" content="Hydejack v9.1.4" />
 
 
-<link rel="alternate" href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" hreflang="en">
+<link rel="alternate" href="/blog/2026-07-02-psram-of-esp32/" hreflang="en">
 
 <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Saptarshi Nag" />
 
@@ -126,7 +124,7 @@
 
   <style id="_pageStyle">
 
-html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accent-color-highlight: rgba(204, 204, 204, 0.1);--accent-color-darkened: rgb(184.875, 184.875, 184.875);--theme-color: #ccc;--dark-mode-body-bg: hsl(0, 0%, 17.5%);--dark-mode-border-color: hsl(0, 0%, 22.5%)}
+html{--accent-color: rgb(79,177,186);--accent-color-faded: rgba(79, 177, 186, 0.5);--accent-color-highlight: rgba(79, 177, 186, 0.1);--accent-color-darkened: rgb(63.8602040816, 154.5602040816, 162.8897959184);--theme-color: rgb(25, 55, 71);--dark-mode-body-bg: hsl(200.8695652174, 5.9895833333%, 17.5%);--dark-mode-border-color: hsl(200.8695652174, 5.9895833333%, 22.5%)}
 </style>
 
 
@@ -200,16 +198,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
       <li>
       
         <span>/</span>
-        
-        
-        <a href="/blog/es/">es</a>
-      
-      </li>
-    
-      <li>
-      
-        <span>/</span>
-        <span>2026-07-01-metricmq-getting-started-no-hardware</span>
+        <span>2026-07-02-psram-of-esp32</span>
       
       </li>
     
@@ -226,82 +215,52 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
 
 
 
-<article id="post-blog-es-metricmq-getting-started-no-hardware" class="page post mb6" role="article">
+<article id="post-blog-psram-of-esp32" class="page post mb6" role="article">
   <header>
     <h1 class="post-title flip-project-title">
       
-        Getting Started with MetricMQ: Local Setup and Grafana Monitoring
+        I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring
       
     </h1>
 
     <div class="post-date">
       
       <span class="ellipsis mr1">
-        <time datetime="2026-07-01T00:00:00+00:00">01 Jul 2026</time> in <span>Blog</span> / <a href="/es/" class="flip-title">Embedded Software</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+        <time datetime="2026-07-02T00:00:00+00:00">02 Jul 2026</time> in <span>Blog</span> 
       </span>
       
     </div>
 
     
     
-      
-        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
-          
-
-
-<img
-  
-    src="/cover_images/posts/grafana_metricmq.webp"
-    
-    
-  
-  alt="Getting Started with MetricMQ: Local Setup and Grafana Monitoring"
-  
-  
-  width="864"
-  height="486"
-  loading="lazy"
-/>
-
-        </div>
-      
-      
-    
 
     
 
 
 
-  
-    <p class="note-sm" >
-      MetricMQ is a 328 KB C++20 message broker featuring a 16-byte binary protocol, Ed25519 message signing, LMDB sequence persistence, native Prometheus metrics, and an ESP32 client. This guide covers running the broker, testing Python demos, and visualizing real-time metrics with Prometheus and Grafana.
-
-    </p>
-  
+  <div class="hr pb0"></div>
 
 
   </header>
 
   
-    <p>A technical guide to running MetricMQ, understanding its wire protocol, executing Python client demos, and setting up Prometheus and Grafana for real-time message tracking.</p>
+    <p><em>A hands-on walkthrough of MetricMQ: what it does differently, how to run the Python demos line by line, and how to watch your messages flow in real time through Prometheus and Grafana.</em></p>
 
 <hr />
 
-<p>I built MetricMQ because existing message brokers often represent trade-offs when working with low-power microcontrollers. Full-featured brokers like RabbitMQ require significant system resources, while lightweight options like basic Redis pub/sub lack message-level security and persistent sequence tracking.</p>
+<p>I kept running into the same wall building IoT systems: existing brokers are either too heavy for microcontrollers (RabbitMQ needs a full server) or too simple to be trustworthy (basic Redis pub/sub drops messages silently and has no security at the message level). So I built MetricMQ — a lightweight broker with a 16-byte binary protocol, built-in Ed25519 message signing, and a Prometheus metrics endpoint baked directly into the binary.</p>
 
-<p>MetricMQ is a lightweight C++20 broker (328 KB binary) that uses a fixed 16-byte binary wire protocol, enforces optional per-message Ed25519 signature verification at the broker level, persists sequence IDs via LMDB for exact sequence tracking, and exposes a native Prometheus metrics endpoint on every path.</p>
-
-<p>This post covers how to run the broker locally, execute Python scripts demonstrating its core feature set without external dependencies, and set up a Grafana dashboard to observe metrics in real time.</p>
+<p>This post is a complete walkthrough. By the end you’ll have the broker running, all six core features demonstrated through Python, and a live Grafana dashboard showing your message traffic in real time. I’ll break down every piece of code so you understand not just <em>what</em> to run but <em>why</em> it works the way it does.</p>
 
 <hr />
 
-<h2 id="message-broker-overview">Message Broker Overview</h2>
+<h2 id="what-a-message-broker-actually-does">What a Message Broker Actually Does</h2>
 
-<p>A message broker decouples data producers (publishers) from data consumers (subscribers).</p>
+<p>Before touching any code, it helps to be clear on the problem.</p>
 
-<p>For example, when multiple microcontrollers record sensor data that needs to feed a database, a web dashboard, and an alerting service, connecting every sensor directly to every service scales poorly:</p>
+<p>Imagine you have a dozen ESP32 sensors publishing temperature readings, plus a database, a mobile dashboard, and an alert system that all want that data. Without a broker, every sensor needs a direct connection to every consumer:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Direct connections (hard to scale):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Without a broker — messy, hard to scale:
 
   Sensor 1 ──→ Dashboard
   Sensor 1 ──→ Database
@@ -309,9 +268,9 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   Sensor 2 ──→ Dashboard
   Sensor 2 ──→ Database
   Sensor 2 ──→ Alert System
-  (12 sensors × 3 consumers = 36 connections)
+  (12 sensors × 3 consumers = 36 connections to manage)
 
-Broker model (hub-and-spoke):
+With MetricMQ — clean hub-and-spoke:
 
   Sensor 1 ──┐
   Sensor 2 ──┤──→ [ MetricMQ Broker :6379 ] ──→ Dashboard
@@ -319,16 +278,18 @@ Broker model (hub-and-spoke):
                                               ──→ Alert System
 </code></pre></div></div>
 
-<p>Publishers send messages to specified topic strings (e.g., <code class="language-plaintext highlighter-rouge">sensors/temperature</code>). Subscribers listen to topics of interest. The broker handles message routing so components can be added or removed independently.</p>
+<p>Sensors <strong>publish</strong> messages to named <strong>topics</strong> like <code class="language-plaintext highlighter-rouge">sensors/temperature</code>. Consumers <strong>subscribe</strong> to the topics they care about. The broker handles all the routing. Nobody needs to know about anybody else — you can add a new consumer without touching a single sensor.</p>
 
 <hr />
 
-<h2 id="technical-comparison">Technical Comparison</h2>
+<h2 id="why-metricmq-and-not-mqtt-or-redis">Why MetricMQ and Not MQTT or Redis?</h2>
+
+<p>Honest comparison:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Feature</th>
+      <th> </th>
       <th>MQTT</th>
       <th>Redis Pub/Sub</th>
       <th>NATS</th>
@@ -338,55 +299,54 @@ Broker model (hub-and-spoke):
   <tbody>
     <tr>
       <td>Binary size</td>
-      <td>~500 KB+</td>
+      <td>~500KB+</td>
       <td>Separate server</td>
-      <td>~20 MB</td>
-      <td><strong>328 KB</strong></td>
+      <td>~20MB</td>
+      <td><strong>328KB</strong></td>
     </tr>
     <tr>
       <td>ESP32 compatible</td>
-      <td>Heavy (TLS overhead)</td>
+      <td>Yes, but TLS is heavy</td>
+      <td>Not designed for MCUs</td>
       <td>No</td>
-      <td>No</td>
-      <td>Yes (2 KB RAM client)</td>
+      <td>Yes — 2KB RAM client</td>
     </tr>
     <tr>
-      <td>Message signing</td>
-      <td>No (TLS transport only)</td>
+      <td>Message-level signing</td>
+      <td>No (TLS only)</td>
       <td>No</td>
       <td>No</td>
       <td><strong>Ed25519 per message</strong></td>
     </tr>
     <tr>
-      <td>Prometheus metrics</td>
-      <td>Requires exporter</td>
-      <td>Requires exporter</td>
-      <td>Requires exporter</td>
-      <td><strong>Native HTTP endpoint</strong></td>
+      <td>Prometheus built in</td>
+      <td>Via sidecar</td>
+      <td>Via sidecar</td>
+      <td>Via sidecar</td>
+      <td><strong>Native, no sidecar</strong></td>
     </tr>
     <tr>
       <td>Sequence numbers</td>
       <td>No</td>
       <td>No</td>
       <td>Yes</td>
-      <td><strong>Yes (LMDB persisted)</strong></td>
+      <td>Yes</td>
     </tr>
   </tbody>
 </table>
 
-<p>Key architectural differences:</p>
+<p>Two things are genuinely different here — not just marketing claims:</p>
 
-<ol>
-  <li><strong>Message-level Ed25519 signatures</strong>: Standard MQTT relies entirely on TLS for security. TLS handshakes add substantial latency and memory pressure on microcontrollers. MetricMQ can include a 64-byte signature directly in the binary message header. The broker validates the signature prior to routing. Failed signatures are rejected immediately and increment the <code class="language-plaintext highlighter-rouge">metricmq_signature_failures_total</code> counter.</li>
-  <li><strong>Dual-protocol single-port handler</strong>: Upon establishing a TCP socket connection, the broker reads the initial byte to detect whether the client is sending MetricMQ binary frames or Redis RESP text. A microcontroller sending binary frames and a Python script using Redis protocol commands can publish to and consume from the same topics simultaneously.</li>
-</ol>
+<p><strong>Ed25519 per-message signing.</strong> MQTT and Redis rely on TLS for all security. TLS is expensive on microcontrollers — the handshake alone can take hundreds of milliseconds on an ESP32. MetricMQ embeds a 64-byte cryptographic signature directly in every message header. The broker verifies it before routing. A tampered or unsigned message is rejected and counted in Prometheus as <code class="language-plaintext highlighter-rouge">metricmq_signature_failures_total</code>. You can literally watch attacks in your dashboard.</p>
+
+<p><strong>Dual-protocol on the same port.</strong> The broker reads the first byte of every new connection and auto-detects whether it’s the MetricMQ binary protocol or Redis RESP text. An ESP32 using the C++ binary client and a Python script can publish and subscribe on the same topic namespace with zero configuration. This is why the demo uses plain Python sockets — no client library needed.</p>
 
 <hr />
 
-<h2 id="system-architecture">System Architecture</h2>
+<h2 id="the-architecture-in-one-diagram">The Architecture in One Diagram</h2>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──────────────────────────────────────────────────────────────┐
-│                    Local Host Machine                        │
+│                    Your Machine                              │
 │                                                              │
 │  ┌─────────────────┐    port 6379    ┌──────────────────┐   │
 │  │  Python Demo    │ ──────────────→ │  MetricMQ Broker │   │
@@ -410,21 +370,19 @@ Broker model (hub-and-spoke):
 └──────────────────────────────────────────────────────────────┘
 </code></pre></div></div>
 
-<p>The broker binary handles message routing on TCP port <code class="language-plaintext highlighter-rouge">6379</code> and serves Prometheus metrics on HTTP port <code class="language-plaintext highlighter-rouge">9091</code>. A Prometheus instance running in Docker scrapes port <code class="language-plaintext highlighter-rouge">9091</code> every 5 seconds. Grafana queries Prometheus on port <code class="language-plaintext highlighter-rouge">9090</code> and renders the dashboard UI on port <code class="language-plaintext highlighter-rouge">3001</code>.</p>
+<p>The broker is one binary. It speaks to clients on port <code class="language-plaintext highlighter-rouge">6379</code> and exposes metrics on port <code class="language-plaintext highlighter-rouge">9091</code>. Prometheus scrapes port <code class="language-plaintext highlighter-rouge">9091</code> every 5 seconds and stores the time series. Grafana reads from Prometheus and draws the graphs. Nothing complicated — three processes, three ports.</p>
 
 <hr />
 
-<h2 id="setting-up-the-infrastructure">Setting Up the Infrastructure</h2>
+<h2 id="setting-up-the-stack">Setting Up the Stack</h2>
 
-<h3 id="step-1-start-the-metricmq-broker">Step 1: Start the MetricMQ Broker</h3>
-
-<p>Run the binary from your build directory:</p>
+<h3 id="step-1--start-the-metricmq-broker">Step 1 — Start the MetricMQ Broker</h3>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="nx">C:\path\to\MetricMQ</span><span class="w">
 </span><span class="o">.</span><span class="n">\build\Release\metricmq-broker.exe</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Expected startup log:</p>
+<p>You should see:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MetricMQ Broker v1.0
 Lightweight Message Queue for IoT
@@ -435,14 +393,14 @@ Broker listening on 0.0.0.0:6379
 Metrics server started successfully on http://0.0.0.0:9091/metrics
 </code></pre></div></div>
 
-<p>The broker binds to <code class="language-plaintext highlighter-rouge">0.0.0.0</code>, listening across all available network interfaces.</p>
+<p>Two things started in one binary: the message broker on port <code class="language-plaintext highlighter-rouge">6379</code> and a Prometheus scrape endpoint on port <code class="language-plaintext highlighter-rouge">9091</code>. Most brokers need a separate exporter process for metrics — MetricMQ does it natively. That <code class="language-plaintext highlighter-rouge">0.0.0.0</code> means it’s listening on all network interfaces, not just localhost, which is what lets the ESP32 connect over WiFi later.</p>
 
-<p>To verify the metrics server, query port <code class="language-plaintext highlighter-rouge">9091</code>:</p>
+<p>Verify the metrics endpoint is live — open a second terminal and run:</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">curl</span><span class="w"> </span><span class="nx">http://localhost:9091/metrics</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Sample initial metrics response:</p>
+<p>You’ll see raw Prometheus text format. Each line is a metric the broker is currently tracking:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># HELP metricmq_messages_published_total Total number of messages published
 # TYPE metricmq_messages_published_total counter
@@ -459,9 +417,11 @@ metricmq_publish_latency_seconds_bucket{le="0.005"} 0
 ...
 </code></pre></div></div>
 
-<h3 id="step-2-configure-prometheus">Step 2: Configure Prometheus</h3>
+<p>Right now everything is zero — no clients connected yet. These numbers will change as the demo runs.</p>
 
-<p>Create a minimal <code class="language-plaintext highlighter-rouge">prometheus.yml</code> configuration:</p>
+<h3 id="step-2--create-the-prometheus-config">Step 2 — Create the Prometheus Config</h3>
+
+<p>Prometheus needs to know where to scrape metrics from. Create a config file:</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mkdir</span><span class="w"> </span><span class="nx">C:\metricmq-monitoring</span><span class="w">
 
@@ -476,14 +436,13 @@ scrape_configs:
 "@</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Out-File</span><span class="w"> </span><span class="nt">-FilePath</span><span class="w"> </span><span class="nx">C:\metricmq-monitoring\prometheus.yml</span><span class="w"> </span><span class="nt">-Encoding</span><span class="w"> </span><span class="nx">utf8</span><span class="w">
 </span></code></pre></div></div>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">scrape_interval: 5s</code> provides granular time-series resolution during local testing.</li>
-  <li><code class="language-plaintext highlighter-rouge">host.docker.internal</code> allows the Prometheus container to resolve and connect back to the host machine’s port <code class="language-plaintext highlighter-rouge">9091</code>.</li>
-</ul>
+<p>Two decisions worth explaining here:</p>
 
-<h3 id="step-3-run-prometheus-and-grafana-containers">Step 3: Run Prometheus and Grafana Containers</h3>
+<p><code class="language-plaintext highlighter-rouge">scrape_interval: 5s</code> — Prometheus fetches fresh metrics every 5 seconds. This is tight enough to watch individual demo runs in real time. In production you’d use 15s or 30s to reduce storage.</p>
 
-<p>Launch Prometheus and Grafana using Docker:</p>
+<p><code class="language-plaintext highlighter-rouge">host.docker.internal</code> — This is Docker’s built-in DNS name that resolves to your Windows host machine from inside a container. Without this, a container can’t reach <code class="language-plaintext highlighter-rouge">localhost:9091</code> because “localhost” inside Docker means the container itself, not your PC.</p>
+
+<h3 id="step-3--start-prometheus-and-grafana">Step 3 — Start Prometheus and Grafana</h3>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Prometheus</span><span class="w">
 </span><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--name</span><span class="w"> </span><span class="nx">prometheus</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">9090:9090</span><span class="w"> </span><span class="se">`
@@ -495,155 +454,77 @@ scrape_configs:
 </span><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--name</span><span class="w"> </span><span class="nx">grafana</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">3001:3000</span><span class="w"> </span><span class="nx">grafana/grafana</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Verify that both containers are running:</p>
+<p>Breaking down the Prometheus command:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-d</code> — run in the background (detached)</li>
+  <li><code class="language-plaintext highlighter-rouge">--name prometheus</code> — give the container a name so you can reference it later</li>
+  <li><code class="language-plaintext highlighter-rouge">-p 9090:9090</code> — map container port 9090 to your machine’s port 9090</li>
+  <li><code class="language-plaintext highlighter-rouge">--add-host=host.docker.internal:host-gateway</code> — tells the container that <code class="language-plaintext highlighter-rouge">host.docker.internal</code> means your actual Windows machine</li>
+  <li><code class="language-plaintext highlighter-rouge">-v "..."</code> — mounts your config file into the container at the path Prometheus expects</li>
+</ul>
+
+<p>Grafana runs on port <code class="language-plaintext highlighter-rouge">3001</code> on your machine (mapped from container port <code class="language-plaintext highlighter-rouge">3000</code>) because something else was already using <code class="language-plaintext highlighter-rouge">3000</code>.</p>
+
+<p>Confirm both are running:</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span><span class="w"> </span><span class="nx">ps</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Confirm that the targets status page (<code class="language-plaintext highlighter-rouge">http://localhost:9090/targets</code>) shows the <code class="language-plaintext highlighter-rouge">metricmq</code> target in an <strong>UP</strong> state.</p>
-
-<h3 id="step-4-add-prometheus-data-source-in-grafana">Step 4: Add Prometheus Data Source in Grafana</h3>
-
-<ol>
-  <li>Open <code class="language-plaintext highlighter-rouge">http://localhost:3001</code> (default login: <code class="language-plaintext highlighter-rouge">admin</code> / <code class="language-plaintext highlighter-rouge">admin</code>).</li>
-  <li>Navigate to <strong>Connections → Data sources → Add data source → Prometheus</strong>.</li>
-  <li>Set the Prometheus server URL to <code class="language-plaintext highlighter-rouge">http://host.docker.internal:9090</code>.</li>
-  <li>Select <strong>Save &amp; test</strong>.</li>
-</ol>
-
-<p><img src="/cover_images/posts/metricmq-prometheus.png" alt="" /></p>
-
-<p>If you want to see your data Raw:
-Source: <a href="http://host.docker.internal:9091/metrics">http://host.docker.internal:9091/metrics</a></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># HELP metricmq_messages_published_total Total number of messages published</span>
-<span class="c"># TYPE metricmq_messages_published_total counter</span>
-metricmq_messages_published_total 3980
-
-<span class="c"># HELP metricmq_messages_delivered_total Total number of messages delivered to subscribers</span>
-<span class="c"># TYPE metricmq_messages_delivered_total counter</span>
-metricmq_messages_delivered_total 3980
-
-<span class="c"># HELP metricmq_subscriptions_total Total number of subscriptions</span>
-<span class="c"># TYPE metricmq_subscriptions_total counter</span>
-metricmq_subscriptions_total 720
-
-<span class="c"># HELP metricmq_unsubscriptions_total Total number of unsubscriptions</span>
-<span class="c"># TYPE metricmq_unsubscriptions_total counter</span>
-metricmq_unsubscriptions_total 0
-
-<span class="c"># HELP metricmq_connections_total Total number of client connections</span>
-<span class="c"># TYPE metricmq_connections_total counter</span>
-metricmq_connections_total 1620
-
-<span class="c"># HELP metricmq_disconnections_total Total number of client disconnections</span>
-<span class="c"># TYPE metricmq_disconnections_total counter</span>
-metricmq_disconnections_total 1615
-
-<span class="c"># HELP metricmq_acks_total Total number of message acknowledgements</span>
-<span class="c"># TYPE metricmq_acks_total counter</span>
-metricmq_acks_total 0
-
-<span class="c"># HELP metricmq_errors_total Total number of errors</span>
-<span class="c"># TYPE metricmq_errors_total counter</span>
-metricmq_errors_total 0
-
-<span class="c"># HELP metricmq_active_connections Current number of active connections</span>
-<span class="c"># TYPE metricmq_active_connections gauge</span>
-metricmq_active_connections 5
-
-<span class="c"># HELP metricmq_active_subscribers Current number of active subscribers</span>
-<span class="c"># TYPE metricmq_active_subscribers gauge</span>
-metricmq_active_subscribers 0
-
-<span class="c"># HELP metricmq_topics Current number of topics with subscribers</span>
-<span class="c"># TYPE metricmq_topics gauge</span>
-metricmq_topics 0
-
-<span class="c"># HELP metricmq_publish_latency_seconds Publish operation latency in seconds</span>
-<span class="c"># TYPE metricmq_publish_latency_seconds histogram</span>
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.0001"</span><span class="o">}</span> 0
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.0005"</span><span class="o">}</span> 0
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.001"</span><span class="o">}</span> 0
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.005"</span><span class="o">}</span> 1517
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.01"</span><span class="o">}</span> 2841
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.05"</span><span class="o">}</span> 3638
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.1"</span><span class="o">}</span> 3708
-metricmq_publish_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"+Inf"</span><span class="o">}</span> 3980
-metricmq_publish_latency_seconds_sum 131.265324
-metricmq_publish_latency_seconds_count 3980
-
-<span class="c"># HELP metricmq_delivery_latency_seconds Message delivery latency in seconds</span>
-<span class="c"># TYPE metricmq_delivery_latency_seconds histogram</span>
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.0001"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.0005"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.001"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.005"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.01"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.05"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"0.1"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">"+Inf"</span><span class="o">}</span> 0
-metricmq_delivery_latency_seconds_sum 0.000000
-metricmq_delivery_latency_seconds_count 0
-
-<span class="c"># HELP metricmq_topic_messages_total Messages published per topic</span>
-<span class="c"># TYPE metricmq_topic_messages_total counter</span>
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"broadcast/alert"</span><span class="o">}</span> 90
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"commands/actuator"</span><span class="o">}</span> 328
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"logs/system"</span><span class="o">}</span> 642
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"sensors/co2"</span><span class="o">}</span> 90
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"sensors/humidity"</span><span class="o">}</span> 588
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"sensors/pressure"</span><span class="o">}</span> 90
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"sensors/temperature"</span><span class="o">}</span> 1438
-metricmq_topic_messages_total<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"stream/data"</span><span class="o">}</span> 714
-
-<span class="c"># HELP metricmq_topic_subscribers Current subscribers per topic</span>
-<span class="c"># TYPE metricmq_topic_subscribers gauge</span>
-metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"broadcast/alert"</span><span class="o">}</span> 450
-metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"sensors/#"</span><span class="o">}</span> 90
-metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"sensors/temperature"</span><span class="o">}</span> 90
-metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><span class="o">=</span><span class="s2">"stream/data"</span><span class="o">}</span> 90
-
-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   IMAGE             PORTS                    NAMES
+9ab6a2f4c802   grafana/grafana   0.0.0.0:3001-&gt;3000/tcp   grafana
+9fa970993610   prom/prometheus   0.0.0.0:9090-&gt;9090/tcp   prometheus
 </code></pre></div></div>
 
-<p>And then to Finally add to Grafana : Go to Grafana -&gt; add Source -&gt; Prometheus (select from the list of plugins) -&gt; add source URL -&gt; save &amp; test</p>
+<p>Check Prometheus is actually scraping MetricMQ — open <code class="language-plaintext highlighter-rouge">http://localhost:9090/targets</code>. You want to see the <code class="language-plaintext highlighter-rouge">metricmq</code> job with a green <strong>UP</strong> badge and a recent “Last scrape” timestamp.</p>
 
-<p><img src="/cover_images/posts/metricmq-prometheus-update.png" alt="" /></p>
+<h3 id="step-4--wire-grafana-to-prometheus">Step 4 — Wire Grafana to Prometheus</h3>
 
-<h2 id="wire-protocol-specification">Wire Protocol Specification</h2>
+<p>Go to <code class="language-plaintext highlighter-rouge">http://localhost:3001</code>, log in with <code class="language-plaintext highlighter-rouge">admin</code> / <code class="language-plaintext highlighter-rouge">admin</code>, then:</p>
 
-<p>MetricMQ uses a fixed 16-byte header for all binary frames:</p>
+<p><strong>Connections → Data sources → Add data source → Prometheus</strong></p>
+
+<p>Set the connection URL to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://host.docker.internal:9090
+</code></pre></div></div>
+
+<p>Click <strong>Save &amp; test</strong>. You should see “Successfully queried the Prometheus API.” If you see a connection error, check that the Prometheus container is running with <code class="language-plaintext highlighter-rouge">docker ps</code>.</p>
+
+<hr />
+
+<h2 id="the-wire-protocol--whats-actually-happening-under-the-hood">The Wire Protocol — What’s Actually Happening Under the Hood</h2>
+
+<p>Before looking at the Python demo, it helps to understand how clients talk to MetricMQ. Every message is wrapped in a <strong>16-byte binary header</strong>:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Byte position:  0      1      2-9        10-11      12-15
                 ┌──────┬──────┬──────────┬──────────┬──────────┐
                 │ Ver  │ Cmd  │ Sequence │ TopicLen │ PayloadLen│
                 │ (1B) │ (1B) │  (8B)    │   (2B)   │   (4B)   │
                 └──────┴──────┴──────────┴──────────┴──────────┘
-                Followed by: [Topic bytes] [Payload bytes]
+                followed by: [Topic bytes] [Payload bytes]
 </code></pre></div></div>
 
-<p>Using a fixed-width 16-byte header simplifies parsing on resource-constrained platforms compared to variable-length header structures. Memory allocation can be completely avoided when receiving packets into static buffers.</p>
+<p>This fixed-size header is one of MetricMQ’s core design decisions. Compare it to MQTT’s variable-length encoding — MQTT uses a complex multi-byte length field that requires branching logic to parse. MetricMQ’s header is always exactly 16 bytes, always the same structure. An ESP32 can parse it with a single <code class="language-plaintext highlighter-rouge">struct</code> read — no dynamic memory allocation, no parsing state machine.</p>
 
-<p>Supported command byte values (<code class="language-plaintext highlighter-rouge">Cmd</code>):</p>
+<p>The <code class="language-plaintext highlighter-rouge">Cmd</code> field tells the broker what to do:</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">0x01</code> (<code class="language-plaintext highlighter-rouge">SUBSCRIBE</code>): Register interest in a topic.</li>
-  <li><code class="language-plaintext highlighter-rouge">0x03</code> (<code class="language-plaintext highlighter-rouge">PUBLISH</code>): Send a message payload to a topic.</li>
-  <li><code class="language-plaintext highlighter-rouge">0x04</code> (<code class="language-plaintext highlighter-rouge">MESSAGE</code>): Broker delivery of a payload to a subscriber.</li>
-  <li><code class="language-plaintext highlighter-rouge">0x06</code> (<code class="language-plaintext highlighter-rouge">PING</code>): Connection keep-alive request.</li>
-  <li><code class="language-plaintext highlighter-rouge">0x07</code> (<code class="language-plaintext highlighter-rouge">PONG</code>): Connection keep-alive response.</li>
-</ul>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0x01 = SUBSCRIBE  (client wants to receive messages on a topic)
+0x03 = PUBLISH    (client is sending a message)
+0x04 = MESSAGE    (broker delivering a message to a subscriber)
+0x06 = PING       (keep-alive check)
+0x07 = PONG       (keep-alive response)
+</code></pre></div></div>
 
-<p>The 8-byte <code class="language-plaintext highlighter-rouge">Sequence</code> field contains a monotonic 64-bit integer maintained by the broker using LMDB, ensuring continuity across process restarts.</p>
+<p>The <code class="language-plaintext highlighter-rouge">Sequence</code> field is an 8-byte counter that the broker increments for every message. It’s stored in LMDB (an embedded database) so it survives broker restarts. If the broker crashes at sequence 5000 and restarts, the next message gets sequence 5001 — not 1. Subscribers can detect gaps.</p>
 
 <hr />
 
-<h2 id="python-client-implementation">Python Client Implementation</h2>
+<h2 id="the-python-demo--line-by-line">The Python Demo — Line by Line</h2>
 
-<p>The demo client uses standard Python libraries (<code class="language-plaintext highlighter-rouge">socket</code>, <code class="language-plaintext highlighter-rouge">struct</code>) to construct protocol frames directly.</p>
+<p>The demo script talks directly to MetricMQ using raw sockets and the 16-byte binary protocol. No broker-specific client library needed. Here’s how it’s structured, piece by piece.</p>
 
-<h3 id="framing-utility">Framing Utility</h3>
+<h3 id="the-frame-builder">The Frame Builder</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">socket</span><span class="p">,</span> <span class="n">struct</span><span class="p">,</span> <span class="n">threading</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">random</span>
 <span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -657,24 +538,30 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
 <span class="n">CMD_MESSAGE</span>    <span class="o">=</span> <span class="mh">0x04</span>
 <span class="n">CMD_PING</span>       <span class="o">=</span> <span class="mh">0x06</span>
 <span class="n">CMD_PONG</span>       <span class="o">=</span> <span class="mh">0x07</span>
+</code></pre></div></div>
 
-<span class="k">def</span> <span class="nf">build_frame</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="sa">b</span><span class="sh">""</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<p>These constants mirror the broker’s internal definitions exactly. <code class="language-plaintext highlighter-rouge">PROTO_VERSION = 0x01</code> tells the broker which version of the protocol we’re speaking. If you ever update the protocol, clients on old versions get rejected cleanly rather than silently misbehaving.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_frame</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="sa">b</span><span class="sh">""</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">topic</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">"</span><span class="s">utf-8</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">payload</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="sh">"</span><span class="s">utf-8</span><span class="sh">"</span><span class="p">)</span> <span class="k">if</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">payload</span>
     <span class="k">return</span> <span class="n">struct</span><span class="p">.</span><span class="nf">pack</span><span class="p">(</span><span class="sh">"</span><span class="s">&gt;BBQHL</span><span class="sh">"</span><span class="p">,</span> <span class="n">PROTO_VERSION</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nf">len</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="n">p</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">struct.pack("&gt;BBQHL", ...)</code> builds the header:</p>
+<p><code class="language-plaintext highlighter-rouge">struct.pack("&gt;BBQHL", ...)</code> is where the 16-byte header gets assembled. The format string <code class="language-plaintext highlighter-rouge">&gt;BBQHL</code> means:</p>
+
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">&gt;</code>: Big-endian network byte order.</li>
-  <li><code class="language-plaintext highlighter-rouge">B</code>: 1-byte protocol version (<code class="language-plaintext highlighter-rouge">0x01</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">B</code>: 1-byte command code.</li>
-  <li><code class="language-plaintext highlighter-rouge">Q</code>: 8-byte unsigned sequence number.</li>
-  <li><code class="language-plaintext highlighter-rouge">H</code>: 2-byte unsigned topic length.</li>
-  <li><code class="language-plaintext highlighter-rouge">L</code>: 4-byte unsigned payload length.</li>
+  <li><code class="language-plaintext highlighter-rouge">&gt;</code> — big-endian byte order (network byte order, consistent across all platforms)</li>
+  <li><code class="language-plaintext highlighter-rouge">B</code> — 1 unsigned byte (version)</li>
+  <li><code class="language-plaintext highlighter-rouge">B</code> — 1 unsigned byte (command)</li>
+  <li><code class="language-plaintext highlighter-rouge">Q</code> — 8 unsigned bytes (sequence number, fits up to 18 quintillion messages)</li>
+  <li><code class="language-plaintext highlighter-rouge">H</code> — 2 unsigned bytes (topic length, up to 65535 characters)</li>
+  <li><code class="language-plaintext highlighter-rouge">L</code> — 4 unsigned bytes (payload length, up to 4GB)</li>
 </ul>
 
-<h3 id="socket-io-helpers">Socket I/O Helpers</h3>
+<p>Total: 1+1+8+2+4 = <strong>16 bytes exactly</strong>. Then the actual topic string and payload bytes are appended directly after. The broker reads the header first, gets the lengths, then reads exactly that many bytes for topic and payload. No delimiters, no parsing ambiguity.</p>
+
+<h3 id="the-frame-reader">The Frame Reader</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">recv_exactly</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">buf</span> <span class="o">=</span> <span class="nf">bytearray</span><span class="p">()</span>
@@ -684,8 +571,11 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
             <span class="k">raise</span> <span class="nc">EOFError</span><span class="p">()</span>
         <span class="n">buf</span> <span class="o">+=</span> <span class="n">chunk</span>
     <span class="k">return</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</code></pre></div></div>
 
-<span class="k">def</span> <span class="nf">read_frame</span><span class="p">(</span><span class="n">sock</span><span class="p">):</span>
+<p>TCP does not guarantee that one <code class="language-plaintext highlighter-rouge">send()</code> equals one <code class="language-plaintext highlighter-rouge">recv()</code>. The network can split a 16-byte header across two packets, or merge multiple messages into one buffer. <code class="language-plaintext highlighter-rouge">recv_exactly</code> loops until it has exactly <code class="language-plaintext highlighter-rouge">n</code> bytes — not more, not less. This is called <strong>framing</strong> and it’s essential for any binary protocol.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">read_frame</span><span class="p">(</span><span class="n">sock</span><span class="p">):</span>
     <span class="n">raw</span> <span class="o">=</span> <span class="nf">recv_exactly</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">HEADER_SIZE</span><span class="p">)</span>
     <span class="n">ver</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">seq</span><span class="p">,</span> <span class="n">tlen</span><span class="p">,</span> <span class="n">plen</span> <span class="o">=</span> <span class="n">struct</span><span class="p">.</span><span class="nf">unpack</span><span class="p">(</span><span class="sh">"</span><span class="s">&gt;BBQHL</span><span class="sh">"</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span>
     <span class="n">topic</span>   <span class="o">=</span> <span class="nf">recv_exactly</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">tlen</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="sh">"</span><span class="s">utf-8</span><span class="sh">"</span><span class="p">)</span> <span class="k">if</span> <span class="n">tlen</span> <span class="k">else</span> <span class="sh">""</span>
@@ -693,9 +583,9 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
     <span class="k">return</span> <span class="p">{</span><span class="sh">"</span><span class="s">cmd</span><span class="sh">"</span><span class="p">:</span> <span class="n">cmd</span><span class="p">,</span> <span class="sh">"</span><span class="s">seq</span><span class="sh">"</span><span class="p">:</span> <span class="n">seq</span><span class="p">,</span> <span class="sh">"</span><span class="s">topic</span><span class="sh">"</span><span class="p">:</span> <span class="n">topic</span><span class="p">,</span> <span class="sh">"</span><span class="s">payload</span><span class="sh">"</span><span class="p">:</span> <span class="n">payload</span><span class="p">}</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">recv_exactly</code> handles TCP packet segmentation by reading until the buffer reaches requested length <code class="language-plaintext highlighter-rouge">n</code>.</p>
+<p>First read exactly 16 bytes. Unpack them according to the same format string used in <code class="language-plaintext highlighter-rouge">build_frame</code> — this is the mirror operation. Then read exactly <code class="language-plaintext highlighter-rouge">tlen</code> bytes for the topic and <code class="language-plaintext highlighter-rouge">plen</code> bytes for the payload. Return a clean dictionary. The broker does exactly the same thing on its side to parse incoming messages from clients.</p>
 
-<h3 id="client-class-structure">Client Class Structure</h3>
+<h3 id="the-client-class">The Client Class</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -705,20 +595,27 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
         <span class="n">self</span><span class="p">.</span><span class="n">received</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">self</span><span class="p">.</span><span class="n">sock</span>     <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="nf">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
         <span class="n">self</span><span class="p">.</span><span class="n">sock</span><span class="p">.</span><span class="nf">connect</span><span class="p">((</span><span class="n">HOST</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+</code></pre></div></div>
 
-    <span class="k">def</span> <span class="nf">_send</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="n">_lock</span><span class="p">:</span>
-            <span class="n">self</span><span class="p">.</span><span class="n">sock</span><span class="p">.</span><span class="nf">sendall</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<p><code class="language-plaintext highlighter-rouge">socket.AF_INET</code> means IPv4. <code class="language-plaintext highlighter-rouge">socket.SOCK_STREAM</code> means TCP — a reliable, ordered connection. Each <code class="language-plaintext highlighter-rouge">Client</code> instance is one TCP connection to the broker. The moment <code class="language-plaintext highlighter-rouge">.connect()</code> is called, the broker logs <code class="language-plaintext highlighter-rouge">New client connected: fd=XXX</code>.</p>
 
-    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">):</span>
+<p>The <code class="language-plaintext highlighter-rouge">_lock</code> is a threading mutex. The <code class="language-plaintext highlighter-rouge">listen()</code> method runs in a background thread (reading incoming messages), while the main thread can simultaneously call <code class="language-plaintext highlighter-rouge">publish()</code>. Without the lock, two threads could write to the socket at the same time and corrupt the data stream.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">):</span>
         <span class="n">self</span><span class="p">.</span><span class="n">_seq</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">self</span><span class="p">.</span><span class="nf">_send</span><span class="p">(</span><span class="nf">build_frame</span><span class="p">(</span><span class="n">CMD_SUBSCRIBE</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">_seq</span><span class="p">))</span>
+</code></pre></div></div>
 
-    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+<p>Subscribing is just sending a frame with <code class="language-plaintext highlighter-rouge">CMD_SUBSCRIBE</code> and the topic name. The payload is empty — the broker only needs the topic string to register this client as a subscriber. After this, any message published to this topic (or a matching wildcard) gets delivered to this socket.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
         <span class="n">self</span><span class="p">.</span><span class="n">_seq</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">self</span><span class="p">.</span><span class="nf">_send</span><span class="p">(</span><span class="nf">build_frame</span><span class="p">(</span><span class="n">CMD_PUBLISH</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">_seq</span><span class="p">))</span>
+</code></pre></div></div>
 
-    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">):</span>
+<p>Publishing sends <code class="language-plaintext highlighter-rouge">CMD_PUBLISH</code> with the topic and payload. The broker receives this, looks up all subscribers matching the topic, and delivers a copy to each one. The <code class="language-plaintext highlighter-rouge">_seq</code> here is the <em>client’s</em> sequence counter — separate from the broker’s global sequence counter.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">while</span> <span class="ow">not</span> <span class="n">stop_event</span><span class="p">.</span><span class="nf">is_set</span><span class="p">():</span>
                 <span class="n">self</span><span class="p">.</span><span class="n">sock</span><span class="p">.</span><span class="nf">settimeout</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
@@ -741,50 +638,67 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
                     <span class="k">continue</span>
         <span class="nf">except </span><span class="p">(</span><span class="nb">EOFError</span><span class="p">,</span> <span class="nb">OSError</span><span class="p">):</span>
             <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">self</span><span class="p">.</span><span class="n">sock</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
-        <span class="k">except</span> <span class="nb">OSError</span><span class="p">:</span>
-            <span class="k">pass</span>
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">listen()</code> runs in a background thread with a 1.0-second socket timeout to permit non-blocking shutdown checks via <code class="language-plaintext highlighter-rouge">stop_event</code>. It also handles broker <code class="language-plaintext highlighter-rouge">PING</code> requests by returning a <code class="language-plaintext highlighter-rouge">PONG</code> response frame.</p>
+<p>This runs in a background thread, constantly reading frames from the socket. Three things worth noting:</p>
+
+<p><code class="language-plaintext highlighter-rouge">sock.settimeout(1.0)</code> — the socket blocks for at most 1 second waiting for data. Without this, <code class="language-plaintext highlighter-rouge">read_frame</code> would block forever if no messages arrive, and the thread could never check <code class="language-plaintext highlighter-rouge">stop_event.is_set()</code> to know it should exit.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">CMD_MESSAGE</code> branch handles delivered messages. MetricMQ wraps the delivered message as an inner frame inside the outer delivery frame’s payload. So we unpack the outer frame first, then unpack again from the payload bytes to get the actual topic and message content.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">CMD_PING</code> branch responds to keep-alive pings from the broker. The broker sends a PING every 60 seconds to check if the client is still alive. If the client doesn’t respond with PONG, the broker closes the connection and decrements <code class="language-plaintext highlighter-rouge">metricmq_active_connections</code>.</p>
 
 <hr />
 
-<h2 id="core-feature-demos">Core Feature Demos</h2>
+<h2 id="running-all-six-features">Running All Six Features</h2>
 
-<p>Run the script directly or in a PowerShell loop to generate continuous traffic for Grafana:</p>
+<p>Run the full script:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span><span class="w"> </span><span class="nx">metricmq_demo.py</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Or run it in a continuous loop to generate enough data for the Grafana graphs:</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">while</span><span class="w"> </span><span class="p">(</span><span class="bp">$true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="nx">metricmq_demo.py</span><span class="p">;</span><span class="w"> </span><span class="n">Start-Sleep</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<h3 id="1-basic-publish--subscribe">1. Basic Publish / Subscribe</h3>
+<p>Here’s what each feature does and what MetricMQ mechanism it exercises.</p>
+
+<hr />
+
+<h3 id="feature-1--basic-pubsub">Feature 1 — Basic Pub/Sub</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demo_pubsub</span><span class="p">():</span>
-    <span class="n">sub</span> <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">subscriber-1</span><span class="sh">"</span><span class="p">)</span>
+    <span class="c1"># Create two separate TCP connections to the broker
+</span>    <span class="n">sub</span> <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">subscriber-1</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">pub</span> <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">publisher-1</span><span class="sh">"</span><span class="p">)</span>
 
-    <span class="n">stop</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="nc">Event</span><span class="p">()</span>
+    <span class="c1"># Start the listener thread for the subscriber
+</span>    <span class="n">stop</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="nc">Event</span><span class="p">()</span>
     <span class="n">threading</span><span class="p">.</span><span class="nc">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">sub</span><span class="p">.</span><span class="n">listen</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">stop</span><span class="p">,),</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="nf">start</span><span class="p">()</span>
 
-    <span class="n">sub</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="sh">"</span><span class="s">sensors/temperature</span><span class="sh">"</span><span class="p">)</span>
-    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="c1"># Register the subscriber's interest in this topic
+</span>    <span class="n">sub</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="sh">"</span><span class="s">sensors/temperature</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># wait for subscribe to register before publishing
+</span></code></pre></div></div>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+<p>Two clients, two separate TCP connections. The <code class="language-plaintext highlighter-rouge">time.sleep(0.5)</code> after subscribing is important — the subscribe frame needs to reach the broker and be registered before any messages are published. Without this pause, the publisher might send messages before the broker knows the subscriber exists, and they’d be dropped.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">({</span><span class="sh">"</span><span class="s">msg</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="sh">"</span><span class="s">temp</span><span class="sh">"</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="mf">20.0</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="sh">"</span><span class="s">unit</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">C</span><span class="sh">"</span><span class="p">})</span>
         <span class="n">pub</span><span class="p">.</span><span class="nf">publish</span><span class="p">(</span><span class="sh">"</span><span class="s">sensors/temperature</span><span class="sh">"</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
         <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  [</span><span class="si">{</span><span class="nf">ts</span><span class="p">()</span><span class="si">}</span><span class="s">] PUB  → sensors/temperature  </span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
         <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  ✅ Received </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">received</span><span class="p">)</span><span class="si">}</span><span class="s">/5 messages</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># wait for all deliveries to arrive
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  ✅ Received </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">received</span><span class="p">)</span><span class="si">}</span><span class="s">/5 messages</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">.</span><span class="n">received</span><span class="p">:</span>
         <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">     [</span><span class="si">{</span><span class="nf">ts</span><span class="p">()</span><span class="si">}</span><span class="s">] RECV ← </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="sh">'</span><span class="s">topic</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">  </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="sh">'</span><span class="s">payload</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Sample console output:</p>
+<p>The payload is JSON — a human-readable format that works on both the ESP32 (C++ JSON parser) and Python. The broker doesn’t care what the payload contains — it’s opaque bytes as far as routing is concerned.</p>
+
+<p><strong>Expected output:</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[00:02:40] PUB  → sensors/temperature  {"msg": 1, "temp": 22.3, "unit": "C"}
 [00:02:40] PUB  → sensors/temperature  {"msg": 2, "temp": 21.8, "unit": "C"}
@@ -793,7 +707,11 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
 [00:02:43] RECV ← sensors/temperature  {"msg": 1, "temp": 22.3, "unit": "C"}
 </code></pre></div></div>
 
-<h3 id="2-wildcard-topic-filtering">2. Wildcard Topic Filtering</h3>
+<p><strong>What to watch in Grafana:</strong> The <strong>Published vs Delivered</strong> panel should show two identical lines — every published message was delivered. The <strong>Publish Rate</strong> panel shows a small burst, then silence.</p>
+
+<hr />
+
+<h3 id="feature-2--wildcard-subscriptions">Feature 2 — Wildcard Subscriptions</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demo_wildcard</span><span class="p">():</span>
     <span class="n">sub</span> <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">wildcard-sub</span><span class="sh">"</span><span class="p">)</span>
@@ -801,10 +719,12 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
     <span class="n">stop</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="nc">Event</span><span class="p">()</span>
     <span class="n">threading</span><span class="p">.</span><span class="nc">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">sub</span><span class="p">.</span><span class="n">listen</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">stop</span><span class="p">,),</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="nf">start</span><span class="p">()</span>
 
-    <span class="n">sub</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="sh">"</span><span class="s">sensors/#</span><span class="sh">"</span><span class="p">)</span>
+    <span class="c1"># Subscribe to a wildcard pattern — catches ALL subtopics under sensors/
+</span>    <span class="n">sub</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="sh">"</span><span class="s">sensors/#</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">sensors/temperature</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sensors/humidity</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sensors/pressure</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sensors/co2</span><span class="sh">"</span><span class="p">]</span>
+    <span class="c1"># Publish to four completely different subtopics
+</span>    <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">sensors/temperature</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sensors/humidity</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sensors/pressure</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">sensors/co2</span><span class="sh">"</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">:</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">({</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="nf">round</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">1</span><span class="p">)})</span>
         <span class="n">pub</span><span class="p">.</span><span class="nf">publish</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
@@ -812,22 +732,40 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
         <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>The multi-level wildcard <code class="language-plaintext highlighter-rouge">#</code> matches any hierarchy trailing the specified topic prefix.</p>
+<p>The subscriber never named <code class="language-plaintext highlighter-rouge">sensors/humidity</code>, <code class="language-plaintext highlighter-rouge">sensors/pressure</code>, or <code class="language-plaintext highlighter-rouge">sensors/co2</code> explicitly. It only said <code class="language-plaintext highlighter-rouge">sensors/#</code>. The <code class="language-plaintext highlighter-rouge">#</code> is a <strong>wildcard</strong> that matches any continuation of the path — including multiple levels deep, so <code class="language-plaintext highlighter-rouge">sensors/room1/temperature</code> would also match.</p>
 
-<h3 id="3-subscriber-fan-out">3. Subscriber Fan-Out</h3>
+<p>This matters in real IoT deployments. If you have a monitoring dashboard subscribed to <code class="language-plaintext highlighter-rouge">sensors/#</code>, you can add new sensor types to your network and they automatically appear in the dashboard. No reconfiguration, no redeployment.</p>
+
+<p><strong>Expected output:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Subscribed to: sensors/#
+[00:02:44] PUB  → sensors/temperature  {"value": 73.7}
+[00:02:44] PUB  → sensors/humidity     {"value": 13.7}
+[00:02:45] PUB  → sensors/pressure     {"value": 82.8}
+[00:02:45] PUB  → sensors/co2          {"value": 75.5}
+
+✅ Wildcard caught 4/4 messages across all subtopics
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="feature-3--fan-out">Feature 3 — Fan-out</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demo_fanout</span><span class="p">():</span>
     <span class="n">N</span>    <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">subs</span> <span class="o">=</span> <span class="p">[</span><span class="nc">Client</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fan-sub-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    <span class="c1"># Create 5 independent subscriber clients (5 separate TCP connections)
+</span>    <span class="n">subs</span> <span class="o">=</span> <span class="p">[</span><span class="nc">Client</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">fan-sub-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
     <span class="n">pub</span>  <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">fan-pub</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">stops</span> <span class="o">=</span> <span class="p">[</span><span class="n">threading</span><span class="p">.</span><span class="nc">Event</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sub</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">subs</span><span class="p">):</span>
+    <span class="c1"># Each subscriber gets its own listener thread
+</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sub</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">subs</span><span class="p">):</span>
         <span class="n">threading</span><span class="p">.</span><span class="nc">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">sub</span><span class="p">.</span><span class="n">listen</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">stops</span><span class="p">[</span><span class="n">i</span><span class="p">],),</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="nf">start</span><span class="p">()</span>
         <span class="n">sub</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="sh">"</span><span class="s">broadcast/alert</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">({</span><span class="sh">"</span><span class="s">alert</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">high_temp</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="mf">87.3</span><span class="p">})</span>
+    <span class="c1"># One publish — broker delivers to all 5
+</span>    <span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">({</span><span class="sh">"</span><span class="s">alert</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">high_temp</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">:</span> <span class="mf">87.3</span><span class="p">})</span>
     <span class="n">pub</span><span class="p">.</span><span class="nf">publish</span><span class="p">(</span><span class="sh">"</span><span class="s">broadcast/alert</span><span class="sh">"</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  [</span><span class="si">{</span><span class="nf">ts</span><span class="p">()</span><span class="si">}</span><span class="s">] PUB  → broadcast/alert  </span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
@@ -836,9 +774,15 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
     <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="se">\n</span><span class="s">  ✅ Fan-out: </span><span class="si">{</span><span class="n">received</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s"> subscribers received the message</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>The broker duplicates published messages across all matching subscriber sockets. In Prometheus, <code class="language-plaintext highlighter-rouge">metricmq_messages_published_total</code> increments by 1 while <code class="language-plaintext highlighter-rouge">metricmq_messages_delivered_total</code> increments by <code class="language-plaintext highlighter-rouge">N</code> (5).</p>
+<p>The broker maintains an internal map of <code class="language-plaintext highlighter-rouge">topic → [list of subscriber connections]</code>. When a publish arrives for <code class="language-plaintext highlighter-rouge">broadcast/alert</code>, the broker iterates that list and writes a copy of the message to each socket. The publisher sent one frame; five deliveries happened.</p>
 
-<h3 id="4-sequence-number-verification">4. Sequence Number Verification</h3>
+<p>This is the mechanism behind alert systems, live dashboards, and logging pipelines — one event source, many consumers, zero coordination between consumers required.</p>
+
+<p><strong>What to watch in Prometheus:</strong> <code class="language-plaintext highlighter-rouge">metricmq_messages_published_total</code> increases by 1. <code class="language-plaintext highlighter-rouge">metricmq_messages_delivered_total</code> increases by 5. The ratio tells you the average fan-out factor.</p>
+
+<hr />
+
+<h3 id="feature-4--sequence-numbers">Feature 4 — Sequence Numbers</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demo_sequence</span><span class="p">():</span>
     <span class="n">sub</span> <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">seq-sub</span><span class="sh">"</span><span class="p">)</span>
@@ -848,10 +792,11 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
     <span class="n">sub</span><span class="p">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="sh">"</span><span class="s">stream/data</span><span class="sh">"</span><span class="p">)</span>
     <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="c1"># Send 8 messages as fast as possible
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
         <span class="n">pub</span><span class="p">.</span><span class="nf">publish</span><span class="p">(</span><span class="sh">"</span><span class="s">stream/data</span><span class="sh">"</span><span class="p">,</span> <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">({</span><span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">}))</span>
-        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
-
+        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># 50ms between sends — fast but not instant
+</span>
     <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  ✅ Received </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">received</span><span class="p">)</span><span class="si">}</span><span class="s">/8 in order:</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">sub</span><span class="p">.</span><span class="n">received</span><span class="p">:</span>
@@ -859,25 +804,39 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
         <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">     broker_seq=</span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="sh">'</span><span class="s">seq</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">  index=</span><span class="si">{</span><span class="n">data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">index</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">?</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Sample output displaying sequential monotonically increasing sequence values:</p>
+<p>Each received message has a <code class="language-plaintext highlighter-rouge">broker_seq</code> — the broker’s global sequence counter at the time of delivery. Watch the numbers:</p>
+
+<p><strong>Expected output:</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✅ Received 8/8 in order:
    broker_seq=4808  index=0
    broker_seq=4809  index=1
-   ...
+   broker_seq=4810  index=2
+   broker_seq=4811  index=3
+   broker_seq=4812  index=4
+   broker_seq=4813  index=5
+   broker_seq=4814  index=6
    broker_seq=4815  index=7
 </code></pre></div></div>
 
-<p>If the broker process restarts, sequence state is reloaded from LMDB storage:</p>
+<p>No gaps in the sequence numbers — <code class="language-plaintext highlighter-rouge">4808, 4809, 4810...</code>. If you ever saw <code class="language-plaintext highlighter-rouge">4808, 4810</code> with 4809 missing, a message was dropped. The broker’s sequence numbers make that immediately visible.</p>
+
+<p>Now stop the broker (<code class="language-plaintext highlighter-rouge">Ctrl+C</code>) and restart it. The first line of broker output will be:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Restored sequence counter from persistence: 4816
 </code></pre></div></div>
 
-<h3 id="5-topic-metrics-and-prometheus-labeling">5. Topic Metrics and Prometheus Labeling</h3>
+<p>The next message after restart gets sequence <code class="language-plaintext highlighter-rouge">4816</code>, not <code class="language-plaintext highlighter-rouge">1</code>. This is LMDB doing its job — the sequence counter is persisted to disk after every message, so broker crashes don’t reset the counter and create ambiguous sequence numbers.</p>
+
+<hr />
+
+<h3 id="feature-5--per-topic-routing-and-prometheus-labels">Feature 5 — Per-Topic Routing and Prometheus Labels</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demo_multi_topic</span><span class="p">():</span>
     <span class="n">pub</span> <span class="o">=</span> <span class="nc">Client</span><span class="p">(</span><span class="sh">"</span><span class="s">topic-pub</span><span class="sh">"</span><span class="p">)</span>
-    <span class="n">topics</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="c1"># Publish deliberately different counts to each topic
+</span>    <span class="n">topics</span> <span class="o">=</span> <span class="p">{</span>
         <span class="sh">"</span><span class="s">sensors/temperature</span><span class="sh">"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
         <span class="sh">"</span><span class="s">sensors/humidity</span><span class="sh">"</span><span class="p">:</span>     <span class="mi">6</span><span class="p">,</span>
         <span class="sh">"</span><span class="s">commands/actuator</span><span class="sh">"</span><span class="p">:</span>    <span class="mi">4</span><span class="p">,</span>
@@ -890,7 +849,12 @@ metricmq_topic_subscribers<span class="o">{</span><span class="nv">topic</span><
         <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Querying <code class="language-plaintext highlighter-rouge">metricmq_topic_messages_total</code> in Prometheus returns metrics labeled by topic string:</p>
+<p>This demo’s output isn’t in the terminal — it’s in Prometheus. After running this, open <code class="language-plaintext highlighter-rouge">http://localhost:9090</code> and query:</p>
+
+<pre><code class="language-promql">metricmq_topic_messages_total
+</code></pre>
+
+<p>You’ll see:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>metricmq_topic_messages_total{topic="sensors/temperature"} 10
 metricmq_topic_messages_total{topic="sensors/humidity"}    6
@@ -898,16 +862,23 @@ metricmq_topic_messages_total{topic="commands/actuator"}   4
 metricmq_topic_messages_total{topic="logs/system"}         8
 </code></pre></div></div>
 
-<h3 id="6-active-connection-monitoring">6. Active Connection Monitoring</h3>
+<p>Each topic is a separate <strong>label</strong> in Prometheus. This is how the broker tracks per-topic traffic without creating a different metric for each topic — the topic name becomes a dimension of the same metric. In Grafana, this shows up as separate coloured lines on the <strong>Messages per Topic</strong> panel, one per topic.</p>
+
+<hr />
+
+<h3 id="feature-6--connection-tracking">Feature 6 — Connection Tracking</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">demo_connections</span><span class="p">():</span>
     <span class="n">clients</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
         <span class="n">clients</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nc">Client</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">conn-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="sh">"</span><span class="p">))</span>
         <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  [</span><span class="si">{</span><span class="nf">ts</span><span class="p">()</span><span class="si">}</span><span class="s">] +1 connected  (total: </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span><span class="p">)</span>
-        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
-
-    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># stagger connections so Prometheus captures each step
+</span>
+    <span class="c1"># Hold all 5 open for 3 seconds
+</span>    <span class="c1"># Prometheus scrapes every 5s — this window ensures at least one scrape
+</span>    <span class="c1"># captures metricmq_active_connections = 5
+</span>    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">clients</span><span class="p">):</span>
         <span class="n">c</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
@@ -915,18 +886,17 @@ metricmq_topic_messages_total{topic="logs/system"}         8
         <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>This sequence tests <code class="language-plaintext highlighter-rouge">metricmq_active_connections</code> gauge tracking as connections open and close.</p>
+<p>Every <code class="language-plaintext highlighter-rouge">Client()</code> constructor calls <code class="language-plaintext highlighter-rouge">sock.connect()</code>, which the broker counts. Every <code class="language-plaintext highlighter-rouge">client.close()</code> closes the TCP connection, which the broker detects via a socket read returning zero bytes.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">time.sleep(0.3)</code> between each connection and disconnection is deliberate — it staggers the changes so the Grafana graph shows a visible staircase pattern (0→1→2→3→4→5→4→3→2→1→0) rather than a single spike.</p>
+
+<p><strong>What to watch in Grafana:</strong> The <strong>Active Connections</strong> stat panel steps up from 0 to 5, holds for 3 seconds, then steps back down. This is how you’d detect a reconnect storm in production — a spike in <code class="language-plaintext highlighter-rouge">metricmq_connections_total</code> with a corresponding spike in <code class="language-plaintext highlighter-rouge">metricmq_disconnections_total</code> a few seconds later.</p>
 
 <hr />
 
-<h2 id="grafana-dashboard-configuration">Grafana Dashboard Configuration</h2>
+<h2 id="the-grafana-dashboard">The Grafana Dashboard</h2>
 
-<p>To import the pre-built dashboard:</p>
-
-<ol>
-  <li>Open <code class="language-plaintext highlighter-rouge">http://localhost:3001/dashboard/import</code>.</li>
-  <li>Paste the following JSON dashboard model into the text box and click <strong>Import</strong>:</li>
-</ol>
+<p>Go to <code class="language-plaintext highlighter-rouge">http://localhost:3001/dashboard/import</code>, paste this JSON, and click <strong>Load → Import</strong>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MetricMQ"</span><span class="p">,</span><span class="w">
@@ -989,42 +959,60 @@ metricmq_topic_messages_total{topic="logs/system"}         8
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Adjust the Grafana dashboard time range to <strong>Last 15 minutes</strong> for detailed view of test bursts.</p>
-
-<p><img src="/cover_images/posts/metricmq-grafana.png" alt="" /></p>
+<p>Change the time range dropdown (top right) from <strong>Last 6 hours</strong> to <strong>Last 15 minutes</strong> — the demo bursts become much more visible at that zoom level.</p>
 
 <hr />
 
-<h2 id="promql-queries-for-verification">PromQL Queries for Verification</h2>
+<h2 id="reading-the-dashboard">Reading the Dashboard</h2>
 
-<p>Useful queries for checking metric states in Prometheus (<code class="language-plaintext highlighter-rouge">http://localhost:9090</code>):</p>
+<p>After running the demo loop for a few minutes, here’s what the panels tell you:</p>
 
-<pre><code class="language-promql"># Overall publish throughput in msg/sec
+<p><strong>Active Connections / Active Subscribers</strong> — live gauges. During Feature 6 you’ll see these climb to 5 then drop to 0.</p>
+
+<p><strong>Total Published = Total Delivered</strong> — the important one. If these numbers ever diverge, messages were dropped. Across thousands of publishes in the demo, they stay identical — zero delivery loss.</p>
+
+<p><strong>Publish Rate</strong> — shows bursts during the demo runs, flat between runs. The y-axis is messages per second, calculated by Prometheus using <code class="language-plaintext highlighter-rouge">rate()</code> over the last 1 minute.</p>
+
+<p><strong>P99 Publish Latency</strong> — the 99th percentile of publish operation time. On Windows loopback this sits around 60–100ms due to Python socket overhead. On actual hardware with the C++ client it drops to microseconds.</p>
+
+<p><strong>Messages per Topic</strong> — each topic gets its own coloured line. You can see Feature 5’s deliberate imbalance (10 messages to temperature, 4 to actuator) as different line heights.</p>
+
+<p><strong>Published vs Delivered</strong> — the two lines track each other exactly when everything is healthy. In a system with overloaded subscribers you’d see delivered lag behind published — an early warning before messages start backing up.</p>
+
+<hr />
+
+<h2 id="useful-promql-queries-to-explore">Useful PromQL Queries to Explore</h2>
+
+<p>Open <code class="language-plaintext highlighter-rouge">http://localhost:9090</code> and try these directly:</p>
+
+<pre><code class="language-promql"># Live publish rate in messages per second
 rate(metricmq_messages_published_total[1m])
 
-# 99th percentile publish latency
+# P99 latency — 99% of messages were published faster than this value
 histogram_quantile(0.99, rate(metricmq_publish_latency_seconds_bucket[1m]))
 
-# Message throughput grouped by topic
+# Per-topic breakdown — which topics are busiest
 sum by (topic) (rate(metricmq_topic_messages_total[1m]))
 
-# Unacknowledged or dropped message ratio (0 under normal operation)
+# Delivery loss ratio — should be exactly 0.0 under normal conditions
 1 - (metricmq_messages_delivered_total / metricmq_messages_published_total)
 
-# Client connection attempt rate
+# Client churn — how fast are clients connecting and disconnecting
 rate(metricmq_connections_total[5m])
 
-# Signature validation failure rate
+# Security check — any rejected messages (should be 0 unless under attack)
 rate(metricmq_errors_total[1m])
 </code></pre>
 
 <hr />
 
-<h2 id="source-code">Source Code</h2>
+<h2 id="whats-next">What’s Next</h2>
 
-<p>Repository and build instructions for MetricMQ are available on GitHub: <a href="https://github.com/Saptarshi-max/MetricMQ">github.com/Saptarshi-max/MetricMQ</a></p>
+<p>Everything above covers the transport and observability layers. The piece not shown here is the <strong>security layer</strong> — publishing a message to a <code class="language-plaintext highlighter-rouge">secure/*</code> topic without a valid Ed25519 key and watching the broker reject it. That’s the feature no equivalent lightweight broker has, and it’s visible in Prometheus as <code class="language-plaintext highlighter-rouge">metricmq_signature_failures_total</code> incrementing.</p>
 
-<p>Repository and build instructions for MetricMQ’s Demo files are available on Github: https://github.com/Saptarshi-max/MetricMQ-Demo-Scripts</p>
+<p>The <strong>ESP32 client</strong> is also worth wiring up once you have a device handy. The broker auto-detects the binary protocol from the first byte — the same Python demo running on your PC and a C++ client running on an ESP32 can both publish to the same topic, and both show up in the same Grafana dashboard. That combination — firmware and backend in one monitoring view — is what MetricMQ is built for.</p>
+
+<p>Source code and build instructions: <a href="https://github.com/Saptarshi-max/MetricMQ">github.com/Saptarshi-max/MetricMQ</a></p>
 
   
 </article>
@@ -1426,7 +1414,7 @@ rate(metricmq_errors_total[1m])
     
 
 
-  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-07-03-kalman-filter-in-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-07-03-kalman-filter-in-embedded/" class="flip-title">Kalman Filter In Embedded</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-07-03-kalman-filter-in-embedded/" tabindex="-1"><span class="sr-only">Continue reading Kalman Filter In Embedded</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-07-02-psram-of-esp32/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-07-02-psram-of-esp32/" class="flip-title">I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-07-02-psram-of-esp32/" tabindex="-1"><span class="sr-only">Continue reading I Built a Message Broker for IoT — Here’s How to Run It With Live Grafana Monitoring</span></a></article>              </div>      </div></aside>
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <div class="columns">          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/2026-07-03-kalman-filter-in-embedded/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine fallback-img">          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/2026-07-03-kalman-filter-in-embedded/" class="flip-title">Kalman Filter In Embedded</a>  </h3>      <a class="fill-card no-hover" href="/blog/2026-07-03-kalman-filter-in-embedded/" tabindex="-1"><span class="sr-only">Continue reading Kalman Filter In Embedded</span></a></article>              </div>          <div class="column column-1-2">                  <article class="project-card">  <a href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" class="no-hover no-print-link flip-project" tabindex="-1">    <div class="project-card-img aspect-ratio sixteen-nine flip-project-img">              <img      src="/cover_images/posts/grafana_metricmq.webp"        sizes="(min-width:86em)27.5rem,(min-width:54em)24.5rem,(min-width:42em)21.5rem,42rem"    alt="Getting Started with MetricMQ: Local Setup and Grafana Monitoring"      width="864"  height="486"  loading="lazy"/>          </div>  </a>  <h3 class="project-card-title flip-project-title">    <a href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" class="flip-title">Getting Started with MetricMQ: Local Setup and Grafana Monitoring</a>  </h3>      <p class="project-card-text fine" property="disambiguatingDescription">      MetricMQ is a 328 KB C++20 message broker featuring a 16-byte binary protocol, Ed25519 message signing, LMDB sequence persistence, native Prometheus metrics, and an ESP32 client. This guide covers running the broker, testing Python demos, and visualizing real-time metrics with Prometheus and Grafana.    </p>      <a class="fill-card no-hover" href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" tabindex="-1"><span class="sr-only">Continue reading Getting Started with MetricMQ: Local Setup and Grafana Monitoring</span></a></article>              </div>      </div></aside>
 
   
 
@@ -1434,7 +1422,7 @@ rate(metricmq_errors_total[1m])
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cppdev/2025-12-26-containers-std-vs-pmr/" class="flip-title"><span>std::pmr in Embedded C++ - Predictable Memory Without the Heap</span></a>  <time class="faded fine" datetime="2025-12-26T00:00:00+00:00">26 Dec 2025</time></li>          <li class="h4">  <a href="/blog/es/2026-02-28-pigweed-cosmopolitan-woodpeaker/" class="flip-title"><span>An Experimental Setup - for Building Local First, Portable Embedded C++ pipeline with self-hosted CI</span></a>  <time class="faded fine" datetime="2026-02-28T00:00:00+00:00">28 Feb 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/2026-07-03-kalman-filter-in-embedded/" class="flip-title"><span>Kalman Filter In Embedded</span></a>  <time class="faded fine" datetime="2026-07-03T00:00:00+00:00">03 Jul 2026</time></li>          <li class="h4">  <a href="/blog/es/2026-04-17-di-embedded/" class="flip-title"><span>Why Most Embedded Code Is Tightly Coupled — And How Dependency Injection Fixes It</span></a>  <time class="faded fine" datetime="2026-04-17T00:00:00+00:00">17 Apr 2026</time></li>          <li class="h4">  <a href="/blog/rust-dev/2025-12-14-borrow-checker/" class="flip-title"><span>Rust’s Borrow Checker: How It Prevents Memory Bugs (and Where You Still Need to Be Careful)</span></a>  <time class="faded fine" datetime="2025-12-14T00:00:00+00:00">14 Dec 2025</time></li>      </ul></aside>
 
   
 
@@ -1511,9 +1499,9 @@ rate(metricmq_errors_total[1m])
   
   
   <div class="sidebar-bg sidebar-overlay sidebar-bg--dark"
-       style="background-color:#ccc;background-image:url(/assets/img/blog/Temple.webp)"></div>
+       style="background-color:rgb(25, 55, 71);background-image:url(/assets/img/blog/Temple.webp)"></div>
   <div class="sidebar-bg sidebar-overlay sidebar-bg--light"
-       style="background-color:#ccc;background-image:url(/cover_images/posts/temple_lite.webp)"></div>
+       style="background-color:rgb(25, 55, 71);background-image:url(/cover_images/posts/temple_lite.webp)"></div>
 
 
     <div class="sidebar-sticky">
