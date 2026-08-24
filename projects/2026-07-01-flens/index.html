@@ -20,9 +20,9 @@
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>FLENS | Saptarshi Nag</title>
+<title>Flens | Saptarshi Nag</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="FLENS" />
+<meta property="og:title" content="Flens" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX)." />
 <meta property="og:description" content="FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX)." />
@@ -32,9 +32,9 @@
 <meta property="article:published_time" content="2026-07-01T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="/cover_images/posts/flens.jpeg" />
-<meta property="twitter:title" content="FLENS" />
+<meta property="twitter:title" content="Flens" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-07-24T19:54:30+00:00","datePublished":"2026-07-01T00:00:00+00:00","description":"FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX).","headline":"FLENS","image":"/cover_images/posts/flens.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2026-07-01-flens/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2026-07-01-flens/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-08-24T12:46:26+00:00","datePublished":"2026-07-01T00:00:00+00:00","description":"FLENS (Firmware Linux Embedded Security) helps engineers understand what’s inside embedded Linux firmware. It automatically extracts firmware images, discovers third-party components, correlates known CVEs, calculates risk scores, and generates industry-standard SBOMs (SPDX and CycloneDX).","headline":"Flens","image":"/cover_images/posts/flens.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"/projects/2026-07-01-flens/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/circle-cropped-min.webp"}},"url":"/projects/2026-07-01-flens/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -106,7 +106,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-08-05T11:58:35+00:00',
+    INDEX_KEY: 'index--2026-08-24T20:36:45+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -226,7 +226,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
   vocab="http://schema.org/" typeof="CreativeWork" resource="#project"
   >
   <header>
-    <h1 class="page-title" property="name">FLENS</h1>
+    <h1 class="page-title" property="name">Flens</h1>
 
     <p class="post-date heading">
       <span>
@@ -265,7 +265,7 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
     
     sizes="(min-width:90em)48rem,(min-width:54em)42rem,(min-width:42em)38rem,100vw"
   
-  alt="FLENS"
+  alt="Flens"
   
   property="image"
   width="864"
@@ -291,533 +291,482 @@ html{--accent-color: #ccc;--accent-color-faded: rgba(204, 204, 204, 0.5);--accen
     
   </header>
 
-  <p>Flens can analyze embedded Linux firmware, identify software components, map known vulnerabilities, and generate actionable security reports.</p>
+  <p><strong>FLENS (Firmware Linux Embedded Security)</strong> analyses embedded Linux firmware
+without sending the image or its contents to an external service. It inventories
+software, records how versions were identified, correlates the results with a
+local vulnerability dataset, and produces HTML, <a href="https://cyclonedx.org/">CycloneDX</a>,
+and <a href="https://spdx.dev/">SPDX</a> reports.</p>
 
-<p>FLENS is a Python-based CLI firmware security analysis tool designed for embedded Linux systems such as routers, IoT gateways, industrial controllers, cameras, and edge devices.</p>
+<blockquote>
+  <p><strong>Alpha status.</strong> FLENS is an alpha-stage analysis tool, not a guarantee that firmware is
+secure. Zero matched vulnerabilities does not mean zero vulnerabilities.</p>
+</blockquote>
 
-<p>The project aims to bring firmware security closer to embedded software development by combining component discovery, vulnerability identification, risk assessment, and reporting into an extensible engineering workflow.</p>
-
-<hr />
-
-<h2 id="why-flens">Why FLENS?</h2>
-
-<p>Firmware often contains hundreds of third-party components:</p>
-
-<ul>
-  <li>OpenSSL</li>
-  <li>BusyBox</li>
-  <li>Dropbear</li>
-  <li>Curl</li>
-  <li>Nginx</li>
-  <li>Linux Kernel packages</li>
-</ul>
-
-<p>Many products ship with outdated or vulnerable versions of these components, creating hidden security risks.</p>
-
-<p>FLENS helps answer questions like:</p>
+<p><img src="/flens.jpeg" alt="flens" /></p>
+<h2 id="features">Features</h2>
 
 <ul>
-  <li>What software exists inside this firmware?</li>
-  <li>Which versions are present?</li>
-  <li>Are any known vulnerabilities affecting them?</li>
-  <li>What is the overall risk profile?</li>
-  <li>How does one firmware release compare to another?</li>
+  <li>Offline firmware analysis</li>
+  <li>Traceable component and version identification</li>
+  <li>Conservative CPE (Common Platform Enumeration) mapping</li>
+  <li>Offline <a href="https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures">CVE</a> correlation</li>
+  <li><a href="https://cyclonedx.org/">CycloneDX</a> and <a href="https://spdx.dev/">SPDX</a> SBOM generation</li>
+  <li>HTML reporting</li>
+  <li>Batch firmware scanning</li>
+  <li>Docker and Docker Compose support</li>
 </ul>
 
-<h2 id="where-flens-fits">Where FLENS Fits</h2>
+<h2 id="why-flens">Why FLENS</h2>
 
-<p>Existing firmware analysis tools are excellent at extracting and inspecting firmware images. However, embedded teams often need more than a one-time security scan.</p>
+<p>Firmware analysis rarely ends with unpacking an image. Package metadata may be
+missing, binaries may report incomplete versions, and the name found in a
+filesystem may not map cleanly to a CPE. FLENS keeps the observations behind
+each identification in the result, and leaves an identity unresolved when the
+available data is not strong enough.</p>
 
-<p>FLENS focuses on the engineering workflow:</p>
+<p>The project is developed against real router and embedded-Linux images rather
+than a synthetic happy path. The published validation corpus currently includes
+15 images across MIPS and ARM targets: 11 produce reports and four document
+extraction failures. Those failures are kept in the results because format
+coverage is part of the problem, not something to hide from the benchmark.</p>
+
+<h2 id="where-flens-fits">Where FLENS fits</h2>
+
+<p>It sits between firmware acquisition and manual reverse engineering:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Vendor Firmware
+        │
+        ▼
+Extraction
+        │
+        ▼
+      FLENS
+        │
+        ├── Component inventory
+        ├── Version evidence
+        ├── Identity resolution
+        ├── Governed CPE mapping
+        ├── Offline vulnerability correlation
+        ├── HTML report
+        ├── CycloneDX SBOM
+        └── SPDX SBOM
+        │
+        ▼
+Security review / Compliance / Further reverse engineering
+</code></pre></div></div>
+<p>The output shows what software FLENS found, how it derived each version and
+identity, which local vulnerability records matched, and which findings still
+need manual investigation. Extraction, inventory, identity resolution, CPE
+selection, vulnerability correlation, and report generation run as one
+reproducible pipeline. Deeper reverse engineering remains a separate step.</p>
+
+<h2 id="current-capabilities">Current capabilities</h2>
 
 <ul>
-  <li>Integrating firmware security checks into development pipelines</li>
-  <li>Tracking component risks across firmware releases</li>
-  <li>Generating actionable reports for developers and reviewers</li>
-  <li>Providing an extensible foundation for SBOM, vulnerability management, and CI/CD security gates</li>
+  <li>Linux firmware extraction and rootfs discovery</li>
+  <li>Package, known-binary, and ELF executable and shared library analysis</li>
+  <li>Deterministic inventory merge with version evidence</li>
+  <li>Governed identity resolution and CPE selection</li>
+  <li>Offline vulnerability correlation</li>
+  <li>HTML, <a href="https://cyclonedx.org/">CycloneDX</a>, <a href="https://spdx.dev/">SPDX</a> and batch-scan output</li>
+  <li>ARM64 Docker and Docker Compose workflows</li>
 </ul>
-
-<p>Instead of treating firmware analysis as a manual security exercise, FLENS aims to make it part of the embedded software lifecycle.</p>
-
-<p>Example workflow:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yocto Build / Firmware Release
-│
-▼
-FLENS Analysis
-│
-▼
-Components + CVEs + Risk Score
-│
-▼
-Security Report / Release Decision
-
-</code></pre></div></div>
-
-<p>FLENS bridges the gap between <strong>firmware reverse engineering tools</strong> and <strong>everyday embedded software engineering workflows</strong>.</p>
-
-<hr />
-
-<h2 id="current-capabilities">Current Capabilities</h2>
-
-<h3 id="component-discovery">Component Discovery</h3>
-
-<p>Automatically identifies known software components inside an extracted firmware filesystem.</p>
-
-<p>Example:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OpenSSL 1.1.1d
-BusyBox 1.31.1
-Dropbear 2020.79
-</code></pre></div></div>
-
-<h3 id="vulnerability-mapping">Vulnerability Mapping</h3>
-
-<p>Correlates detected software versions against a vulnerability database.</p>
-
-<p>Example:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OpenSSL 1.1.1d
-
-→ CVE-2022-0778
-→ CVE-2021-3711
-</code></pre></div></div>
-
-<h3 id="risk-assessment">Risk Assessment</h3>
-
-<p>Calculates an overall firmware security score using configurable severity weighting.</p>
-
-<p>Example:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Risk Level: HIGH
-</code></pre></div></div>
-
-<h3 id="report-generation">Report Generation</h3>
-
-<p>Produces human-readable HTML reports suitable for audits, reviews, and release validation.</p>
-
-<p>Reports include:</p>
-
-<ul>
-  <li>Risk score breakdown</li>
-  <li>Vulnerability detection explanation</li>
-  <li>Transparency &amp; methodology references</li>
-  <li>Security disclaimer</li>
-</ul>
-
-<h3 id="sbom-generation">SBOM Generation</h3>
-
-<p>Generates machine-readable SBOMs in both CycloneDX JSON and SPDX JSON formats for each scan.</p>
-
-<h3 id="persistent-scan-history">Persistent Scan History</h3>
-
-<p>Stores scan artifacts in SQLite for report retrieval and auditability:</p>
-
-<ul>
-  <li>Components</li>
-  <li>Vulnerabilities</li>
-  <li>Risk score</li>
-  <li>SBOM payloads</li>
-  <li>Firmware metadata</li>
-</ul>
-
-<h3 id="firmware-metadata--elf-intelligence">Firmware Metadata + ELF Intelligence</h3>
-
-<p>Enhances detection with:</p>
-
-<ul>
-  <li>ELF architecture parsing</li>
-  <li>Binary string fingerprints for component identification fallback</li>
-  <li>Firmware kernel and vendor hints from extracted rootfs</li>
-</ul>
-
-<hr />
-
-<h2 id="example-scan">Example Scan</h2>
-
-<p>Input:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rootfs/
-├── bin/
-│   ├── busybox
-│   ├── openssl
-│   └── dropbear
-</code></pre></div></div>
-
-<p>Output:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>──────────────────────────
-FLENS Security Report
-──────────────────────────
-
-Detected Components
-
-• BusyBox 1.31.1
-• OpenSSL 1.1.1d
-• Dropbear 2020.79
-
-Detected Vulnerabilities
-
-• CVE-2022-0778 (HIGH)
-• CVE-2021-3711 (HIGH)
-
-Overall Risk
-
-HIGH
-</code></pre></div></div>
-
-<hr />
 
 <h2 id="architecture">Architecture</h2>
 
-<p>FLENS follows Clean Architecture principles to separate business logic from implementation details.</p>
+<pre><code class="language-mermaid">flowchart TD
+    A[Firmware Image]
+    B[Extraction]
+    C[Root Filesystem]
+    D[Evidence Collection]
+    E[Inventory]
+    F[Identity Resolution]
+    G[CPE Mapping]
+    H[Vulnerability Correlation]
+    I[Reports &amp; SBOMs]
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Root Filesystem
-        │
-        ▼
-Component Detection
-        │
-        ▼
-Version Resolution
-        │
-        ▼
-Vulnerability Mapping
-        │
-        ▼
-Risk Assessment
-        │
-        ▼
-HTML Report / API Response
-</code></pre></div></div>
+    A --&gt; B
+    B --&gt; C
+    C --&gt; D
+    D --&gt; E
+    E --&gt; F
+    F --&gt; G
+    G --&gt; H
+    H --&gt; I
+</code></pre>
 
-<p>Project Structure:</p>
+<h2 id="identity-and-cpe-mapping">Identity and CPE Mapping</h2>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens/
-├── app/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   ├── presentation/
-│   └── config/
-├── tests/
-├── sample_data/
-├── docs/
-└── pyproject.toml
-</code></pre></div></div>
+<p>Firmware often contains the same software under different names, incomplete
+version information, or ambiguous identifiers.</p>
 
-<hr />
+<p>FLENS combines evidence from packages, binaries, and shared libraries to
+identify software components and map them to official CPEs (Common Platform
+Enumeration identifiers).</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>Mappings are only made when supported by sufficient evidence. If confidence is
+too low, FLENS reports the component as <strong>Unknown</strong> rather than making an
+incorrect vulnerability match.</p>
 
-<p>Before running FLENS, make sure the following are in place:</p>
+<p>This conservative approach reduces false positives and makes every
+vulnerability match traceable back to the evidence used to identify the
+software.</p>
+
+<h2 id="validation">Validation</h2>
+
+<p>FLENS has been validated using an ARM64 Docker environment against a corpus of
+15 embedded Linux firmware images.</p>
+
+<p>Validation included:</p>
 
 <ul>
-  <li>Python 3.12+</li>
-  <li>The same virtual environment is used for install and runtime</li>
-  <li>Python dependencies installed with <code class="language-plaintext highlighter-rouge">pip install -e .[dev]</code></li>
-  <li>For firmware image analysis, native extraction tools installed in the same shell/environment:
-      * <code class="language-plaintext highlighter-rouge">binwalk</code>
-      * <code class="language-plaintext highlighter-rouge">squashfs-tools</code></li>
+  <li>Firmware extraction</li>
+  <li>Component inventory generation</li>
+  <li>Identity resolution</li>
+  <li>Governed CPE mapping</li>
+  <li>Offline vulnerability correlation</li>
+  <li>HTML report generation</li>
+  <li>CycloneDX and SPDX SBOM generation</li>
+  <li>Batch scanning with Docker Compose</li>
 </ul>
 
-<p>If you run <code class="language-plaintext highlighter-rouge">flens</code> from a different Python environment than the one used for installation, you can get missing-module errors or incomplete analysis. For firmware reports, that can also lead to misleading output, so it is better to stop and fix the environment first.</p>
+<p>Results:</p>
 
-<p>Recommended Windows workflow:</p>
+<ul>
+  <li>15 firmware images analysed</li>
+  <li>11 firmware images successfully extracted and analysed</li>
+  <li>4 images that could not be fully analysed</li>
+  <li>96 automated tests passed (1 platform-specific skipped)</li>
+  <li>Ruff and MyPy passed</li>
+  <li>ARM64 Docker and Docker Compose validated</li>
+</ul>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\.venv\Scripts\Activate.ps1</span><span class="w">
-</span><span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="o">.</span><span class="p">[</span><span class="n">dev</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
+<p>Detailed validation evidence is available in
+<a href="docs/release-evidence/v0.3.0-alpha/"><code class="language-plaintext highlighter-rouge">docs/release-evidence</code></a>.</p>
+
+<blockquote>
+  <p>A result of zero matched vulnerabilities only describes the configured local
+dataset and the components FLENS could identify. It is not proof that the
+firmware is secure.</p>
+</blockquote>
+
+<h2 id="validated-firmware-reports">Validated Firmware Reports</h2>
+
+<p>FLENS was evaluated on a representative corpus of embedded Linux firmware from
+commercial vendors and open-source distributions.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Validation Summary</th>
+      <th style="text-align: right"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Firmware images tested</td>
+      <td style="text-align: right"><strong>15</strong></td>
+    </tr>
+    <tr>
+      <td>Successful analyses</td>
+      <td style="text-align: right"><strong>11</strong></td>
+    </tr>
+    <tr>
+      <td>Extraction failures</td>
+      <td style="text-align: right"><strong>4</strong></td>
+    </tr>
+    <tr>
+      <td>HTML reports generated</td>
+      <td style="text-align: right"><strong>11</strong></td>
+    </tr>
+    <tr>
+      <td>PDF reports published</td>
+      <td style="text-align: right"><strong>11</strong></td>
+    </tr>
+    <tr>
+      <td>Architectures</td>
+      <td style="text-align: right"><strong>MIPS, ARM</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The reports below are the exact outputs generated by FLENS during validation.</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">0 matched CVEs</code> indicates that no vulnerabilities matched the configured
+local vulnerability dataset. It should not be interpreted as proof that the
+firmware is secure.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Firmware</th>
+      <th>Result</th>
+      <th style="text-align: right">Components</th>
+      <th>Analysis Report</th>
+      <th>Official Firmware Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TP-Link Archer C7 v5</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">387</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-archer-c7-v5-report.pdf">PDF</a></td>
+      <td><a href="https://www.tp-link.com/support/download/archer-c7/v5/">TP-Link Archer C7 v5 download page</a></td>
+    </tr>
+    <tr>
+      <td>8devices Carambola 2</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">282</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-carambola2-report.pdf">PDF</a></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Netgear R6400v2 DD-WRT</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">584</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-netgear-r6400v2-ddwrt-report.pdf">PDF</a></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Netgear R7000 DD-WRT</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">572</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-netgear-r7000-ddwrt-report.pdf">PDF</a></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ALFA AP96 OpenWrt 19.07.10</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">224</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-openwrt-ap96-19.07.10-report.pdf">PDF</a></td>
+      <td><a href="https://downloads.openwrt.org/releases/19.07.10/">OpenWrt 19.07.10 release page</a></td>
+    </tr>
+    <tr>
+      <td>Meraki MR16 OpenWrt 19.07.10</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">212</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-openwrt-meraki-mr16-19.07.10-report.pdf">PDF</a></td>
+      <td><a href="https://downloads.openwrt.org/releases/19.07.10/">OpenWrt 19.07.10 release page</a></td>
+    </tr>
+    <tr>
+      <td>Onion Omega OpenWrt 19.07.10</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">238</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-openwrt-onion-omega-19.07.10-report.pdf">PDF</a></td>
+      <td><a href="https://downloads.openwrt.org/releases/19.07.10/">OpenWrt 19.07.10 release page</a></td>
+    </tr>
+    <tr>
+      <td>Packet Squirrel OpenWrt 19.07.10</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">212</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-openwrt-packet-squirrel-19.07.10-report.pdf">PDF</a></td>
+      <td><a href="https://downloads.openwrt.org/releases/19.07.10/">OpenWrt 19.07.10 release page</a></td>
+    </tr>
+    <tr>
+      <td>Linksys EA6500 DD-WRT</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">616</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-linksys-ea6500-ddwrt-report.pdf">PDF</a></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ALFA AP96 sysupgrade OpenWrt 19.07.10</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">224</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-openwrt-ap96-sysupgrade-19.07.10-report.pdf">PDF</a></td>
+      <td><a href="https://downloads.openwrt.org/releases/19.07.10/targets/ar71xx/generic/">OpenWrt ar71xx/generic downloads</a></td>
+    </tr>
+    <tr>
+      <td>TP-Link TL-WA701ND v2</td>
+      <td>Succeeded - 0 matched CVEs</td>
+      <td style="text-align: right">150</td>
+      <td><a href="https://github.com/Saptarshi-max/FLens/blob/master/docs/release-evidence/v0.3.0-alpha/reports/flens-tplink-tl-wa701nd-v2-report.pdf">PDF</a></td>
+      <td><a href="https://www.tp-link.com/support/download/tl-wa701nd/v2/">TP-Link TL-WA701ND v2 download page</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="extraction-failures">Extraction Failures</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Original input</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DIR878A1_FW100B13.bin</code></td>
+      <td>Extraction failed - no report generated</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">firmware/sample_router.bin</code></td>
+      <td>Extraction failed - no report generated</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">linksys_ea6500_cfe.bin</code></td>
+      <td>Extraction failed - no report generated</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uploads/router.bin</code></td>
+      <td>Extraction failed - no report generated</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="quick-start">Quick Start</h2>
 
-<h3 id="choose-the-right-command">Choose the Right Command</h3>
+<p>FLENS requires Python 3.12 or later. <code class="language-plaintext highlighter-rouge">uv</code> is the recommended dependency and environment manager;
+it is not part of FLENS at runtime. The FLENS CLI provides the <code class="language-plaintext highlighter-rouge">scan</code> and <code class="language-plaintext highlighter-rouge">firmware</code> commands.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Input you have</th>
-      <th>Command to use</th>
-      <th>When Docker is useful</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>An extracted firmware directory, such as <code class="language-plaintext highlighter-rouge">squashfs-root/</code></td>
-      <td><code class="language-plaintext highlighter-rouge">flens scan &lt;rootfs-path&gt;</code></td>
-      <td>Optional; Python dependencies are sufficient.</td>
-    </tr>
-    <tr>
-      <td>A firmware image, such as <code class="language-plaintext highlighter-rouge">.bin</code>, <code class="language-plaintext highlighter-rouge">.img</code>, or <code class="language-plaintext highlighter-rouge">.trx</code></td>
-      <td><code class="language-plaintext highlighter-rouge">flens firmware &lt;firmware-path&gt;</code></td>
-      <td>Recommended on Windows or when <code class="language-plaintext highlighter-rouge">binwalk</code> and <code class="language-plaintext highlighter-rouge">squashfs-tools</code> are not installed locally.</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="option-1-docker">Option 1: Docker</h3>
 
-<p><code class="language-plaintext highlighter-rouge">flens scan</code> does not extract firmware. Passing a <code class="language-plaintext highlighter-rouge">.bin</code> file to it will not find components because it expects a directory of extracted files. Use <code class="language-plaintext highlighter-rouge">flens firmware</code> for the image first.</p>
+<p>Docker is the recommended firmware-extraction workflow on Windows. Extraction occurs in the Linux
+<code class="language-plaintext highlighter-rouge">/work</code> volume; <code class="language-plaintext highlighter-rouge">sample_data</code> is read-only and final artefacts are written to the host <code class="language-plaintext highlighter-rouge">output/</code>
+mount.</p>
 
-<p>Navigate the CLI with:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flens</span><span class="w"> </span><span class="nt">--help</span><span class="w">
-</span><span class="n">flens</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nt">--help</span><span class="w">
-</span><span class="n">flens</span><span class="w"> </span><span class="nx">firmware</span><span class="w"> </span><span class="nt">--help</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Install:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">-e</span> .[dev]
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--platform</span> linux/arm64 <span class="nt">-t</span> flens:docker <span class="nb">.</span>
+docker compose up <span class="nt">--build</span> <span class="nt">--abort-on-container-exit</span>
+docker compose down
 </code></pre></div></div>
 
-<p>Run a scan:</p>
+<p>Compose batch-scans <code class="language-plaintext highlighter-rouge">sample_data/</code> into <code class="language-plaintext highlighter-rouge">output/sample-scans/</code>. Set <code class="language-plaintext highlighter-rouge">FLENS_INPUT_DIR</code> or
+<code class="language-plaintext highlighter-rouge">FLENS_OUTPUT_DIR</code> to use different host directories. <code class="language-plaintext highlighter-rouge">docker compose down -v</code> also removes the
+named Linux workspace volume.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens scan sample_data/rootfs
+<h3 id="option-2-run-from-source-with-uv">Option 2: Run from source with uv</h3>
+
+<p>From the repository root, create the managed environment and invoke the local CLI:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv <span class="nb">sync
+</span>uv run flens <span class="nt">--help</span>
 </code></pre></div></div>
 
-<p>Generate an HTML report:</p>
+<p><code class="language-plaintext highlighter-rouge">uv sync</code> installs the local <code class="language-plaintext highlighter-rouge">flens</code> entry point into uv’s managed environment. There is no
+<code class="language-plaintext highlighter-rouge">python -m flens</code> entry point; the equivalent module invocation is
+<code class="language-plaintext highlighter-rouge">uv run python -m app.presentation.cli.main</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens scan sample_data/rootfs <span class="se">\</span>
-    <span class="nt">--report-out</span> report.html
+<h3 id="option-3-install-the-cli">Option 3: Install the CLI</h3>
+
+<p>Install the local checkout as an editable uv tool to make <code class="language-plaintext highlighter-rouge">flens</code> available as a direct command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool <span class="nb">install</span> <span class="nt">--editable</span> <span class="nb">.</span>
+flens <span class="nt">--help</span>
 </code></pre></div></div>
 
-<p>Generate SBOM exports (SPDX + CycloneDX):</p>
+<p>The editable installation keeps FLENS’ report template available from the checkout. <code class="language-plaintext highlighter-rouge">uv run flens
+...</code> runs the project entry point inside uv’s managed environment. <code class="language-plaintext highlighter-rouge">flens ...</code> runs the command
+installed by <code class="language-plaintext highlighter-rouge">uv tool install --editable .</code>; ensure uv’s tool bin directory is on <code class="language-plaintext highlighter-rouge">PATH</code> (or run
+<code class="language-plaintext highlighter-rouge">uv tool update-shell</code> once). A non-editable <code class="language-plaintext highlighter-rouge">uv tool install .</code> does not currently package the
+HTML template, so use the editable installation or Docker for report generation.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens scan sample_data/rootfs <span class="se">\</span>
-        <span class="nt">--report-out</span> output/report.html <span class="se">\</span>
-        <span class="nt">--sbom-out</span> output
+<h2 id="cli-usage">CLI Usage</h2>
+
+<p><code class="language-plaintext highlighter-rouge">scan</code> analyses an already extracted Linux root filesystem. <code class="language-plaintext highlighter-rouge">firmware</code> extracts and then analyses
+a <code class="language-plaintext highlighter-rouge">.bin</code>, <code class="language-plaintext highlighter-rouge">.img</code>, or <code class="language-plaintext highlighter-rouge">.trx</code> firmware image; it needs Binwalk and SquashFS tools, so Docker is the
+recommended option when those tools are unavailable locally.</p>
+
+<p>The examples below use the tested source-mode invocation. After installing the CLI, replace
+<code class="language-plaintext highlighter-rouge">uv run flens</code> with <code class="language-plaintext highlighter-rouge">flens</code>.</p>
+
+<h3 id="analyse-an-extracted-root-filesystem">Analyse an extracted root filesystem</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run flens scan sample_data/rootfs <span class="se">\</span>
+  <span class="nt">--report-out</span> output/rootfs-report.html <span class="se">\</span>
+  <span class="nt">--sbom-out</span> output/rootfs-sbom
 </code></pre></div></div>
 
-<h2 id="example-reports">Example Reports</h2>
+<h3 id="analyse-a-firmware-image">Analyse a firmware image</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rootfs fixture</th>
-      <th>OpenWrt firmware image</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><img src="docs/images/rootfs-fixture-report.png" alt="HTML report for the controlled rootfs fixture" width="450" /></td>
-      <td><img src="docs/images/openwrt-report.png" alt="HTML report for an extracted OpenWrt firmware image" width="450" /></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>The rootfs fixture is deliberately small and deterministic: it contains placeholder binaries for BusyBox, Dropbear, and OpenSSL. It is useful for quick CLI and report tests.</p>
-
-<p>The OpenWrt example is produced by extracting a real <code class="language-plaintext highlighter-rouge">squashfs-sysupgrade.bin</code> firmware image. It demonstrates the complete extraction-to-report workflow. Current component versions and CVE matches come from FLENS’s bundled static test dataset, so treat the findings as pipeline examples rather than a production vulnerability assessment.</p>
-
-<p>Analyze a firmware image directly:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens firmware sample_data/firmware/sample_router.bin <span class="nt">--report-out</span> firmware_report.html
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run flens firmware firmware.bin <span class="se">\</span>
+  <span class="nt">--report-out</span> output/report.html <span class="se">\</span>
+  <span class="nt">--sbom-out</span> output/sbom
 </code></pre></div></div>
 
-<p>Analyze firmware image and export SBOMs:</p>
+<h3 id="batch-scanning">Batch scanning</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flens firmware sample_data/firmware/sample_router.bin <span class="se">\</span>
-        <span class="nt">--report-out</span> output/report.html <span class="se">\</span>
-        <span class="nt">--sbom-out</span> output
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv run python scripts/scan_sample_firmware.py <span class="se">\</span>
+  <span class="nt">--input-dir</span> sample_data <span class="se">\</span>
+  <span class="nt">--output-dir</span> output/sample-scans <span class="se">\</span>
+  <span class="nt">--work-dir</span> work <span class="se">\</span>
+  <span class="nt">--overwrite</span>
 </code></pre></div></div>
 
-<p>Generated files:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output/
-├── report.html
-├── report.spdx.json
-└── report.cyclonedx.json
-</code></pre></div></div>
-
-<p>Optional: set FLENS_REPOSITORY_URL to render clickable methodology links in HTML reports.</p>
-
-<p>Example:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set </span><span class="nv">FLENS_REPOSITORY_URL</span><span class="o">=</span>https://github.com/example/flens
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="api">API</h2>
-
-<p>Run locally:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uvicorn app.presentation.api.main:api <span class="nt">--reload</span>
-</code></pre></div></div>
-
-<p>Open:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8000/docs
-</code></pre></div></div>
-
-<p>Available endpoints:</p>
-
-<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET  /health
-POST /scan
-POST /firmware/upload
-GET  /reports/{report_id}
-</span></code></pre></div></div>
-
-<p>Example scan request:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-        </span><span class="nl">"rootfs_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_data/rootfs"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Example scan response (persisted):</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-        </span><span class="nl">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openssl"</span><span class="p">,</span><span class="w"> </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1.1d"</span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"vulnerabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                        </span><span class="nl">"cve_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CVE-2022-0778"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HIGH"</span><span class="p">,</span><span class="w">
-                        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Infinite loop in BN_mod_sqrt"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"risk_score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HIGH"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"report_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h2 id="quality-standards">Quality Standards</h2>
-
-<p>FLENS includes:</p>
-
+<p>For each successful image, the batch runner creates a collision-safe output directory containing</p>
 <ul>
-  <li>Type hints</li>
-  <li>Dependency injection</li>
-  <li>Unit tests</li>
-  <li>Integration tests</li>
-  <li>Static analysis</li>
-  <li>HTML reporting</li>
-  <li>CI-ready structure</li>
+  <li><code class="language-plaintext highlighter-rouge">report.html</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cyclonedx.json</code></li>
+  <li><code class="language-plaintext highlighter-rouge">spdx.json</code></li>
+  <li><code class="language-plaintext highlighter-rouge">scan-summary.json</code></li>
 </ul>
 
-<p>Validation:</p>
+<p>It also writes</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruff check <span class="nb">.</span>
-mypy <span class="nb">.</span>
-pytest <span class="nt">-v</span>
-pytest <span class="nt">--cov</span>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">batch-summary.json</code></li>
+  <li><code class="language-plaintext highlighter-rouge">batch-summary.csv</code></li>
+</ul>
+
+<p>And a batch README in the selected output directory.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">--work-dir</code> option is useful for a Linux-local extraction workspace; Docker Compose supplies
+<code class="language-plaintext highlighter-rouge">/work</code> automatically.</p>
+
+<h2 id="development">Development</h2>
+
+<p>Install development dependencies, then run the quality checks from the repository root:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv <span class="nb">sync</span> <span class="nt">--extra</span> dev
+uv run pytest
+uv run ruff check <span class="nb">.</span>
+uv run mypy app scripts
 </code></pre></div></div>
 
-<hr />
+<h2 id="limitations">Limitations</h2>
+
+<p>Firmware format coverage, version evidence, governed CPE coverage, and local vulnerability data are
+incomplete. Encrypted/proprietary firmware and bootloader-only images may not yield a rootfs. FLENS
+does not provide regulatory-compliance guarantees.</p>
 
 <h2 id="roadmap">Roadmap</h2>
 
-<h3 id="phase-1---foundation-">Phase 1 - Foundation ✅</h3>
+<p>FLENS is moving from a single scan pipeline toward a traceable firmware analysis
+system. The goal is to preserve raw observations, explain how each conclusion
+was reached, and keep results reproducible as tools and vulnerability data change.</p>
 
-<ul>
-  <li>Component detection</li>
-  <li>Version resolution</li>
-  <li>CVE matching</li>
-  <li>Risk scoring</li>
-  <li>CLI interface</li>
-  <li>HTML reporting</li>
-</ul>
+<ol>
+  <li><strong>Domain foundation:</strong> model analysis projects, firmware artifacts, tool runs,
+and provenance with stable identifiers and deterministic serialization.</li>
+  <li><strong>Analysis model:</strong> separate observations from component identities, findings,
+and review decisions so conflicting or uncertain data is not discarded.</li>
+  <li><strong>Collector migration:</strong> move package, binary, and ELF analysis onto the new
+model while preserving current CLI commands, reports, and SBOM output.</li>
+  <li><strong>Interoperability:</strong> add a versioned analysis export, updateable vulnerability
+data, firmware-release comparison, and OpenVEX output.</li>
+</ol>
 
-<h3 id="phase-2---firmware-extraction">Phase 2 - Firmware Extraction</h3>
+<p>The <a href="docs/architecture/migration-plan.md">migration plan</a> contains the detailed
+sequence, compatibility requirements, and suggested contribution boundaries.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firmware.bin
-      │
-      ▼
-    Binwalk
-      ▼
-    rootfs
-</code></pre></div></div>
+<h2 id="quality">Quality</h2>
 
-<ul>
-  <li>Direct firmware analysis</li>
-  <li>Filesystem extraction</li>
-  <li>Metadata discovery</li>
-</ul>
+<p>Release-preparation validation recorded 96 passing tests and one platform-specific skip, plus 44
+focused tests; Ruff, MyPy, ARM64 Docker, Compose, and a 15-image batch were validated.</p>
 
-<h3 id="phase-3---sbom-generation">Phase 3 - SBOM Generation</h3>
+<h2 id="contributing-and-security">Contributing and security</h2>
 
-<ul>
-  <li>SPDX + CycloneDX generation</li>
-  <li>SQLite persistence for reports</li>
-  <li>ELF-assisted component identification</li>
-  <li>Firmware metadata extraction</li>
-  <li>Expanded API for upload and report retrieval</li>
-</ul>
+<p>See <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> and <a href="SECURITY.md">SECURITY.md</a>. Evidence is required for
+new version detection, identity aliases, CPE mappings, and vulnerability matches.</p>
 
-<h3 id="phase-4---secret-discovery">Phase 4 - Secret Discovery</h3>
+<h2 id="licence">Licence</h2>
 
-<p>Detect:</p>
-
-<ul>
-  <li>Private keys</li>
-  <li>API keys</li>
-  <li>Credentials</li>
-  <li>Certificates</li>
-</ul>
-
-<h3 id="phase-5---firmware-diffing">Phase 5 - Firmware Diffing</h3>
-
-<p>Compare releases:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Firmware A
-     vs
-Firmware B
-</code></pre></div></div>
-
-<p>Identify:</p>
-
-<ul>
-  <li>Added packages</li>
-  <li>Removed packages</li>
-  <li>New vulnerabilities</li>
-  <li>Fixed vulnerabilities</li>
-</ul>
-
-<h3 id="phase-6---security-platform">Phase 6 - Security Platform</h3>
-
-<ul>
-  <li>Scan history</li>
-  <li>Dashboard</li>
-  <li>Multi-user support</li>
-  <li>Automated analysis pipelines</li>
-</ul>
-
-<hr />
-
-<h2 id="technology-stack">Technology Stack</h2>
-
-<ul>
-  <li>Python 3.12+</li>
-  <li>FastAPI</li>
-  <li>Pydantic</li>
-  <li>Typer</li>
-  <li>Jinja2</li>
-  <li>Pytest</li>
-  <li>Ruff</li>
-  <li>MyPy</li>
-</ul>
-
-<hr />
-
-<h2 id="motivation">Motivation</h2>
-
-<p>FLENS is designed for engineers building embedded Linux products who need visibility into the security posture of their firmware before deployment.</p>
-
-<p>FLENS was created to explore the intersection of:</p>
-
-<ul>
-  <li>Embedded Linux</li>
-  <li>Firmware Analysis</li>
-  <li>Software Supply Chain Security</li>
-  <li>Vulnerability Management</li>
-  <li>Modern Python Architecture</li>
-</ul>
-
-<p>The long-term vision is to evolve FLENS into a comprehensive firmware security platform capable of analyzing, comparing, and monitoring embedded software releases at scale.</p>
-
-<hr />
+<p>FLENS is licensed under <a href="LICENSE">Apache-2.0</a>. Firmware samples are governed separately by
+<a href="docs/firmware-provenance.md">firmware provenance</a>; users should provide their own legally obtained
+firmware where redistribution is not documented.</p>
 
 </article>
 
