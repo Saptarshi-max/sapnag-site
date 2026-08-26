@@ -102,7 +102,7 @@
   w._search = {
     DATA_URL: '/assets/sitedata.json?no-cache',
     STORAGE_KEY: 'mini-search/',
-    INDEX_KEY: 'index--2026-08-25T05:48:00+00:00',
+    INDEX_KEY: 'index--2026-08-26T14:12:02+00:00',
   };
   w._clapButton = true;
 }(window);</script>
@@ -210,14 +210,14 @@ html{--accent-color: rgb(79,177,186);--accent-color-faded: rgba(79, 177, 186, 0.
   <header>
     <h1 class="post-title flip-project-title">
       <a href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/" class="flip-title">
-        Getting Started with MetricMQ: Local Setup and Grafana Monitoring
+        MetricMQ: Exploring Lightweight Messaging for Constrained Devices
       </a>
     </h1>
 
     <div class="post-date">
       
       <span class="ellipsis mr1">
-        <time datetime="2026-07-01T00:00:00+00:00">01 Jul 2026</time> in <span>Blog</span> / <a href="/es/" class="flip-title">Embedded Software</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>
+        <time datetime="2026-07-01T00:00:00+00:00">01 Jul 2026</time> in <span>Blog</span> / <a href="/es/" class="flip-title">Embedded Software</a> , Tags: <a href="/tag-cpp/" class="flip-title">C++</a>, <span>Embedded systems</span>, <span>Messaging</span>, <span>Iot</span>
       </span>
       
     </div>
@@ -235,7 +235,7 @@ html{--accent-color: rgb(79,177,186);--accent-color-faded: rgba(79, 177, 186, 0.
     
     
   
-  alt="Getting Started with MetricMQ: Local Setup and Grafana Monitoring"
+  alt="MetricMQ: Exploring Lightweight Messaging for Constrained Devices"
   
   
   width="864"
@@ -254,7 +254,7 @@ html{--accent-color: rgb(79,177,186);--accent-color-faded: rgba(79, 177, 186, 0.
 
   
     <p class="note-sm" >
-      MetricMQ is a 328 KB C++20 message broker featuring a 16-byte binary protocol, Ed25519 message signing, LMDB sequence persistence, native Prometheus metrics, and an ESP32 client. This guide covers running the broker, testing Python demos, and visualizing real-time metrics with Prometheus and Grafana.
+      Why I am building MetricMQ, the trade-offs it explores, and how to try its basic publish-and-subscribe flow without an ESP32.
 
     </p>
   
@@ -263,14 +263,17 @@ html{--accent-color: rgb(79,177,186);--accent-color-faded: rgba(79, 177, 186, 0.
   </header>
 
   
-    <p>A technical guide to running MetricMQ, understanding its wire protocol, executing Python client demos, and setting up Prometheus and Grafana for real-time message tracking.</p>
+    <p>Message brokers let applications exchange data without every producer maintaining
+a direct connection to every consumer. On a microcontroller, the protocol parser,
+buffers, reconnect logic, and security code all compete with the application for
+memory. MetricMQ started with a practical question:</p>
 
 
     
     
     <footer>
       <p class="read-more">
-        Continue reading <a class="heading flip-title" href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/">Getting Started with MetricMQ: Local Setup and Grafana Monitoring</a>
+        Continue reading <a class="heading flip-title" href="/blog/es/2026-07-01-metricmq-getting-started-no-hardware/">MetricMQ: Exploring Lightweight Messaging for Constrained Devices</a>
 
       </p>
     </footer>
